@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "i-button": "../../dist/button/index",
+    "i-tabs": "../../dist/tabs/index",
+    "i-tab": "../../dist/tab/index",
+    "i-avatar": "../../dist/avatar/index",
+    "i-divider": "../../dist/divider/index",
+    "i-load-more": "../../dist/load-more/index"
+  },
+  "navigationBarTitleText": "社区"
+}

@@ -1,0 +1,58 @@
+<view class='whole'>
+  <view class='title'>
+    <view class='title-left'>分享发现，创造美好</view>
+    <view class='title-right'>
+      <span class='title-right-count'>{{currentWordNumber|0}}</span>/{{max}}</view>
+  </view>
+  <!-- 发现-内容 -->
+  <view class='content'>
+    <textarea class='text_class' placeholder="这一刻你的想法......" placeholder-style="color:#495060;" maxlength='{{max}}' value="{{value}}" bindinput="inputs">
+    </textarea>
+  </view>
+  <!-- 发现图片上传，按钮 -->
+  <view class="upload">
+    <!-- 发现-图片上传 -->
+    <view class="page">
+      <view class="page__bd">
+        <view class="weui-cells">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                  <view class="weui-uploader__overview">
+                    <view class="weui-uploader__title">图片上传</view>
+                    <view class="weui-uploader__info">{{files.length}}/3</view>
+                  </view>
+                </view>
+                <view class="weui-uploader__bd">
+                  <view class="weui-uploader__files" id="uploaderFiles">
+                    <block wx:for="{{files}}" wx:key="*this">
+                      <view class="weui-uploader__file" data-Id="{{index}}" bindtap="previewImage" id="{{item}}">
+                        <image style="width:120rpx;height:120rpx;" class="weui-uploader__img" src="{{item}}" mode="aspectFill" data-Id="{{index}}" bindlongpress="deleteImage" />
+                      </view>
+                    </block>
+                  </view>
+                  <view wx:if="{{files.length<3}}" style="width:120rpx;height:120rpx;" class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="button">
+    <i-button bind:click="handleClick" type="primary" shape="circle" size="small">发布</i-button>
+  </view>
+  <view>
+  </view>
+</view>
+<i-action-sheet visible="{{ visible2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleCancel2" bind:click="handleClickItem2" mask-closable="{{ false }}">
+  <view slot="header" style="padding: 16px">
+    <view style="color: #444;font-size: 16px">确定删除此照片吗？</view>
+    <text>删除后无法恢复哦</text>
+  </view>
+</i-action-sheet>
+<i-message id="message" />

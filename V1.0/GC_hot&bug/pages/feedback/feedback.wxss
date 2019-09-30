@@ -1,0 +1,50 @@
+.whole {
+  position: fixed;
+  width: 80%;
+  height: 100%;
+}
+
+.radio-group {
+  position: relative;
+  top: 75rpx;
+  left: 52rpx;
+  size: 150rpx;
+}
+
+.textarea {
+  position: relative;
+  width: 600rpx;
+  top: 100rpx;
+  height: 500rpx;
+  border: solid 1px #bbbec4;
+  border-radius: 5px;
+  resize: none;
+}
+
+.text {
+  position: relative;
+  width: 600rpx;
+  top: 125rpx;
+  height: 90rpx;
+  border: solid 1px #bbbec4;
+  border-radius: 5px;
+}
+
+.tip {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.submit {
+  position: relative;
+  width: 600rpx;
+  top: 150rpx;
+  background-color: #2b85e4;
+  color: #fff;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  background-color: #2b85e4;
+  border-color: #2b85e4;
+}

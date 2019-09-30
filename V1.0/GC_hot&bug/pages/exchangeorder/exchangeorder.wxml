@@ -1,0 +1,17 @@
+<scroll-view class="hot-box" scroll-y="true">
+  <view class="orderDetails" wx:for="{{orderCarts}}" wx:key=" ">
+    <view class="orderListTitle">
+      <text class="userName">{{item.name}}</text>
+      <text class="orderStatus">{{state}}</text>
+    </view>
+    <view class="orderListDetails">
+      <view class="productImg">
+        <image src="{{item.picture}}" mode="aspectFill" background-size="cover" style="width:160rpx;height:160rpx;"></image>
+      </view>
+      <view class="productInfo">
+        <view class="productTitle">提交时间: {{time}}</view>
+        <text class="productPrice">当前状态：{{status}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

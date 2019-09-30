@@ -1,0 +1,155 @@
+/* 抽屉 */
+.rank_header {
+  background: #f8f8f9;
+}
+
+.demo-container {
+  width: 550rpx;
+  height: 100vh;
+  background: #fff;
+}
+
+/* 头部下拉框 */
+
+.product-list {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.choice-bar {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  font-size: 14px;
+  background-color: #fff;
+  color: #495060;
+}
+
+.chioce-item {
+  position: absolute;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  width: 690rpx;
+  height: 80rpx;
+  border-top: 12rpx solid #2b85e4;
+  border-bottom: 12rpx solid #2b85e4;
+  border-left: 12rpx solid #2b85e4;
+  border-right: 20rpx solid #2b85e4;
+  color: #495060;
+}
+
+.icon-chioce {
+  height: 40rpx;
+  width: 40rpx;
+}
+
+/* 地图 */
+
+.index-map {
+  position: absolute;
+  margin-top: 110rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  width: 730rpx;
+  height: 170px;
+}
+
+/*弹出菜单*/
+
+.img-plus-style {
+  height: 80rpx;
+  width: 80rpx;
+  position: absolute;
+  bottom: 5rpx;
+  right: 50rpx;
+  z-index: 100;
+}
+
+
+.img-style {
+  height: 70rpx;
+  width: 70rpx;
+  position: absolute;
+  bottom: 250rpx;
+  right: 100rpx;
+  opacity: 0;
+}
+
+/*周边环境预报*/
+.tipsection {
+  position: absolute;
+  margin-top: 520rpx;
+  margin-left: 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.index-tips {
+  width: 440rpx;
+  height: 500rpx;
+  margin-left: 40rpx;
+  border: 4rpx solid #bbbec4;
+  background-color: #fff;
+  -moz-box-shadow: 2px 2px 5px #e9eaec;
+  -webkit-box-shadow: 2px 2px 5px #e9eaec;
+  box-shadow: 2px 2px 5px #e9eaec;
+}
+
+.index-othertips {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  left: 450rpx;
+  width: 220rpx;
+  height: 200rpx;
+  background-color: rgb(255, 255, 255, 0.2);
+}
+
+.imagestips {
+  position: relative;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  width: 400rpx;
+  height: 400rpx;
+  background-color: #1c2438;
+}
+
+.imagestexttips {
+  position: absolute;
+  flex-direction: column;
+  top: 0rpx;
+}
+
+.imagesline {
+  background: #fff;
+  width: 100%;
+  height: 3rpx;
+  position: absolute;
+  top: 200rpx;
+}
+
+.texttips {
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-top: 40rpx;
+  width: 400rpx;
+  height: 60rpx;
+  font-size: 13px;
+  color: #1c2438;
+  text-shadow: 2px 2px 5px #bbbec4;
+  border-bottom: 2rpx solid #bbbec4;
+}
+
+/*底部*/
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0rpx;
+}

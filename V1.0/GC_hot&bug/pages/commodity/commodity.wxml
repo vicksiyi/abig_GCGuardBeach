@@ -1,0 +1,41 @@
+<view>
+  <view style="background-color:#fff">
+    <i-divider content="来兑换你喜欢的东西吧"></i-divider>
+  </view>
+  <view class='productNav'>
+    <!-- 左侧 -->
+    <view class='left'>
+      <view wx:for="{{gooditem}}" wx:for-item="itemGood">
+        <view class="{{active==index?'selected':'normal'}}" id="{{index}}" bindtap='switchNav'>
+          {{itemGood.name}}
+        </view>
+      </view>
+    </view>
+    <!-- 右侧 -->
+    <view class='right'>
+      <swiper current='{{currentTab}}' vertical='{{true}}' class='type' bindchange="swiperChange">
+        <swiper-item wx:for="{{gooditem}}" id="{{index}}">
+          <scroll-view scroll-y="true" class="scoll-h">
+            <view class="goodcontainer" wx:for="{{science}}" wx:for-item="itemName" wx:key="id">
+              <view class="goodpicture" style="float:left">
+                <image src="{{itemName.picture}}" mode="aspectFill" style="width:200rpx;height:200rpx"></image>
+              </view>
+              <view class="goodtext" style="float:left">
+                <view class="goodname">{{itemName.name}}</view>
+                <view class="goodcontent">{{itemName.content}}</view>
+                <view class="goodlove">
+                  <i-icon type="like" size="20" />
+                  {{itemName.price}}
+                </view>
+                <view class="addgood" bindtap="tap" data-Id="{{index}}">
+                  <i-icon type="publishgoods_fill" size="18" />
+                  加入兑换车
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</view>

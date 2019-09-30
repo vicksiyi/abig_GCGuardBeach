@@ -1,0 +1,7 @@
+<i-panel title="圆角输入框" wx:for="{{inputList}}" data-item="item" wx:key="id">
+  <i-input value="{{item.value}}" type="{{item.type}}" right Dark Primary title="{{item.title}}" mode="wrapped" placeholder="{{item.placeholder}}" />
+</i-panel>
+<i-panel title="地址">
+  <i-input value="{{value5}}" placeholder="请输入常用真实地址" />
+</i-panel>
+<button class="submit" style="color:white">提交</button>

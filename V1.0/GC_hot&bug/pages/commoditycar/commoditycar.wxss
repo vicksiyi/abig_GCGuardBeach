@@ -1,0 +1,130 @@
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.wraper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  position: relative;
+}
+
+.footer {
+  border-top: 2rpx solid #dddee1;
+  color: #000;
+  line-height: 50rpx;
+  flex: 0 0 100rpx; /* 不放大不缩小固定100rpx */
+}
+
+.cart_Title {
+  margin: 0 10px 0;
+}
+
+.cart-box {
+  margin-top: 10rpx;
+  width: 100%;
+  height: 200rpx;
+  border-bottom: 1rpx solid #dddee1;
+}
+
+.cart-select {
+  padding-top: 60rpx;
+  margin-left: 20rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.cart-picture {
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.cart-name {
+  width: 160rpx;
+  height: 100rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.nametext {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.cart-love {
+  width: 160rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+  color: #2b85e4;
+  font-size: 14px;
+}
+
+.cart-num {
+  width: 200rpx;
+  height: 60rpx;
+  margin-left: 50rpx;
+  margin-top: 60rpx;
+}
+
+.cart-title {
+  margin-left: 21px;
+}
+
+.count {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.cart-count {
+  padding: 10px;
+}
+
+.delAfter {
+  text-align: center;
+  margin-top: 100px;
+  color: rgb(231, 67, 67);
+}
+
+.redus {
+  border: 1px solid #eee;
+  padding: 0 5px;
+}
+
+.add {
+  border: 1px solid #eee;
+  padding: 0 5px;
+}
+
+.cart-bottom {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+}
+
+.cart-bottom icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.total {
+  margin-left: 15px;
+  display: inline-block;
+}
+
+.total text {
+  color: #2b85e4;
+}
+
+.changebtn {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 50rpx;
+}

@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/find/find",
+    "pages/logs/logs",
+    "pages/commodity/commodity",
+    "pages/interactive/interactive",
+    "pages/mine/mine",
+    "pages/myinfo/myinfo",
+    "pages/commoditycar/commoditycar",
+    "pages/record/record",
+    "pages/feedback/feedback",
+    "pages/exchangeorder/exchangeorder",
+    "pages/about/about"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于GC海滩卫士小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2b85e4",
+    "navigationBarTitleText": "GC海滩卫士",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#80848f",
+    "selectedColor": "#2b85e4",
+    "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/index.png",
+        "selectedIconPath": "images/icon/index_fill.png"
+      },
+      {
+        "pagePath": "pages/commodity/commodity",
+        "text": "兑换",
+        "iconPath": "images/icon/commodity.png",
+        "selectedIconPath": "images/icon/commodity_fill.png"
+      },
+      {
+        "pagePath": "pages/interactive/interactive",
+        "text": "社区",
+        "iconPath": "images/icon/interactive.png",
+        "selectedIconPath": "images/icon/interactive_fill.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/icon/mine.png",
+        "selectedIconPath": "images/icon/mine_fill.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-divider": "../../dist/divider/index",
+    "i-spin": "../../dist/spin/index"
+  },
+  "navigationBarTitleText": "兑换"
+}

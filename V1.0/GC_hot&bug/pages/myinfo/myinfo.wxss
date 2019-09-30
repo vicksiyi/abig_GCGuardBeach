@@ -1,0 +1,6 @@
+.submit {
+  position: relative;
+  top: 100rpx;
+  background-color: #2d8cf0;
+  width: 80%;
+}

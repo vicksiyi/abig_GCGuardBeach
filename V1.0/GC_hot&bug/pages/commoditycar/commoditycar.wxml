@@ -1,0 +1,49 @@
+<view class='wraper'>
+  <view class='main'>
+    <view class='cart_Title' wx:if='{{hasList}}'>
+      <!-- 数据列表 -->
+      <view class='cart-box' wx:for='{{carts}}' wx:key='{{index}}'>
+        <!-- 全选反选按钮 -->
+        <view class="cart-select" style="float:left">
+          <icon wx:if='{{item.selected}}' type='success' color='#2b85e4' bindtap='handleselectList' data-index='{{index}}'></icon>
+          <icon wx:else type='circle' bindtap='handleselectList' data-index='{{index}}'></icon>
+        </view>
+        <!-- 数据图片 -->
+        <view class="cart-picture" style="float:left">
+          <image src="{{item.picture}}" style="width:160rpx;height:160rpx;"></image>
+        </view>
+        <!-- 数据名称 -->
+        <view class="cart-name" style="float:left">
+          <text class="nametext">{{item.name}}</text>
+          <view class="cart-love">
+            <i-icon type="like" size="20" style="margin-right:10rpx;" />{{item.price}}</view>
+        </view>
+        <!-- 数据价格 -->
+
+        <!-- 数量的加减操作 -->
+        <view class="cart-num" style="float:left">
+          <view class='count'>
+            <text class='redus' data-index='{{index}}' bindtap='handleredus'>-</text>
+            <text class='cart-count'>{{item.num}}</text>
+            <text class='add' data-index='{{index}}' bindtap='handleadd'>+</text>
+          </view>
+        </view>
+        <!-- 删除 -->
+        <text class='delete' data-index='{{index}}' bindtap='handledel'>x</text>
+      </view>
+    </view>
+  </view>
+  <!-- 底部 -->
+  <view class="footer">
+    <icon type='success' color='#2b85e4' wx:if='{{selectAllStatus}}' bindtap='selectAll'></icon>
+    <icon type='circle' color='#ccc' wx:else bindtap='selectAll'></icon>
+    <text>全选</text>
+    <text class='total'>
+      数量：<text>{{totalCount}}</text>
+    </text>
+    <text class='total'> 
+      合计：<text>{{totalPrice}}</text>
+    </text>
+    <i-button bindtap="handleClick" data-index='{{index}}' type="primary" shape="circle" size="small">提交兑换</i-button>
+  </view>
+</view>

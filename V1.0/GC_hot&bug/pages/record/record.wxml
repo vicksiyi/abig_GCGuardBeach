@@ -1,0 +1,10 @@
+<i-swipeout wx:for="{{recordList}}" data-item="item" wx:key="id" i-class="i-swipeout-demo-item" operateWidth="{{100}}">
+  <view slot="content">
+    <i-cell i-class="i-cell-padding" title="{{item.time}}" label="{{item.content}}">
+    </i-cell>
+  </view>
+  <view slot="button" class="i-swipeout-demo-button-group">
+        <view class="i-swipeout-demo-button">删除
+        </view>
+    </view>
+</i-swipeout>

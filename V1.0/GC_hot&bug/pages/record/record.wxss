@@ -1,0 +1,19 @@
+.i-swipeout-demo-button {
+  font-size: 30rpx;
+  width: 100%;
+  height: 100%;
+  float: left;
+  align-items: center;
+  background-color: #2d8cf0;
+}
+
+.content {
+  font-size: 32rpx;
+}
+
+.i-swipeout-demo-button-group {
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  width: 100%;
+}

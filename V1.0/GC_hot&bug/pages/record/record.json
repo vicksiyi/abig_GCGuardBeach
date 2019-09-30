@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-swipeout": "../../dist/swipeout/index",
+    "i-cell": "../../dist/cell/index"
+  },
+  "navigationBarTitleText": "我的社区记录"
+}

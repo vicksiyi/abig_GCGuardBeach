@@ -1,0 +1,36 @@
+<view class="section">
+  <view class="headercontainer">
+    <view class="headeravatar">
+      <image src="{{useravatar}}"  class="avatar" mode="aspectFill"></image>
+    </view>
+    <text class="headertext">{{username}}</text>
+    <view class="headerlove">
+      <i-icon type="like" size="28" color="#f8f8f9" />
+      <text style="margin-left:15rpx;font-size:17px;color:#dddee1">520</text>
+    </view>
+  </view>
+  <view class="info">
+  </view>
+  <view class="middlecontainer">
+    <view style="float:left;margin-left:25rpx;" class="shopcontainer">
+      <view style="margin-top:30rpx;margin-left:80rpx;">
+        <i-icon type="publishgoods_fill" size="26" color="#5cadff" />
+        <text class="shoptitle" bindtap="gocar">兑换车</text>
+      </view>
+    </view>
+    <view style="float:left" class="shopcontainer">
+      <view style="margin-top:30rpx;margin-left:80rpx;">
+        <i-icon type="document" size="26" color="#5cadff" />
+        <text class="shoptitle" >兑换订单</text>
+      </view>
+    </view>
+  </view>
+  <view class="footercontainer">
+   <i-cell-group wx:for="{{cardList}}" data-item="item" wx:key="id">
+    <i-cell title="{{item.title}}" is-link url="{{item.url}}">
+      <i-icon slot="icon" type="{{item.type}}" size="24" color="#5cadff" />
+    </i-cell>
+</i-cell-group>
+  </view>
+  <i-spin size="large" fix wx:if="{{spinShow }}"></i-spin>
+</view>
