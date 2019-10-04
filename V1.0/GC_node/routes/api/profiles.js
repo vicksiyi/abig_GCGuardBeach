@@ -9,11 +9,13 @@ const Profile = require('../../models/Profile');
 router.get('/ceshi',(req,res)=>{
     res.json({msg:"成功"})
 })
+
+
 // $routes /api/profiles/add
 // @desc 添加信息
 // @access private
 router.post('/add',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    const profileFileds = {};
+    // const profileFileds = {};
     new Profile({
         type :req.body.type,
         desc:req.body.desc,

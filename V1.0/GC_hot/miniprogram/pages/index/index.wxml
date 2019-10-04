@@ -1,18 +1,21 @@
+<!-- 未授权 -->
 <view wx:if="{{isHide}}">
   <view wx:if="{{canIUse}}">
-    <view class='header'>
-      <image src='../../images/wx_login.png'></image>
-    </view>
-    <view class='headcontent'>
-      <view>申请获取以下权限</view>
-      <text>获得你的公开信息(昵称，头像等)</text>
-    </view>
-    <button class='bottom' style="color:white" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-      授权登录
-    </button>
+    <section>
+      <view class="profile-content">
+        <view class="padding-image">
+          <image src="../../images/wx_login.png"></image>
+        </view>
+        <h1>申请获得以下权限</h1>
+        <view style="font-size:0.8rem;">获得你的公开信息(昵称、头像、地区及性别)</view>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>
+      </view>
+    </section>
   </view>
   <view wx:else>请升级微信版本</view>
+  <i-message id="message" />
 </view>
+<!-- 已授权 -->
 <view style="height:1100rpx;" wx:else>
   <!-- 选择框 -->
   <view class="product-list">

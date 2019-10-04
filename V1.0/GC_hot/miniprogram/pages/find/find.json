@@ -10,6 +10,8 @@
     "i-col": "../../dist/col/index",
     "i-drawer": "../../dist/drawer/index",
     "i-action-sheet": "../../dist/action-sheet/index",
-    "i-message": "../../dist/message/index"
+    "i-message": "../../dist/message/index",
+    "i-spin": "../../dist/spin/index",
+    "i-progress": "../../dist/progress/index"
   }
 }
