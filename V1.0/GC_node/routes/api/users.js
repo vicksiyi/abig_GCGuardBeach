@@ -108,4 +108,23 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
         identity: req.user.identity
     });
 })
+
+
+// $routes GET /api/users/users
+// @desc 返回请求的json数据
+// @access private
+router.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+    // res.json({
+    //     email: req.user.email,
+    //     name: req.user.name,
+    //     identity: req.user.identity
+    // });
+    if (req.user.identity == "超级管理员") {
+        User.find()
+            .then(user => {
+                res.json(user)
+            })
+    }
+})
+
 module.exports = router;
