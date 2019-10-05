@@ -1,6 +1,9 @@
 //app.js
+// s3.pstatp.com/toutiao/static/img/0.2491676.png
+// s3.pstatp.com/toutiao/static/img/31.4b92e75.png
+// s3.pstatp.com/toutiao/static/img/1.51a147f.png
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -17,7 +20,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {

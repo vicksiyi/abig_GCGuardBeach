@@ -8,7 +8,8 @@
     "i-tab-bar-item": "../../dist/tab-bar-item/index",
     "i-tag": "../../dist/tag/index",
     "i-drawer": "../../dist/drawer/index",
-    "i-message": "../../dist/message/index"
+    "i-message": "../../dist/message/index",
+    "i-spin": "../../dist/spin/index"
   },
   "navigationBarTitleText": "首页"
 }

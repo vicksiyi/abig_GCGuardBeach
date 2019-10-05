@@ -1,10 +1,10 @@
 const requestUtils = (options) => {
     let tempRequest = {}
     wx.request({
-        url: options.url,
-        data: options.data,
-        method: options.method,
-        header: options.header,
+        url: options.url || '',
+        data: options.data || '',
+        method: options.method || '',
+        header: options.header || '',
         success(s) {
             // s.data.msg = 'success'
             tempRequest = s.data

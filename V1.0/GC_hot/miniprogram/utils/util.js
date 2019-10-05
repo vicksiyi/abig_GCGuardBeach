@@ -1,3 +1,8 @@
+/**
+  * 格式化时间
+  * @param {date} 当前时间戳
+  * @return 返回的是已格式化的时间
+  */
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -15,6 +20,10 @@ const formatNumber = n => {
 }
 
 
+/**
+  * 生成十个不重复的随机数
+  * @return 返回的是十个随机数字符串
+  */
 const randomNum = () => {
   var arr1 = new Array();
   var arr2 = new Array();
@@ -23,9 +32,6 @@ const randomNum = () => {
     arr1.push(i);
 
   }
-
-
-
 
   for (var k = 0; k < 10; k++) {
 
@@ -40,7 +46,29 @@ const randomNum = () => {
   return arr2.join("")
 }
 
+
+/**
+  * 返回当周的时间
+  * @return 周数
+  * @example 当天：2019-10-05  return ["2019-09-30", "2019-10-01", "2019-10-02", "2019-10-03", "2019-10-04", "2019-10-05", "2019-10-06"]
+  */
+const thisWeek = () => {
+  const dateOfToday = Date.now()
+  const dayOfToday = (new Date().getDay() + 7 - 1) % 7
+  const daysOfThisWeek = Array.from(new Array(7))
+    .map((_, i) => {
+      const date = new Date(dateOfToday + (i - dayOfToday) * 1000 * 60 * 60 * 24)
+      return date.getFullYear() +
+        '-' +
+        String(date.getMonth() + 1).padStart(2, '0') +
+        '-' +
+        String(date.getDate()).padStart(2, '0')
+    })
+  return daysOfThisWeek
+}
+
 module.exports = {
   formatTime: formatTime,
-  randomNum: randomNum
+  randomNum: randomNum,
+  thisWeek: thisWeek
 }
