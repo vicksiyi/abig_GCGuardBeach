@@ -11,5 +11,6 @@
     "i-message": "../../dist/message/index",
     "i-spin": "../../dist/spin/index"
   },
-  "navigationBarTitleText": "首页"
+  "navigationBarTitleText": "首页",
+  "disableScroll": true
 }

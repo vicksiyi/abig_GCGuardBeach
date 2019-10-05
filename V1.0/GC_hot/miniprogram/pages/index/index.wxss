@@ -15,7 +15,7 @@
   width: 100%;
   height: 50px;
   box-sizing: border-box;
-  position: absolute;
+  /* position: absolute; */
 }
 
 .choice-bar {
@@ -51,10 +51,9 @@
 /* 地图 */
 
 .index-map {
-  position: absolute;
-  margin-top: 110rpx;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
+  /* position: absolute; */
+  margin-top: 10rpx;
+  margin-left: 9rpx;
   width: 730rpx;
   height: 170px;
 }
@@ -82,9 +81,10 @@
 
 /*周边环境预报*/
 .tipsection {
-  position: absolute;
-  margin-top: 520rpx;
-  margin-left: 10rpx;
+  /* position: absolute; */
+  /* margin-top: 520rpx;
+  margin-left: 10rpx; */  
+  margin: 30rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -230,4 +230,10 @@ section.profile {
 
 .padding-image{
   padding-top: 50rpx;
+}
+
+.pop_up{
+  position: fixed;
+  bottom: 100rpx;
+  right: -4rpx;
 }

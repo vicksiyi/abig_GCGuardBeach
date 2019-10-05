@@ -1,4 +1,8 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-sticky": "../../dist/sticky/index",
+    "i-sticky-item": "../../dist/sticky-item/index",
+    "i-alert": "../../dist/alert/index"
+  },
   "navigationBarTitleText": "关于我们"
 }

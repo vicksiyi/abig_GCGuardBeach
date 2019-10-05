@@ -1,7 +1,7 @@
-<view class="bg">
-  <view class="word-container">
-    <text class="word">
-苍穹之上晴空和飞云是向往期盼，
+<view class="about_margin">
+  <view class="about_title">关于GC海滩卫士</view>
+  <view class="about_content">
+    简介: 苍穹之上晴空和飞云是向往期盼，
 海水之下挣扎与呐喊是永不停歇！
 万物有灵，我们尊重所有生命。
 日益严重的海洋污染，
@@ -9,6 +9,12 @@
 守护海底生物，还海底一片清明！
 我们就是这样子一个团队，
 我们一直致力于海洋环保。
-加入我们吧，一起给家园添一抹蓝！</text>
+加入我们吧，一起给家园添一抹蓝！
+  </view>
+  <view class="about_content">
+    团队名称: 热到出bug队
+  </view>
+  <view class="about_content">
+    开发者: GC怪兽、熙哥、纯姐
   </view>
 </view>

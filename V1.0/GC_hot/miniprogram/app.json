@@ -4,14 +4,14 @@
     "pages/find/find",
     "pages/logs/logs",
     "pages/commodity/commodity",
+    "pages/about/about",
     "pages/interactive/interactive",
     "pages/mine/mine",
     "pages/myinfo/myinfo",
     "pages/commoditycar/commoditycar",
     "pages/record/record",
     "pages/feedback/feedback",
-    "pages/exchangeorder/exchangeorder",
-    "pages/about/about"
+    "pages/exchangeorder/exchangeorder"
   ],
   "permission": {
     "scope.userLocation": {
