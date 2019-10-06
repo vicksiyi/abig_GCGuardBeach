@@ -25,7 +25,7 @@
 .layout-footer-center {
   text-align: center;
 }
-.img_logo{
+.img_logo {
   width: 100px;
   padding: 3px;
 }
@@ -39,7 +39,7 @@
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
-            <img class="img_logo" src="../assets/logo.png">
+            <img class="img_logo" src="../assets/logo.png" />
           </div>
           <div class="layout-nav">
             <MenuItem name="1">
@@ -55,7 +55,13 @@
         <Content :style="{padding: '24px 0', minHeight: '280px', background: '#fff'}">
           <Layout>
             <Sider hide-trigger :style="{background: '#fff'}">
-              <Menu active-name="1-1" theme="light" width="auto" :open-names="['1']">
+              <Menu
+                active-name="1-1"
+                theme="light"
+                width="auto"
+                @on-select="select"
+                :open-names="['1']"
+              >
                 <Submenu name="1">
                   <template slot="title">
                     <Icon type="ios-navigate"></Icon>管理员数据
@@ -83,7 +89,7 @@
 
             <!-- 正文 -->
             <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-              <ListPageData />
+              <router-view></router-view>
             </Content>
           </Layout>
         </Content>
@@ -99,10 +105,30 @@
 
 <script>
 import ListPageData from "../components/ListPageData";
+import AuditAdmin from "../components/AuditAdmin";
 
 export default {
   components: {
-    ListPageData
+    ListPageData,
+    AuditAdmin
+  },
+  data() {
+    return {
+      auditTest: "1-1"
+    };
+  },
+  methods: {
+    select(res) {
+      // 防止多次跳转到同一个子组件
+      if (this.auditTest != res) {
+        this.auditTest = res;
+        if (res == "1-1") {
+          this.$router.push({ path: "/" });
+        } else if (res == "1-2") {
+          this.$router.push({ path: "/auditadmin" });
+        }
+      }
+    }
   }
 };
 </script>
