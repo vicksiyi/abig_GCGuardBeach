@@ -163,7 +163,9 @@ Page({
           sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
 
           success: function (res) {//成功后的回调
-            console.log(res.result.address_component.district);
+            _this.setData({
+              start: [res.result.address_component.city,'-', res.result.address_component.district,'-',res.result.address_component.street_number].join("")
+            })
             // 传入位置，返回天气
             let item = {
               url: 'https://www.toutiao.com/stream/widget/local_weather/data/',
@@ -338,7 +340,7 @@ Page({
           weatherLogo: _this.data.weatherLogoList[numTemp2].url
         })
       }
-    }else{
+    } else {
       _this.setData({
         weatherLogo: _this.data.weatherLogoList[numTemp].url
       })

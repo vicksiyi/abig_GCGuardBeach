@@ -62,7 +62,7 @@
       <i-tag style="opacity: 0.8;" class="i-tags" color="{{weatherColor}}">空气质量：{{weatherResult.quality_level}}</i-tag>
       <i-tag class="i-tags" color="blue">海洋水质：中</i-tag>
       <i-tag class="i-tags" color="green">海滩环境：及格</i-tag>
-      <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+      <!-- <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin> -->
     </view>
   </view>
 

@@ -71,10 +71,13 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    console.log(req.body)
     User.findOne({ email: email })
         .then(user => {
             if (!user) {
-                return res.status(404).json('用户不存在')
+                return res.json({
+                    msg: 0
+                })
             }
             // 密码匹配
             bcrypt.compare(password, user.password)
@@ -92,7 +95,9 @@ router.post('/login', (req, res) => {
                             }
                         })
                     } else {
-                        return res.status(400).json("密码错误");
+                        return res.json({
+                            msg: -1
+                        });
                     }
                 })
         })
@@ -119,12 +124,17 @@ router.get('/users', passport.authenticate('jwt', { session: false }), (req, res
     //     name: req.user.name,
     //     identity: req.user.identity
     // });
-    if (req.user.identity == "超级管理员") {
-        User.find()
-            .then(user => {
+    User.find()
+        .then(user => {
+            if (req.user.identity == "超级管理员") {
                 res.json(user)
-            })
-    }
+            } else {
+                for (let i = 0; i < user.length; i++) {
+                    user[i].password = '你没此权限'
+                }
+                res.json(user)
+            }
+        })
 })
 
 module.exports = router;

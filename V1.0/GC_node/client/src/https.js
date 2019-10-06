@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 axios.defaults.timeout = 5000;                        //响应时间
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';        //配置请求头
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';        //配置请求头
 axios.defaults.baseURL = '';   //配置接口地址
 
 //POST传参序列化(添加请求拦截器)
@@ -32,8 +32,7 @@ axios.interceptors.response.use((res) => {
 //返回一个Promise(发送post请求)
 export function fetchPost(url, param, header) {
     return new Promise((resolve, reject) => {
-        axios.post(url, {
-            params: param,
+        axios.post(url, param, {
             headers: header
         })
             .then(response => {
@@ -56,7 +55,7 @@ export function fetchGet(url, param, header) {
             .then(response => {
                 resolve(response);
             }
-            // 用户登录失败导致
+                // 用户登录失败导致
                 , () => {
                     resolve('oauthError');
                     // reject(err)

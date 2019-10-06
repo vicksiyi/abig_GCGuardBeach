@@ -205,9 +205,9 @@ export default {
                       style: {
                         width: "200px"
                       },
-                      on:{
-                        select:val=>{
-                          console.log(val,'ok')
+                      on: {
+                        select: val => {
+                          console.log(val, "ok");
                         }
                       }
                     },
@@ -280,14 +280,14 @@ export default {
   beforeCreate() {
     console.log("开始");
     // 判断是否登录
-    if (localStorage.getItem("Authorization") == null) {
+    if (localStorage.getItem("Token") == null) {
       console.log("请登录");
     }
   },
   created() {
     let params = {};
     let headers = {
-      Authorization: localStorage.getItem("Authorization")
+      Authorization: localStorage.getItem("Token")
     };
     try {
       https
