@@ -8,7 +8,7 @@ const passport = require('passport');
 const users = require('./routes/api/users');
 const profiles = require('./routes/api/profiles');
 const finds = require('./routes/api/finds');
-
+const oauthUsers = require('./routes/api/oauthUsers');
 
 // DB config
 const db = require('./config/keys').mongoURI;
@@ -34,6 +34,7 @@ require('./config/passport')(passport);
 app.use('/api/users',users);
 app.use('/api/profiles',profiles);
 app.use('/api/finds',finds);
+app.use('/api/oauthUsers',oauthUsers);
 
 app.listen(5000, () => {
     console.log('the port running');

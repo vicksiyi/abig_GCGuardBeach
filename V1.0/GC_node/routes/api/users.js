@@ -18,13 +18,15 @@ router.post('/register', (req, res) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (user) {
-                return res.status(400).json('邮箱已被注册')
+                return res.json({
+                    msg: -1
+                })
             } else {
                 // const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'});
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
-                    identity: req.body.identity,
+                    identity: '管理员',
                     password: req.body.password
                 })
 

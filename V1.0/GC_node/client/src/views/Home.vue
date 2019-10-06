@@ -55,13 +55,13 @@
         <Content :style="{padding: '24px 0', minHeight: '280px', background: '#fff'}">
           <Layout>
             <Sider hide-trigger :style="{background: '#fff'}">
-              <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
+              <Menu active-name="1-1" theme="light" width="auto" :open-names="['1']">
                 <Submenu name="1">
                   <template slot="title">
                     <Icon type="ios-navigate"></Icon>管理员数据
                   </template>
                   <MenuItem name="1-1">管理员成员管理</MenuItem>
-                  <MenuItem name="1-2">管理员权限管理</MenuItem>
+                  <MenuItem name="1-2">管理员审核管理</MenuItem>
                   <MenuItem name="1-3">管理员信息管理</MenuItem>
                 </Submenu>
                 <Submenu name="2">

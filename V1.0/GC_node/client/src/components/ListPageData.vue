@@ -2,8 +2,27 @@
   <div>
     <Table :loading="loading" border :columns="columns7" :data="data6"></Table>
     <div class="page_list">
-      <Page :total="100" show-elevator />
+      <Page :total="total" show-elevator />
     </div>
+    <Modal v-model="modal2" width="360">
+      <p slot="header" style="color:#f60;text-align:center">
+        <Icon type="ios-information-circle"></Icon>
+        <span>删除</span>
+      </p>
+      <div style="text-align:center">
+        <p>删除该管理员之后,将不可再通过此账号密码登录</p>
+        <p>确定删除?</p>
+      </div>
+      <div slot="footer">
+        <Button
+          type="error"
+          size="large"
+          long
+          :loading="modal_loading"
+          @click="del(modalIndex2)"
+        >确定删除</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -15,6 +34,10 @@ export default {
   props: {},
   data() {
     return {
+      modal_loading: false,
+      modal2: false,
+      modalIndex2: 0,
+      total: 0,
       loading: true,
       columns7: [
         {
@@ -99,7 +122,7 @@ export default {
       // });
       this.$Modal.confirm({
         okText: "修改",
-        title: "管理员",
+        title: "修改",
         onOk: () => {
           console.log(this.data6[index]);
         },
@@ -257,7 +280,11 @@ export default {
                     props: {
                       value: this.value,
                       autofocus: true,
-                      placeholder: this.data6[index].password
+                      placeholder: this.data6[index].password,
+                      disabled:
+                        this.data6[index].password == "你没此权限"
+                          ? true
+                          : false
                     },
                     on: {
                       input: val => {
@@ -274,14 +301,27 @@ export default {
       });
     },
     remove(index) {
-      this.data6.splice(index, 1);
+      this.modal2 = true;
+      this.modalIndex2 = index;
+    },
+    del(index) {
+      this.modal_loading = true;
+      setTimeout(() => {
+        this.modal_loading = false;
+        this.modal2 = false;
+        this.data6.splice(index, 1);
+        this.$Message.success("Successfully delete");
+      }, 2000);
     }
   },
   beforeCreate() {
     console.log("开始");
     // 判断是否登录
     if (localStorage.getItem("Token") == null) {
-      console.log("请登录");
+      this.$Message.error("请先登录!");
+      setTimeout(() => {
+        this.$router.push({ path: "/login" });
+      }, 1000);
     }
   },
   created() {
@@ -298,6 +338,8 @@ export default {
             this.$router.push({ path: "/login" });
           }
           this.data6 = data.data;
+          this.total = data.data.length;
+          console.log(this.total);
           this.loading = false;
         })
         .catch(err => {
