@@ -140,11 +140,6 @@ Page({
    */
   onLoad: function () {
     var _this = this;
-
-    // 实例化API核心类
-    qqmapsdk = new QQMapWX({
-      key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
-    });
     _this.setData({
       spinShow: true
     })
@@ -153,64 +148,16 @@ Page({
       success(res) {
         const latitude = res.latitude
         const longitude = res.longitude
-        qqmapsdk.reverseGeocoder({
-          //位置坐标，默认获取当前位置，非必须参数 
-          //Object格式
-          location: {
-            latitude: latitude,
-            longitude: longitude
-          },
-          sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-
-          success: function (res) {//成功后的回调
-            _this.setData({
-              start: [res.result.address_component.city,'-', res.result.address_component.district,'-',res.result.address_component.street_number].join("")
-            })
-            // 传入位置，返回天气
-            let item = {
-              url: 'https://www.toutiao.com/stream/widget/local_weather/data/',
-              data: {
-                city: res.result.address_component.district
-              },
-              method: 'GET',
-              header: {}
-            }
-            // 天气
-            let num = 0 // 只作一次更改
-            let event = async (itemTemp) => {
-              let result = await requests.requestUtils(itemTemp)
-              // 如果区域没有搜索到，则进行市区查询
-              if (result.data.city != res.result.address_component.district && num <= 0) {
-                num++ // 防止两次打印
-                item.data.city = res.result.address_component.city
-                return event(item)
-              }
-
-              // 空气质量颜色问题
-              _this.weatherColorFun(result.data.weather.quality_level)
-
-              // 根据气候选Logo
-              _this.weatherLogoFun(result.data.weather.dat_condition)
-
-              // 星期数
-              _this.weatherWeek()
-
-              _this.setData({
-                weatherResult: result.data.weather,
-                spinShow: false
-              })
-              console.log(result.data.weather)
-            }
-            event(item)
-          },
-          fail: function (error) {
-            console.error(error);
-          },
-          complete: function (res) {
-            console.log(res);
-          }
-        })
-
+        // 根据经纬度获取天气
+        _this.weatherAll(latitude, longitude)
+      },
+      fail(err) {
+        // 拒绝定位，默认北京
+        _this.weatherAll()
+        $Message({
+          content: '位置定位失败,默认北京气候',
+          type: 'warning'
+        });
       }
     })
     /**
@@ -245,25 +192,6 @@ Page({
           });
           wx.hideTabBar({});
         }
-      }
-    });
-    /**
-     * 获取当前的地理位置
-     */
-    wx.getLocation({
-      type: "wgs84",
-      success: function (res) {
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        //console.log(res.latitude);
-        _this.setData({
-          latitude: res.latitude,
-          longitude: res.longitude,
-          markers: [{
-            latitude: res.latitude,
-            longitude: res.longitude
-          }]
-        })
       }
     });
   },
@@ -305,6 +233,92 @@ Page({
         }
       });
     }
+  },
+  /**
+ * 根据经纬度返回地区
+ * @param {latitude} 经度
+ * @param {longitude} 纬度
+ */
+  weatherAll: function (latitude = '', longitude = '') {
+    let _this = this
+    if (latitude && longitude) {
+      // 实例化API核心类
+      qqmapsdk = new QQMapWX({
+        key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
+      });
+      qqmapsdk.reverseGeocoder({
+        //位置坐标，默认获取当前位置，非必须参数 
+        //Object格式
+        location: {
+          latitude: latitude,
+          longitude: longitude
+        },
+        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
+
+        success: function (res) {//成功后的回调
+          // 渲染天气
+          let start = [res.result.address_component.city, '-', res.result.address_component.district, '-', res.result.address_component.street_number].join("")
+          let city = res.result.address_component
+          _this.weatherApply(start, city)
+        },
+        fail: function (error) {
+          console.error(error);
+        },
+        complete: function (res) {
+          console.log(res);
+        }
+      })
+    } else {
+      _this.weatherApply()
+    }
+  },
+  /**
+ * 根据地区返回天气
+ * @param {start} 显示出来的位置
+ * @param {city.district} 小地点
+ * @param {city.city} 大地点
+ */
+  weatherApply: function (start = '北京', city = { district: "北京", city: "北京" }) {
+    let _this = this
+    _this.setData({
+      start: start
+    })
+    // 传入位置，返回天气
+    let item = {
+      url: 'https://www.toutiao.com/stream/widget/local_weather/data/',
+      data: {
+        city: city.district
+      },
+      method: 'GET',
+      header: {}
+    }
+    // 天气
+    let num = 0 // 只作一次更改
+    let event = async (itemTemp) => {
+      let result = await requests.requestUtils(itemTemp)
+      // 如果区域没有搜索到，则进行市区查询
+      if (result.data.city != city.city && num <= 0) {
+        num++ // 防止两次打印
+        item.data.city = city.city
+        return event(item)
+      }
+
+      // 空气质量颜色问题
+      _this.weatherColorFun(result.data.weather.quality_level)
+
+      // 根据气候选Logo
+      _this.weatherLogoFun(result.data.weather.dat_condition)
+
+      // 星期数
+      _this.weatherWeek()
+
+      _this.setData({
+        weatherResult: result.data.weather,
+        spinShow: false
+      })
+      console.log(result.data.weather)
+    }
+    event(item)
   },
   /**
   * 空气质量颜色问题
