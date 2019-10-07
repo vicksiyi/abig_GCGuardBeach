@@ -150,6 +150,7 @@ export default {
               .then(data => {
                 if (data.data.msg == -1) {
                   this.$Message.error("已存在该用户,请登录");
+                  this.spinShow = false;
                 } else {
                   this.$Message.success("已发到后台审核");
                   setTimeout(() => {

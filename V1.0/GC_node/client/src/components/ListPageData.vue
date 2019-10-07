@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Table :loading="loading" border :columns="columns7" :data="data6"></Table>
+    <Table :loading="loading" border :columns="columns7" :data="data7"></Table>
     <div class="page_list">
-      <Page :total="total" show-elevator />
+      <Page :total="total" @on-change="pageChange" show-elevator />
     </div>
     <Modal v-model="modal2" width="360">
       <p slot="header" style="color:#f60;text-align:center">
@@ -110,7 +110,8 @@ export default {
           }
         }
       ],
-      data6: [] // 数据
+      data6: [], // 数据
+      data7: [] //分页显示数据
       // manageUser:["姓名","邮箱","权限","密码"]
     };
   },
@@ -310,8 +311,16 @@ export default {
         this.modal_loading = false;
         this.modal2 = false;
         this.data6.splice(index, 1);
-        this.$Message.success("Successfully delete");
+        this.$Message.success("成功删除");
       }, 2000);
+    },
+    // 需优化在后端处理
+    pageChange(index) {
+      console.log(index);
+      this.data7 = []
+      for (let i = (index - 1) * 10; i < this.data6.length; i++) {
+        this.data7.push(this.data6[i]);
+      }
     }
   },
   beforeCreate() {
@@ -338,8 +347,13 @@ export default {
             this.$router.push({ path: "/login" });
           }
           this.data6 = data.data;
+          let num = this.data6.length > 10 ? 10 : this.data6.length;
+          this.data7 = [];
+          for (let i = 0; i < num; i++) {
+            this.data7.push(this.data6[i]);
+          }
+          this.data7.push();
           this.total = data.data.length;
-          console.log(this.total);
           this.loading = false;
         })
         .catch(err => {

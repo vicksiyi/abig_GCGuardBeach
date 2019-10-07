@@ -96,7 +96,6 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          console.log(this.formValidate.mail, this.formValidate.psw);
           let params = {
             email: this.formValidate.mail,
             password: this.formValidate.psw
