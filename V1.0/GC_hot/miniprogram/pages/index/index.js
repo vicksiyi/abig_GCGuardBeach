@@ -82,7 +82,6 @@ Page({
       url: '../find/find',
     })
   },
-  //弹出动画
   /**
    * 弹出动画
    */
@@ -101,8 +100,8 @@ Page({
       timingFunction: 'ease-out'
     })
     animationPlus.rotateZ(180).step();
-    animationcollect.translate(-5, 60).rotateZ(180).opacity(1).step();
-    animationTranspond.translate(-20, 100).rotateZ(180).opacity(1).step();
+    animationcollect.translate(-2, 80).rotateZ(180).opacity(1).step();
+    animationTranspond.translate(-20, 110).rotateZ(180).opacity(1).step();
     this.setData({
       animPlus: animationPlus.export(),
       animCollect: animationcollect.export(),
@@ -127,8 +126,8 @@ Page({
       timingFunction: 'ease-out'
     })
     animationPlus.rotateZ(0).step();
-    animationcollect.translate(0, 0).rotateZ(0).opacity(0).step();
-    animationTranspond.translate(0, 0).rotateZ(0).opacity(0).step();
+    animationcollect.translate(10, 120).rotateZ(0).opacity(0).step();
+    animationTranspond.translate(10, 120).rotateZ(0).opacity(0).step();
     this.setData({
       animPlus: animationPlus.export(),
       animCollect: animationcollect.export(),

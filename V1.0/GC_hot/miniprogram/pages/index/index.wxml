@@ -43,15 +43,16 @@
         <image src="../../images/timg.gif" style="width:400rpx;height:400rpx" mode="aspectFill" />
         <view class="imagestexttips">
           <view>
-            <text style="font-size:26px;color:#2b85e4;float:left;">{{weatherResult.current_temperature}}°</text>
-            <view style="width:70rpx;height:70rpx;float:left;margin-top:10rpx;margin-left:10rpx;">
-
-              <image src="{{weatherLogo}}" style="width:70rpx;height:70rpx;padding-top:10rpx;" mode="aspectFill" ></image>
-
-
+            <text style="font-size:26px;color:#2b85e4;float:left;">
+              {{weatherResult.current_temperature}}°
+            </text>
+            <view style="width:70rpx;height:70rpx;float:left;margin-top:80rpx;margin-left:10rpx;">
+              <image src="{{weatherLogo}}" style="width:70rpx;height:70rpx;padding-top:10rpx;" mode="aspectFill"></image>
             </view>
           </view>
-          <view style="float:left;font-size:12px;color:#5cadff;margin-top:15rpx;">今天 {{newTime}} {{thisWeek}} {{weatherResult.dat_condition}}</view>
+          <view style="float:left;font-size:12px;color:#5cadff;margin-top:5rpx;">
+            今天 {{newTime}} {{thisWeek}} {{weatherResult.dat_condition}}
+          </view>
         </view>
         <view class="imagesline"></view>
       </view>
@@ -59,14 +60,14 @@
       <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
     </view>
     <view class="index-othertips">
-      <i-tag style="opacity: 0.8;" class="i-tags" color="{{weatherColor}}">空气质量：{{weatherResult.quality_level}}</i-tag>
+      <i-tag style="opacity: 0.8;" class="i-tags" color="{{weatherColor}}">
+        空气质量：{{weatherResult.quality_level}}
+      </i-tag>
       <i-tag class="i-tags" color="blue">海洋水质：中</i-tag>
       <i-tag class="i-tags" color="green">海滩环境：及格</i-tag>
       <!-- <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin> -->
     </view>
   </view>
-
-  
   <view>
     <i-drawer mode="left" visible="{{showLeft1}}" bind:close="transpond">
       <view class="demo-container">

@@ -52,8 +52,7 @@
 
 .index-map {
   /* position: absolute; */
-  margin-top: 10rpx;
-  margin-left: 9rpx;
+  margin: 10rpx;
   width: 730rpx;
   height: 170px;
 }
@@ -83,7 +82,7 @@
 .tipsection {
   /* position: absolute; */
   /* margin-top: 520rpx;
-  margin-left: 10rpx; */  
+  margin-left: 10rpx; */
   margin: 30rpx;
   display: flex;
   flex-direction: row;
@@ -122,29 +121,28 @@
 }
 
 .imagestexttips {
-  position: absolute;
+  position: relative;
+  top: -450rpx;
   flex-direction: column;
-  top: 0rpx;
 }
 
 .imagesline {
   background: #fff;
   width: 100%;
   height: 3rpx;
-  position: absolute;
-  top: 200rpx;
+  position: relative;
+  top: -200rpx;
 }
 
 .texttips {
-  margin-left: 40rpx;
-  margin-right: 40rpx;
+  position: relative;
+  right: 160rpx;
   margin-top: 40rpx;
-  width: 400rpx;
+  width: 550rpx;
   height: 60rpx;
   font-size: 13px;
   color: #1c2438;
   text-shadow: 2px 2px 5px #bbbec4;
-  border-bottom: 2rpx solid #bbbec4;
 }
 
 /*底部*/
@@ -228,11 +226,11 @@ section.profile {
 }
 
 
-.padding-image{
+.padding-image {
   padding-top: 50rpx;
 }
 
-.pop_up{
+.pop_up {
   position: fixed;
   bottom: 100rpx;
   right: -4rpx;
