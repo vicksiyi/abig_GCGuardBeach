@@ -16,8 +16,19 @@ const requestUtils = (options) => {
             console.log(err)
         }
     })
+    // 定时器&5秒超时
+    var time =  setTimeout(() => {
+        console.log('停止')
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject("超时")
+            }, 0);
+        })
+    }, 5000)
+
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+            clearTimeout(time)
             resolve(tempRequest)
         }, 2000);
     })

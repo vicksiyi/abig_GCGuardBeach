@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const userDecrypt = require('../../utils/userDecrypt')
 
 
 const saltRounds = 10
@@ -67,42 +68,73 @@ router.post('/register', (req, res) => {
         })
 })
 
+
 // $routes /api/users/login
 // @desc 返回请求的json数据
 // @access public
 router.post('/login', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(req.body)
-    User.findOne({ email: email })
-        .then(user => {
-            if (!user) {
-                return res.json({
-                    msg: 0
-                })
-            }
-            // 密码匹配
-            bcrypt.compare(password, user.password)
-                .then(isMatch => {
-                    if (isMatch) {
-                        const rule = { id: user.id, name: user.name }
-                        jwt.sign(rule, keys.secretOrket, { expiresIn: 3600 }, (err, token) => {
-                            if (err) {
-                                throw err;
-                            } else {
-                                res.json({
-                                    success: true,
-                                    token: 'Bearer ' + token
-                                })
-                            }
-                        })
-                    } else {
-                        return res.json({
-                            msg: -1
-                        });
-                    }
-                })
+    // 遍历发送过来的字段
+    let keyTemp = []
+    let valueTemp = []
+    for (const key in req.body) {
+        keyTemp.push(key)
+        valueTemp.push(req.body[key])
+    }
+
+    // 邮箱字段解密
+    let emailSctEn = userDecrypt.usersDecrypt(keyTemp[0], 'email')
+    // 密码字段解密
+    let pswSctEn = userDecrypt.usersDecrypt(keyTemp[1], 'password')
+    // 邮箱解密 
+    let email = userDecrypt.usersDecrypt(valueTemp[0], 'secret key emailAbc')
+    let password = userDecrypt.usersDecrypt(valueTemp[1], 'secret key passwordAbc')
+
+
+
+    
+    // 验证上传上来的字段是否符合emailSct,passwordSct
+    if (emailSctEn == 'emailSct' && pswSctEn == 'passwordSct') {
+        User.findOne({ email: email })
+            .then(user => {
+                if (!user) {
+                    return res.json({
+                        msg: 0
+                    })
+                }
+                // 密码匹配
+                bcrypt.compare(password, user.password)
+                    .then(isMatch => {
+                        if (isMatch) {
+                            const rule = { id: user.id, name: user.name }
+                            jwt.sign(rule, keys.secretOrket, { expiresIn: 3600 }, (err, token) => {
+                                if (err) {
+                                    throw err;
+                                } else {
+                                    res.json({
+                                        success: true,
+                                        token: 'Bearer ' + token
+                                    })
+                                }
+                            })
+                        } else {
+                            return res.json({
+                                msg: -1
+                            });
+                        }
+                    })
+            })
+    } else {
+        return res.json({
+            error: "字段错误"
         })
+    }
+    // if (email == JSON.stringify(req.body).split(":")[0] && password == JSON.stringify(req.body).split(":")[1].split(",")[1]) {
+    //     console.log('nice')
+    // } else {
+    //     return res.json({
+    //         error: "字段错误"
+    //     })
+    // }
 })
 
 // $routes GET /api/users/current
