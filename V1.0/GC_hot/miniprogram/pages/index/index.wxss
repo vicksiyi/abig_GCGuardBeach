@@ -47,7 +47,9 @@
   height: 40rpx;
   width: 40rpx;
 }
-
+.btn_login{
+  
+}
 /* 地图 */
 
 .index-map {
@@ -153,8 +155,6 @@
   width: 100%;
   bottom: 0rpx;
 }
-
-
 button {
   padding-left: 10rpx;
   display: block;
@@ -219,19 +219,15 @@ section.profile {
   border-radius: 100%;
   background: #fff;
 }
-
-.profile-content h1 {
-  margin: 25px 0 0;
-  font-size: 1.4em;
-  font-weight: 200;
-  letter-spacing: 0.05em;
-}
-
-
 .padding-image{
-  padding-top: 50rpx;
+  /* padding-top: 50rpx; */
+  width: 100vw;height: 100vw;
 }
-
+.btn_login{
+width:80%;
+position:relative;
+left: 50rpx;
+}
 .pop_up{
   position: fixed;
   bottom: 100rpx;

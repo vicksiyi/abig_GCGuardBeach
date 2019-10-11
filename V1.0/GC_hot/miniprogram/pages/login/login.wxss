@@ -1,0 +1,110 @@
+.tab-h {
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.tab-item {
+  float: left;
+  width: 50%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 100;
+  color: #80848f;
+  font-family: "Microsoft YaHei";
+}
+
+.tab-item.active {
+  color: #4675f9;
+  position: relative;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  font-family: "Microsoft YaHei";
+}
+
+.tab-content {
+  margin-top: 80rpx;
+}
+
+.scoll-h {
+  height: 100%;
+}
+
+.btn_warrant{
+  background: #2b85e4;
+  color:#fff;
+  width:75%;
+  position:relative;
+  top:250rpx;
+}
+.btn_login{
+  position: relative;
+  top: 100rpx;
+  background-color: #2d8cf0;
+  width: 80%;
+}
+.profile-content {
+  padding: 0 30px 60px;
+  width: 70%;
+  margin: 200rpx auto;
+  border-radius: 5px;
+  color: #495060;
+  text-align: center;
+  background: #f8f8f9;
+}
+.profile-content image {
+  width: 150px;
+  height: 150px;
+  border: 5px solid #ffffff;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.profile-content h1 {
+  margin: 25px 0 0;
+  font-size: 1.4em;
+  font-weight: 200;
+  letter-spacing: 0.05em;
+}
+.profile-content button {
+background: #2b85e4;
+color:#fff;
+}
+.padding-image{
+  padding-top: 50rpx;
+}
+.input{
+  position:relative;
+  top:50rpx;
+}
+.reg_now{
+  background: #fff;
+  color:#2b85e4;
+  font-size:25rpx;
+  width:200rpx;
+  position:relative;
+  top:-150rpx;
+  right:-250rpx;
+}
+.modal-mask{
+
+}
+.modal-photo{
+
+}
+.userinfo-avatar{
+
+}
+.modal-contant{
+
+}

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/find/find",
     "pages/logs/logs",
@@ -11,7 +12,8 @@
     "pages/commoditycar/commoditycar",
     "pages/record/record",
     "pages/feedback/feedback",
-    "pages/exchangeorder/exchangeorder"
+    "pages/exchangeorder/exchangeorder",
+    "pages/news/news"
   ],
   "permission": {
     "scope.userLocation": {
@@ -27,7 +29,8 @@
   "tabBar": {
     "color": "#80848f",
     "selectedColor": "#2b85e4",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "images/icon/index.png",
