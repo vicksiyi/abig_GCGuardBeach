@@ -1,2 +1,28 @@
-<!--pages/news/news.wxml-->
-<text>pages/news/news.wxml</text>
+<view>
+<i-tabs current="{{ current }}" color="#2b85e4" bindchange="handleChange">
+    <i-tab key="0" title="推荐"></i-tab>
+    <i-tab key="1" title="视频"></i-tab>
+    <i-tab key="2" title="热点"></i-tab>
+    <i-tab key="3" title="同城"></i-tab>
+</i-tabs>
+<view>
+<view hidden="{{current!=0}}">
+</view>
+<view hidden="{{current!=1}}">fyh </view>
+<view hidden="{{current!=2}}">
+<i-tag 
+    wx:for="{{hot}}" 
+    wx:key="{{index}}"
+    bindchange="onChange" 
+    checkable="{{true}}" 
+    name="{{index}}" 
+    color="{{item.color}}" 
+    checked="{{item.checked}}" 
+    type="border"
+    style="margin-right:5px;">
+    {{item.name}}
+</i-tag>
+</view>
+<view hidden="{{current!=3}}">32</view>
+</view>
+</view>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/news/news",
     "pages/login/login",
     "pages/index/index",
     "pages/find/find",
@@ -12,8 +13,7 @@
     "pages/commoditycar/commoditycar",
     "pages/record/record",
     "pages/feedback/feedback",
-    "pages/exchangeorder/exchangeorder",
-    "pages/news/news"
+    "pages/exchangeorder/exchangeorder"
   ],
   "permission": {
     "scope.userLocation": {
