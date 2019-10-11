@@ -1,5 +1,6 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/news/news",
     "pages/login/login",
     "pages/index/index",
@@ -14,6 +15,13 @@
     "pages/record/record",
     "pages/feedback/feedback",
     "pages/exchangeorder/exchangeorder"
+=======
+    "page/packageA/login/login",
+    "page/packageA/index/index",
+    "page/packageA/commodity/commodity",
+    "page/packageA/interactive/interactive",
+    "page/packageA/mine/mine"
+>>>>>>> b6be65d6891f679e59f11d38e3be708d8f0e1b60
   ],
   "permission": {
     "scope.userLocation": {
@@ -31,31 +39,57 @@
     "selectedColor": "#2b85e4",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "page/packageA/index/index",
         "text": "首页",
         "iconPath": "images/icon/index.png",
         "selectedIconPath": "images/icon/index_fill.png"
       },
       {
-        "pagePath": "pages/commodity/commodity",
+        "pagePath": "page/packageA/commodity/commodity",
         "text": "兑换",
         "iconPath": "images/icon/commodity.png",
         "selectedIconPath": "images/icon/commodity_fill.png"
       },
       {
-        "pagePath": "pages/interactive/interactive",
+        "pagePath": "page/packageA/interactive/interactive",
         "text": "社区",
         "iconPath": "images/icon/interactive.png",
         "selectedIconPath": "images/icon/interactive_fill.png"
       },
       {
-        "pagePath": "pages/mine/mine",
+        "pagePath": "page/packageA/mine/mine",
         "text": "我的",
         "iconPath": "images/icon/mine.png",
         "selectedIconPath": "images/icon/mine_fill.png"
       }
     ]
   },
+  "subpackages": [
+    {
+      "root": "page/packageB/",
+      "pages": [
+        "pages/find/find",
+        "pages/logs/logs",
+        "pages/about/about"
+      ]
+    },
+    {
+      "root": "page/packageC/",
+      "pages": [
+        "pages/myinfo/myinfo",
+        "pages/commoditycar/commoditycar",
+        "pages/record/record",
+        "pages/feedback/feedback"
+      ]
+    },
+    {
+      "root": "page/packageD/",
+      "pages": [
+        "pages/exchangeorder/exchangeorder",
+        "pages/news/news"
+      ]
+    }
+  ],
   "usingComponents": {
     "i-icon": "../../dist/icon/index"
   },

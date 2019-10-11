@@ -16,6 +16,7 @@
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.0",
