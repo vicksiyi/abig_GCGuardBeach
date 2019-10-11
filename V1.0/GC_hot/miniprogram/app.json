@@ -12,13 +12,8 @@
     "pages/commoditycar/commoditycar",
     "pages/record/record",
     "pages/feedback/feedback",
-<<<<<<< HEAD
-    "pages/test/test",
-    "pages/exchangeorder/exchangeorder"
-=======
     "pages/exchangeorder/exchangeorder",
     "pages/news/news"
->>>>>>> 94210807623e29f508754d811f921ab308e0ad1d
   ],
   "permission": {
     "scope.userLocation": {

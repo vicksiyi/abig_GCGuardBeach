@@ -217,22 +217,6 @@ section.profile {
   border-radius: 100%;
   background: #fff;
 }
-<<<<<<< HEAD
-
-.profile-content h1 {
-  margin: 25px 0 0;
-  font-size: 1.4em;
-  font-weight: 200;
-  letter-spacing: 0.05em;
-}
-
-
-.padding-image {
-  padding-top: 50rpx;
-}
-
-.pop_up {
-=======
 .padding-image{
   /* padding-top: 50rpx; */
   width: 100vw;height: 100vw;
@@ -243,7 +227,6 @@ position:relative;
 left: 50rpx;
 }
 .pop_up{
->>>>>>> 94210807623e29f508754d811f921ab308e0ad1d
   position: fixed;
   bottom: 100rpx;
   right: -4rpx;
