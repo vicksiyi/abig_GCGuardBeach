@@ -52,5 +52,11 @@ Page({
     url: '../commoditycar/commoditycar',
 
   })
+  },
+  goorder: function () {
+    wx.navigateTo({
+      url: '../exchangeorder/exchangeorder',
+
+    })
   }
 });
