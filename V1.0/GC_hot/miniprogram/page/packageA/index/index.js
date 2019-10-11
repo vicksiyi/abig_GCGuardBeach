@@ -1,10 +1,10 @@
 const {
   $Message
-} = require('../../dist/base/index');
-const QQMapWX = require('../../utils/qqmap-wx-jssdk');
-const requests = require('../../utils/requests')
-const weatherLogoList = require('../../utils/weatherLogo')
-const utils = require('../../utils/util')
+} = require('../../../dist/base/index');
+const QQMapWX = require('../../../utils/qqmap-wx-jssdk');
+const requests = require('../../../utils/requests')
+const weatherLogoList = require('../../../utils/weatherLogo')
+const utils = require('../../../utils/util')
 var qqmapsdk;
 Page({
   data: {
@@ -48,7 +48,7 @@ Page({
     weatherColor: 'green',
     weatherLevel: ['优', '良', '差'],
     weatherLogoList: weatherLogoList.weatherLogo,
-    weatherLogo: '../../images/weatherLogo/999.png',
+    weatherLogo: '../../../images/weatherLogo/999.png',
     thisWeekList: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
     thisWeekListTime: utils.thisWeek(),
     thisWeek: '星期一',

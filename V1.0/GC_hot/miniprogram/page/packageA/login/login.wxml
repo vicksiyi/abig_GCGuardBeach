@@ -9,7 +9,7 @@
           <section>
       <view class="profile-content">
         <view class="padding-image">
-          <image src="../../images/wx_login.png"></image>
+          <image src="../../../images/wx_login.png"></image>
         </view>
         <h1>申请获得以下权限</h1>
         <view style="font-size:0.8rem;">获得你的公开信息(昵称、头像、地区及性别)</view>

@@ -20,7 +20,7 @@
     <view class="choice-bar">
       <view class="chioce-item">
         {{start}}
-        <image class="icon-chioce" src="../../images/icon/list.png"></image>
+        <image class="icon-chioce" src="../../../images/icon/list.png"></image>
       </view>
     </view>
   </view>
@@ -30,15 +30,15 @@
   </view>
   <!-- 弹出菜单 -->
   <view class="pop_up">
-    <image src="../../images/icon/indexfind.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
-    <image src="../../images/icon/indexorder.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
-    <image src="../../images/icon/indexplus.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
+    <image src="../../../images/icon/indexfind.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
+    <image src="../../../images/icon/indexorder.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
+    <image src="../../../images/icon/indexplus.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
   </view>
   <!-- 周边环境预报 -->
   <view class="tipsection">
     <view class="index-tips">
       <view class="imagestips">
-        <image src="../../images/timg.gif" style="width:400rpx;height:400rpx" mode="aspectFill" />
+        <image src="../../../images/timg.gif" style="width:400rpx;height:400rpx" mode="aspectFill" />
         <view class="imagestexttips">
           <view>
             <text style="font-size:26px;color:#2b85e4;float:left;">
