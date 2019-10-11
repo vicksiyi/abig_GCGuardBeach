@@ -7,13 +7,25 @@
 </i-tabs>
 <view>
 <view hidden="{{current!=0}}">
+<i-tag 
+    wx:for="{{push}}" 
+    wx:key="{{index}}"
+    bindchange="push_onChange" 
+    checkable="{{true}}" 
+    name="{{index}}" 
+    color="{{item.color}}" 
+    checked="{{item.checked}}" 
+    type="border"
+    style="margin-right:5px;">
+    {{item.name}}
+</i-tag>
 </view>
 <view hidden="{{current!=1}}">fyh </view>
 <view hidden="{{current!=2}}">
 <i-tag 
     wx:for="{{hot}}" 
     wx:key="{{index}}"
-    bindchange="onChange" 
+    bindchange="hot_onChange" 
     checkable="{{true}}" 
     name="{{index}}" 
     color="{{item.color}}" 
@@ -26,3 +38,4 @@
 <view hidden="{{current!=3}}">32</view>
 </view>
 </view>
+

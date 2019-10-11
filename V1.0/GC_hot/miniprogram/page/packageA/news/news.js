@@ -1,6 +1,33 @@
 Page({
   data: {
     current: 0,
+    push: [
+      {
+        name: '社会',
+        checked: false,
+        color: 'default'
+      },
+      {
+        name: '财经',
+        checked: false,
+        color: 'red'
+      },
+      {
+        name: '美食',
+        checked: true,
+        color: 'blue'
+      },
+      {
+        name: '科普',
+        checked: true,
+        color: 'green'
+      },
+      {
+        name: '艺术',
+        checked: true,
+        color: 'yellow'
+      }
+    ],
     hot: [
       {
         name: '浏览最多',
@@ -29,7 +56,13 @@ Page({
       current: detail.key
     });
   },
-  onChange(event) {
+  push_onChange(event) {
+    const detail = event.detail;
+    this.setData({
+      ['push[' + event.detail.name + '].checked']: detail.checked
+    })
+  },
+  hot_onChange(event) {
     const detail = event.detail;
     this.setData({
       ['hot[' + event.detail.name + '].checked']: detail.checked

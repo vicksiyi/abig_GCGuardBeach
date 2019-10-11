@@ -1,17 +1,17 @@
 {
   "usingComponents": {
-    "i-button": "../../dist/button/index",
-    "i-tabs": "../../dist/tabs/index",
-    "i-tab": "../../dist/tab/index",
-    "i-avatar": "../../dist/avatar/index",
-    "i-divider": "../../dist/divider/index",
-    "i-load-more": "../../dist/load-more/index",
-    "i-row": "../../dist/row/index",
-    "i-col": "../../dist/col/index",
-    "i-drawer": "../../dist/drawer/index",
-    "i-action-sheet": "../../dist/action-sheet/index",
-    "i-message": "../../dist/message/index",
-    "i-spin": "../../dist/spin/index",
-    "i-progress": "../../dist/progress/index"
+    "i-button": "../../../../dist/button/index",
+    "i-tabs": "../../../../dist/tabs/index",
+    "i-tab": "../../../../dist/tab/index",
+    "i-avatar": "../../../../dist/avatar/index",
+    "i-divider": "../../../../dist/divider/index",
+    "i-load-more": "../../../../dist/load-more/index",
+    "i-row": "../../../../dist/row/index",
+    "i-col": "../../../../dist/col/index",
+    "i-drawer": "../../../../dist/drawer/index",
+    "i-action-sheet": "../../../../dist/action-sheet/index",
+    "i-message": "../../../../dist/message/index",
+    "i-spin": "../../../../dist/spin/index",
+    "i-progress": "../../../../dist/progress/index"
   }
 }

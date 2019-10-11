@@ -1,27 +1,11 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/news/news",
-    "pages/login/login",
-    "pages/index/index",
-    "pages/find/find",
-    "pages/logs/logs",
-    "pages/commodity/commodity",
-    "pages/about/about",
-    "pages/interactive/interactive",
-    "pages/mine/mine",
-    "pages/myinfo/myinfo",
-    "pages/commoditycar/commoditycar",
-    "pages/record/record",
-    "pages/feedback/feedback",
-    "pages/exchangeorder/exchangeorder"
-=======
-    "page/packageA/login/login",
+    "page/packageA/news/news",
     "page/packageA/index/index",
+    "page/packageA/login/login",
     "page/packageA/commodity/commodity",
     "page/packageA/interactive/interactive",
     "page/packageA/mine/mine"
->>>>>>> b6be65d6891f679e59f11d38e3be708d8f0e1b60
   ],
   "permission": {
     "scope.userLocation": {
@@ -57,6 +41,12 @@
         "selectedIconPath": "images/icon/interactive_fill.png"
       },
       {
+        "pagePath": "page/packageA/news/news",
+        "text": "新闻",
+        "iconPath": "images/icon/news.png",
+        "selectedIconPath": "images/icon/news_fill.png"
+      },
+      {
         "pagePath": "page/packageA/mine/mine",
         "text": "我的",
         "iconPath": "images/icon/mine.png",
@@ -85,8 +75,7 @@
     {
       "root": "page/packageD/",
       "pages": [
-        "pages/exchangeorder/exchangeorder",
-        "pages/news/news"
+        "pages/exchangeorder/exchangeorder"
       ]
     }
   ],

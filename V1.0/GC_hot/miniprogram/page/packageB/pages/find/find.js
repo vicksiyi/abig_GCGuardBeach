@@ -1,6 +1,6 @@
-const { $Message } = require('../../dist/base/index');
-const utils = require('../../utils/util')
-const requests = require('../../utils/requests')
+const { $Message } = require('../../../../dist/base/index');
+const utils = require('../../../../utils/util');
+const requests = require('../../../../utils/requests');
 Page({
   data: {
     currentData: 0,
@@ -239,7 +239,7 @@ Page({
                             spinShow: false
                           })
                           wx.switchTab({
-                            url: '../../pages/index/index'
+                            url: '../../../../page/packageA/index/index'
                           })
                         }, 1000);
                       } else {
@@ -249,7 +249,7 @@ Page({
                         });
                         setTimeout(() => {
                           wx.switchTab({
-                            url: '../../pages/index/index'
+                            url: '../../../../page/packageA/index/index'
                           })
                         }, 1000);
                       }
