@@ -38,4 +38,3 @@
 <view hidden="{{current!=3}}">32</view>
 </view>
 </view>
-

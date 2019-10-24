@@ -1,10 +1,10 @@
 {
   "pages": [
-    "page/packageA/news/news",
     "page/packageA/index/index",
     "page/packageA/login/login",
     "page/packageA/commodity/commodity",
     "page/packageA/interactive/interactive",
+    "page/packageA/news/news",
     "page/packageA/mine/mine"
   ],
   "permission": {
@@ -25,20 +25,20 @@
       {
         "pagePath": "page/packageA/index/index",
         "text": "首页",
-        "iconPath": "images/icon/index.png",
-        "selectedIconPath": "images/icon/index_fill.png"
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home_fill.png"
       },
       {
         "pagePath": "page/packageA/commodity/commodity",
         "text": "兑换",
-        "iconPath": "images/icon/commodity.png",
-        "selectedIconPath": "images/icon/commodity_fill.png"
+        "iconPath": "images/icon/comm.png",
+        "selectedIconPath": "images/icon/comm_fill.png"
       },
       {
         "pagePath": "page/packageA/interactive/interactive",
-        "text": "社区",
-        "iconPath": "images/icon/interactive.png",
-        "selectedIconPath": "images/icon/interactive_fill.png"
+        "text": "圈子",
+        "iconPath": "images/icon/inter.png",
+        "selectedIconPath": "images/icon/inter_fill.png"
       },
       {
         "pagePath": "page/packageA/news/news",
@@ -49,8 +49,8 @@
       {
         "pagePath": "page/packageA/mine/mine",
         "text": "我的",
-        "iconPath": "images/icon/mine.png",
-        "selectedIconPath": "images/icon/mine_fill.png"
+        "iconPath": "images/icon/my.png",
+        "selectedIconPath": "images/icon/my_fill.png"
       }
     ]
   },
@@ -58,24 +58,31 @@
     {
       "root": "page/packageB/",
       "pages": [
-        "pages/find/find",
-        "pages/logs/logs",
-        "pages/about/about"
+      "pages/volunteer/volunteer",
+      "pages/knowledge/knowledge"
       ]
     },
     {
-      "root": "page/packageC/",
+      "root": "page/packageF/",
+      "pages": [
+        "pages/find/find",
+        "pages/FindCircle/FindCircle",
+        "pages/record/record"
+      ]
+    },
+    {
+      "root": "page/packageG/",
+      "pages": [
+        "pages/order/order",
+        "pages/commoditycar/commoditycar"
+      ]
+    },
+    {
+      "root": "page/packageH/",
       "pages": [
         "pages/myinfo/myinfo",
-        "pages/commoditycar/commoditycar",
-        "pages/record/record",
+        "pages/about/about",
         "pages/feedback/feedback"
-      ]
-    },
-    {
-      "root": "page/packageD/",
-      "pages": [
-        "pages/exchangeorder/exchangeorder"
       ]
     }
   ],

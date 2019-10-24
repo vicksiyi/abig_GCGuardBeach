@@ -3,8 +3,33 @@ Page({
     store: [],
     active: 0,
     currentTab: 0,
-    science: [{
+    category: [{
+        id: 0,
+        name: '图书'
+      },
+      {
         id: 1,
+        name: '童书'
+      },
+      {
+        id: 2,
+        name: '家用摆饰'
+      },
+      {
+        id: 3,
+        name: '精美礼品'
+      },
+      {
+        id: 4,
+        name: '海的零食'
+      },
+      {
+        id: 5,
+        name: '海产干货'
+      },
+    ],
+    science: [{
+        id: 0,
         picture: 'https://img13.360buyimg.com/n1/s200x200_jfs/t18412/89/1210128942/433322/e2c0fecb/5abda998N22e4ad6c.jpg',
         name: '海洋百科',
         content: 'BBC蓝色星球II [英]詹姆斯.霍尼伯内 马克.布朗罗著',
@@ -12,7 +37,7 @@ Page({
         num: 1,
         selected: false
       }, {
-        id: 2,
+        id: 1,
         picture: 'https://img14.360buyimg.com/n1/s200x200_jfs/t5992/59/4558255428/1351988/429e072b/5962f5bfNde8054fc.jpg',
         name: '深水探秘',
         content: 'BBC科普三部曲海洋 [英]保尔·罗斯 安妮·莱金 著',
@@ -21,7 +46,7 @@ Page({
         selected: false
       },
       {
-        id: 3,
+        id: 2,
         picture: 'https://img14.360buyimg.com/n1/s200x200_jfs/t1/7219/37/6341/428004/5be1420aEdc24573e/77b1594062670fb5.jpg',
         name: '无尽深蓝',
         content: '未读探索家海洋摄影作品 西尔维亚A厄尔著',
@@ -30,16 +55,16 @@ Page({
         selected: false
       },
       {
-        id: 4,
+        id: 3,
         picture: 'https://img13.360buyimg.com/n1/s200x200_jfs/t1/1700/32/13788/328786/5bd94947E2c0bdc46/5ef2697d0d16c6d3.jpg',
-        name: '海洋中药化学',
+        name: '海洋药化学',
         content: '侯小涛邓家刚郝二伟 编',
         price: '1160',
         num: 1,
         selected: false
       },
       {
-        id: 5,
+        id: 4,
         picture: 'https://img10.360buyimg.com/n1/s200x200_jfs/t13231/124/337624371/188390/1f5c6a84/5a095d09N73fa1194.jpg',
         name: '深渊',
         content: '探索海洋最深处的奥秘 [英]艾伦·杰米逊著',
@@ -47,24 +72,14 @@ Page({
         num: 1,
         selected: false
       },
-    ],
-    gooditem: [{
-        name: '科普读物'
-      },
       {
-        name: '童书'
-      },
-      {
-        name: '家用摆饰'
-      },
-      {
-        name: '精美礼品'
-      },
-      {
-        name: '海的零食'
-      },
-      {
-        name: '海产干货'
+        id: 5,
+        picture: 'https://img13.360buyimg.com/n1/s200x200_jfs/t22210/120/1193638501/177325/95fd85c5/5b21ded7N149b1a2e.jpg',
+        name: '综合考察船',
+        content: '中国大科学装置出版工程：走进深海大洋',
+        price: '270',
+        num: 1,
+        selected: false
       },
     ],
     spinShow: false
@@ -72,7 +87,7 @@ Page({
   /**
    *  左侧栏选择
    */
-  switchNav: function (e) {
+  switchNav: function(e) {
     var page = this;
     var id = e.target.id;
     if (this.data.currentTab == id) {
@@ -89,7 +104,7 @@ Page({
   /**
    *  右侧swiper改变
    */
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     var id = e.detail.current
     if (this.data.currentTab == id) {
       return false;
@@ -102,10 +117,15 @@ Page({
       active: id
     });
   },
+  cartbtn: function() {
+    wx.navigateTo({
+      url: '../../packageC/pages/commoditycar/commoditycar',
+    })
+  },
   /**
    *  加入购物车
    */
-  tap: function (res) {
+  tap: function(res) {
     // this.data.array[res.currentTarget.dataset.id]
     let storeTemp = this.data.store
     //向数组的末尾添加一个或多个元素，并返回新的长度
@@ -140,7 +160,7 @@ Page({
   /**
    *  加载过程
    */
-  onLoad: function () {
+  onLoad: function() {
     let _this = this
     _this.setData({
       spinShow: true

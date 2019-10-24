@@ -1,179 +1,21 @@
-.tab-h {
-  height: 80rpx;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  line-height: 80rpx;
-  background: #f7f7f7;
-  font-size: 16px;
-  white-space: nowrap;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99;
+.image{
+  width:100%;
+  height: 350rpx;
 }
-
-.tab-item {
-  float: left;
-  width: 50%;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 100;
-  color: #80848f;
-  font-family: "Microsoft YaHei";
+.text_container{
+  background: #F6EEEF;
+  width:100%;
+  position:relative;
+  top:-15rpx;
 }
-
-.tab-item.active {
-  color: #4675f9;
-  position: relative;
-  font-weight: bold;
-  font-size: 15px;
-  text-align: center;
-  font-family: "Microsoft YaHei";
-}
-
-.tab-content {
-  margin-top: 80rpx;
-}
-
-.scoll-h {
-  height: 100%;
-}
-
-.index-textarea {
-  position: absolute;
-  margin-left: 16rpx;
-  margin-top: 20rpx;
-}
-
-.title {
-  margin: 20rpx;
-  display: flex;
-  position: relative;
-}
-
-.title .title-left {
-  font-size: 36rpx;
-  font-weight: bold;
-  color: rgba(34, 34, 34, 1);
-}
-
-.title .title-right {
-  position: absolute;
-  top: 5rpx;
-  right: 0rpx;
+.text{
+  position:relative;
+  top:-15rpx;
+  left:100rpx;
+  width:70%;
   font-size: 30rpx;
-  font-weight: bold;
-  color: rgba(34, 34, 34, 1);
 }
-
-.title .title-right-count {
-  color: rgba(153, 153, 153, 1);
-}
-
-.content {
-  padding: 20rpx;
-  width: 100%;
-  height: 150rpx;
-}
-
-.content .text_class {
-  width: 100%;
-  height: 200rpx;
-  font-size: 26rpx;
-  line-height: 1.25;
-  z-index: -1;
-  color: #1c2438;
-  position: static;
-}
-
-.picturecontainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.main {
-  width: 100%;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom: 1px solid #2b85e4;
-}
-
-.headportrait {
-  width: 710rpx;
-  height: 100rpx;
-  float: left;
-  margin-left: 25rpx;
-  margin-top: 20rpx;
-  background-color: #f8f8f9;
-  border-radius: 10px;
-}
-
-.headname {
-  float: left;
-  font-size: 14px;
-  margin-left: 50rpx;
-  margin-top: 20rpx;
-  color: #1c2438;
-  font-family: "Microsoft YaHei";
-}
-
-.headgood {
-  float: right;
-  width: 60rpx;
-  height: 60rpx;
-  margin-top: 18rpx;
-}
-
-.headgoodcount {
-  float: right;
-  width: 200rpx;
-  height: 60rpx;
-  margin-top: 18rpx;
-  font-size: 12px;
-}
-
-.contentcontainer {
-  width: 720rpx;
-  height: 100%;
-  float: left;
-  margin-left: 25rpx;
-  background-color: #fff;
-}
-
-.contenttext {
-  margin-top: 20rpx;
-  margin-left: 70rpx;
-  margin-bottom: 20rpx;
-  width: 600rpx;
-}
-
-.picturecontainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-.contentpicture {
-  margin-left: 70rpx;
-  margin-bottom: 20rpx;
-  background-color: #deeee5;
-  border-radius: 10px;
-}
-
-.pcitem {
-  width: 180rpx;
-  height: 180rpx;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
-  float: left;
-  background-color: #fff;
+.btn{
+  position:relative;
+  top:25rpx;
 }

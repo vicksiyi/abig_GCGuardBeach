@@ -7,26 +7,26 @@ Page({
       id: 1,
       title: "用户信息",
       type: "addressbook",
-      url: "../../packageC/pages/myinfo/myinfo"
+      url: "../../packageH/pages/myinfo/myinfo"
 
     },
     {
       id: 2,
       title: "我的社区记录",
       type: "document",
-      url: "../../packageC/pages/record/record"
+      url: "../../packageF/pages/record/record"
     },
     {
       id: 3,
       title: "意见反馈",
       type: "feedback",
-      url: "../../packageC/pages/feedback/feedback"
+      url: "../../packageH/pages/feedback/feedback"
     },
     {
       id: 4,
       title: "关于我们",
       type: "more",
-      url: "../../packageB/pages/about/about"
+      url: "../../packageH/pages/about/about"
     }
     ]
   },
@@ -49,13 +49,13 @@ Page({
   },
   gocar:function(){
   wx.navigateTo({
-    url: '../../packageC/pages/commoditycar/commoditycar',
+    url: '../../packageG/pages/commoditycar/commoditycar',
 
   })
   },
   goorder: function () {
     wx.navigateTo({
-      url: '../../packageD/pages/exchangeorder/exchangeorder',
+      url: '../../packageG/pages/order/order',
 
     })
   }

@@ -1,7 +1,7 @@
 {
-  "usingComponents": {
-    "i-tabs": "../../../dist/tabs/index",
-    "i-tab": "../../../dist/tab/index",
-    "i-tag": "../../../dist/tag/index"
+    "usingComponents": {
+      "i-tabs": "../../../dist/tabs/index",
+      "i-tab": "../../../dist/tab/index",
+      "i-tag": "../../../dist/tag/index"
+    }
   }
-}
