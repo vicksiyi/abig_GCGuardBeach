@@ -1,0 +1,89 @@
+.title_image{
+  width:240rpx;
+  height: 216rpx;
+}
+.head{
+color:#2b85e4;
+font-size:72rpx;
+font-family:"微软雅黑";
+position:relative;
+top:-121rpx;
+left:9rpx;
+}
+.top{ 
+      font-family:"微软雅黑";
+    	font-size: 52rpx; 
+    	color:#2b85e4; 
+    	position:relative;
+      left:-56rpx;
+      top:-36rpx;
+    	animation: changeshadow 1s  ease-in  infinite ;
+	    -webkit-animation: changeshadow 1s linear infinite;
+	    -moz-animation: changeshadow 1s linear infinite;
+	    -ms-animation: changeshadow 1s linear infinite;
+	    -o-animation: changeshadow 1s linear infinite;
+    }  
+    @keyframes changeshadow {  
+        0%{ text-shadow: 0 0 4px #2b85e4}  
+        50%{ text-shadow: 0 0 40px #2b85e4}  
+        100%{ text-shadow: 0 0 4px #2b85e4}  
+    }
+    wxss
+.item-box {
+    width: 700rpx;
+    margin: 0 auto;
+    padding: 20rpx 0;
+}
+
+.items {
+    width: 100%;
+}
+
+.item {
+    position: relative;
+    border-top: 2rpx solid #eee;
+    height: 115rpx;
+    line-height: 115rpx;
+    overflow: hidden;
+}
+
+.itemformat {
+    float: left;
+    margin-left: 90rpx;
+}
+.otherrank {
+    margin-top: 20rpx;
+    margin-left: 40rpx;
+    width: 700rpx;
+    height: 150rpx;
+    background-color: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    -moz-box-shadow: 2px 2px 5px #DDDEE1;
+    -webkit-box-shadow: 2px 2px 5px #DDDEE1;
+    box-shadow: 2px 2px 5px #DDDEE1;
+}
+
+.otherrankitem {
+    margin-left: 40rpx;
+    margin-top: 10rpx;
+    width: 200rpx;
+    height: 120rpx;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.otherranktext {
+    font-size: 13px;
+    color: #bbbec4;
+}
+
+.otherranknum {
+    font-size: 12px;
+    color: #1c2438;
+    font-weight: bold;
+}

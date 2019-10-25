@@ -5,7 +5,7 @@
 }
 
 .left {
-  width: 25%;
+  width: 20%;
   font-size: 30rpx;
   display: flex;
   flex-direction: column;
@@ -32,14 +32,14 @@
 }
 
 .right {
-  width: 75%;
+  width: 80%;
   margin: 0;
   background-color: #f8f8f9;
 }
 
 .type {
-  height: 900rpx;
-  width: 535rpx;
+  height: 1100rpx;
+  width: 570rpx;
   margin: 15rpx;
   background-color: #fff;
 }
@@ -56,68 +56,35 @@
   margin-top: 20rpx;
   margin-left: 20rpx;
   margin-bottom: 20rpx;
-  width: 500rpx;
-  height: 340rpx;
-  border-bottom: 6rpx solid #e9eaec;
-  -moz-box-shadow: 2px 2px 5px #dddee1;
-  -webkit-box-shadow: 2px 2px 5px #dddee1;
-  box-shadow: 2px 2px 5px #dddee1;
+  width: 535rpx;
+  height: 535rpx;
+}
+
+.categoryname {
+  width: 200rpx;
+  height: 50rpx;
+  font-size: 16px;
+}
+
+.goodpack {
+  width: 510rpx;
+  height: 680rpx;
 }
 
 .goodpicture {
-  position: relative;
-  top: 40rpx;
-  width: 200rpx;
-  height: 200rpx;
-
+  width: 140rpx;
+  height: 140rpx;
+  margin-left: 24rpx;
+  padding-top: 35rpx;
 }
 
 .goodtext {
-  position: relative;
-  width: 260rpx;
-  height: 290rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.goodname {
-  position: relative;
-  top: 10rpx;
-  width: 260rpx;
-  height: 60rpx;
-  color: #1c2438;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: "Microsoft YaHei";
-}
-
-.goodcontent {
-  position: relative;
-  top: 6rpx;
-  font-size: 13px;
-  width: 260rpx;
-  height: 155rpx;
-  color: #495060;
-  font-family: "Microsoft YaHei";
-}
-
-.goodlove {
-  position: relative;
-  top: 20rpx;
+  margin-left: 24rpx;
+  padding-top: 10rpx;
   font-size: 14px;
-  width: 260rpx;
-  height: 56rpx;
-  color: #2b85e4;
-}
-
-.addgood {
-  position: relative;
-  left: 80rpx;
-  top: 35rpx;
-  width: 260rpx;
-  height: 45rpx;
-  font-size: 13px;
-  font-weight: bold;
-  color: #80848f;
+  width: 140rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

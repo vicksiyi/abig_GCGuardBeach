@@ -8,6 +8,9 @@
       <i-icon type="like" size="28" color="#f8f8f9" />
       <text style="margin-left:15rpx;font-size:17px;color:#dddee1">520</text>
     </view>
+    <view class="rank">
+    <image  src="../../../images/sixtitle.png" class="rank_image" bindtap="rank"></image>
+    </view>
   </view>
   <view class="info">
   </view>

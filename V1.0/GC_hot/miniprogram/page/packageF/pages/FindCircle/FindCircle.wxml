@@ -1,0 +1,21 @@
+<view>
+  <image class="top_image" src="../../../../images/findsth.png"></image>
+</view>
+<view  wx:for="{{array}}" wx:for-item="item" wx:key="id">
+  <i-divider class="divi"></i-divider>
+  <view class="container">
+    <i-avatar class="avatar_img" src="{{item.headportrait}}" size="large" shape="square"></i-avatar>
+    <text class="nickname">{{item. headname}}</text>
+    <text class="time">{{item.headtime}}</text>
+    <i-icon class="zan" type="praise" />
+    <textarea  class="contant">{{item.contenttext}}</textarea>
+    <!-- 社区图片 -->
+    <view class="picturecontainer">
+      <view class="contentpicture">
+        <view class="pcitem" wx:for="{{item.contentpicture}}" wx:for-item="pictureName" wx:key="id">
+          <image style="width:180rpx; height:180rpx;" mode="aspectFill" src="{{pictureName.photo}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

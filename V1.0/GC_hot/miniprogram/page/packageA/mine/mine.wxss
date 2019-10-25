@@ -39,7 +39,17 @@
   top: 140rpx;
   left: 280rpx;
 }
-
+.rank{
+  position:relative;
+  top:76rpx;
+  left:480rpx;
+  width:100rpx;
+  height: 40rpx;
+}
+.rank_image{
+ width:70rpx;
+ height:70rpx;
+}
 .info {
   height: 150rpx;
   align-items: center;

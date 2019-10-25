@@ -1,14 +1,3 @@
-/* 抽屉 */
-.rank_header {
-  background: #f8f8f9;
-}
-
-.demo-container {
-  width: 550rpx;
-  height: 100vh;
-  background: #fff;
-}
-
 /* 头部下拉框 */
 
 .product-list {

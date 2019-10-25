@@ -12,7 +12,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
     start: "茂名-中国第一滩",
-    showLeft1: false,
     max: 100,
     value: "",
     files: [],
@@ -25,23 +24,11 @@ Page({
       width: 50,
       height: 50
     }],
-    rank: [{
-      id: 1,
-      num: 1,
-      user: 'GuiStar',
-      title: 'GC卫士',
-      index: '1200'
-    }, {
-      id: 2,
-      num: 2,
-      user: '孔孔',
-      title: 'GC护卫',
-      index: '1000'
-    }],
     Popping: false, //是否已经弹出
     animPlus: {}, //旋转动画
     animCollect: {}, //item位移,透明度
     animTranspond: {}, //item位移,透明度
+    animChat: {},
     weatherResult: '',
     spinShow: false,
     weatherColorList: ['green', 'yellow', 'red'],
@@ -57,7 +44,7 @@ Page({
   /**
    * 点击弹出
    */
-  plus: function () {
+  plus: function() {
     if (this.data.isPopping) {
       //缩回动画
       this.popp();
@@ -72,20 +59,38 @@ Page({
       })
     }
   },
-  transpond: function () {
-    this.setData({
-      showLeft1: !this.data.showLeft1
-    });
-  },
-  collect: function () {
+  /**
+   * 首页进入志愿者
+   */
+  transpond: function() {
     wx.navigateTo({
-      url: '../../packageB/pages/find/find',
+   
+    })
+  },
+  /**
+   *首页进入发现
+   */
+  find: function() {
+    wx.navigateTo({
+      url: '../../packageF/pages/find/find',
+    })
+  },
+  // 进入志愿者
+  volut: function() {
+    wx.navigateTo({
+      url: '../../packageB/pages/volunteer/volunteer',
+    })
+  },
+  // 进入冷知识
+  know: function () {
+    wx.navigateTo({
+      url: '../../packageB/pages/knowledge/knowledge',
     })
   },
   /**
    * 弹出动画
    */
-  popp: function () {
+  popp: function() {
     //plus顺时针旋转
     var animationPlus = wx.createAnimation({
       duration: 500,
@@ -99,19 +104,25 @@ Page({
       duration: 500,
       timingFunction: 'ease-out'
     })
+    var animationChat = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
     animationPlus.rotateZ(180).step();
-    animationcollect.translate(-2, 80).rotateZ(180).opacity(1).step();
-    animationTranspond.translate(-20, 110).rotateZ(180).opacity(1).step();
+    animationcollect.translate(10, 80).rotateZ(0).opacity(1).step();
+    animationTranspond.translate(-20, 120).rotateZ(0).opacity(1).step();
+    animationChat.translate(10, 160).rotateZ(0).opacity(1).step();
     this.setData({
       animPlus: animationPlus.export(),
       animCollect: animationcollect.export(),
       animTranspond: animationTranspond.export(),
+      animChat: animationChat.export(),
     })
   },
   /**
    * 收回动画
    */
-  takeback: function () {
+  takeback: function() {
     //plus逆时针旋转
     var animationPlus = wx.createAnimation({
       duration: 500,
@@ -125,19 +136,25 @@ Page({
       duration: 500,
       timingFunction: 'ease-out'
     })
+    var animationChat = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
     animationPlus.rotateZ(0).step();
     animationcollect.translate(10, 120).rotateZ(0).opacity(0).step();
     animationTranspond.translate(10, 120).rotateZ(0).opacity(0).step();
+    animationChat.translate(10, 120).rotateZ(0).opacity(0).step();
     this.setData({
       animPlus: animationPlus.export(),
       animCollect: animationcollect.export(),
       animTranspond: animationTranspond.export(),
+      animChat: animationChat.export(),
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function() {
     var _this = this;
     _this.setData({
       spinShow: true
@@ -163,10 +180,10 @@ Page({
      * 查看是否授权
      */
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
               // 用户已经授权过,不改变 isHide 的值
               // 用户授权成功后，调用微信的 wx.login 接口，从而获取code
               // wx.login({
@@ -194,17 +211,17 @@ Page({
       }
     });
   },
-  login:function(){
-  wx.redirectTo({
-    url: '../login/login',
-  })
+  login: function() {
+    wx.redirectTo({
+      url: '../login/login',
+    })
   },
   /**
- * 根据经纬度返回地区
- * @param {latitude} 经度
- * @param {longitude} 纬度
- */
-  weatherAll: function (latitude = '', longitude = '') {
+   * 根据经纬度返回地区
+   * @param {latitude} 经度
+   * @param {longitude} 纬度
+   */
+  weatherAll: function(latitude = '', longitude = '') {
     let _this = this
     if (latitude && longitude) {
       // 实例化API核心类
@@ -220,16 +237,16 @@ Page({
         },
         sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
 
-        success: function (res) {//成功后的回调
+        success: function(res) { //成功后的回调
           // 渲染天气
           let start = [res.result.address_component.city, '-', res.result.address_component.district, '-', res.result.address_component.street_number].join("")
           let city = res.result.address_component
           _this.weatherApply(start, city)
         },
-        fail: function (error) {
+        fail: function(error) {
           console.error(error);
         },
-        complete: function (res) {
+        complete: function(res) {
           console.log(res);
         }
       })
@@ -238,12 +255,15 @@ Page({
     }
   },
   /**
- * 根据地区返回天气
- * @param {start} 显示出来的位置
- * @param {city.district} 小地点
- * @param {city.city} 大地点
- */
-  weatherApply: function (start = '北京', city = { district: "北京", city: "北京" }) {
+   * 根据地区返回天气
+   * @param {start} 显示出来的位置
+   * @param {city.district} 小地点
+   * @param {city.city} 大地点
+   */
+  weatherApply: function(start = '北京', city = {
+    district: "北京",
+    city: "北京"
+  }) {
     let _this = this
     _this.setData({
       start: start
@@ -259,7 +279,7 @@ Page({
     }
     // 天气
     let num = 0 // 只作一次更改
-    let event = async (itemTemp) => {
+    let event = async(itemTemp) => {
       let result = await requests.requestUtils(itemTemp)
       // 如果区域没有搜索到，则进行市区查询
       if (result.data.city != city.city && num <= 0) {
@@ -286,10 +306,10 @@ Page({
     event(item)
   },
   /**
-  * 空气质量颜色问题
-  * @param {quality_level} 空气质量
-  */
-  weatherColorFun: function (quality_level) {
+   * 空气质量颜色问题
+   * @param {quality_level} 空气质量
+   */
+  weatherColorFun: function(quality_level) {
     let _this = this
     let numTempLevel = _this.data.weatherLevel.indexOf(quality_level)
 
@@ -301,10 +321,10 @@ Page({
 
   },
   /**
-  * 空气LOGO问题
-  * @param {dat_condition} 气候
-  */
-  weatherLogoFun: function (dat_condition) {
+   * 空气LOGO问题
+   * @param {dat_condition} 气候
+   */
+  weatherLogoFun: function(dat_condition) {
     let _this = this
     console.log(dat_condition)
     let dat_condition_list = []
@@ -326,9 +346,9 @@ Page({
     }
   },
   /**
-  * 星期数
-  */
-  weatherWeek: function () {
+   * 星期数
+   */
+  weatherWeek: function() {
     let _this = this
     let numTemp = _this.data.thisWeekListTime.indexOf(utils.formatTime(new Date).split(" ")[0].replace('/', '-').replace('/', '-'))
     _this.setData({
