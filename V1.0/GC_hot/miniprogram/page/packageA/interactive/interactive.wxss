@@ -23,6 +23,6 @@
 .btn{
   position:relative;
   top:25rpx;
-  width: 80%;
+  width: 82%;
   margin: auto;
 }

@@ -22,7 +22,7 @@
 </view>
 <view class="volunteercontainer">
   <view class="volunteerpicture">
-    <image src="../../../../images/volunteer.jpg" mode="aspectFill" style="width:700rpx;" />
+    <image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2275557018,866498616&fm=26&gp=0.jpg" mode="aspectFill" style="width:700rpx;" />
   </view>
   <view style="background-color:#fff;">
     <view class="volunteertext">浪漫海岸捡垃圾</view>
