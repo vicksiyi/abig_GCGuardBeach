@@ -40,6 +40,11 @@ Page({
       useravatar: avatar
     });
   },
+  rank: function () {
+  wx.navigateTo({
+    url: '../../packageH/pages/rank/rank',
+  })
+  },
   handleChange({
     detail
   }) {
