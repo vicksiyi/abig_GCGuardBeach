@@ -1,8 +1,8 @@
 {
   "pages": [
+    "page/packageA/login/login",
     "page/packageA/news/news",
     "page/packageA/index/index",
-    "page/packageA/login/login",
     "page/packageA/commodity/commodity",
     "page/packageA/interactive/interactive",
     "page/packageA/mine/mine"
