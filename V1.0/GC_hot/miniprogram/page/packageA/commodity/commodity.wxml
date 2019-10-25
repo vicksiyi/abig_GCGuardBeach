@@ -7,31 +7,31 @@
           {{categoryName.name}}
         </view>
       </view>
-      <view style="width:150rpx;height:150rpx;margin-top:200rpx;">
-        <image src="../../../images/store.gif" style="width:180rpx;height:180rpx" mode="aspectFill" bindtap="cartbtn" />
-      </view>
+      <view style="width:150rpx;height:150rpx;margin-top:200rpx;"></view>
     </view>
     <!-- 右侧 -->
-    <view class='right'>
-      <swiper current='{{currentTab}}' vertical='{{true}}' class='type' bindchange="swiperChange">
+    <view class='right' style="height:{{windowHeight}}px;">
+      <!-- <swiper current='{{currentTab}}' vertical='{{true}}' class='type' bindchange="swiperChange">
         <swiper-item wx:for="{{category}}" id="{{index}}">
-          <scroll-view scroll-y="true" class="scoll-h">
-            <view class="goodcontainer" wx:for="{{category}}" wx:for-item="categoryName" wx:key="id">
-              <view style="width:300rpx;margin-left:120rpx;">
-                <i-divider content="{{categoryName.name}}" color="#000" lineColor="#000" size="20px" style="font-weight:bold;"></i-divider>
-              </view>
-              <view class="goodpack">
-                <view style="float:left;" wx:for="{{science}}" wx:for-item="itemName" wx:key="id">
-                  <view class="goodpicture">
-                    <image src="{{itemName.picture}}" mode="aspectFill" style="width:140rpx;height:140rpx" bindtap="tap" data-Id="{{index}}" />
-                  </view>
-                  <view class="goodtext">{{itemName.name}}</view>
-                </view>
-              </view>
-            </view>
-          </scroll-view>
+          
         </swiper-item>
-      </swiper>
+      </swiper> -->
+      <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" class="scoll-h" scroll-with-animation="true">
+        <view class="goodcontainer" wx:for="{{category}}" wx:for-item="categoryName" wx:key="id">
+          <view style="width:300rpx;margin-left:120rpx;">
+            <i-divider content="{{categoryName.name}}" color="#bbbec4" lineColor="#bbbec4" size="20px" style="font-weight:bold;"></i-divider>
+          </view>
+          <view class="goodpack">
+            <view style="float:left;" wx:for="{{categoryName.science}}" wx:for-item="itemName" wx:key="id">
+              <view class="goodpicture">
+                <image src="{{itemName.picture}}" mode="aspectFill" style="width:140rpx;height:140rpx" bindtap="tap" data-Id="{{index}}" />
+              </view>
+              <view class="goodtext">{{itemName.name}}</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
     </view>
   </view>
+  <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 </view>

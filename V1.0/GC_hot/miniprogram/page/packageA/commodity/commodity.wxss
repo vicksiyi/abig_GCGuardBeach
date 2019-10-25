@@ -23,17 +23,20 @@
   font-weight: bold;
   color: #2b85e4;
   background-color: #f8f8f9;
-  font-size: 14px;
+  font-size: 0.8rem;
 }
 
 .normal {
   color: #1c2438;
-  font-size: 14px;
+  font-size: 0.8rem;
+  color: #495060;
 }
 
 .right {
   width: 80%;
   margin: 0;
+  height:100%;
+  overflow: scroll;
   background-color: #f8f8f9;
 }
 
@@ -48,7 +51,7 @@
   height: 100%;
 }
 
-::-webkit-scrollbar {
+.scoll-h::-webkit-scrollbar {
   display: none;
 }
 
@@ -56,8 +59,9 @@
   margin-top: 20rpx;
   margin-left: 20rpx;
   margin-bottom: 20rpx;
-  width: 535rpx;
-  height: 535rpx;
+  width: 510rpx;
+  height: 600rpx;
+  margin: auto;
 }
 
 .categoryname {
@@ -68,7 +72,7 @@
 
 .goodpack {
   width: 510rpx;
-  height: 680rpx;
+  height: 458rpx;
 }
 
 .goodpicture {
@@ -81,10 +85,11 @@
 .goodtext {
   margin-left: 24rpx;
   padding-top: 10rpx;
-  font-size: 14px;
+  font-size: 0.7rem;
   width: 140rpx;
   height: 40rpx;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #495060;
 }

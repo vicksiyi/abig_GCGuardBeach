@@ -159,6 +159,14 @@ Page({
     _this.setData({
       spinShow: true
     })
+
+    
+    // 测试所用
+    // wx.navigateTo({
+    //   url:"../../packageB/pages/knowledge/knowledge"
+    // })
+
+
     wx.getLocation({
       type: 'wgs84',
       success(res) {

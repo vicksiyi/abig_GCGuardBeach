@@ -1,10 +1,11 @@
-    <image  class="image" src="../../../images/yuanqyuan.gif"></image>
- <view class="text_container">
-<view class="text">
-  {{text}}
+<image class="image" src="../../../images/yuanqyuan.gif"></image>
+<view class="text_container">
+  <text>关于圈子</text>
+  <view class="content">
+    <text>{{text}}</text>
   </view>
-  </view>
-  <view class="btn">
-  <i-button  shape="circle" style="color:white" size="large" bindtap="find">发现圈</i-button>
-  <i-button  shape="circle" style="color:white" size="large" bindtap="life">生活圈</i-button>
-  </view>
+</view>
+<view class="btn">
+  <i-button  type="primary" size="small" bindtap="find">发现圈</i-button>
+  <i-button  type="primary"  size="small" bindtap="life">生活圈</i-button>
+</view>
