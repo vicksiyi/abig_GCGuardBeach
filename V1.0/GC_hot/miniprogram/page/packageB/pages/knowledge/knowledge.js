@@ -1,11 +1,12 @@
-// page/packageB/pages/knowledge/knowledge.js
+const utils = require("../../../../utils/util")
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    spinShow: false,
+    value: []
   },
 
   /**
@@ -26,7 +27,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let _this = this
+    _this.setData({
+      spinShow: true
+    })
+    const db = wx.cloud.database()
+    let numRandom = utils.randomNumOneToOne(0, 6)
+    db.collection('abig_kong_knowledge').where({
+      num: numRandom
+    }).get({
+      success: function (res) {
+        _this.setData({
+          value: res.data[0],
+          spinShow: false
+        })
+      }
+    })
   },
 
   /**

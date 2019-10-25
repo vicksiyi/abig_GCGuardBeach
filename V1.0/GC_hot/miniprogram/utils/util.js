@@ -46,6 +46,24 @@ const randomNum = () => {
   return arr2.join("")
 }
 
+/**
+ * 生成随机数
+ * @param {*} minNum 最小值
+ * @param {*} maxNum 最大值
+ */
+function randomNumOneToOne(minNum, maxNum) {
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * minNum + 1, 10);
+      break;
+    case 2:
+      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+      break;
+    default:
+      return 0;
+      break;
+  }
+}
 
 /**
   * 返回当周的时间
@@ -70,5 +88,6 @@ const thisWeek = () => {
 module.exports = {
   formatTime: formatTime,
   randomNum: randomNum,
-  thisWeek: thisWeek
+  thisWeek: thisWeek,
+  randomNumOneToOne: randomNumOneToOne
 }

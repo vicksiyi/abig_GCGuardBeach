@@ -20,9 +20,9 @@
 		},
 		"uglifyFileName": true
 	},
-	"appid": "wxd13cd8f778c55aea",
+	"appid": "wx564d2807694ef073",
 	"projectname": "GC_hot",
-	"libVersion": "2.8.1",
+	"libVersion": "2.9.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

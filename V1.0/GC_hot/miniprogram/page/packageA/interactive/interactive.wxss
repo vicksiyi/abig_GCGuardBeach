@@ -3,19 +3,26 @@
   height: 350rpx;
 }
 .text_container{
-  background: #F6EEEF;
-  width:100%;
-  position:relative;
-  top:-15rpx;
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }
-.text{
-  position:relative;
-  top:-15rpx;
-  left:100rpx;
-  width:70%;
-  font-size: 30rpx;
+
+.text_container text{
+  font-weight: bolder;
+  color: #2b85e4;
 }
+
+.text_container .content text{
+  padding: 10rpx;
+  font-size: 0.8rem;
+  color: #495060;
+  font-weight: normal;
+}
+
 .btn{
   position:relative;
   top:25rpx;
+  width: 82%;
+  margin: auto;
 }

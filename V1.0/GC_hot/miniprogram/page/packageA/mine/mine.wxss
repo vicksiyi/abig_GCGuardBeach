@@ -43,12 +43,23 @@
   position:relative;
   top:76rpx;
   left:480rpx;
-  width:100rpx;
-  height: 40rpx;
+  color: #fff;
+  width: 30%;
+  text-align: center;
+}
+
+.rank text{
+  font-weight:bolder ;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.rank_01{
+  display: flex;
+  flex-direction: column;
 }
 .rank_image{
- width:70rpx;
- height:70rpx;
+  width:70rpx;
+  height:70rpx;
 }
 .info {
   height: 150rpx;
