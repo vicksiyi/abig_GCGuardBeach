@@ -49,7 +49,8 @@ Page({
     visible4: false,
     subkey: "CWXBZ-JSM6U-KCJV5-2MKJ7-R6PO3-GZBA3",
     distance: '',
-    loadDistance: false
+    loadDistance: false,
+    loadMap: true
   },
   /**
    * 点击弹出
@@ -176,9 +177,6 @@ Page({
     //   url:"../../packageB/pages/knowledge/knowledge"
     // })
 
-
-
-
     wx.getLocation({
       type: 'wgs84',
       success(res) {
@@ -186,7 +184,8 @@ Page({
         const longitude = res.longitude
         _this.setData({
           latitude: latitude,
-          longitude: longitude
+          longitude: longitude,
+          loadMap: false
         })
         // 根据经纬度获取天气
         _this.weatherAll(latitude, longitude)
@@ -200,6 +199,45 @@ Page({
           content: '位置定位失败,默认北京气候',
           type: 'warning'
         });
+
+        wx.showModal({
+          title: '位置获取失败',
+          content: '是否进入开启权限页面重新授权',
+          confirmText: '确定',
+          confirmColor: '#19be6b',
+          success(res2) {
+            if (res2.confirm) {
+              wx.openSetting({
+                success(data) {
+                  if (data.authSetting["scope.userLocation"]) {
+                    $Message({
+                      content: '获取位置成功',
+                      type: 'success'
+                    });
+                    // 重新加载
+                    _this.onLoad()
+                  } else {
+                    $Message({
+                      content: '获取权限失败',
+                      type: 'error'
+                    });
+                  }
+                },
+                fail(err) {
+                  console.log(err)
+                  $Message({
+                    content: '未知错误',
+                    type: 'error'
+                  });
+                }
+              })
+            } else {
+              $Message({
+                content: '用户取消选择'
+              });
+            }
+          }
+        })
       }
     })
     /**
@@ -406,6 +444,7 @@ Page({
           var mks = []
           console.log(res)
           for (var i = 0; i < res.data.length; i++) {
+            // 测试所用
             if (res.data[i].title == "西葛沙滩") {
               mks.push({ // 获取返回结果，放到mks数组中
                 title: res.data[i].title,
@@ -542,18 +581,19 @@ Page({
       phoneNumber: _this.data.actions4[e.detail.index].name
     })
   },
+  // 跳转导航
   navMap: function (res) {
     let _this = this
     let key = "CWXBZ-JSM6U-KCJV5-2MKJ7-R6PO3-GZBA3"
     let referer = "GC海滩卫士"
-    let sign = "urDytR73uaBhazdaVhHsk4j1NEDiP0"
+    let sig = "urDytR73uaBhazdaVhHsk4j1NEDiP0"
     let endPoint = JSON.stringify({  //终点
       'name': _this.data.dataValue.title,
       'latitude': _this.data.dataValue.latitude,
       'longitude': _this.data.dataValue.longitude
     });
     wx.navigateTo({
-      url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + `&sign=${sign}`
+      url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + `&sign=${sig}`
     });
   },
   // 距离计算
