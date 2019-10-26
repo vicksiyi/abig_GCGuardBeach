@@ -1,89 +1,61 @@
-.title_image{
-  width:240rpx;
-  height: 216rpx;
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 9000;
+  opacity: 0.7;
 }
-.head{
-color:#2b85e4;
-font-size:72rpx;
-font-family:"微软雅黑";
+.modalDlg{
+  width: 619rpx;
+  height: 1063rpx;
+  position: fixed;
+  top:36%;
+  left: 0;
+  z-index: 9999;
+  margin: -370rpx 70rpx;
+  background-color: #fff;
+  border-radius: 36rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header{
+  background: #2b85e4;
+  height:219rpx;
+  width:100%;
+}
+.status{
 position:relative;
-top:-121rpx;
-left:9rpx;
+height: 50rpx;
+text-align: center;
+font-size:1.4rem;
+color:#fff;
 }
-.top{ 
-      font-family:"微软雅黑";
-    	font-size: 52rpx; 
-    	color:#2b85e4; 
-    	position:relative;
-      left:-56rpx;
-      top:-36rpx;
-    	animation: changeshadow 1s  ease-in  infinite ;
-	    -webkit-animation: changeshadow 1s linear infinite;
-	    -moz-animation: changeshadow 1s linear infinite;
-	    -ms-animation: changeshadow 1s linear infinite;
-	    -o-animation: changeshadow 1s linear infinite;
-    }  
-    @keyframes changeshadow {  
-        0%{ text-shadow: 0 0 4px #2b85e4}  
-        50%{ text-shadow: 0 0 40px #2b85e4}  
-        100%{ text-shadow: 0 0 4px #2b85e4}  
-    }
-    wxss
-.item-box {
-    width: 700rpx;
-    margin: 0 auto;
-    padding: 20rpx 0;
+.image{
+height: 144rpx;
+width:144rpx;
+margin: 17rpx 25rpx;
 }
-
-.items {
-    width: 100%;
+.title{
+font-size:0.8rem;
+color:#fff;
+margin: -155rpx 190rpx;
 }
-
-.item {
-    position: relative;
-    border-top: 2rpx solid #eee;
-    height: 115rpx;
-    line-height: 115rpx;
-    overflow: hidden;
+.type{
+font-size:0.6rem;
+color:#fff;
+margin: 158rpx 190rpx;
 }
-
-.itemformat {
-    float: left;
-    margin-left: 90rpx;
+.number{
+font-size:0.6rem;
+color:red;
+margin: -199rpx 300rpx;
 }
-.otherrank {
-    margin-top: 20rpx;
-    margin-left: 40rpx;
-    width: 700rpx;
-    height: 150rpx;
-    background-color: #fff;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    -moz-box-shadow: 2px 2px 5px #DDDEE1;
-    -webkit-box-shadow: 2px 2px 5px #DDDEE1;
-    box-shadow: 2px 2px 5px #DDDEE1;
-}
-
-.otherrankitem {
-    margin-left: 40rpx;
-    margin-top: 10rpx;
-    width: 200rpx;
-    height: 120rpx;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.otherranktext {
-    font-size: 13px;
-    color: #bbbec4;
-}
-
-.otherranknum {
-    font-size: 12px;
-    color: #1c2438;
-    font-weight: bold;
+.arrive{
+font-size:1rem;
+color:red;
+margin: 200rpx 190rpx;
 }

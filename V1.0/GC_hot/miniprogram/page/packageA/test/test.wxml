@@ -1,34 +1,25 @@
-<image class="title_image" src="../../../images/rank.gif"></image>
-<text class="head">GC排行榜</text>
-<text class="top">TOP10</text>
-<view class="otherrank">
-    <view class="otherrankitem">
-        <view class="otherranknum">124,856</view>
-        <view class="otherranktext">您在全国总排名</view>
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modalDlg" wx:if="{{showModal}}">
+  <view class="header">
+    <view class="status">
+      <text>已揽件</text>
     </view>
-    <view class="otherrankitem">
-        <view class="otherranknum">19</view>
-        <view class="otherranktext">您在附近排名</view>
+    <view class="image">
+      <image src="../../../images/volunteer.jpg" mode="aspectFill" style='width:144rpx;height:144rpx;'></image>
     </view>
-    <view class="otherrankitem">
-        <view class="otherranknum">6</view>
-        <view class="otherranktext">近七日附近排名</view>
+    <view class="title">
+    <text>鲁滨逊漂流记</text>
     </view>
+    <view class="type">
+    <text>中通快递</text>
+    </view>
+    <view class="number">
+    <text>12344546464</text>
+    </view>
+    <view class="arrive">
+    <text >预计明天到达</text>
+    </view>
+  </view>
+  <view></view>
 </view>
-
-<view class="item-box">
-    <!-- 所有项 -->
-    <view class="items">
-        <!-- 每一项 -->
-        <view wx:for="{{list}}" wx:key="{{index}}" class="item">
-            <view style="float:left;margin-left:20rpx;">
-                <view style="width:80rpx;height:80rpx;margin-top:20rpx;">
-                    <image src="{{item.ranking}}" mode="aspectFill" style="width:80rpx;height:80rpx;" />
-                </view>
-            </view>
-            <view class="itemformat">{{item.userName}}</view>
-            <view class="itemformat">{{item.title}}</view>
-            <view class="itemformat">爱心数量</view>
-        </view>
-    </view>
-</view>
+<button bindtap="submit">点我弹窗</button>

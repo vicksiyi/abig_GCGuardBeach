@@ -1,0 +1,102 @@
+{
+  "pages": [
+    "page/packageA/index/index",
+    "page/packageA/test/test",
+    "page/packageA/mine/mine",
+    "page/packageA/login/login",
+    "page/packageA/commodity/commodity",
+    "page/packageA/interactive/interactive",
+    "page/packageA/show/show",
+    "page/packageA/news/news"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于GC海滩卫士小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2b85e4",
+    "navigationBarTitleText": "GC海滩卫士",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#80848f",
+    "selectedColor": "#2b85e4",
+    "list": [
+      {
+        "pagePath": "page/packageA/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home_fill.png"
+      },
+      {
+        "pagePath": "page/packageA/commodity/commodity",
+        "text": "兑换",
+        "iconPath": "images/icon/comm.png",
+        "selectedIconPath": "images/icon/comm_fill.png"
+      },
+      {
+        "pagePath": "page/packageA/interactive/interactive",
+        "text": "圈子",
+        "iconPath": "images/icon/inter.png",
+        "selectedIconPath": "images/icon/inter_fill.png"
+      },
+      {
+        "pagePath": "page/packageA/news/news",
+        "text": "新闻",
+        "iconPath": "images/icon/news.png",
+        "selectedIconPath": "images/icon/news_fill.png"
+      },
+      {
+        "pagePath": "page/packageA/mine/mine",
+        "text": "我的",
+        "iconPath": "images/icon/my.png",
+        "selectedIconPath": "images/icon/my_fill.png"
+      }
+    ]
+  },
+  "subpackages": [
+    {
+      "root": "page/packageB/",
+      "pages": [
+        "pages/volunteer/volunteer",
+        "pages/knowledge/knowledge"
+      ]
+    },
+    {
+      "root": "page/packageF/",
+      "pages": [
+        "pages/find/find",
+        "pages/FindCircle/FindCircle",
+        "pages/record/record"
+      ]
+    },
+    {
+      "root": "page/packageG/",
+      "pages": [
+        "pages/order/order",
+        "pages/commoditycar/commoditycar"
+      ]
+    },
+    {
+      "root": "page/packageH/",
+      "pages": [
+        "pages/myinfo/myinfo",
+        "pages/about/about",
+        "pages/feedback/feedback",
+        "pages/rank/rank"
+      ]
+    }
+  ],
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.3",
+      "provider": "wx50b5593e81dd937a"
+    }
+  }
+}
