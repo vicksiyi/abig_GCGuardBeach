@@ -26,7 +26,7 @@
   </view>
   <!-- 地图 -->
   <view class="index-map">
-    <map id="map" longitude="{{longitude}}" latitude=" {{latitude}}" markers="{{markers}}" scale="8" show-location style="width: 100%; height: 170px;" bindmarkertap="markersChange"></map>
+    <map id="map" longitude="{{longitude}}" latitude=" {{latitude}}" markers="{{markers}}" subkey="{{subkey}}" scale="8" show-location style="width: 100%; height: 170px;" bindmarkertap="markersChange"></map>
   </view>
   <!-- 弹出菜单 -->
   <view class="pop_up">
@@ -100,8 +100,8 @@
           </view>
         </view>
         <!-- 导航 -->
-        <view class="model-dao">
-          <image src="../../../images/line.png"></image>
+        <view class="model-dao" >
+          <image src="../../../images/line.png" bindtap="navMap"></image>
         </view>
       </view>
       <!-- 操作 -->

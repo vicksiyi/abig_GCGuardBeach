@@ -91,5 +91,11 @@
   "usingComponents": {
     "i-icon": "../../dist/icon/index"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.3",
+      "provider": "wx50b5593e81dd937a"
+    }
+  }
 }

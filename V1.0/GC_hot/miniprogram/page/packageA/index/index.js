@@ -5,6 +5,7 @@ const QQMapWX = require('../../../utils/qqmap-wx-jssdk');
 const requests = require('../../../utils/requests')
 const weatherLogoList = require('../../../utils/weatherLogo')
 const utils = require('../../../utils/util')
+const plugin = requirePlugin('routePlan');
 var qqmapsdk;
 Page({
   data: {
@@ -45,7 +46,8 @@ Page({
     listPhone: [],
     actions4: [],
     colorListAction: ["#19be6b", "#ff9900", "#2d8cf0"],
-    visible4: false
+    visible4: false,
+    subkey: "CWXBZ-JSM6U-KCJV5-2MKJ7-R6PO3-GZBA3"
   },
   /**
    * 点击弹出
@@ -535,5 +537,19 @@ Page({
     wx.makePhoneCall({
       phoneNumber: _this.data.actions4[e.detail.index].name
     })
+  },
+  navMap: function (res) {
+    let _this = this
+    let key = "CWXBZ-JSM6U-KCJV5-2MKJ7-R6PO3-GZBA3"
+    let referer = "GC海滩卫士"
+    let sign = "urDytR73uaBhazdaVhHsk4j1NEDiP0"
+    let endPoint = JSON.stringify({  //终点
+      'name': _this.data.dataValue.title,
+      'latitude': _this.data.dataValue.latitude,
+      'longitude': _this.data.dataValue.longitude
+    });
+    wx.navigateTo({
+      url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + `&sign=${sign}`
+    });
   }
 })
