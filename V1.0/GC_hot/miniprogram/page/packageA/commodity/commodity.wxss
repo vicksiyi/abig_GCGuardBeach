@@ -92,4 +92,7 @@
   justify-content: center;
   align-items: center;
   color: #495060;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

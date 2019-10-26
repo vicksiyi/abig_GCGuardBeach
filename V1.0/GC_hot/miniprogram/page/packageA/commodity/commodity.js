@@ -52,35 +52,40 @@ Page({
    */
   tap: function (res) {
     // this.data.array[res.currentTarget.dataset.id]
-    let storeTemp = this.data.store
+    let _this = this
+    // let storeTemp = _this.data.store
+    wx.navigateTo({
+      url: `../show/show?type=${res.currentTarget.dataset.type}&name=${res.currentTarget.dataset.name}`
+    })
     //向数组的末尾添加一个或多个元素，并返回新的长度
-    storeTemp.push(this.data.science[res.currentTarget.dataset.id])
-    this.setData({
-      store: storeTemp
-    })
-    wx.setStorage({
-      key: 'store',
-      data: JSON.stringify(storeTemp)
-    })
-    wx.showModal({
-      title: '提示',
-      content: '是否加入兑换车？',
-      success(res) {
-        if (res.confirm) {
-          wx.showToast({
-            title: '加入成功',
-            icon: 'success',
-            duration: 2000
-          })
-        } else if (res.cancel) {
-          wx.showToast({
-            title: '已取消',
-            icon: 'loading',
-            duration: 1000
-          })
-        }
-      }
-    })
+    // storeTemp.push(_this.data.science[res.currentTarget.dataset.id])
+    // _this.setData({
+    //   store: storeTemp
+    // })
+
+    // wx.setStorage({
+    //   key: 'store',
+    //   data: JSON.stringify(storeTemp)
+    // })
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '是否加入兑换车？',
+    //   success(res) {
+    //     if (res.confirm) {
+    //       wx.showToast({
+    //         title: '加入成功',
+    //         icon: 'success',
+    //         duration: 2000
+    //       })
+    //     } else if (res.cancel) {
+    //       wx.showToast({
+    //         title: '已取消',
+    //         icon: 'loading',
+    //         duration: 1000
+    //       })
+    //     }
+    //   }
+    // })
   },
   /**
    *  加载过程
@@ -115,7 +120,7 @@ Page({
   scroll(e) {
     let _this = this
     let id = 0
-    console.log(e)
+    // console.log(e)
     if ((e.detail.scrollTop / 300) > 4.1) {
       id = 5
     } else {
