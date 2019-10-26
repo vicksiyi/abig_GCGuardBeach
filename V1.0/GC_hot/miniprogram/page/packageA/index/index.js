@@ -47,7 +47,9 @@ Page({
     actions4: [],
     colorListAction: ["#19be6b", "#ff9900", "#2d8cf0"],
     visible4: false,
-    subkey: "CWXBZ-JSM6U-KCJV5-2MKJ7-R6PO3-GZBA3"
+    subkey: "CWXBZ-JSM6U-KCJV5-2MKJ7-R6PO3-GZBA3",
+    distance: '',
+    loadDistance: false
   },
   /**
    * 点击弹出
@@ -463,6 +465,8 @@ Page({
     _this.setData({
       dataValue: data
     })
+    // 距离计算
+    _this.calLocation(data.latitude, data.longitude)
     console.log(data)
   },
   /**
@@ -550,6 +554,40 @@ Page({
     });
     wx.navigateTo({
       url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + `&sign=${sign}`
+    });
+  },
+  // 距离计算
+  calLocation: function (latitude, longitude) {
+    let _this = this
+    qqmapsdk = new QQMapWX({
+      key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O' // 必填
+    });
+    let dest = [{
+      latitude: latitude,
+      longitude: longitude
+    }]
+    _this.setData({
+      loadDistance: true,
+      distance: 0
+    })
+    //调用距离计算接口
+    qqmapsdk.calculateDistance({
+      to: dest, //终点坐标
+      sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
+      success: function (res) {//成功后的回调
+        console.log(res.result.elements[0].distance);
+        _this.setData({
+          // 米转公里
+          distance: utils.distanceFormat(res.result.elements[0].distance),
+          loadDistance: false
+        })
+      },
+      fail: function (error) {
+        console.error(error);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
     });
   }
 })

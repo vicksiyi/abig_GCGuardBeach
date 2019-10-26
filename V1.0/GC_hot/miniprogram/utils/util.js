@@ -85,9 +85,19 @@ const thisWeek = () => {
   return daysOfThisWeek
 }
 
+/**
+ * 距离转换
+ * @param {distance} 米
+ * @return 公里
+ */
+function distanceFormat(distance) {
+  return Math.round((distance / 100) / 10).toFixed(1)
+}
+
 module.exports = {
   formatTime: formatTime,
   randomNum: randomNum,
   thisWeek: thisWeek,
-  randomNumOneToOne: randomNumOneToOne
+  randomNumOneToOne: randomNumOneToOne,
+  distanceFormat: distanceFormat
 }

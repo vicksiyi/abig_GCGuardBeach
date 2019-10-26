@@ -399,3 +399,8 @@ section.profile {
   width: 50rpx;
   height: 50rpx;
 }
+
+.model-line text{
+  font-size: 0.9rem;
+  color: #bbbec4;
+}

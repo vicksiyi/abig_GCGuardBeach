@@ -10,7 +10,8 @@
     "i-drawer": "../../../dist/drawer/index",
     "i-message": "../../../dist/message/index",
     "i-spin": "../../../dist/spin/index",
-    "i-modal": "../../../dist/modal/index"
+    "i-modal": "../../../dist/modal/index",
+    "i-load-more": "../../../dist/load-more/index"
   },
   "navigationBarTitleText": "首页",
   "disableScroll": true

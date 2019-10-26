@@ -74,8 +74,6 @@
 <view class="model" wx:if="{{showModel}}">
   <!-- 电话列表 -->
   <i-modal title="选择您要联系的号码" visible="{{ visible4 }}" actions="{{ actions4 }}" action-mode="{{ vertical }}" bind:click="telPhoneList"></i-modal>
-
-
   <view class="model-content {{showModel?'pop-up':''}}">
     <!-- 关闭 -->
     <view class="close" bindtap="closeModel">
@@ -100,7 +98,7 @@
           </view>
         </view>
         <!-- 导航 -->
-        <view class="model-dao" >
+        <view class="model-dao">
           <image src="../../../images/line.png" bindtap="navMap"></image>
         </view>
       </view>
@@ -127,7 +125,8 @@
         <!-- 距离 -->
         <view class="model-line">
           <view>
-            <image src="../../../images/dao.png"></image>
+            <i-spin size="large" fix wx:if="{{ loadDistance }}"></i-spin>
+            <text>{{distance}}公里</text>
           </view>
         </view>
       </view>
