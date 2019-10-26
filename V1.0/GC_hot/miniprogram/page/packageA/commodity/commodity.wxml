@@ -11,11 +11,6 @@
     </view>
     <!-- 右侧 -->
     <view class='right' style="height:{{windowHeight}}px;">
-      <!-- <swiper current='{{currentTab}}' vertical='{{true}}' class='type' bindchange="swiperChange">
-        <swiper-item wx:for="{{category}}" id="{{index}}">
-          
-        </swiper-item>
-      </swiper> -->
       <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" class="scoll-h" scroll-with-animation="true">
         <view class="goodcontainer" wx:for="{{category}}" wx:for-item="categoryName" wx:key="id">
           <view style="width:300rpx;margin-left:120rpx;">

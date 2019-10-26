@@ -26,10 +26,6 @@
     font-family: "微软雅黑";
     font-size: 52rpx;
     color: #2b85e4;
-    /* position: relative;
-    left: -56rpx;
-    top: -36rpx; */
-
     animation: changeshadow 1s ease-in infinite;
     -webkit-animation: changeshadow 1s linear infinite;
     -moz-animation: changeshadow 1s linear infinite;

@@ -115,6 +115,7 @@ Page({
   scroll(e) {
     let _this = this
     let id = 0
+    console.log(e)
     if ((e.detail.scrollTop / 300) > 4.1) {
       id = 5
     } else {
