@@ -2,7 +2,7 @@
   <div>
     <Table border :loading="loading" :columns="columns1" :data="data1"></Table>
     <div class="page_list">
-      <Page :total="total" show-elevator />
+      <Page :total="total" show-elevator @on-change="pageChange" />
     </div>
     <Modal v-model="modal2" width="360">
       <p slot="header" style="color:#f60;text-align:center">
@@ -101,31 +101,38 @@ export default {
         title: "选择权限",
         onOk: () => {
           let params = {
-            name: this.data1[index].name,
-            email: this.data1[index].email,
-            password: this.data1[index].password,
-            selecte: this.selectedI
+            select: this.selectedI
           };
           let headers = {
             Authorization: localStorage.getItem("Token")
           };
           try {
             https
-              .fetchPost("/api/oauthUsers/addUsers", params, headers)
+              .fetchGet(
+                `/api/admins/addAdmins/${this.data1[index]._id}`,
+                params,
+                headers
+              )
               .then(data => {
                 // 验证码结束,不正确
                 if (data == "oauthError") {
                   this.$router.push({ path: "/login" });
                 } else {
-                  if (data.data.msg == 0) {
-                    this.$Message.error("已存在该用户,已删除");
-                  } else if (data.data.msg == -1) {
+                  if (
+                    data.data.msg == "Existing" ||
+                    data.data.msg == "Success"
+                  ) {
+                    this.$Message.success("分配权限完毕");
+                    this.showTotal();
+                    this.showPage(0);
+                  } else if (data.data.msg == "No permissions") {
                     this.$Message.error("你没有此权限");
                     return;
                   } else {
-                    this.$Message.success("分配权限完毕");
+                    console.log(data.data.msg);
+                    this.$Message.error("未知错误");
+                    return;
                   }
-                  this.data1.splice(index, 1);
                 }
               })
               .catch(err => {
@@ -280,6 +287,43 @@ export default {
         this.data1.splice(index, 1);
         this.$Message.success("成功删除");
       }, 2000);
+    },
+    showPage(page) {
+      let params = {};
+      let headers = {
+        Authorization: localStorage.getItem("Token")
+      };
+      https
+        .fetchGet(`/api/admins/showAdmins/${page}`, params, headers)
+        .then(data => {
+          // 验证码结束,不正确
+          if (data == "oauthError") {
+            this.$router.push({ path: "/login" });
+          }
+          this.data1 = data.data;
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    showTotal() {
+      let params = {};
+      let headers = {
+        Authorization: localStorage.getItem("Token")
+      };
+      https
+        .fetchGet("/api/admins/showAdminNum", params, headers)
+        .then(data => {
+          this.total = data.data.len;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    pageChange(index) {
+      console.log(index, "有数据");
+      this.showPage(index - 1);
     }
   },
   created() {
@@ -289,20 +333,8 @@ export default {
       Authorization: localStorage.getItem("Token")
     };
     try {
-      https
-        .fetchGet("/api/oauthUsers/users", params, headers)
-        .then(data => {
-          // 验证码结束,不正确
-          if (data == "oauthError") {
-            this.$router.push({ path: "/login" });
-          }
-          this.data1 = data.data;
-          this.total = data.data.length;
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.showTotal();
+      this.showPage(0);
     } catch (err) {
       console.log(err);
     }

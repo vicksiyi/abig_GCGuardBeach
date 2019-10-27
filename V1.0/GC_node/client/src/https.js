@@ -67,7 +67,30 @@ export function fetchGet(url, param, header) {
             })
     })
 }
+
+
+////返回一个Promise(发送get请求)
+export function fetchDelete(url, param, header) {
+    return new Promise((resolve, reject) => {
+        axios.get(url, {
+            params: param,
+            headers: header
+        })
+            .then(response => {
+                resolve(response);
+            }
+                // 用户登录失败导致
+                , () => {
+                    resolve('oauthError');
+                    // reject(err)
+                })
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
 export default {
     fetchPost,
     fetchGet,
+    fetchDelete
 }
