@@ -146,7 +146,7 @@ export default {
           this.spinShow = true;
           try {
             https
-              .fetchPost("/api/oauthUsers/register", params, headers)
+              .fetchPost("/api/admins/register", params, headers)
               .then(data => {
                 if (data.data.msg == -1) {
                   this.$Message.error("已存在该用户,请登录");

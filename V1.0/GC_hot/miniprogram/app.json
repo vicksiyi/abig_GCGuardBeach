@@ -1,7 +1,7 @@
 {
   "pages": [
-    "page/packageA/show/show",
     "page/packageA/index/index",
+    "page/packageA/show/show",
     "page/packageA/test/test",
     "page/packageA/mine/mine",
     "page/packageA/login/login",

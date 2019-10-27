@@ -1,28 +1,36 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//create Schema
+// 小程序用户
 const UserSchema = new Schema({
-    name :{
-        type:String,
-        required:true
+    name: {         // 微信名字
+        type: String,
+        required: true
     },
-    email :{
-        type:String,
-        required:true
+    name_true: {    // 真实名字
+        type: String,
+        required: false
     },
-    password :{
-        type:String,
-        required:true
+    phone: {        // 手机号码
+        type: String,
+        required: false
     },
-    identity :{
-        type:String,
-        required:true
+    email: {        // 常用邮箱
+        type: String,
+        required: false
     },
-    time :{
-        type:Date,
-        default:Date.now
+    appid: {        // appid
+        type: String,
+        required: false
+    },
+    password: {     // 用户登录密码
+        type: String,
+        required: false
+    },
+    time: {         // 加入时间
+        type: Date,
+        default: Date.now
     }
 })
 
-module.exports = User = mongoose.model('users',UserSchema);
+module.exports = User = mongoose.model('users', UserSchema);

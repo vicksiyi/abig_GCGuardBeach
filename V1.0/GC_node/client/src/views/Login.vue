@@ -106,7 +106,7 @@ export default {
           this.spinShow = true;
           try {
             https
-              .fetchPost("/api/users/login", params, headers)
+              .fetchPost("/api/admins/login", params, headers)
               .then(data => {
                 if (data.data.token == undefined) {
                   if (data.data.msg == 0) {
@@ -116,7 +116,11 @@ export default {
                     this.$Message.error("密码不正确");
                     this.formValidate.psw = "";
                   }
+                  if (data.data.msg == "审核中") {
+                    this.$Message.error("审核中，请稍后重试");
+                  }
                 } else {
+                  console.log(data.data.token)
                   localStorage.setItem("Token", data.data.token);
                   this.$Message.success("登录成功");
                   setTimeout(() => {

@@ -340,7 +340,7 @@ export default {
     };
     try {
       https
-        .fetchGet("/api/users/users", params, headers)
+        .fetchPost("/api/admins/admins", params, headers)
         .then(data => {
           // 验证码结束,不正确
           if (data == "oauthError") {
