@@ -5,7 +5,7 @@
       <text>已揽件</text>
     </view>
     <view class="image">
-      <image src="../../../../images/sun.png" mode="aspectFill" style='width:144rpx;height:144rpx;'></image>
+      <image src="../../resources/images/sun.png" mode="aspectFill" style='width:144rpx;height:144rpx;'></image>
     </view>
     <view class="title">
       <text>鲁滨逊漂流记</text>
@@ -25,15 +25,15 @@
     <!-- 列表 -->
     <view class='list'>
       <!-- 判断列表中id==0并且长度大于1  已完成ICON带线 -->
-      <image class='list_img_tab1' wx:if="{{item.id==0&&list.length>1}}" src='../../../../images/order_1.png'></image>
+      <image class='list_img_tab1' wx:if="{{item.id==0&&list.length>1}}" src='../../resources/images/order_1.png'></image>
       <!-- 判断列表中id==0并且长度小于1  已完成ICON无线 -->
-      <image class='list_img' wx:if="{{item.id==0&&list.length==1}}" src='../../../../images/order_111.png'></image>
+      <image class='list_img' wx:if="{{item.id==0&&list.length==1}}" src='../../resources/images/order_111.png'></image>
       <!-- 判断列表中id==1  灰色ICON -->
-      <image class='list_imgs' wx:if="{{item.id==1}}" src='../../../../images/order_12.png'></image>
+      <image class='list_imgs' wx:if="{{item.id==1}}" src='../../resources/images/order_12.png'></image>
       <!-- 判断列表中id==2  灰色ICON -->
-      <image class='list_imgs' wx:if="{{item.id==2}}" src='../../../../images/order_12.png'></image>
+      <image class='list_imgs' wx:if="{{item.id==2}}" src='../../resources/images/order_12.png'></image>
       <!-- 判断列表中id==3  飞机ICON -->
-      <image class='list_img' wx:if="{{item.id==3}}" src='../../../../images/order_222.png'></image>
+      <image class='list_img' wx:if="{{item.id==3}}" src='../../resources/images/order_222.png'></image>
       <view class='list_name_page'>
         <!-- 列表名称 -->
         <lable class='list_name'>{{item.name}}</lable>

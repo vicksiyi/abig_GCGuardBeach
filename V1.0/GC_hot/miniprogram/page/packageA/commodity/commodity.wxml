@@ -19,7 +19,7 @@
           <view class="goodpack">
             <view style="float:left;" wx:for="{{categoryName.science}}" wx:for-item="itemName" wx:key="id">
               <view class="goodpicture">
-                <image src="{{itemName.picture}}" mode="aspectFill" style="width:140rpx;height:140rpx" bindtap="tap" data-Name="{{itemName.name}}" data-Type="{{categoryName.name}}" />
+                <image src="{{itemName.picture}}" mode="aspectFill" style="width:140rpx;height:140rpx" bindtap="tap" data-Name="{{itemName.name}}" data-Type="{{categoryName.name}}" bindtap="detail"/>
               </view>
               <view class="goodtext">{{itemName.name}}</view>
             </view>

@@ -1,12 +1,10 @@
 {
   "pages": [
     "page/packageA/index/index",
-    "page/packageA/test/test",
     "page/packageA/mine/mine",
     "page/packageA/login/login",
     "page/packageA/commodity/commodity",
     "page/packageA/interactive/interactive",
-    "page/packageA/show/show",
     "page/packageA/news/news"
   ],
   "permission": {
@@ -76,7 +74,8 @@
       "root": "page/packageG/",
       "pages": [
         "pages/order/order",
-        "pages/commoditycar/commoditycar"
+        "pages/commoditycar/commoditycar",
+        "pages/ShowDetail/ShowDetail"
       ]
     },
     {
