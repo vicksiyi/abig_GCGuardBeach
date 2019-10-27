@@ -1,25 +1,115 @@
-<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="mask" bindtap="disappear" wx:if="{{showModal}}"></view>
 <view class="modalDlg" wx:if="{{showModal}}">
   <view class="header">
     <view class="status">
       <text>已揽件</text>
     </view>
     <view class="image">
-      <image src="../../../images/volunteer.jpg" mode="aspectFill" style='width:144rpx;height:144rpx;'></image>
+      <image src="../../../images/sun.png" mode="aspectFill" style='width:144rpx;height:144rpx;'></image>
     </view>
     <view class="title">
-    <text>鲁滨逊漂流记</text>
+      <text>鲁滨逊漂流记</text>
     </view>
     <view class="type">
-    <text>中通快递</text>
+      <text>中通快递</text>
     </view>
     <view class="number">
-    <text>12344546464</text>
+      <text>12344546464</text>
     </view>
     <view class="arrive">
-    <text >预计明天到达</text>
+      <text>预计明天到达</text>
     </view>
   </view>
-  <view></view>
+  <!-- 追踪 -->
+  <view class='logisit' wx:for="{{list}}" wx:key="key">
+    <!-- 列表 -->
+    <view class='list'>
+      <!-- 判断列表中id==0并且长度大于1  已完成ICON带线 -->
+      <image class='list_img_tab1' wx:if="{{item.id==0&&list.length>1}}" src='../../../images/order_1.png'></image>
+      <!-- 判断列表中id==0并且长度小于1  已完成ICON无线 -->
+      <image class='list_img' wx:if="{{item.id==0&&list.length==1}}" src='../../../images/order_111.png'></image>
+      <!-- 判断列表中id==1  灰色ICON -->
+      <image class='list_imgs' wx:if="{{item.id==1}}" src='../../../images/order_12.png'></image>
+      <!-- 判断列表中id==2  灰色ICON -->
+      <image class='list_imgs' wx:if="{{item.id==2}}" src='../../../images/order_12.png'></image>
+      <!-- 判断列表中id==3  飞机ICON -->
+      <image class='list_img' wx:if="{{item.id==3}}" src='../../../images/order_222.png'></image>
+      <view class='list_name_page'>
+        <!-- 列表名称 -->
+        <lable class='list_name'>{{item.name}}</lable>
+      </view>
+      <!-- 时间 -->
+      <view class='list_dates_page'>{{item.dates}}</view>
+    </view>
+    <!-- 列表底线 -->
+    <view class='writes'></view>
+  </view>
+  </view>
+<!-- 导航条 -->
+<view class="navbar">
+    <lable wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
+        <text>{{item}}</text>
+    </lable>
 </view>
-<button bindtap="submit">点我弹窗</button>
+<!-- 全部 -->
+<view hidden="{{currentTab!==0}}" class='total' style='background-color: #f8f8f9'>
+    <view wx:if="{{GoodList.length>0}}">
+        <!-- 外层 -->
+        <view class='cont_count' wx:for="{{GoodList}}" wx:key="key">
+            <!-- 编号 -->
+            <view class='seria'>
+                <label class='seriac_name'>
+                    订单编号
+                    <text>{{item.binahao}}</text>
+                </label>
+                <!-- 订单状态 -->
+                <label class='seriac_start'>{{item.start}}</label>
+            </view>
+            <!-- 列表 -->
+            <view class='GoodList' wx:for="{{item.arry}}" wx:for-item="arr_item" wx:key="key">
+                <!-- 列表图片 -->
+                <image class='GoodList_img' src='{{arr_item.image}}'></image>
+                <!-- 列表标题 -->
+                <label class='GoodList_name'>{{arr_item.name}}</label>
+                <!-- 列表价格 -->
+                <label class='GoodList_money'>￥{{arr_item.money}}</label>
+            </view>
+            <!-- 计算 -->
+            <view class='count_eg'>
+                <!-- 居中 -->
+                <view class='count_cent'>
+                    <!-- 共两件商品 -->
+                    <label class='cont_cent_name'>共{{item.cont_count}}件商品</label>
+                    <!-- 合计 -->
+                    <lable class='cont_cen_money'>
+                        <text class='cont_ce_mon'>合计:￥{{item.count_money}}</text>
+                    </lable>
+                </view>
+            </view>
+            <!-- 标签功能 -->
+            <view class='coent_GoodList'>
+                <!-- 取消订单 -->
+                <label class='coent_del' data-index='{{index}}'>取消订单</label>
+                <!-- 查看物流 -->
+                <label class='coent_check' bindtap="logistics" data-index='{{index}}'>查看物流</label>
+                <!-- 确认收货 -->
+                <label class='coent_log_base' data-index='{{index}}'>确认收货</label>
+            </view>
+        </view>
+    </view>
+    <!-- 否则 -->
+    <view wx:else>
+        <!-- 外层 -->
+        <view class='cont_count'>
+            <label class='none_tab'>亲,您还暂未下单哦~~</label>
+        </view>
+    </view>
+</view>
+<!-- 代付款 -->
+<view hidden="{{currentTab!==1}}"></view>
+<!-- 代发货 -->
+<view hidden="{{currentTab!==2}}"></view>
+<!-- 待收货 -->
+<view hidden="{{currentTab!==3}}"></view>
+<!-- 已完成 -->
+<view hidden="{{currentTab!==4}}"></view>
