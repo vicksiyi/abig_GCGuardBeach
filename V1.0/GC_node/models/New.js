@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // 新闻
 const NewSchema = new Schema({
-    new_name: {         // 新闻名字
+    new_title: {         // 新闻名字
         type: String,
         required: true
     },
@@ -11,7 +11,7 @@ const NewSchema = new Schema({
         type: String,
         required: true
     },
-    new_route: {         // 新闻来源
+    new_from: {         // 新闻来源
         type: String,
         required: true
     },
@@ -23,7 +23,7 @@ const NewSchema = new Schema({
         type: String,
         required: true
     },
-    content: {        // 常用邮箱
+    new_content: {        // 正文
         type: String,
         required: true
     },
@@ -32,5 +32,4 @@ const NewSchema = new Schema({
         default: Date.now
     }
 })
-
 module.exports = User = mongoose.model('news', NewSchema);
