@@ -9,6 +9,7 @@ const users = require('./routes/api/users');
 const profiles = require('./routes/api/profiles');
 const finds = require('./routes/api/finds');
 const admins = require('./routes/api/admins');
+const news = require('./routes/api/news');
 
 // DB config
 const db = require('./config/keys').mongoURI;
@@ -35,6 +36,7 @@ app.use('/api/users', users);
 app.use('/api/profiles', profiles);
 app.use('/api/finds', finds);
 app.use('/api/admins', admins);
+app.use('/api/news', news);
 
 app.listen(5000, () => {
     console.log('the port running');

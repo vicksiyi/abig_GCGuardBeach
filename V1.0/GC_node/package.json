@@ -25,6 +25,7 @@
     "mongoose": "^5.4.17",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "superagent": "^5.1.0"
   }
 }
