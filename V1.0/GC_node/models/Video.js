@@ -40,4 +40,4 @@ const VideoSchema = new Schema({
         default: Date.now
     }
 })
-module.exports = User = mongoose.model('videos', VideoSchema);
+module.exports = Video = mongoose.model('videos', VideoSchema);

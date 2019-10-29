@@ -6,12 +6,16 @@ const router = express.Router();
 const passport = require('passport');
 const Entities = require('html-entities').XmlEntities;
 const randomUA = require('../../utils/userAgent').randomUA;
-const ErrorLog = require('../../models/ErrorLog')
-const New = require('../../models/New')
-const Video = require('../../models/Video')
+const ErrorLog = require('../../models/ErrorLog');
+const New = require('../../models/New');
+const Video = require('../../models/Video');
 
 
-// 错误日志
+/**
+ * 错误日志
+ * @param {*} err 错误
+ * @param {*} url 接口
+ */
 const ErrorFuc = (err, url) => {
     new ErrorLog({
         url: url,
@@ -22,7 +26,11 @@ const ErrorFuc = (err, url) => {
 }
 
 
-// 清洗html
+/**
+ * 清洗html
+ * @param {*} html 所需要清洗的html
+ * @return 放回已清洗的html 
+ */
 const clean_html = (html) => {
     try {
         const $ = cheerio.load(html)
@@ -34,8 +42,11 @@ const clean_html = (html) => {
         }
     }
 }
-
-// 获取视频数据
+/**
+ * 获取视频数据
+ * @param {*} $ 获取节点
+ * @return 返回数据
+ */
 const list_video = ($) => {
     try {
         // 获取数据
@@ -102,7 +113,7 @@ router.get('/video', (req, res) => {
 
 
 // $routes /api/news/addNews
-// @desc 发布新闻到小程序端
+// @desc 发布新闻到小程序端(管理员端)
 // @access private
 router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, res) => {
     (async () => {
@@ -151,14 +162,11 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
 
 
 // $routes /api/news/addVideos
-// @desc 发布视频到小程序端
+// @desc 发布视频到小程序端(管理员端)
 // @access private
 router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req, res) => {
     (async () => {
         try {
-            // const request_data = await superagent.get(req.body["url"]).set(
-            //     "User-Agent", randomUA()
-            // );
             const request_data = await superagent.get(req.body["video_proto_url"]).set(
                 "User-Agent", randomUA()
             );
@@ -167,9 +175,9 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
                 // 获取数据
                 let data_json = list_video($)
                 // 保存
-                Video.findOne({ video_id: data_json.curVideoMeta.id }).then(Video => {
-                    if (!Video) {
-                        res.json({
+                Video.findOne({ video_id: data_json.curVideoMeta.id }).then(VideoTemp => {
+                    if (!VideoTemp) {
+                        new Video({
                             video_title: data_json.curVideoMeta.title,
                             video_id: data_json.curVideoMeta.id,
                             video_author: req.body["video_author"],
@@ -178,8 +186,12 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
                             video_read_num: 0,
                             video_proto_url: req.body["video_proto_url"],
                             video_url: data_json.curVideoMeta.playurl
+                        }).save().then(data => {
+                            res.json(data)
+                        }).catch(err => {
+                            ErrorFuc(err, req.originalUrl)
+                            res.json(err);
                         })
-
                     } else {
                         res.json({
                             msg: 'Existing'
@@ -189,9 +201,9 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
                     ErrorFuc(err, req.originalUrl)
                     res.json(err);
                 })
-            }else{
+            } else {
                 res.json({
-                    msg : 'An unknown error'
+                    msg: 'An unknown error'
                 })
             }
             // res.writeHead(200, { 'Content-Type': 'video/mp4' });

@@ -17,4 +17,4 @@ const AdminLogSchema = new Schema({
     }
 })
 
-module.exports = User = mongoose.model('adminLogs', AdminLogSchema);
+module.exports = AdminLog = mongoose.model('adminLogs', AdminLogSchema);

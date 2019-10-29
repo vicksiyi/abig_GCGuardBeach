@@ -17,4 +17,4 @@ const ErrorLogSchema = new Schema({
     }
 })
 
-module.exports = User = mongoose.model('errorLogs', ErrorLogSchema);
+module.exports = ErrorLog = mongoose.model('errorLogs', ErrorLogSchema);

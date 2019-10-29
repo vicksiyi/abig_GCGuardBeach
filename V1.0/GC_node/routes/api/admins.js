@@ -13,7 +13,11 @@ const ErrorLog = require('../../models/ErrorLog')
 // 密码加密所需
 const saltRounds = 10
 
-// 错误日志
+/**
+ * 错误日志
+ * @param {*} err 错误
+ * @param {*} url 接口
+ */
 const ErrorFuc = (err, url) => {
     new ErrorLog({
         url: url,

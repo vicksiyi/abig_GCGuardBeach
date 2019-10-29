@@ -32,4 +32,4 @@ const NewSchema = new Schema({
         default: Date.now
     }
 })
-module.exports = User = mongoose.model('news', NewSchema);
+module.exports = New = mongoose.model('news', NewSchema);
