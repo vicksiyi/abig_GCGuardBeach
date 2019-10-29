@@ -36,9 +36,6 @@
   height: 40rpx;
   width: 40rpx;
 }
-
-.btn_login {}
-
 /* 地图 */
 
 .index-map {
@@ -225,7 +222,11 @@ section.profile {
   bottom: 100rpx;
   right: -4rpx;
 }
-
+.fish{
+position:fixed;
+bottom:300rpx;
+right:12rpx;
+}
 .model {
   position: absolute;
   left: 0px;

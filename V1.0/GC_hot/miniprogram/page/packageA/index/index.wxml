@@ -30,6 +30,9 @@
       <i-spin size="large" fix wx:if="{{ loadMap }}"></i-spin>
     </map>
   </view>
+  <view class="fish">
+  <image src="../../../images/fish.gif" style="width:120rpx;height:120rpx" mode="aspectFill" bindtap="view"></image>
+  </view>
   <!-- 弹出菜单 -->
   <view class="pop_up">
     <image src="../../../images/icon/indexfind.png" class="img-style" animation="{{animCollect}}" bindtap="find"></image>

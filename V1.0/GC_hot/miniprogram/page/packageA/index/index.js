@@ -52,6 +52,12 @@ Page({
     loadDistance: false,
     loadMap: true
   },
+  // 跳转到全览页面
+  view:function(){
+ wx.navigateTo({
+   url: '../../packageB/pages/FullView/FullView',
+ })
+  },
   /**
    * 点击弹出
    */
