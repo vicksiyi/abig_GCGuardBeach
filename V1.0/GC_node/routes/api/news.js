@@ -6,25 +6,9 @@ const router = express.Router();
 const passport = require('passport');
 const Entities = require('html-entities').XmlEntities;
 const randomUA = require('../../utils/userAgent').randomUA;
-const ErrorLog = require('../../models/ErrorLog');
+const Err = require('../../utils/error')
 const New = require('../../models/New');
 const Video = require('../../models/Video');
-
-
-/**
- * 错误日志
- * @param {*} err 错误
- * @param {*} url 接口
- */
-const ErrorFuc = (err, url) => {
-    new ErrorLog({
-        url: url,
-        log: JSON.stringify(err)
-    }).save().then(AdminLog => {
-        console.log(AdminLog)
-    })
-}
-
 
 /**
  * 清洗html
@@ -82,7 +66,7 @@ router.get('/select/:num', (req, res) => {
             res.json(data.data.news)
             // spider_page(data.data.news[1].url, req, res)
         } catch (err) {
-            ErrorFuc(err, req.originalUrl)
+            Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
         }
     })();
@@ -105,7 +89,7 @@ router.get('/video', (req, res) => {
             let data_json = list_video($)
             res.json(data_json.list);
         } catch (err) {
-            ErrorFuc(err, req.originalUrl)
+            Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
         }
     })();
@@ -141,7 +125,7 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
                     }).save().then(New => {
                         res.json(New)
                     }).catch(err => {
-                        ErrorFuc(err, req.originalUrl)
+                        Err.ErrorFuc(err, req.originalUrl)
                         res.json(err);
                     })
                 } else {
@@ -150,11 +134,11 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
                     })
                 }
             }).catch(err => {
-                ErrorFuc(err, req.originalUrl)
+                Err.ErrorFuc(err, req.originalUrl)
                 res.json(err);
             })
         } catch (err) {
-            ErrorFuc(err, req.originalUrl)
+            Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
         }
     })();
@@ -189,7 +173,7 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
                         }).save().then(data => {
                             res.json(data)
                         }).catch(err => {
-                            ErrorFuc(err, req.originalUrl)
+                            Err.ErrorFuc(err, req.originalUrl)
                             res.json(err);
                         })
                     } else {
@@ -198,7 +182,7 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
                         })
                     }
                 }).catch(err => {
-                    ErrorFuc(err, req.originalUrl)
+                    Err.ErrorFuc(err, req.originalUrl)
                     res.json(err);
                 })
             } else {
@@ -216,7 +200,7 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
             // });
 
         } catch (err) {
-            ErrorFuc(err, req.originalUrl)
+            Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
         }
     })();

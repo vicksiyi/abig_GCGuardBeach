@@ -3,11 +3,15 @@ const Schema = mongoose.Schema;
 
 // 小程序用户
 const UserSchema = new Schema({
-    name: {         // 微信名字
+    nickName: {         // 微信名字
         type: String,
-        required: true
+        required: false
     },
     name_true: {    // 真实名字
+        type: String,
+        required: false
+    },
+    avatarUrl:{
         type: String,
         required: false
     },
@@ -19,9 +23,9 @@ const UserSchema = new Schema({
         type: String,
         required: false
     },
-    appid: {        // appid
+    openId: {        // openId
         type: String,
-        required: false
+        required: true
     },
     password: {     // 用户登录密码
         type: String,

@@ -28,7 +28,8 @@ mongoose.connect(db)
 
 // passport初始化
 app.use(passport.initialize());
-require('./config/passport')(passport);
+require('./config/adminPassport')(passport);
+require('./config/userPassport')(passport);
 
 
 //使用routes

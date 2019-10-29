@@ -8,24 +8,10 @@ const passport = require('passport');
 const Admin = require('../../models/Admin');
 const OauthUser = require('../../models/OauthUser');
 const AdminLog = require('../../models/AdminLog')
-const ErrorLog = require('../../models/ErrorLog')
+const Err = require('../../utils/error')
 
 // 密码加密所需
 const saltRounds = 10
-
-/**
- * 错误日志
- * @param {*} err 错误
- * @param {*} url 接口
- */
-const ErrorFuc = (err, url) => {
-    new ErrorLog({
-        url: url,
-        log: JSON.stringify(err)
-    }).save().then(AdminLog => {
-        console.log(AdminLog)
-    })
-}
 
 // $routes /api/admins/register
 // @desc 管理员注册->(没字段加密->邮箱未验证)
@@ -54,7 +40,7 @@ router.post('/register', (req, res) => {
                         newUser.save().then(user => {
                             res.json(user);
                         }).catch(err => {
-                            ErrorFuc(err, req.originalUrl)
+                            Err.ErrorFuc(err, req.originalUrl)
                             res.json(err);
                         })
                     }
@@ -62,7 +48,7 @@ router.post('/register', (req, res) => {
             });
         }
     }).catch(err => {
-        ErrorFuc(err, req.originalUrl)
+        Err.ErrorFuc(err, req.originalUrl)
         res.json(err);
     })
 })
@@ -88,7 +74,7 @@ router.get('/addAdmins/:id', passport.authenticate('jwt', { session: false }), (
                                 res.json(item);
                             })
                     }).catch(err => {
-                        ErrorFuc(err, req.originalUrl)
+                        Err.ErrorFuc(err, req.originalUrl)
                         res.json(err);
                     })
                 } else {
@@ -107,17 +93,17 @@ router.get('/addAdmins/:id', passport.authenticate('jwt', { session: false }), (
                                 res.json(item);
                             })
                         }).catch(err => {
-                            ErrorFuc(err, req.originalUrl)
+                            Err.ErrorFuc(err, req.originalUrl)
                             res.json(err);
                         })
                     }).catch(err => {
-                        ErrorFuc(err, req.originalUrl)
+                        Err.ErrorFuc(err, req.originalUrl)
                         res.json(err);
                     })
                 }
             })
         }).catch(err => {
-            ErrorFuc(err, req.originalUrl)
+            Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
         })
     } else {
@@ -135,7 +121,7 @@ router.get('/showAdmins/:page', passport.authenticate('jwt', { session: false })
     OauthUser.find().skip(req.params.page * 10).limit(10).then(OauthUser => {
         res.json(OauthUser)
     }).catch(err => {
-        ErrorFuc(err, req.originalUrl)
+        Err.ErrorFuc(err, req.originalUrl)
         res.json(err);
     })
 })
@@ -149,7 +135,7 @@ router.get('/showAdminNum', passport.authenticate('jwt', { session: false }), (r
             len: OauthUser.length
         })
     }).catch(err => {
-        ErrorFuc(err, req.originalUrl)
+        Err.ErrorFuc(err, req.originalUrl)
         res.json(err);
     })
 })
@@ -192,12 +178,12 @@ router.post('/login', (req, res) => {
                     }
                 })
             }).catch(err => {
-                ErrorFuc(err, req.originalUrl)
+                Err.ErrorFuc(err, req.originalUrl)
                 res.json(err);
             })
         }
     }).catch(err => {
-        ErrorFuc(err, req.originalUrl)
+        Err.ErrorFuc(err, req.originalUrl)
         res.json(err);
     })
 })
@@ -228,7 +214,7 @@ router.post('/admins', passport.authenticate('jwt', { session: false }), (req, r
             res.json(user)
         }
     }).catch(err => {
-        ErrorFuc(err, req.originalUrl)
+        Err.ErrorFuc(err, req.originalUrl)
         res.json(err);
     })
 })
@@ -251,7 +237,7 @@ router.delete('/deleteAdmin/:id', passport.authenticate('jwt', { session: false 
                 })
             })
         }).catch(err => {
-            ErrorFuc(err, req.originalUrl)
+            Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
         })
     } else {
