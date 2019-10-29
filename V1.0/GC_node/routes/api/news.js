@@ -1,12 +1,14 @@
 const express = require('express');
 const superagent = require('superagent');
 const cheerio = require('cheerio')
+const fs = require('fs')
 const router = express.Router();
 const passport = require('passport');
 const Entities = require('html-entities').XmlEntities;
 const randomUA = require('../../utils/userAgent').randomUA;
 const ErrorLog = require('../../models/ErrorLog')
 const New = require('../../models/New')
+const Video = require('../../models/Video')
 
 
 // 错误日志
@@ -33,12 +35,26 @@ const clean_html = (html) => {
     }
 }
 
+// 获取视频数据
+const list_video = ($) => {
+    try {
+        // 获取数据
+        let dataTemp = $('script').filter('#_page_data')[0].children[0].data;
+        let data_json = JSON.parse(dataTemp.split("window.__PRELOADED_STATE__ =")[1].split(";")[0])
+
+        return data_json
+    } catch (err) {
+        throw {
+            msg: 'error 404'
+        }
+    }
+}
 router.get('/ceshi', (req, res) => {
     console.log(randomUA())
 })
 
 // $routes /api/news/select/:num
-// @desc 推荐列表获取
+// @desc 推荐新闻列表获取->(管理员端)
 // @access public
 router.get('/select/:num', (req, res) => {
     let url = "http://search.sohu.com/search/meta"
@@ -61,16 +77,40 @@ router.get('/select/:num', (req, res) => {
     })();
 })
 
+// $routes /api/news/video
+// @desc 视频列表获取->(管理员端)
+// @access public
+router.get('/video', (req, res) => {
+    let url = "https://haokan.baidu.com/videoui/page/pc/search"
+    let keyword = req.body["keyword"]
+    let spider_url = encodeURI(`${url}?query=${keyword}`);
+    (async () => {
+        try {
+            const request_data = await superagent.get(spider_url).set(
+                "User-Agent", randomUA()
+            );
+            const $ = cheerio.load(request_data.text)
+            // 获取数据
+            let data_json = list_video($)
+            res.json(data_json.list);
+        } catch (err) {
+            ErrorFuc(err, req.originalUrl)
+            res.json(err);
+        }
+    })();
+})
+
 
 // $routes /api/news/addNews
-// @desc 发布到小程序端
+// @desc 发布新闻到小程序端
 // @access private
 router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, res) => {
     (async () => {
         try {
-            const request_data = await superagent.get(req.body["url"]);
+            const request_data = await superagent.get(req.body["url"]).set(
+                "User-Agent", randomUA()
+            );
             const $ = cheerio.load(request_data.text)
-
             let title = $('div.text-title h1').text().replace(/\s+/g, ""); // 标题
             let time = $('div.article-info span.time').text().replace(/\s+/g, ""); // 时间
             let from = $('div.article-info span a').text().replace(/\s+/g, ""); // 来源
@@ -102,6 +142,67 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
                 ErrorFuc(err, req.originalUrl)
                 res.json(err);
             })
+        } catch (err) {
+            ErrorFuc(err, req.originalUrl)
+            res.json(err);
+        }
+    })();
+})
+
+
+// $routes /api/news/addVideos
+// @desc 发布视频到小程序端
+// @access private
+router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req, res) => {
+    (async () => {
+        try {
+            // const request_data = await superagent.get(req.body["url"]).set(
+            //     "User-Agent", randomUA()
+            // );
+            const request_data = await superagent.get(req.body["video_proto_url"]).set(
+                "User-Agent", randomUA()
+            );
+            if (request_data.status == 200) {
+                const $ = cheerio.load(request_data.text);
+                // 获取数据
+                let data_json = list_video($)
+                // 保存
+                Video.findOne({ video_id: data_json.curVideoMeta.id }).then(Video => {
+                    if (!Video) {
+                        res.json({
+                            video_title: data_json.curVideoMeta.title,
+                            video_id: data_json.curVideoMeta.id,
+                            video_author: req.body["video_author"],
+                            video_duration: data_json.curVideoMeta.time_length,
+                            video_image: data_json.curVideoMeta.poster,
+                            video_read_num: 0,
+                            video_proto_url: req.body["video_proto_url"],
+                            video_url: data_json.curVideoMeta.playurl
+                        })
+
+                    } else {
+                        res.json({
+                            msg: 'Existing'
+                        })
+                    }
+                }).catch(err => {
+                    ErrorFuc(err, req.originalUrl)
+                    res.json(err);
+                })
+            }else{
+                res.json({
+                    msg : 'An unknown error'
+                })
+            }
+            // res.writeHead(200, { 'Content-Type': 'video/mp4' });
+            // let rs = fs.createReadStream(data_json.curVideoMeta.playurl);
+            // rs.pipe(res)
+
+            // rs.on('end', function () {
+            //     res.end();
+            //     console.log('end call');
+            // });
+
         } catch (err) {
             ErrorFuc(err, req.originalUrl)
             res.json(err);
