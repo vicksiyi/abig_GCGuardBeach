@@ -47,6 +47,11 @@ Page({
       url: '../../packageC/pages/commoditycar/commoditycar',
     })
   },
+  detail: function () {
+    wx.navigateTo({
+      url: '../../packageG/pages/ShowDetail/ShowDetail',
+    })
+  },
   /**
    *  加入购物车
    */

@@ -1,0 +1,55 @@
+<!--商品幻灯片-->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" class="banner" duration="{{duration}}" circular="{{duration}}">
+  <block wx:for="{{value.images}}" wx:key="value.name">
+    <swiper-item>
+      <image src="{{item.img}}" class="slide-image" mode="aspectFill" />
+    </swiper-item>
+  </block>
+</swiper>
+<!--商品幻灯片 end-->
+<view class="info-price clear">
+  <view class='price'>❤{{value.price}}</view>
+  <view class='fenxiang'>
+    <button class='fxbtn' open-type="share">
+      <view style='height:20px;margin-top:8px;'>
+        <image src='../../resources/images/fenxiang.png' mode="aspectFill"></image>
+      </view>
+      <view>分享</view>
+    </button>
+  </view>
+</view>
+<view class="info-title">
+  <text>{{value.name}}</text>
+</view>
+<view style="border-top:1px solid #F6F6F6;background: #fff; padding:5px 15px;">
+  <view class="clearfix flex grey gridXt">
+    <text class="sub"><block wx:if='{{value.yunfei==0.00}}'>运费：包邮</block><block wx:else>运费：{{value.yunfei}}</block></text>
+    <text class="sub">库存：{{value.kucun}}</text>
+    <text class="sub">销量：{{value.xiaoliang}}</text>
+  </view>
+</view>
+<!--商品详情-->
+<view class='details_box'>
+  <view style="height:40px;line-height: 40px;border-bottom:1px solid #f5f5f5;">
+    <view>商品详情</view>
+  </view>
+  <view style='padding:10px 0px;'>
+    <view class="wxParse">
+      {{value.content}}
+    </view>
+  </view>
+</view>
+<!--底部浮动 start-->
+<view class="foot-nav mt15">
+  <view class="flex con gridXt tc">
+    <view class="fast-links mr15 flex f12">
+      <view class="sub gridYr">
+        <i-icon type="publishgoods_fill" color="#488ab1" size="34" />
+        <text class="iconfont icon-gouwuche">加入兑换车</text>
+      </view>
+    </view>
+    <view class="add-cart sub f16">
+      <button class="add-cart-btn" bindtap='buy'>立即购买</button>
+    </view>
+  </view>
+</view>

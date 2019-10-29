@@ -1,8 +1,6 @@
 {
   "pages": [
     "page/packageA/index/index",
-    "page/packageA/show/show",
-    "page/packageA/test/test",
     "page/packageA/mine/mine",
     "page/packageA/login/login",
     "page/packageA/commodity/commodity",
@@ -76,7 +74,8 @@
       "root": "page/packageG/",
       "pages": [
         "pages/order/order",
-        "pages/commoditycar/commoditycar"
+        "pages/commoditycar/commoditycar",
+        "pages/ShowDetail/ShowDetail"
       ]
     },
     {
