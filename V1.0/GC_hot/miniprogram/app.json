@@ -1,15 +1,9 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "page/packageA/login/login",
-    "page/packageA/news/news",
-    "page/packageA/index/index",
-=======
     "page/packageA/index/index",
     "page/packageA/test/test",
     "page/packageA/mine/mine",
     "page/packageA/login/login",
->>>>>>> upstream/master
     "page/packageA/commodity/commodity",
     "page/packageA/interactive/interactive",
     "page/packageA/news/news"
