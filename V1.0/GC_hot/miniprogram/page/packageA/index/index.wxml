@@ -31,7 +31,7 @@
     </map>
   </view>
   <view class="fish">
-  <image src="../../../images/fish.gif" style="width:120rpx;height:120rpx" mode="aspectFill" bindtap="view"></image>
+  <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/fish.gif" style="width:120rpx;height:120rpx" mode="aspectFill" bindtap="view"></image>
   </view>
   <!-- 弹出菜单 -->
   <view class="pop_up">

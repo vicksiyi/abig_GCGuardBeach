@@ -224,7 +224,7 @@ section.profile {
 }
 .fish{
 position:fixed;
-bottom:300rpx;
+bottom:250rpx;
 right:12rpx;
 }
 .model {
