@@ -1,4 +1,9 @@
 function Utils() { }
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
 /**
   * 格式化时间
   * @param {date} 当前时间戳
@@ -13,11 +18,6 @@ Utils.prototype.formatTime = date => {
   const second = date.getSeconds()
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-}
-
-Utils.prototype.formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
 }
 
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const superagent = require('superagent');
 const cheerio = require('cheerio')
-const fs = require('fs')
 const router = express.Router();
 const passport = require('passport');
 const Entities = require('html-entities').XmlEntities;
@@ -44,8 +43,10 @@ const list_video = ($) => {
         }
     }
 }
+
+
 router.get('/ceshi', (req, res) => {
-    console.log(randomUA())
+    console.log(access_token())
 })
 
 // $routes /api/news/select/:num
@@ -190,14 +191,6 @@ router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req,
                     msg: 'An unknown error'
                 })
             }
-            // res.writeHead(200, { 'Content-Type': 'video/mp4' });
-            // let rs = fs.createReadStream(data_json.curVideoMeta.playurl);
-            // rs.pipe(res)
-
-            // rs.on('end', function () {
-            //     res.end();
-            //     console.log('end call');
-            // });
 
         } catch (err) {
             Err.ErrorFuc(err, req.originalUrl)

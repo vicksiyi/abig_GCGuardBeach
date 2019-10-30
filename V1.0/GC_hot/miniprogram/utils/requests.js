@@ -3,7 +3,7 @@ const requestUtils = (options) => {
     wx.request({
         url: options.url || '',
         data: options.data || '',
-        method: options.method || '',
+        method: options.method || 'GET',
         header: options.header || '',
         success(s) {
             // s.data.msg = 'success'

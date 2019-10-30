@@ -11,6 +11,10 @@ const finds = require('./routes/api/finds');
 const admins = require('./routes/api/admins');
 const news = require('./routes/api/news');
 
+// 小程序端数据获取接口
+const miniNews = require('./routes/miniapi/news');
+const miniFinds = require('./routes/miniapi/finds');
+
 // DB config
 const db = require('./config/keys').mongoURI;
 
@@ -38,6 +42,11 @@ app.use('/api/profiles', profiles);
 app.use('/api/finds', finds);
 app.use('/api/admins', admins);
 app.use('/api/news', news);
+
+// 小程序端
+app.use('/mini/news', miniNews);
+app.use('/mini/finds', miniFinds);
+
 
 app.listen(5000, () => {
     console.log('the port running');
