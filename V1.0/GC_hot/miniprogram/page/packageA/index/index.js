@@ -170,8 +170,8 @@ Page({
     _this.setData({
       spinShow: true
     })
-
-
+    // 返回验证token
+    _this.loginUser()
     // let button = wx.createFeedbackButton({
     //   type: 'text',
     //   text: '打开意见反馈页面',
@@ -646,5 +646,43 @@ Page({
         console.log(res);
       }
     });
+  },
+  loginUser: function () {
+    wx.login({
+      success: res => {
+        if (res.code) {
+          let item = {}
+          wx.getUserInfo({
+            success: function (e) {
+              item.iv = e.iv;
+              item.encryptedData = e.encryptedData
+            },
+            complete() {
+              item.code = res.code
+              // 获取token
+              wx.request({
+                url: 'http://localhost:5000/api/users/oauth',
+                data: item,
+                method: 'POST',
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                success(data) {
+                  wx.setStorage({
+                    key: "Token",
+                    data: data.data.token
+                  })
+                }
+              })
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  },
+  onShow: function () {
+    this.loginUser()
   }
 })
