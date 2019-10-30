@@ -59,7 +59,8 @@
       "root": "page/packageB/",
       "pages": [
         "pages/volunteer/volunteer",
-        "pages/knowledge/knowledge"
+        "pages/knowledge/knowledge",
+        "pages/FullView/FullView"
       ]
     },
     {
