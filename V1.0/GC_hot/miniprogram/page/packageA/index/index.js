@@ -4,9 +4,12 @@ const {
 const QQMapWX = require('../../../utils/qqmap-wx-jssdk');
 const requests = require('../../../utils/requests')
 const weatherLogoList = require('../../../utils/weatherLogo')
-const utils = require('../../../utils/util')
-const plugin = requirePlugin('routePlan');
+const Utils = require('../../../utils/util')
+const plugin = requirePlugin('routePlan')
+const Oauth = require('../../../utils/oauth')
 var qqmapsdk;
+const utils = new Utils()
+const oauth = new Oauth()
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
@@ -170,8 +173,8 @@ Page({
     _this.setData({
       spinShow: true
     })
-    // 返回验证token
-    _this.loginUser()
+    // 缓存验证token
+    oauth.loginUser()
     // let button = wx.createFeedbackButton({
     //   type: 'text',
     //   text: '打开意见反馈页面',
@@ -646,43 +649,5 @@ Page({
         console.log(res);
       }
     });
-  },
-  loginUser: function () {
-    wx.login({
-      success: res => {
-        if (res.code) {
-          let item = {}
-          wx.getUserInfo({
-            success: function (e) {
-              item.iv = e.iv;
-              item.encryptedData = e.encryptedData
-            },
-            complete() {
-              item.code = res.code
-              // 获取token
-              wx.request({
-                url: 'http://localhost:5000/api/users/oauth',
-                data: item,
-                method: 'POST',
-                header: {
-                  'content-type': 'application/x-www-form-urlencoded'
-                },
-                success(data) {
-                  wx.setStorage({
-                    key: "Token",
-                    data: data.data.token
-                  })
-                }
-              })
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    })
-  },
-  onShow: function () {
-    this.loginUser()
   }
 })

@@ -1,9 +1,10 @@
+function Utils() { }
 /**
   * 格式化时间
   * @param {date} 当前时间戳
   * @return 返回的是已格式化的时间
   */
-const formatTime = date => {
+Utils.prototype.formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -14,7 +15,7 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
-const formatNumber = n => {
+Utils.prototype.formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
@@ -24,7 +25,7 @@ const formatNumber = n => {
   * 生成十个不重复的随机数
   * @return 返回的是十个随机数字符串
   */
-const randomNum = () => {
+Utils.prototype.randomNum = () => {
   var arr1 = new Array();
   var arr2 = new Array();
   for (var i = 0; i < 20; i++) {
@@ -51,7 +52,7 @@ const randomNum = () => {
  * @param {*} minNum 最小值
  * @param {*} maxNum 最大值
  */
-function randomNumOneToOne(minNum, maxNum) {
+Utils.prototype.randomNumOneToOne = (minNum, maxNum) => {
   switch (arguments.length) {
     case 1:
       return parseInt(Math.random() * minNum + 1, 10);
@@ -70,7 +71,7 @@ function randomNumOneToOne(minNum, maxNum) {
   * @return 周数
   * @example 当天：2019-10-05  return ["2019-09-30", "2019-10-01", "2019-10-02", "2019-10-03", "2019-10-04", "2019-10-05", "2019-10-06"]
   */
-const thisWeek = () => {
+Utils.prototype.thisWeek = () => {
   const dateOfToday = Date.now()
   const dayOfToday = (new Date().getDay() + 7 - 1) % 7
   const daysOfThisWeek = Array.from(new Array(7))
@@ -90,14 +91,8 @@ const thisWeek = () => {
  * @param {distance} 米
  * @return 公里
  */
-function distanceFormat(distance) {
+Utils.prototype.distanceFormat = (distance) => {
   return Math.round((distance / 100) / 10).toFixed(1)
 }
 
-module.exports = {
-  formatTime: formatTime,
-  randomNum: randomNum,
-  thisWeek: thisWeek,
-  randomNumOneToOne: randomNumOneToOne,
-  distanceFormat: distanceFormat
-}
+module.exports = Utils

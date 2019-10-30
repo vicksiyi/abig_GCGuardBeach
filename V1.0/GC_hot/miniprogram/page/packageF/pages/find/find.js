@@ -1,6 +1,7 @@
 const { $Message } = require('../../../../dist/base/index');
-const utils = require('../../../../utils/util');
+const Utils = require('../../../../utils/util');
 const requests = require('../../../../utils/requests');
+const utils = new Utils()
 Page({
   data: {
     currentData: 0,

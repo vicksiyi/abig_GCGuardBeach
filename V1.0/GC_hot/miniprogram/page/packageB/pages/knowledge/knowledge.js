@@ -1,4 +1,5 @@
-const utils = require("../../../../utils/util")
+const Utils = require("../../../../utils/util")
+const utils = new Utils()
 Page({
 
   /**
