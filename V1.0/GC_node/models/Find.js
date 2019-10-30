@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 //create Schema
 const FindSchema = new Schema({
-    name: {
+    nickName: {
         type: String,
         required: true
     },
-    avatar: {
+    avatarUrl: {
         type: String,
         required: true
     },
@@ -27,7 +27,7 @@ const FindSchema = new Schema({
         type: String,
         required: true
     },
-    openid: {
+    openId: {
         type: String,
         required: true
     },

@@ -55,7 +55,7 @@ App({
             complete() {
               item.code = res.code
               wx.request({
-                url: 'http://localhost:5000/api/users/login',
+                url: 'http://localhost:5001/mini/users/login',
                 data: item,
                 success(data) {
                   console.log(data.data)

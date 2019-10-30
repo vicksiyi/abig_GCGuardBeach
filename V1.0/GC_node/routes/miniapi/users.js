@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const User = require('../../models/User');
-const Err = require('../..//utils/error')
+const Err = require('../../utils/error')
 const WXBizDataCrypt = require('../../utils/WXBizDataCrypt')
 
 
@@ -87,7 +87,7 @@ router.post('/oauth', (req, res) => {
         // 响应
         if (data.openid) {
             if (iv && encryptedData) {
-                const rule = { openid: data.openid }
+                const rule = { openId: data.openid }
                 jwt.sign(rule, keys.secretUser, { expiresIn: 3600 }, (err, token) => {
                     if (err) {
                         throw err;
