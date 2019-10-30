@@ -45,10 +45,6 @@ const list_video = ($) => {
 }
 
 
-router.get('/ceshi', (req, res) => {
-    console.log(access_token())
-})
-
 // $routes /api/news/select/:num
 // @desc 推荐新闻列表获取->(管理员端)
 // @access public

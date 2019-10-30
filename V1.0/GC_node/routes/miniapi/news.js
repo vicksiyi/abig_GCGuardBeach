@@ -47,26 +47,31 @@ router.get('/showVideos', passport.authenticate('jwt', { session: false }), (req
 // @access private
 router.get('/video', (req, res) => {
     // let video_name = req.query.video_url.split("?")[0].split("/").pop()
-    console.log( req.query.video_url)
-    try {
-        res.writeHead(200, { 'Content-Type': 'video/mp4' });
-        (async () => {
-            let data = await request(req.query.video_url).on('error', function (err) {
-                Err.ErrorFuc(err, req.originalUrl)
-                res.json(err);
-            }).pipe(res)
+    if (req.query.video_url != undefined) {
+        try {
+            res.writeHead(200, { 'Content-Type': 'video/mp4' });
+            (async () => {
+                let data = await request(req.query.video_url).on('error', function (err) {
+                    Err.ErrorFuc(err, req.originalUrl)
+                    res.json(err);
+                }).pipe(res)
 
-            data.on('open', () => {
-                console.log('开始读取..');
-            });
+                data.on('open', () => {
+                    console.log('开始读取..');
+                });
 
-            data.on('finish', () => {
-                console.log('写入已完成..');
-            });
-        })()
-    } catch (err) {
-        Err.ErrorFuc(err, req.originalUrl)
-        res.json(err);
+                data.on('finish', () => {
+                    console.log('写入已完成..');
+                });
+            })()
+        } catch (err) {
+            Err.ErrorFuc(err, req.originalUrl)
+            res.json(err);
+        }
+    }else{
+        res.json({
+            msg : 'Null'
+        })
     }
 })
 
