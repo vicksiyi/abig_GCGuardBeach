@@ -1,41 +1,86 @@
+const request = require("../../../../utils/requests")
+const { $Message } = require('../../../../dist/base/index');
 Page({
   data: {
-    inputList: [{
-        id: 1,
-        title: "微信昵称",
-        type: "string",
-        placeholder: "",
-        value: ""
-      },
-      {
-        id: 2,
-        title: "姓名",
-        type: "string",
-        placeholder: "真实姓名",
-        value: ""
-      },
-      {
-        id: 3,
-        title: "手机号码",
-        type: "number",
-        placeholder: "常用手机号码",
-      },
-      {
-        id: 4,
-        title: "邮箱",
-        type: "string",
-        placeholder: "常用邮箱",
-        value: ""
-      }
-    ]
+    userInfo: {},
+    spinShow: false
   },
-  onLoad: function() {
+  onLoad: function () {
     let _this = this
-    var name = wx.getStorageSync('name')
-    var value = 'inputList[0].value';
     _this.setData({
-      [value]: name
+      spinShow: true
     })
-    console.log(name)
+    wx.getStorage({
+      key: 'Token',
+      success(res) {
+        let Item = {
+          url: 'http://localhost:5001/mini/users/user',
+          header: {
+            'Authorization': res.data
+          }
+        };
+        (async () => {
+          let result = await request.requestUtils(Item)
+          console.log(result)
+          _this.setData({
+            userInfo: result,
+            spinShow: false
+          })
+        })()
+      }
+    })
+  },
+  chooseAddress() {
+    let _this = this
+    wx.chooseAddress({
+      success: (res) => {
+        _this.setData({
+          'userInfo.name_true': res.userName,
+          'userInfo.address': res.cityName + res.countyName + res.detailInfo
+        })
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
+  },
+  submit: function () {
+    let _this = this
+    _this.setData({
+      spinShow: true
+    })
+    wx.getStorage({
+      key: 'Token',
+      success(res) {
+        let Item = {
+          url: 'http://localhost:5001/mini/users/edit',
+          method: "POST",
+          data: _this.data.userInfo,
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': res.data
+          }
+        };
+        (async () => {
+          let result = await request.requestUtils(Item)
+          if (result.msg == "Success") {
+            $Message({
+              content: '修改成功',
+              type: 'success'
+            });
+          } else {
+            $Message({
+              content: '未知错误',
+              type: 'error'
+            });
+          }
+          setTimeout(() => {
+            wx.switchTab({
+              url: '../../../packageA/mine/mine'
+            })
+          }, 1000)
+        })()
+      }
+    })
   }
 })

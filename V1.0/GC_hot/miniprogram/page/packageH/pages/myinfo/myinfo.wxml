@@ -1,7 +1,21 @@
-<i-panel title="圆角输入框" wx:for="{{inputList}}" data-item="item" wx:key="id">
-  <i-input value="{{item.value}}" type="{{item.type}}" right Dark Primary title="{{item.title}}" mode="wrapped" placeholder="{{item.placeholder}}" />
+<!-- <i-panel title="圆角输入框" wx:for="{{inputList}}" data-item="item" wx:key="id">
+  <i-input value="{{item.value}}" type="{{item.type}}" right Dark Primary title="{{item.title}} " disabled="{{item.disabled}}" mode="wrapped" placeholder="{{item.placeholder}}" />
 </i-panel>
-<i-panel title="地址">
-  <i-input value="{{value5}}" placeholder="请输入常用真实地址" />
-</i-panel>
-<button class="submit" style="color:white">提交</button>
+<button class="submit" bindtap="chooseAddress" style="color:white">获取信息</button> -->
+<i-cell-group>
+  <i-cell title="微信名" label="{{userInfo.nickName?userInfo.nickName:'未填写'}}"></i-cell>
+  <i-cell title="真实姓名" label="{{userInfo.name_true ? userInfo.name_true:'未填写'}}"></i-cell>
+  <i-cell title="手机号" label="{{userInfo.phone? userInfo.phone:'未填写'}}" is-link url="../../../packageI/pages/phone/phone" value="点击修改"></i-cell>
+  <i-cell title="邮箱" label="{{userInfo.email?userInfo.email:'未填写'}}" is-link url="../../../packageI/pages/email/email" value="点击修改"></i-cell>
+  <i-cell title="地址" label="{{userInfo.address? userInfo.address:'未填写'}}"></i-cell>
+</i-cell-group>
+<view class="btn">
+  <view>
+    <i-button bind:click="chooseAddress" type="primary">获取信息</i-button>
+  </view>
+  <view>
+    <i-button bind:click="submit" type="primary">提交修改</i-button>
+  </view>
+</view>
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<i-message id="message" />

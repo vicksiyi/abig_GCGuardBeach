@@ -11,7 +11,7 @@ const UserSchema = new Schema({
         type: String,
         required: false
     },
-    avatarUrl:{
+    avatarUrl: {
         type: String,
         required: false
     },
@@ -28,6 +28,14 @@ const UserSchema = new Schema({
         required: true
     },
     password: {     // 用户登录密码
+        type: String,
+        required: false
+    },
+    price: {        // 爱心量
+        type: Number,
+        required: false
+    },
+    address: {        // 地点
         type: String,
         required: false
     },

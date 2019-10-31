@@ -4,3 +4,8 @@
   background-color: #2d8cf0;
   width: 80%;
 }
+.btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

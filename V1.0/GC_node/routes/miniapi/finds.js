@@ -26,7 +26,7 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
         price: 0
     }).save().then(find => {
         res.json({
-            msg : 'Success'
+            msg: 'Success'
         });
     }).catch(err => {
         res.json(err);

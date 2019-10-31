@@ -87,6 +87,13 @@
         "pages/feedback/feedback",
         "pages/rank/rank"
       ]
+    },
+    {
+      "root": "page/packageI/",
+      "pages": [
+        "pages/phone/phone",
+        "pages/email/email"
+      ]
     }
   ],
   "usingComponents": {

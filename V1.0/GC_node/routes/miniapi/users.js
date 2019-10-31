@@ -23,14 +23,14 @@ const oauthFunc = (code) => {
         }, 1000);
     })
 }
-// $routes /api/users/register
+// $routes /mini/users/register
 // @desc 返回请求的json数据
 // @access public
 router.post('/register', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log("暂无")
 })
 
-// $routes /api/users/login
+// $routes /mini/users/login
 // @desc 获取&更新数据库
 // @access public
 router.get('/login', (req, res) => {
@@ -75,8 +75,8 @@ router.get('/login', (req, res) => {
     })()
 })
 
-// $routes /api/users/oauth
-// @desc 放回验证接口登录密钥
+// $routes /mini/users/oauth
+// @desc 返回验证接口登录密钥
 // @access public
 router.post('/oauth', (req, res) => {
     (async () => {
@@ -109,5 +109,31 @@ router.post('/oauth', (req, res) => {
     })()
 })
 
+// $routes /mini/users/user
+// @desc 获取用户信息
+// @access private
+router.get('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.json(req.user[0])
+})
+
+// $routes /mini/users/edit
+// @desc 返回验证接口登录密钥
+// @access public
+router.post('/edit', passport.authenticate('jwt', { session: false }), (req, res) => {
+    let userFileds = {};
+    if (req.body.name_true) userFileds.name_true = req.body.name_true;
+    if (req.body.phone) userFileds.phone = req.body.phone;
+    if (req.body.email) userFileds.email = req.body.email;
+    if (req.body.address) userFileds.address = req.body.address;
+
+    User.findOneAndUpdate({ openId: req.user[0].openId }, { $set: userFileds }, { new: true }).then(user => {
+        res.json({
+            msg: 'Success'
+        });
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
 
 module.exports = router;

@@ -20,8 +20,8 @@ const FindSchema = new Schema({
         required: true
     },
     price: {
-        type: String,
-        required: true
+        type: Number,
+        required: false
     },
     place: {
         type: String,
