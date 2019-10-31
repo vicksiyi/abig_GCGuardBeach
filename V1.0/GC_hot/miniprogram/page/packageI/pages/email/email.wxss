@@ -1,1 +1,46 @@
-/* page/packageI//pages/email/email.wxss */
+page {
+    background: #f8f8f9;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 600rpx;
+    background: #fff;
+    margin: 40% auto;
+}
+
+.phone-title {
+    text-align: center;
+    margin-top: 20rpx;
+}
+
+.phone-title text {
+    font-weight: bolder;
+    color: #2b85e4;
+}
+
+.num-row {
+    display: flex;
+    flex-direction: row;
+    margin: 20rpx;
+}
+
+.num-row .input {
+    width: 50%;
+}
+
+.num-row .btn {
+    width: 50%;
+}
+
+.input-num{
+    width: 90%;
+    margin: 20rpx auto;
+}
+
+.sub{
+    width: 80%;
+    margin: auto;
+}

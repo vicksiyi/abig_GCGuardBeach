@@ -8,10 +8,10 @@
         </view>
         <view class="num-row">
             <view class="input">
-                <i-input value="{{ value2 }}" type="number"  placeholder="请输入验证码" />
+                <i-input value="{{ value2 }}" type="number" bind:change="changeValue2"  placeholder="请输入验证码" />
             </view>
             <view class="btn">
-                <i-button bind:click="valPhone" type="primary" bind:change="changeValue2" disabled="{{btnDisable}}" size="small">{{msg}}</i-button>
+                <i-button bind:click="valPhone" type="primary"  disabled="{{btnDisable}}" size="small">{{msg}}</i-button>
             </view>
         </view>
     </view>

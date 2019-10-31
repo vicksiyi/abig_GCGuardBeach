@@ -15,6 +15,7 @@ const news = require('./routes/api/news');
 const miniUsers = require('./routes/miniapi/users');
 const miniNews = require('./routes/miniapi/news');
 const miniFinds = require('./routes/miniapi/finds');
+const miniEmails = require('./routes/miniapi/emails');
 
 // DB config
 const db = require('./config/keys').mongoURI;
@@ -53,6 +54,7 @@ app.use('/api/news', news);
 miniApp.use('/mini/users', miniUsers);
 miniApp.use('/mini/news', miniNews);
 miniApp.use('/mini/finds', miniFinds);
+miniApp.use('/mini/emails', miniEmails);
 
 
 app.listen(5000, () => {

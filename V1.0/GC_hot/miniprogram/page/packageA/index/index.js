@@ -181,26 +181,10 @@ Page({
     })
     // 缓存验证token
     oauth.loginUser()
-    // let button = wx.createFeedbackButton({
-    //   type: 'text',
-    //   text: '打开意见反馈页面',
-    //   style: {
-    //     left: 10,
-    //     top: 76,
-    //     width: 200,
-    //     height: 40,
-    //     lineHeight: 40,
-    //     backgroundColor: '#ff0000',
-    //     color: '#ffffff',
-    //     textAlign: 'center',
-    //     fontSize: 16,
-    //     borderRadius: 4
-    //   }
-    // })
 
     // 测试所用
     // wx.navigateTo({
-    //   url:"../../packageI/pages/phone/phone"
+    //   url:"../../packageI/pages/email/email"
     // })
 
     wx.getLocation({

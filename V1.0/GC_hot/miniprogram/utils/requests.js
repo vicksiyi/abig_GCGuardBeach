@@ -1,4 +1,4 @@
-const requestUtils = (options) => {
+const requestUtils = (options, time) => {
     let tempRequest = {}
     wx.request({
         url: options.url || '',
@@ -17,7 +17,7 @@ const requestUtils = (options) => {
         }
     })
     // 定时器&5秒超时
-    var time =  setTimeout(() => {
+    var time = setTimeout(() => {
         console.log('停止')
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -30,7 +30,7 @@ const requestUtils = (options) => {
         setTimeout(() => {
             clearTimeout(time)
             resolve(tempRequest)
-        }, 2000);
+        }, time ? 2000 : time);
     })
 }
 

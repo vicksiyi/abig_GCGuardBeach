@@ -5,8 +5,11 @@ Page({
     userInfo: {},
     spinShow: false
   },
-  onLoad: function () {
+  onLoad: function (options) {
     let _this = this
+    _this.setData({
+      'userInfo.email': options.email
+    })
     _this.setData({
       spinShow: true
     })
