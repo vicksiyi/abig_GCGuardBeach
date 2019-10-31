@@ -118,7 +118,7 @@ router.get('/user', passport.authenticate('jwt', { session: false }), (req, res)
 
 // $routes /mini/users/edit
 // @desc 返回验证接口登录密钥
-// @access public
+// @access private
 router.post('/edit', passport.authenticate('jwt', { session: false }), (req, res) => {
     let userFileds = {};
     if (req.body.name_true) userFileds.name_true = req.body.name_true;

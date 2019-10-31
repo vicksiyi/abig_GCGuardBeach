@@ -53,17 +53,9 @@ Utils.prototype.randomNum = () => {
  * @param {*} maxNum 最大值
  */
 Utils.prototype.randomNumOneToOne = (minNum, maxNum) => {
-  switch (arguments.length) {
-    case 1:
-      return parseInt(Math.random() * minNum + 1, 10);
-      break;
-    case 2:
-      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-      break;
-    default:
-      return 0;
-      break;
-  }
+  let Range = maxNum - minNum;
+  let Rand = Math.random();
+  return (minNum + Math.round(Rand * Range));
 }
 
 /**

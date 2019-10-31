@@ -14,7 +14,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: 'http://localhost:5001/mini/users/user',
+          url: 'http://192.168.2.123:5001/mini/users/user',
           header: {
             'Authorization': res.data
           }
@@ -34,9 +34,11 @@ Page({
     let _this = this
     wx.chooseAddress({
       success: (res) => {
+        console.log(res)
         _this.setData({
           'userInfo.name_true': res.userName,
-          'userInfo.address': res.cityName + res.countyName + res.detailInfo
+          'userInfo.address': res.cityName + res.countyName + res.detailInfo,
+          'userInfo.phone': res.telNumber
         })
       },
       fail: function (err) {
@@ -53,7 +55,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: 'http://localhost:5001/mini/users/edit',
+          url: 'http://192.168.2.123:5001/mini/users/edit',
           method: "POST",
           data: _this.data.userInfo,
           header: {
@@ -82,5 +84,8 @@ Page({
         })()
       }
     })
+  },
+  getPhoneNumber: function (e) {
+    console.log(e)
   }
 })

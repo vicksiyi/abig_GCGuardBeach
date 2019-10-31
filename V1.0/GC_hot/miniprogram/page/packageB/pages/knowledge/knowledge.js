@@ -34,6 +34,7 @@ Page({
     })
     const db = wx.cloud.database()
     let numRandom = utils.randomNumOneToOne(0, 6)
+    console.log(numRandom)
     db.collection('abig_kong_knowledge').where({
       num: numRandom
     }).get({

@@ -199,9 +199,9 @@ Page({
     // })
 
     // 测试所用
-    wx.navigateTo({
-      url:"../../packageH/pages/myinfo/myinfo"
-    })
+    // wx.navigateTo({
+    //   url:"../../packageI/pages/phone/phone"
+    // })
 
     wx.getLocation({
       type: 'wgs84',
