@@ -2,6 +2,8 @@ const { $Message } = require('../../../../dist/base/index');
 const request = require('../../../../utils/requests');
 const Utils = require('../../../../utils/util');
 const utils = new Utils();
+const app = getApp()
+
 Page({
 
   /**
@@ -65,7 +67,7 @@ Page({
       },
       complete() {
         let Item = {
-          url: 'http://192.168.2.123:5001/mini/emails/send',
+          url: `${app.Host}/mini/emails/send`,
           method: 'POST',
           header: {
             'content-type': 'application/x-www-form-urlencoded',

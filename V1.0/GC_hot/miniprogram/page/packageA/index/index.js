@@ -2,14 +2,14 @@ const {
   $Message
 } = require('../../../dist/base/index');
 const QQMapWX = require('../../../utils/qqmap-wx-jssdk');
-const requests = require('../../../utils/requests')
-const weatherLogoList = require('../../../utils/weatherLogo')
-const Utils = require('../../../utils/util')
-const plugin = requirePlugin('routePlan')
-const Oauth = require('../../../utils/oauth')
+const requests = require('../../../utils/requests');
+const weatherLogoList = require('../../../utils/weatherLogo');
+const Utils = require('../../../utils/util');
+const plugin = requirePlugin('routePlan');
+const Oauth = require('../../../utils/oauth');
 var qqmapsdk;
-const utils = new Utils()
-const oauth = new Oauth()
+const utils = new Utils();
+const oauth = new Oauth();
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
@@ -70,14 +70,14 @@ Page({
       this.popp();
       this.setData({
         isPopping: false
-      })
+      });
     } else if (!this.data.isPopping) {
       //弹出动画
       this.takeback();
       this.setData({
         isPopping: true
-      })
-    }
+      });
+    };
   },
   /**
    * 首页进入志愿者
@@ -184,7 +184,7 @@ Page({
 
     // 测试所用
     // wx.navigateTo({
-    //   url:"../../packageH/pages/myinfo/myinfo"
+    //   url:"../../packageF/pages/FindCircle/FindCircle"
     // })
 
     wx.getLocation({

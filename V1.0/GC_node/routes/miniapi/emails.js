@@ -22,7 +22,7 @@ router.post('/send', passport.authenticate('jwt', { session: false }), (req, res
         text: `验证码:${req.body.num}`,       //邮件内容
         from: '1724264854@qq.com',        //谁发送的
         to: req.body.email,       //发送给谁的
-        subject: 'GC海滩卫士~验证邮箱'          //邮件主题
+        subject: 'GC海滩卫士'          //邮件主题
     }, function (err, message) {
         console.log(err)
         //回调函数

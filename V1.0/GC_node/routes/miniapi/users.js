@@ -56,13 +56,19 @@ router.get('/login', (req, res) => {
             User.findOneAndUpdate({ openId: data.openid }, { $set: Item }, { new: true }).then(user => {
                 if (!user) {
                     new User(Item).save().then(user => {
-                        res.json(user)
+                        res.json({
+                            msg: "Success"
+                        })
                     }).catch(err => {
                         Err.ErrorFuc(err, req.originalUrl)
-                        res.json(err);
+                        res.json({
+                            msg: "err"
+                        });
                     })
                 } else {
-                    res.json(user)
+                    res.json({
+                        msg: 'Success'
+                    })
                 }
             }).catch(err => {
                 Err.ErrorFuc(err, req.originalUrl)

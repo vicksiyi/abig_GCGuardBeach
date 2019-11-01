@@ -1,5 +1,6 @@
 const request = require("../../../../utils/requests")
 const { $Message } = require('../../../../dist/base/index');
+const app = getApp()
 Page({
   data: {
     userInfo: {},
@@ -7,9 +8,11 @@ Page({
   },
   onLoad: function (options) {
     let _this = this
-    _this.setData({
-      'userInfo.email': options.email
-    })
+    // if (options.email != undefined) {
+    //   _this.setData({
+    //     'userInfo.email': options.email
+    //   })
+    // }
     _this.setData({
       spinShow: true
     })
@@ -17,7 +20,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: 'http://192.168.2.123:5001/mini/users/user',
+          url: `${app.Host}/mini/users/user`,
           header: {
             'Authorization': res.data
           }
@@ -45,7 +48,50 @@ Page({
         })
       },
       fail: function (err) {
-        console.log(err)
+        if (err.errMsg == "chooseAddress:fail auth deny") {
+          $Message({
+            content: '获取信息失败',
+            type: 'error'
+          });
+          wx.showModal({
+            title: '通讯信息获取失败',
+            content: '是否进入开启权限页面重新授权',
+            confirmText: '确定',
+            confirmColor: '#19be6b',
+            success(res2) {
+              if (res2.confirm) {
+                wx.openSetting({
+                  success(data) {
+                    if (data.authSetting["scope.address"]) {
+                      $Message({
+                        content: '获取成功',
+                        type: 'success'
+                      });
+                      // 重新加载
+                      _this.onLoad()
+                    } else {
+                      $Message({
+                        content: '获取权限失败',
+                        type: 'error'
+                      });
+                    }
+                  },
+                  fail(err) {
+                    console.log(err)
+                    $Message({
+                      content: '未知错误',
+                      type: 'error'
+                    });
+                  }
+                })
+              } else {
+                $Message({
+                  content: '用户取消选择'
+                });
+              }
+            }
+          })
+        }
       }
     })
   },
@@ -58,7 +104,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: 'http://192.168.2.123:5001/mini/users/edit',
+          url: `${app.Host}/mini/users/edit`,
           method: "POST",
           data: _this.data.userInfo,
           header: {

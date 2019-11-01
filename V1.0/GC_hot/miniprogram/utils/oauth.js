@@ -1,3 +1,4 @@
+const app = getApp()
 function Oauth() { }
 // 缓存Token
 Oauth.prototype.loginUser = () => {
@@ -14,7 +15,7 @@ Oauth.prototype.loginUser = () => {
                         item.code = res.code
                         // 获取token
                         wx.request({
-                            url: 'http://192.168.2.123:5001/mini/users/oauth',
+                            url: `${app.Host}/mini/users/oauth`,
                             data: item,
                             method: 'POST',
                             header: {

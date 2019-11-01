@@ -43,6 +43,7 @@ App({
     userInfo: null
   },
   login: function () {
+    let _this = this
     wx.login({
       success: res => {
         if (res.code) {
@@ -55,7 +56,7 @@ App({
             complete() {
               item.code = res.code
               wx.request({
-                url: 'http://localhost:5001/mini/users/login',
+                url: `${_this.Host}/mini/users/login`,
                 data: item,
                 success(data) {
                   console.log(data.data)
@@ -68,5 +69,6 @@ App({
         }
       }
     })
-  }
+  },
+  Host: 'http://192.168.2.123:5001'
 })

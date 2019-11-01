@@ -1,4 +1,4 @@
-<image class="image" src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/yuanqyuan.gif"></image>
+<image class="image" src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/yuanqyuan.gif" bindload="imageLoad"></image>
 <view class="text_container">
   <text>关于圈子</text>
   <view class="content">
@@ -6,6 +6,7 @@
   </view>
 </view>
 <view class="btn">
-  <i-button  type="primary" size="small" bindtap="find">发现圈</i-button>
-  <i-button  type="primary"  size="small" bindtap="life">生活圈</i-button>
+  <i-button type="primary" size="small" bindtap="find">发现圈</i-button>
+  <i-button type="primary" size="small" bindtap="life">生活圈</i-button>
+  <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 </view>
