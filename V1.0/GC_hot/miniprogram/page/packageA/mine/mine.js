@@ -18,12 +18,18 @@ Page({
     },
     {
       id: 3,
+      title: "我的组织",
+      type: "interactive",
+      url: "../../packageH/pages/myOrganization/myOrganization"
+    },
+    {
+      id: 4,
       title: "意见反馈",
       type: "feedback",
       url: "../../packageH/pages/feedback/feedback"
     },
     {
-      id: 4,
+      id: 5,
       title: "关于我们",
       type: "more",
       url: "../../packageH/pages/about/about"

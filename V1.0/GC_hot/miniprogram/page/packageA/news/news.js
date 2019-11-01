@@ -58,9 +58,12 @@ Page({
     },
     push_onChange(event) {
       const detail = event.detail;
+      if(detailname=="社会"){
       this.setData({
-        ['push[' + event.detail.name + '].checked']: detail.checked
+        ['push[' + event.detail.name + '].checked']: detail.checked,
+        ['push["财经"].checked']: false
       })
+      }
     },
     hot_onChange(event) {
       const detail = event.detail;

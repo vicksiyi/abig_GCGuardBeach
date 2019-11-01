@@ -1,0 +1,23 @@
+<view class="container">
+    <view class="fishcontainer">
+        <image src="../../../images/fish1.gif" mode="aspectFill" style="width:100rpx;height:100rpx;" />
+    </view>
+    <view class="takephoto">
+        <image src="../../../images/takephoto.png" mode="aspectFill" style="width:160rpx;height:160rpx;" />
+    </view>
+    <view class="rubbishfish">
+        <image src="../../../images/rubbish.png" mode="aspectFill" style="width:120rpx;height:120rpx;" />
+    </view>
+    <view class="interactivecontainer">
+        <image src="../../../images/interactive.png" mode="aspectFill" style="width:180rpx;height:180rpx;" />
+    </view>
+    <view class="lovecontainer">
+        <image src="../../../images/lovestore.png" mode="aspectFill" style="width:150rpx;height:150rpx;" />
+    </view>
+    <view class="newswomen">
+        <image src="../../../images/newswomen.png" mode="aspectFill" style="width:120rpx;height:150rpx;" />
+    </view>
+    <view class="newsman">
+        <image src="../../../images/newsman.png" mode="aspectFill" style="width:120rpx;height:150rpx;" />
+    </view>
+</view>

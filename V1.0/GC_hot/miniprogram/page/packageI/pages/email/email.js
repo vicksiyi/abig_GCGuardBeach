@@ -67,7 +67,7 @@ Page({
       },
       complete() {
         let Item = {
-          url: `${app.Host}/mini/emails/send`,
+          url: `http://${app.ip}:5001/mini/emails/send`,
           method: 'POST',
           header: {
             'content-type': 'application/x-www-form-urlencoded',
