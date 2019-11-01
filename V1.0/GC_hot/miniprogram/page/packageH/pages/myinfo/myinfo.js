@@ -20,7 +20,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: `http://${app.Host}:5001/mini/users/user`,
+          url: `http://${app.ip}:5001/mini/users/user`,
           header: {
             'Authorization': res.data
           }

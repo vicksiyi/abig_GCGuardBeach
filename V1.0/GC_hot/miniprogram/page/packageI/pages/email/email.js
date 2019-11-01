@@ -15,7 +15,8 @@ Page({
     btnDisable: false,
     subDisabled: true,
     value2: '',
-    numTest: ''
+    numTest: '',
+    numTemp: ''
   },
 
   /**
@@ -56,9 +57,13 @@ Page({
         })
       }
     }, 1000);
+    let numTemp = utils.randomNumOneToOne(1000, 9999);
+    _this.setData({
+      numTemp: numTemp
+    })
     let item = {
       email: _this.data.email,
-      num: utils.randomNumOneToOne(1000, 9999)
+      num: numTemp
     }
     wx.getStorage({
       key: 'Token',
@@ -116,7 +121,7 @@ Page({
       });
       return
     }
-    if (_this.data.value2 == _this.data.numTest) {
+    if (_this.data.value2 == _this.data.numTemp) {
 
       $Message({
         content: '验证成功',
