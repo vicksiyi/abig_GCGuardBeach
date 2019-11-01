@@ -184,7 +184,7 @@ Page({
 
     // 测试所用
     // wx.navigateTo({
-    //   url:"../../packageI/pages/email/email"
+    //   url:"../../packageH/pages/myinfo/myinfo"
     // })
 
     wx.getLocation({

@@ -1,4 +1,4 @@
-const requestUtils = (options, time) => {
+const requestUtils = (options, clrTime) => {
     let tempRequest = {}
     wx.request({
         url: options.url || '',
@@ -30,7 +30,7 @@ const requestUtils = (options, time) => {
         setTimeout(() => {
             clearTimeout(time)
             resolve(tempRequest)
-        }, time ? 2000 : time);
+        }, clrTime != undefined ? clrTime : 2000);
     })
 }
 

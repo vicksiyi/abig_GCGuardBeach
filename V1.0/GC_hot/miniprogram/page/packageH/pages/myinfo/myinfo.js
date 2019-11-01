@@ -90,5 +90,24 @@ Page({
   },
   getPhoneNumber: function (e) {
     console.log(e)
+  },
+  onShow: function () {
+    let _this = this
+    wx.getStorage({
+      key: 'email',
+      success(res) {
+        _this.setData({
+          'userInfo.email': res.data
+        })
+      }
+    })
+  },
+  onUnload: function () {
+    wx.removeStorage({
+      key: 'email',
+      success(res) {
+        console.log(res)
+      }
+    })
   }
 })

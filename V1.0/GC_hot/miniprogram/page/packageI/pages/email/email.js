@@ -120,11 +120,17 @@ Page({
         content: '验证成功',
         type: 'success'
       });
-      setTimeout(() => {
-        wx.redirectTo({
-          url: `../../../packageH/pages/myinfo/myinfo?email=${_this.data.email}`
-        })
-      }, 1000);
+      wx.setStorage({
+        key: "email",
+        data: _this.data.email,
+        complete() {
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000);
+        }
+      })
     } else {
       $Message({
         content: '验证码错误,请重新输入',
