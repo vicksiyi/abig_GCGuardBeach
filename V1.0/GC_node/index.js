@@ -6,8 +6,7 @@ const miniApp = express();
 const passport = require('passport');
 
 // 引入ws
-const WebSocketServer = require('websocket').server;
-const http = require('http');
+const ws = require("nodejs-websocket")
 
 //引入users
 const profiles = require('./routes/api/profiles');
@@ -62,11 +61,6 @@ miniApp.use('/mini/finds', miniFinds);
 miniApp.use('/mini/emails', miniEmails);
 miniApp.use('/mini/chats', miniChats);
 
-// ws
-const server = http.createServer(function (request, response) {
-    console.log((new Date()) + ' Received request for ' + request.url);
-});
-
 app.listen(5000, () => {
     console.log('the port running');
 })
@@ -75,38 +69,37 @@ miniApp.listen(5001, () => {
     console.log('the mini port running');
 })
 
-server.listen(5002, function () {
+// 聊天
+var server = ws.createServer(function (conn) {
+    console.log("connected！！！")
+    console.log(conn)
+    conn.protocols = ['protocols']
+    conn.on("text", function (str) {
+        console.log("Received " + str)
+        broadcast(str)
+        // let data = JSON.parse(str)
+        // switch (data.type) {
+        //     case value:
+
+        //         break;
+
+        //     default:
+        //         break;
+        // }
+    })
+    conn.on("error", function (err) {
+        console.log(err)
+    })
+    conn.on("close", function (code, reason) {
+        console.log("Connection closed")
+    })
+}).listen(5002, function () {
     console.log('the ws port running');
 });
 
-wsServer = new WebSocketServer({
-    httpServer: server,
-    autoAcceptConnections: false
-});
-
-const originIsAllowed = (origin) => {
-    return true;
+function broadcast(msg) {
+    server.connections.forEach(function (conn) {
+        console.log(conn)
+        conn.sendText(msg)
+    })
 }
-
-wsServer.on('request', function (request) {
-    if (!originIsAllowed(request.origin)) {
-        request.reject();
-        console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
-        return;
-    }
-    var connection = request.accept('protocol1', request.origin);
-    console.log((new Date()) + ' Connection accepted.');
-    connection.on('message', function (message) {
-        if (message.type === 'utf8') {
-            console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
-        }
-        else if (message.type === 'binary') {
-            console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
-            connection.sendBytes(message.binaryData);
-        }
-    });
-    connection.on('close', function (reasonCode, description) {
-        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
-    });
-});
