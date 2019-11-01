@@ -15,7 +15,7 @@ Oauth.prototype.loginUser = () => {
                         item.code = res.code
                         // 获取token
                         wx.request({
-                            url: `${app.Host}/mini/users/oauth`,
+                            url: `http://${app.ip}:5001/mini/users/oauth`,
                             data: item,
                             method: 'POST',
                             header: {

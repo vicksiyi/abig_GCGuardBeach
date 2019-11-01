@@ -56,7 +56,7 @@ App({
             complete() {
               item.code = res.code
               wx.request({
-                url: `${_this.Host}/mini/users/login`,
+                url: `http://${_this.ip}:5001/mini/users/login`,
                 data: item,
                 success(data) {
                   console.log(data.data)
@@ -70,5 +70,5 @@ App({
       }
     })
   },
-  Host: 'http://192.168.2.123:5001'
+  ip: '192.168.2.123'
 })

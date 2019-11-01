@@ -20,7 +20,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: `${app.Host}/mini/users/user`,
+          url: `http://${app.Host}:5001/mini/users/user`,
           header: {
             'Authorization': res.data
           }
@@ -104,7 +104,7 @@ Page({
       key: 'Token',
       success(res) {
         let Item = {
-          url: `${app.Host}/mini/users/edit`,
+          url: `http://${app.ip}:5001/mini/users/edit`,
           method: "POST",
           data: _this.data.userInfo,
           header: {

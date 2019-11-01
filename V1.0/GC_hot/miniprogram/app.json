@@ -3,9 +3,9 @@
     "page/packageA/index/index",
     "page/packageA/mine/mine",
     "page/packageA/login/login",
+    "page/packageA/news/news",
     "page/packageA/commodity/commodity",
-    "page/packageA/interactive/interactive",
-    "page/packageA/news/news"
+    "page/packageA/interactive/interactive"
   ],
   "permission": {
     "scope.userLocation": {
@@ -21,8 +21,7 @@
   "tabBar": {
     "color": "#80848f",
     "selectedColor": "#2b85e4",
-    "list": [
-      {
+    "list": [{
         "pagePath": "page/packageA/index/index",
         "text": "首页",
         "iconPath": "images/icon/home.png",
@@ -54,8 +53,7 @@
       }
     ]
   },
-  "subpackages": [
-    {
+  "subpackages": [{
       "root": "page/packageB/",
       "pages": [
         "pages/volunteer/volunteer",
@@ -85,7 +83,8 @@
         "pages/myinfo/myinfo",
         "pages/about/about",
         "pages/feedback/feedback",
-        "pages/rank/rank"
+        "pages/rank/rank",
+        "pages/myOrganization/myOrganization"
       ]
     },
     {

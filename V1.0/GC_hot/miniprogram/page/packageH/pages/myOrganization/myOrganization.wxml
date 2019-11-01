@@ -1,0 +1,9 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="section">
+        <view class="section__title">input</view>
+        <input name="input" placeholder="please input here" />
+    </view>
+    <view class="btn-area">
+        <button formType="submit">Submit</button>
+    </view>
+</form>
