@@ -1,53 +1,266 @@
 const app = getApp()
+const Utils = require('../../../../utils/util');
+const utils = new Utils();
+const { $Message } = require('../../../../dist/base/index');
 var wxst = function () { }
+const myUrl = `ws://${app.ip}:5002` // websocket链接
+
+var ws // socket发送的消息队列
+var socketMsgQueue = []
+var socketOpen = true // 判断心跳变量
+var heart = ''  // 心跳失败次数
+var heartBeatFailCount = 0 // 终止心跳
+var heartBeatTimeOut = null; // 终止重新连接
+var connectSocketTimeOut = null;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    value: []
+    value: '',
+    name: '',
+    avatar: '',
+    msgData: [],
+    height: 0
   },
-  onLoad:function(){
-    
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onShow: function (options) {
+  onLoad: function () {
     let _this = this
-    wxst = wx.connectSocket({
-      url: `ws://${app.ip}:5002`,
-      header: {
-        'content-type': 'application/json'
+    let nameTemp = ''
+    let avatarTemp = ''
+
+    // 历史信息
+    _this.history(1)
+
+    // 获取姓名
+    wx.getStorage({
+      key: 'name',
+      success(res) {
+        nameTemp = res.data
+        _this.setData({
+          name: res.data
+        })
+      },
+      fail(err) {
+        console.log(err)
+      },
+      complete() {
+        // 获取头像
+        wx.getStorage({
+          key: 'avatar',
+          success(res) {
+            avatarTemp = res.data
+            _this.setData({
+              avatar: res.data
+            })
+          },
+          fail(err) {
+            console.log(err)
+          },
+          complete() {
+            // 开启连接
+            _this.connectStart(nameTemp, avatarTemp)
+            // deal
+            _this.deal()
+          }
+        })
       }
     })
-    
-    wxst.onOpen(res => {
-      console.info('连接打开成功');
-    });
-    wxst.onError(res => {
-      console.info('连接识别');
-      console.error(res);
-    });
-    wxst.onMessage(res => {
-      console.info(res.data);
-    });
-    wxst.onClose(() => {
-      console.info('连接关闭');
+    // 获取屏幕高度
+    wx.getSystemInfo({
+      success(res) {
+        _this.setData({
+          height: res.windowHeight
+        })
+      }
+    })
+
+  },
+  history: function (page) {
+    console.log(`历史信息${page}`)
+  },
+  // 通过websocket发送数据
+  formSubmit: function (e) {
+    let _this = this
+    if (!e.detail.value.msg) {
+      return
+    }
+    // sendSocketMessage
+    let data = JSON.stringify({
+      type: 2,
+      str: e.detail.value.msg,
+      room: '1',
+      name: _this.data.name,
+      avatar: _this.data.avatar
+    })
+    _this.sendSocketMessage({
+      msg: data,
+      data: data,
+      success: () => {
+        console.log("客户端发送成功")
+      },
+      fail: function (err) {
+        console.log('发送失败');
+        $Message({
+          content: '发送失败',
+          type: 'error'
+        });
+      }
+    })
+    // 清空input
+    _this.setData({
+      value: ''
+    })
+  },
+  //与socket建立连接
+  connectStart: function (nameTemp, avatarTemp) {
+    var _this = this
+    ws = wx.connectSocket({
+      url: myUrl,
+      header: {
+        // "Authorization": app.globalData.token,
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        // console.log("连接成功")
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: '网络异常！',
+        })
+        console.log(err)
+      }
+    })
+
+    // 连接成功
+    wx.onSocketOpen((res) => {
+      console.log('WebSocket 成功连接', res)
+      // 进入聊天
+      _this.resMes(nameTemp, avatarTemp)
+      // 开始心跳
+      _this.startHeartBeat()
+    })
+    //连接失败
+    wx.onSocketError((err) => {
+      console.log('websocket连接失败', err);
+      twice = 0
+      _this.connectStart()
+    })
+  },
+  // 进入聊天
+  resMes: function (nameTemp, avatarTemp) {
+    var _this = this
+    let data = JSON.stringify({
+      type: 0,
+      str: '',
+      room: '1',
+      name: nameTemp,
+      avatar: avatarTemp
+    })
+    // console.log(joinData)
+    _this.sendSocketMessage({
+      msg: data,
+      data: data,
+      success: () => {
+        $Message({
+          content: '进入房间成功',
+          type: 'success'
+        });
+      },
+      fail: function (err) {
+        console.log('进入房间失败');
+        $Message({
+          content: '进入房间失败',
+          type: 'error'
+        });
+      },
+    })
+  },
+  // 开始心跳
+  startHeartBeat: function () {
+    // console.log('socket开始心跳')
+    var that = this;
+    heart = 'heart';
+    that.heartBeat();
+  },
+  // 心跳检测
+  heartBeat: function () {
+    var _this = this;
+    if (!heart) {
+      return;
+    }
+    var xtData = {
+      type: 1
+    }
+    // console.log(JSON.stringify({ xtData }))
+    _this.sendSocketMessage({
+      msg: JSON.stringify(xtData),
+      data: JSON.stringify(xtData),
+      success: function (res) {
+        // console.log('socket心跳成功',res);
+        if (heart) {
+          heartBeatTimeOut = setTimeout(() => {
+            _this.heartBeat();
+          }, 5000);
+        }
+      },
+      fail: function (res) {
+        console.log('socket心跳失败');
+        if (heartBeatFailCount > 2) {
+          // 重连
+          console.log('socket心跳失败')
+          _this.connectStart();
+        }
+        if (heart) {
+          heartBeatTimeOut = setTimeout(() => {
+            _this.heartBeat();
+          }, 5000);
+        }
+        heartBeatFailCount++;
+      },
     });
   },
-  formSubmit: function (e) {
-    console.log(e.detail.value.input)
-    if (wxst.readyState == wxst.OPEN) {
-      wxst.send({
-        data: e.detail.value.input,
-        success: () => {
-          console.info('客户端发送成功');
+  // 通过 WebSocket 连接发送数据
+  sendSocketMessage: function (options) {
+    var _this = this
+    if (socketOpen) {
+      wx.sendSocketMessage({
+        data: options.msg,
+        success: function (res) {
+          if (options) {
+            options.success && options.success(res);
+          }
+        },
+        fail: function (res) {
+          if (options) {
+            options.fail && options.fail(res);
+          }
         }
-      });
+      })
     } else {
-      console.error('连接已经关闭');
+      socketMsgQueue.push(options.msg)
     }
+    // ws.closeSocket();
+    // _this.deal()
+  },
+  // 监听socket
+  deal: function () {
+    ws.onOpen(res => {
+      socketOpen = true;
+      console.log('监听 WebSocket 连接打开事件。', res)
+    })
+    ws.onClose(onClose => {
+      console.log('监听 WebSocket 连接关闭事件。', onClose)
+      // socketOpen = false;
+      // that.connectStart()
+    })
+    ws.onError(onError => {
+      console.log('监听 WebSocket 错误。错误信息', onError)
+      socketOpen = false
+    })
+    ws.onMessage(onMessage => {
+      var res = JSON.parse(onMessage.data)
+      console.log(res, "接收到了消息")
+    })
   }
 })

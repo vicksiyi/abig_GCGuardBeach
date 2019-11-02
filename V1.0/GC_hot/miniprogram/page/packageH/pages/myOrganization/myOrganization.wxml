@@ -1,9 +1,16 @@
-<form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="section">
-        <view class="section__title">input</view>
-        <input name="input" placeholder="please input here" />
-    </view>
-    <view class="btn-area">
-        <button formType="submit">Submit</button>
+<!-- 消息体 -->
+<view class="content" style="height:{{height - 50}}px">
+
+</view>
+<!-- 发送 -->
+<form bindsubmit="formSubmit">
+    <view class="submit">
+        <view class="input">
+            <input name="msg" value="{{value}}" placeholder="内容" placeholder-class="input-class" />
+        </view>
+        <view class="btn">
+            <button formType="submit" size="mini" type="primary">发送</button>
+        </view>
     </view>
 </form>
+<i-message id="message" />

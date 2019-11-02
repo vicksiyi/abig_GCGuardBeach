@@ -6,7 +6,8 @@ const miniApp = express();
 const passport = require('passport');
 
 // 引入ws
-const ws = require("nodejs-websocket")
+const ws = require("nodejs-websocket");
+const Time = require("./utils/formatTimes");
 
 //引入users
 const profiles = require('./routes/api/profiles');
@@ -72,34 +73,44 @@ miniApp.listen(5001, () => {
 // 聊天
 var server = ws.createServer(function (conn) {
     console.log("connected！！！")
-    console.log(conn)
-    conn.protocols = ['protocols']
-    conn.on("text", function (str) {
-        console.log("Received " + str)
-        broadcast(str)
-        // let data = JSON.parse(str)
-        // switch (data.type) {
-        //     case value:
-
-        //         break;
-
-        //     default:
-        //         break;
-        // }
+    const time = new Time()
+    conn.on("text", function (dataTemp) {
+        let data = JSON.parse(dataTemp)
+        data.time = time.formatTime(new Date());
+        console.log(`${data.name}:${data.str}`)
+        switch (data.type) {
+            case 0:
+                conn.name = data.name;
+                conn.avatar = data.avatar;
+                conn.time = data.time;
+                data.str = "加入了房间";
+                broadcast(JSON.stringify(data))
+                break;
+            case 2:
+                broadcast(JSON.stringify(data))
+                break;
+            default:
+                break;
+        }
     })
     conn.on("error", function (err) {
         console.log(err)
     })
     conn.on("close", function (code, reason) {
-        console.log("Connection closed")
+        broadcast(JSON.stringify({
+            name: conn.name,
+            avatar: conn.avatar,
+            time: conn.time,
+            str: `${conn.name}离开了房间`
+        }))
     })
 }).listen(5002, function () {
     console.log('the ws port running');
 });
 
 function broadcast(msg) {
+    console.log(msg)
     server.connections.forEach(function (conn) {
-        console.log(conn)
         conn.sendText(msg)
     })
 }
