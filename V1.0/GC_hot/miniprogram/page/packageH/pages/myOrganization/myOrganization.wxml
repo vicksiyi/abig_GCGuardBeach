@@ -42,7 +42,7 @@
                     <!-- 时间 -->
                     <span>{{item.time}}</span>
                     <!-- 正文 -->
-                    <view class="arrow-left">
+                    <view class="arrow-left2">
                         <view class="content2">{{item.str}}</view>
                         <view class="left2"></view>
                     </view>

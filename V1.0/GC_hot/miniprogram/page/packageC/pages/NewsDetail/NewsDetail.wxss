@@ -1,0 +1,62 @@
+.titlecontainer {
+  width: 700rpx;
+  height: 100%;
+  margin: 25rpx;
+}
+
+.titletext {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #1c2438;
+}
+
+.tipcontainer {
+  width: 700rpx;
+  height: 50rpx;
+  margin: 25rpx;
+  display: flex;
+  align-items: center;
+}
+
+.tiptextcontainer {
+  width: 490rpx;
+  height: 50rpx;
+}
+
+.tiptext {
+  width: 200rpx;
+  font-size: 0.7rem;
+  color: #bbbec4;
+}
+
+.picturecontainer {
+  width: 700rpx;
+  height: 300rpx;
+  margin-left: 25rpx;
+}
+
+.scoll-h {
+  height: 100%;
+}
+
+.scoll-h::-webkit-scrollbar {
+  display: none;
+}
+
+.detailedcontainer {
+  margin-left: 25rpx;
+}
+
+.detailedtext {
+  font-size: 0.7rem;
+  color: #495060;
+}
+
+.btnshare {
+  margin-top: 10rpx;
+  float: right;
+  width: 250rpx;
+  height: 70rpx;
+  font-size: 15px;
+  color: #495060;
+}

@@ -49,22 +49,9 @@ page {
     flex-direction: row;
 }
 
-.content-all2 {
-    width: 96%;
-    margin: 20rpx auto;
-    display: flex;
-    flex-direction: row;
-}
-
 .content-all .msg {
     display: flex;
     flex-direction: column;
-}
-
-.content-all2 .msg2 {
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
 }
 
 .avatar {
@@ -77,11 +64,6 @@ page {
     border-radius: 50%;
 }
 
-.content-all2 .avatar image {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 50%;
-}
 
 .msg text {
     font-weight: bolder;
@@ -90,30 +72,18 @@ page {
     color: #1c2438;
 }
 
-.msg2 text {
-    font-weight: bolder;
-    margin-right: 20rpx;
-    font-size: 0.8rem;
-    color: #1c2438;
-    text-align: right
-}
-
 .msg span {
     font-size: 0.7rem;
     color: #80848f;
     margin-left: 20rpx;
 }
 
-.msg2 span {
-    font-size: 0.7rem;
-    color: #80848f;
-    margin-right: 20rpx;
-}
 
 .arrow-left {
     display: flex;
     flex-direction: row;
 }
+
 
 .arrow-left .left {
     width: 0;
@@ -133,9 +103,55 @@ page {
     color: #495060;
     border-radius: 0 10rpx 10rpx 10rpx;
     box-shadow: 0 2px 2px #bbbec4, 0 0 2px #bbbec4;
+    word-break: break-all;
 }
 
-.arrow-left .left2 {
+.content-all2 {
+    width: 96%;
+    margin: 20rpx auto;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.content-all2 .msg2 {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    width: 80%;
+}
+
+.content-all2 .avatar image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+
+.msg2 text {
+    font-weight: bolder;
+    margin-right: 20rpx;
+    font-size: 0.8rem;
+    color: #1c2438;
+    text-align: right
+}
+
+
+
+.msg2 span {
+    font-size: 0.7rem;
+    color: #80848f;
+    margin-right: 20rpx;
+    text-align: right
+}
+
+
+.arrow-left2 {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.arrow-left2 .left2 {
     width: 0;
     height: 0;
     border-top: 20rpx solid transparent;
@@ -144,8 +160,7 @@ page {
     margin-top: 10rpx;
 }
 
-.msg2 .content2 {
-    width: 80%;
+.arrow-left2 .content2 {
     padding: 20rpx;
     font-size: 0.8rem;
     text-align: left;
@@ -153,6 +168,7 @@ page {
     color: #495060;
     border-radius: 10rpx 0 10rpx 10rpx;
     box-shadow: 0 2px 2px #bbbec4, 0 0 2px #bbbec4;
+    word-break: break-all;
 }
 
 .room {
@@ -165,6 +181,7 @@ page {
     background: #fff;
     border-radius: 26rpx;
     padding-right: 10rpx;
+    z-index: 1;
 }
 
 .room .avatar-room image {

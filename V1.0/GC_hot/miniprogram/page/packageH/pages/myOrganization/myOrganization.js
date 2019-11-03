@@ -85,6 +85,10 @@ Page({
   formSubmit: function (e) {
     let _this = this
     if (!e.detail.value.msg) {
+      $Message({
+        content: '不能为空',
+        type: 'warning'
+      });
       return
     }
     // sendSocketMessage

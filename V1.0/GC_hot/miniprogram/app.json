@@ -53,7 +53,14 @@
       }
     ]
   },
-  "subpackages": [{
+  "subpackages": [
+    {
+      "root": "page/packageC/",
+      "pages": [
+        "pages/NewsDetail/NewsDetail"
+      ]
+    },
+    {
       "root": "page/packageB/",
       "pages": [
         "pages/volunteer/volunteer",

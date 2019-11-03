@@ -1,0 +1,24 @@
+<view class="titlecontainer">
+  <text class="titletext">第二届进博会将至 航拍璀璨夜上海</text>
+</view>
+<view class="tipcontainer">
+  <view class="tiptextcontainer">
+    <text class="tiptext">来源:央视网</text>
+  </view>
+  <view>
+    <text class="tiptext">2019年11月02日</text>
+  </view>
+</view>
+<scroll-view scroll-y="true" class="scoll-h" scroll-with-animation="true">
+  <view class="picturecontainer">
+    <image src="https://p4.img.cctvpic.com/photoworkspace/contentimg/2019/11/02/2019110210072052303.png" mode="aspectFill" style="width:700rpx;height:300rpx;" />
+  </view>
+  <view class="detailedcontainer">
+    <text>
+                        央视网消息：第二届国际进口博览会还有三天就将在上海开幕，为了迎接此次进博会，上海市提升了夜间景观照明。昨晚（1日），中央广播电视总台的航拍直升机对杨浦大桥、陆家嘴、外滩万国建筑博览群、南浦大桥、卢浦大桥等地标性景观进行了航拍报道，接下来我们就通过航拍的视角一起从空中俯瞰魅力夜上海。
+                    </text>
+  </view>
+</scroll-view>
+<button class="btnshare" open-type='share'>
+  <i-icon type="share_fill" /> 分享
+</button>

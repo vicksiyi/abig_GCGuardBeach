@@ -1,23 +1,100 @@
 <view>
-    <i-tabs current="{{ current }}" color="#2b85e4" bindchange="handleChange">
-        <i-tab key="0" title="推荐"></i-tab>
-        <i-tab key="1" title="视频"></i-tab>
-        <i-tab key="2" title="热点"></i-tab>
-        <i-tab key="3" title="同城"></i-tab>
-    </i-tabs>
-    <view>
-        <view hidden="{{current!=0}}">
-            <i-tag wx:for="{{push}}" wx:key="{{index}}" bindchange="push_onChange" checkable="{{true}}" name="{{index}}" color="{{item.color}}" checked="{{item.checked}}" type="border" style="margin-right:5px;">
-                {{item.name}}
-            </i-tag>
-        </view>
-        <view hidden="{{current!=1}}">fyh</view>
-        <view hidden="{{current!=2}}">
-            <i-tag wx:for="{{hot}}" wx:key="{{index}}" bindchange="hot_onChange" checkable="{{true}}" name="{{index}}" color="{{item.color}}" checked="{{item.checked}}" type="border" style="margin-right:5px;">
-                {{item.name}}
-            </i-tag>
-        </view>
-        <view hidden="{{current!=3}}">32</view>
+  <i-tabs current="{{ current }}" color="#2b85e4" bindchange="handleChange">
+    <i-tab key="0" title="推荐"></i-tab>
+    <i-tab key="1" title="视频"></i-tab>
+    <i-tab key="2" title="热点"></i-tab>
+    <i-tab key="3" title="搞笑"></i-tab>
+  </i-tabs>
+  <view>
+    <view hidden="{{current!=0}}">
+      <view class="tagcontainer">
+        <block wx:for="{{['社会','财经','美食','科普','艺术']}}" wx:key="item">
+          <view class="tagtextcontainer {{currentTabsIndex == index ? '_tagtextcontainer' : ''}}" bindtap="onTabsItemTap" data-index="{{index}}">
+            {{item}}
+          </view>
+        </block>
+      </view>
+      <view style="height:{{windowHeight}}px;">
+        <scroll-view scroll-y="true" class="scoll-h" hidden="{{currentTabsIndex != 0}}">
+          <view class="news_whole" wx:for="{{hot}}" data-item="item" wx:key="id" bindtap="godetail">
+            <view class="news_title">
+              <text>{{item.title}}</text>
+            </view>
+            <view class="news_source">
+              <text>{{item.source}}</text>
+            </view>
+            <view class="news_time">
+              <text>{{item.time}}</text>
+            </view>
+            <view class="news_image">
+              <image style="width:250rpx;height:250rpx" src="{{item.photo}}" mode="aspectFill"></image>
+            </view>
+          </view>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="scoll-h" hidden="{{currentTabsIndex != 1}}">
+          财经新闻
+        </scroll-view>
+        <scroll-view scroll-y="true" class="scoll-h" hidden="{{currentTabsIndex != 2}}">
+          美食新闻
+        </scroll-view>
+        <scroll-view scroll-y="true" class="scoll-h" hidden="{{currentTabsIndex != 3}}">
+          科普新闻
+        </scroll-view>
+        <scroll-view scroll-y="true" class="scoll-h" hidden="{{currentTabsIndex != 4}}">
+          艺术新闻
+        </scroll-view>
+      </view>
     </view>
+    <view hidden="{{current!=1}}">
+      <view class="video_whole" wx:for="{{video}}" data-item="item" wx:key="id">
+        <view class="video">
+          <video src="{{item.src}}" bindfullscreenchange="screenChange" controls show-center-play-btn='{{playBtn}}' show-fullscreen-btn="{{fullscreen}}" show-progress='{{show_prog}}' direction="{{dir}}" style="width:100%;height:300rpx">
+          </video>
+        </view>
+        <view>
+          <view class="video_title">
+            <text>{{item.title}}</text>
+          </view>
+          <view class="video_source">
+            <text>{{item.source}}</text>
+          </view>
+          <view class="video_time">
+            <text>{{item.time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{current!=2}}">
+      <view class="news_whole" wx:for="{{hot}}" data-item="item" wx:key="id" bindtap="godetail">
+        <view class="news_title">
+          <text>{{item.title}}</text>
+        </view>
+        <view class="news_source">
+          <text>{{item.source}}</text>
+        </view>
+        <view class="news_time">
+          <text>{{item.time}}</text>
+        </view>
+        <view class="news_image">
+          <image style="width:250rpx;height:250rpx" src="{{item.photo}}" mode="aspectFill"></image>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{current!=3}}">
+      <view class="news_whole" wx:for="{{hot}}" data-item="item" wx:key="id">
+        <view class="news_title">
+          <text>{{item.title}}</text>
+        </view>
+        <view class="news_source">
+          <text>{{item.source}}</text>
+        </view>
+        <view class="news_time">
+          <text>{{item.time}}</text>
+        </view>
+        <view class="news_image">
+          <image style="width:250rpx;height:250rpx" src="{{item.photo}}" mode="aspectFill"></image>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
-<view class="tagcontainer"></view>
