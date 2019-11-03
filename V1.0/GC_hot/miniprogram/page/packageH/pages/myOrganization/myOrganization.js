@@ -270,6 +270,12 @@ Page({
     })
     ws.onMessage(onMessage => {
       var res = JSON.parse(onMessage.data)
+      let _this = this
+      let dataTemp = _this.data.msgData;
+      dataTemp.push(res)
+      _this.setData({
+        msgData: dataTemp
+      })
       console.log(res, "接收到了消息")
     })
   }

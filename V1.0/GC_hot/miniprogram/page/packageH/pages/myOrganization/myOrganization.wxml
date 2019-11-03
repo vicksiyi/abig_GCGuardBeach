@@ -1,6 +1,44 @@
 <!-- 消息体 -->
 <view class="content" style="height:{{height - 50}}px">
-
+    <view class="content-list">
+        <!-- 消息 -->
+        <block wx:for="{{msgData}}">
+            <view wx:if="{{name != item.name}}" class="content-all">
+                <!-- 头像 -->
+                <view class="avatar">
+                    <image src="{{item.avatar}}"></image>
+                </view>
+                <view class="msg">
+                    <!-- 昵称 -->
+                    <text>{{item.name}}</text>
+                    <!-- 时间 -->
+                    <span>{{item.time}}</span>
+                    <!-- 正文 -->
+                    <view class="arrow-left">
+                        <view class="left"></view>
+                        <view class="content">{{item.str}}</view>
+                    </view>
+                </view>
+            </view>
+            <view wx:else class="content-all2">
+                <view class="msg2">
+                    <!-- 昵称 -->
+                    <text>{{item.name}}</text>
+                    <!-- 时间 -->
+                    <span>{{item.time}}</span>
+                    <!-- 正文 -->
+                    <view class="arrow-left">
+                        <view class="content2">{{item.str}}</view>
+                        <view class="left2"></view>
+                    </view>
+                </view>
+                <!-- 头像 -->
+                <view class="avatar">
+                    <image src="{{item.avatar}}"></image>
+                </view>
+            </view>
+        </block>
+    </view>
 </view>
 <!-- 发送 -->
 <form bindsubmit="formSubmit">
