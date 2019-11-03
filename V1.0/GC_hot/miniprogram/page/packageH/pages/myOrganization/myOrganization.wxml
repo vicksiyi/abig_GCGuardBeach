@@ -1,6 +1,21 @@
+<!-- 加入房间 -->
+<block wx:for="{{room}}">
+    <view class="room class-room">
+        <!-- 头像 -->
+        <view class="avatar-room">
+            <image src="{{item.avatar}}"></image>
+        </view>
+        <view>
+            <!-- 昵称 -->
+            <view class="name-room">{{item.name}}</view>
+            <!-- 时间 -->
+            <view class="time-room">{{item.str}}</view>
+        </view>
+    </view>
+</block>
 <!-- 消息体 -->
 <view class="content" style="height:{{height - 50}}px">
-    <view class="content-list">
+    <scroll-view scroll-y='true' enable-back-to-top='true' style="height:{{height - 50}}px" scroll-top='{{scrollTop}}' scroll-with-animation="true">
         <!-- 消息 -->
         <block wx:for="{{msgData}}">
             <view wx:if="{{name != item.name}}" class="content-all">
@@ -38,7 +53,7 @@
                 </view>
             </view>
         </block>
-    </view>
+    </scroll-view>
 </view>
 <!-- 发送 -->
 <form bindsubmit="formSubmit">

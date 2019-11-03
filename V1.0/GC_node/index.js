@@ -101,7 +101,8 @@ var server = ws.createServer(function (conn) {
             name: conn.name,
             avatar: conn.avatar,
             time: conn.time,
-            str: `${conn.name}离开了房间`
+            type: 0,
+            str: '离开了房间'
         }))
     })
 }).listen(5002, function () {

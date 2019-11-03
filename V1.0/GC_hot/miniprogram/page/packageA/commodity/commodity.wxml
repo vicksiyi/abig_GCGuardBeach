@@ -11,7 +11,7 @@
     </view>
     <!-- 右侧 -->
     <view class='right' style="height:{{windowHeight}}px;">
-      <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" class="scoll-h" scroll-with-animation="true">
+      <scroll-view  scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" class="scoll-h" scroll-with-animation="true">
         <view class="goodcontainer" wx:for="{{category}}" wx:for-item="categoryName" wx:key="id">
           <view style="width:300rpx;margin-left:120rpx;">
             <i-divider content="{{categoryName.name}}" color="#bbbec4" lineColor="#bbbec4" size="20px" style="font-weight:bold;"></i-divider>

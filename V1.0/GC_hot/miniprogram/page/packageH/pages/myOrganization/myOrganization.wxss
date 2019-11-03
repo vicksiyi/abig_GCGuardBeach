@@ -128,7 +128,7 @@ page {
     width: 80%;
     padding: 20rpx;
     font-size: 0.8rem;
-    text-align: center;
+    text-align: left;
     background: #FFF;
     color: #495060;
     border-radius: 0 10rpx 10rpx 10rpx;
@@ -148,9 +148,72 @@ page {
     width: 80%;
     padding: 20rpx;
     font-size: 0.8rem;
-    text-align: center;
+    text-align: left;
     background: #19be6b;
     color: #495060;
     border-radius: 10rpx 0 10rpx 10rpx;
     box-shadow: 0 2px 2px #bbbec4, 0 0 2px #bbbec4;
+}
+
+.room {
+    position: absolute;
+    height: 80rpx;
+    right: 20rpx;
+    bottom: 200rpx;
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+    border-radius: 26rpx;
+    padding-right: 10rpx;
+}
+
+.room .avatar-room image {
+    border-radius: 50%;
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx;
+}
+
+.room .name-room {
+    font-size: 0.7rem;
+    font-weight: bolder;
+    color: #495060;
+    padding-top: 10rpx;
+}
+
+.room .time-room {
+    font-size: 0.6rem;
+    color: #80848f;
+}
+
+.class-room {
+    animation: myshow 3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+@keyframes myshow {
+    0% {
+        transform: scale(0);
+        right: -400rpx;
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(1);
+        right: 20rpx;
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(1);
+        right: 20rpx;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+        bottom: 300rpx;
+    }
 }

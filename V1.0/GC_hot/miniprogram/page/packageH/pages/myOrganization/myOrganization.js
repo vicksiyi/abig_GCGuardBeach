@@ -22,7 +22,11 @@ Page({
     name: '',
     avatar: '',
     msgData: [],
-    height: 0
+    height: 0,
+    classRoom: {},
+    showClass: false,
+    room: [],
+    scrollTop: 0
   },
   onLoad: function () {
     let _this = this
@@ -272,10 +276,22 @@ Page({
       var res = JSON.parse(onMessage.data)
       let _this = this
       let dataTemp = _this.data.msgData;
-      dataTemp.push(res)
-      _this.setData({
-        msgData: dataTemp
-      })
+      let roomTemp = _this.data.room;
+      if (res.type == 0) {
+        roomTemp.push(res)
+        _this.setData({
+          room: roomTemp
+        })
+      } else {
+        if (dataTemp.length > 30) {
+          dataTemp.shift()
+        }
+        dataTemp.push(res)
+        _this.setData({
+          msgData: dataTemp,
+          scrollTop: dataTemp.length * 1000
+        })
+      }
       console.log(res, "接收到了消息")
     })
   }
