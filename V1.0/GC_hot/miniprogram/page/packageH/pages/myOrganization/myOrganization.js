@@ -60,8 +60,6 @@ Page({
           complete() {
             // 开启连接
             _this.connectStart(nameTemp, avatarTemp)
-            // deal
-            _this.deal()
           }
         })
       }
@@ -143,9 +141,11 @@ Page({
     //连接失败
     wx.onSocketError((err) => {
       console.log('websocket连接失败', err);
-      twice = 0
-      _this.connectStart()
+      // twice = 0
+      _this.connectStart(nameTemp, avatarTemp)
     })
+    // deal
+    _this.deal()
   },
   // 进入聊天
   resMes: function (nameTemp, avatarTemp) {
@@ -190,7 +190,10 @@ Page({
       return;
     }
     var xtData = {
-      type: 1
+      type: 1,
+      str: '心跳检测',
+      name: _this.data.name,
+      avatar: _this.data.avatar
     }
     // console.log(JSON.stringify({ xtData }))
     _this.sendSocketMessage({
@@ -205,11 +208,14 @@ Page({
         }
       },
       fail: function (res) {
-        console.log('socket心跳失败');
+        $Message({
+          content: '重新连接中ing...',
+          type: 'warning'
+        });
         if (heartBeatFailCount > 2) {
           // 重连
           console.log('socket心跳失败')
-          _this.connectStart();
+          _this.connectStart(_this.data.name, _this.data.avatar);
         }
         if (heart) {
           heartBeatTimeOut = setTimeout(() => {
@@ -251,6 +257,10 @@ Page({
     })
     ws.onClose(onClose => {
       console.log('监听 WebSocket 连接关闭事件。', onClose)
+      $Message({
+        content: '连接关闭',
+        type: 'error'
+      });
       // socketOpen = false;
       // that.connectStart()
     })
