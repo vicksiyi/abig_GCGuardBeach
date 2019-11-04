@@ -298,5 +298,8 @@ Page({
       }
       console.log(res, "接收到了消息")
     })
+  },
+  onUnload:function(){
+    wx.closeSocket()
   }
 })
