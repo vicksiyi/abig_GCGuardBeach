@@ -300,6 +300,7 @@ Page({
     })
   },
   onUnload:function(){
+    clearTimeout(heartBeatTimeOut)
     wx.closeSocket()
   }
 })
