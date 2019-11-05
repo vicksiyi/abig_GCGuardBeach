@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const request = require('request');
-const fs = require('fs')
 const Err = require('../..//utils/error');
 const New = require('../../models/New');
 
@@ -14,7 +13,7 @@ router.get('/ceshi', passport.authenticate('jwt', { session: false }), (req, res
 })
 
 
-// $routes /mini/news/show
+// $routes /mini/news/showNews
 // @desc 获取新闻列表
 // @access private
 router.get('/showNews', passport.authenticate('jwt', { session: false }), (req, res) => {

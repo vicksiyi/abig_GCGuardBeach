@@ -265,10 +265,11 @@ Page({
     })
     ws.onClose(onClose => {
       console.log('监听 WebSocket 连接关闭事件。', onClose)
-      $Message({
-        content: '连接关闭',
-        type: 'error'
-      });
+      // 防止退出找不到组件
+      // $Message({
+      //   content: '连接关闭',
+      //   type: 'error'
+      // });
       // socketOpen = false;
       // that.connectStart()
     })

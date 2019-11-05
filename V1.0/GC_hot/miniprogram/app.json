@@ -1,9 +1,9 @@
 {
   "pages": [
+    "page/packageA/news/news",
     "page/packageA/index/index",
     "page/packageA/mine/mine",
     "page/packageA/login/login",
-    "page/packageA/news/news",
     "page/packageA/commodity/commodity",
     "page/packageA/interactive/interactive"
   ],

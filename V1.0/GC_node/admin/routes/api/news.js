@@ -167,7 +167,7 @@ router.post('/addNews', passport.authenticate('jwt', { session: false }), (req, 
             }).catch(err => {
                 Err.ErrorFuc(err, req.originalUrl)
                 res.json(err);
-                })
+            })
         } catch (err) {
             Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
@@ -175,25 +175,6 @@ router.post('/addNews', passport.authenticate('jwt', { session: false }), (req, 
     })();
 })
 
-// $routes /api/news/addWeChatNews
-// @desc 发布公众号文章到小程序端(管理员端)
-// @access private
-router.post('/addWeChatNews', passport.authenticate('jwt', { session: false }), (req, res) => {
-    (async () => {
-
-        try {
-            const request_data = await superagent.get(req.body.url).set(
-                "User-Agent", randomUA()
-            );
-            const $ = cheerio.load(request_data.text)
-            entities = new Entities(); // 解码
-            res.json(entities.decode($('.rich_media_area_primary_inner').html().replace('\n', '')))
-        } catch (err) {
-            Err.ErrorFuc(err, req.originalUrl)
-            res.json(err);
-        }
-    })();
-})
 
 // $routes /api/news/addVideos
 // @desc 发布视频到小程序端(管理员端)
