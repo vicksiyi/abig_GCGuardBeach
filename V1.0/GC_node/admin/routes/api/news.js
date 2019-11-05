@@ -14,10 +14,13 @@ const Video = require('../../models/Video');
  * @param {*} html 所需要清洗的html
  * @return 放回已清洗的html 
  */
-const clean_html = (html) => {
+const clean_html = async (html) => {
     try {
         const $ = cheerio.load(html)
         $('a').remove()
+        let url = await get_video_sohu($('iframe').attr("src"))
+        $('p').eq(0).append(`<video src="${url}"></video>`)
+        $('iframe').remove()
         return $.html()
     } catch (err) {
         throw {
@@ -25,6 +28,35 @@ const clean_html = (html) => {
         }
     }
 }
+
+/**
+ * 获取搜狐视频里面的视频链接
+ * @param {*} url 链接
+ * @return 搜狐视频链接
+ */
+const get_video_sohu = async (url) => {
+    let vid = url.split("?")[1].split("bid=")[1].split("&")[0]
+    let url_sohu = `https://my.tv.sohu.com/play/videonew.do?vid=${vid}`
+    let get_url = 'https://data.vod.itc.cn/ip'
+    let mp4_url = ''
+    try {
+        const request_data = await superagent.get(url_sohu).set(
+            "User-Agent", randomUA()
+        );
+        let news = JSON.parse(request_data.text).data.su[0]
+
+        const request_url = await superagent.get(`${get_url}?new=${news}`).set(
+            "User-Agent", randomUA()
+        );
+        mp4_url = JSON.parse(request_url.text).servers[0].url
+    } catch (err) {
+        throw {
+            msg: 'error 404'
+        }
+    }
+    return mp4_url
+}
+
 /**
  * 获取视频数据
  * @param {*} $ 获取节点
@@ -96,10 +128,10 @@ router.get('/video', (req, res) => {
 // $routes /api/news/addNews
 // @desc 发布新闻到小程序端(管理员端)
 // @access private
-router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/addNews', passport.authenticate('jwt', { session: false }), (req, res) => {
     (async () => {
         try {
-            const request_data = await superagent.get(req.body["url"]).set(
+            const request_data = await superagent.get(req.body.url).set(
                 "User-Agent", randomUA()
             );
             const $ = cheerio.load(request_data.text)
@@ -107,7 +139,7 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
             let time = $('div.article-info span.time').text().replace(/\s+/g, ""); // 时间
             let from = $('div.article-info span a').text().replace(/\s+/g, ""); // 来源
             let content_temp = $('article.article').html(); // 正文
-            let content = clean_html(content_temp); // 清洗content
+            let content = await clean_html(content_temp); // 清洗content
             entities = new Entities(); // 解码
 
             New.findOne({ new_title: title }).then(NewTitle => {
@@ -116,11 +148,13 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
                         new_title: title,
                         new_time: time,
                         new_from: from,
-                        new_type: req.body["type"],
-                        new_image: req.body["image"],
+                        new_type: req.body.type,
+                        new_image: req.body.image,
                         new_content: entities.decode(content)
                     }).save().then(New => {
-                        res.json(New)
+                        res.json({
+                            msg: 'Success'
+                        })
                     }).catch(err => {
                         Err.ErrorFuc(err, req.originalUrl)
                         res.json(err);
@@ -133,7 +167,7 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
             }).catch(err => {
                 Err.ErrorFuc(err, req.originalUrl)
                 res.json(err);
-            })
+                })
         } catch (err) {
             Err.ErrorFuc(err, req.originalUrl)
             res.json(err);
@@ -141,6 +175,25 @@ router.get('/addNews', passport.authenticate('jwt', { session: false }), (req, r
     })();
 })
 
+// $routes /api/news/addWeChatNews
+// @desc 发布公众号文章到小程序端(管理员端)
+// @access private
+router.post('/addWeChatNews', passport.authenticate('jwt', { session: false }), (req, res) => {
+    (async () => {
+
+        try {
+            const request_data = await superagent.get(req.body.url).set(
+                "User-Agent", randomUA()
+            );
+            const $ = cheerio.load(request_data.text)
+            entities = new Entities(); // 解码
+            res.json(entities.decode($('.rich_media_area_primary_inner').html().replace('\n', '')))
+        } catch (err) {
+            Err.ErrorFuc(err, req.originalUrl)
+            res.json(err);
+        }
+    })();
+})
 
 // $routes /api/news/addVideos
 // @desc 发布视频到小程序端(管理员端)
