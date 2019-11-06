@@ -26,15 +26,14 @@ Page({
         _this.setData({
           dataNews: dataTemp
         })
-        let video_url = dataTemp.new_content.split("video src=")[1].split("\">")[0].replace(/[\"]/g, "")
-        if (!video_url) {
-          console.log(video_url, '123')
+        if (dataTemp.new_iframe == 'http:undefined' || dataTemp.new_iframe == undefined) {
           var article = dataTemp.new_content
           WxParse.wxParse('article', 'html', article, _this, 5);
           _this.setData({
             spinShow: false
           })
         } else {
+          let video_url = dataTemp.new_content.split("video src=")[1].split("\">")[0].replace(/[\"]/g, "")
           _this.testVideo(video_url, dataTemp.new_content, dataTemp._id, dataTemp.new_iframe)
         }
       }
