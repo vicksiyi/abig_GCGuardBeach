@@ -27,6 +27,10 @@ const NewSchema = new Schema({
         type: String,
         required: true
     },
+    new_from: {        // 来自
+        type: String,
+        required: true
+    },
     time: {          // 加入时间
         type: Date,
         default: Date.now

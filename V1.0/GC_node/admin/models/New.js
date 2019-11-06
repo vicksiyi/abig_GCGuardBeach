@@ -27,6 +27,14 @@ const NewSchema = new Schema({
         type: String,
         required: true
     },
+    new_from_url: {        // 来自
+        type: String,
+        required: true
+    },
+    new_iframe: {        // 视频来自
+        type: String,
+        required: true
+    },
     time: {          // 加入时间
         type: Date,
         default: Date.now

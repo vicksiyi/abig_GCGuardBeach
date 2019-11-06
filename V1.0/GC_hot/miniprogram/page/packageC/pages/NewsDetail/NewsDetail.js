@@ -1,4 +1,6 @@
 const WxParse = require('../../../../wxParse/wxParse.js');
+const app = getApp()
+const request = require('../../../../utils/requests')
 Page({
 
   /**
@@ -22,12 +24,57 @@ Page({
       success(res) {
         let dataTemp = JSON.parse(res.data)
         _this.setData({
-          dataNews: dataTemp,
-          spinShow: false
+          dataNews: dataTemp
         })
-        var article = dataTemp.new_content
-
-        WxParse.wxParse('article', 'html', article, _this, 5);
+        let video_url = dataTemp.new_content.split("video src=")[1].split("\">")[0].replace(/[\"]/g, "")
+        if (!video_url) {
+          console.log(video_url, '123')
+          var article = dataTemp.new_content
+          WxParse.wxParse('article', 'html', article, _this, 5);
+          _this.setData({
+            spinShow: false
+          })
+        } else {
+          _this.testVideo(video_url, dataTemp.new_content, dataTemp._id, dataTemp.new_iframe)
+        }
+      }
+    })
+  },
+  testVideo: function (url, content, id, from_url) {
+    let _this = this
+    wx.request({
+      url: url,
+      success(res) {
+        if (res.statusCode == 200) {
+          WxParse.wxParse('article', 'html', content, _this, 5);
+          _this.setData({
+            spinShow: false
+          })
+        } else {
+          wx.getStorage({
+            key: 'Token',
+            success(res) {
+              (async () => {
+                let Item = {
+                  url: `http://${app.ip}:5001/mini/news/updateVideo`,
+                  method: "POST",
+                  data: {
+                    _id: id,
+                    url: from_url
+                  },
+                  header: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': res.data
+                  }
+                };
+                let result = await request.requestUtils(Item)
+                _this.setData({
+                  dataNews: result
+                })
+              })()
+            }
+          })
+        }
       }
     })
   }

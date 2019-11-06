@@ -2,7 +2,7 @@ const app = getApp()
 const request = require('../../../utils/requests')
 Page({
   data: {
-    current: 1,
+    current: 0,
     currentTabsIndex: 0,
     windowHeight: '',
     playBtn: false,
@@ -96,9 +96,6 @@ Page({
           windowHeight: res.windowHeight
         })
       }
-    })
-    wx.navigateTo({
-      url: '../../packageC/pages/VideosDetail/VideosDetail'
     })
     wx.getStorage({
       key: 'Token',

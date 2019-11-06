@@ -152,6 +152,8 @@ router.post('/addNews', passport.authenticate('jwt', { session: false }), (req, 
                         new_from: from,
                         new_type: req.body.type,
                         new_image: req.body.image,
+                        new_from_url: req.body.url,
+                        new_iframe: `http:${$('iframe').attr("src")}`,
                         new_content: entities.decode(content)
                     }).save().then(New => {
                         res.json({
