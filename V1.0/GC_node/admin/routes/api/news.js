@@ -18,9 +18,11 @@ const clean_html = async (html) => {
     try {
         const $ = cheerio.load(html)
         $('a').remove()
-        let url = await get_video_sohu($('iframe').attr("src"))
-        $('p').eq(0).append(`<video src="${url}"></video>`)
-        $('iframe').remove()
+        if ($('iframe').attr("src")) {
+            let url = await get_video_sohu($('iframe').attr("src"))
+            $('body').eq(0).append(`<video src="${url}"></video>`)
+            $('iframe').remove()
+        }
         return $.html()
     } catch (err) {
         throw {

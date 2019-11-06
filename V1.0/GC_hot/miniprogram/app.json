@@ -57,7 +57,8 @@
     {
       "root": "page/packageC/",
       "pages": [
-        "pages/NewsDetail/NewsDetail"
+        "pages/NewsDetail/NewsDetail",
+        "pages/VideosDetail/VideosDetail"
       ]
     },
     {

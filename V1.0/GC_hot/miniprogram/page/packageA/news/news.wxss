@@ -43,7 +43,7 @@ page {
 
 .video_whole {
   width: 100%;
-  height: 410rpx;
+  height: 400rpx;
 }
 
 .video {
@@ -129,4 +129,50 @@ page {
   font-size: 0.7rem;
   color: #bbbec4;
   width: 50%;
+}
+
+.bg-img {
+  width: 96%;
+  height: 400rpx;
+  margin: 30rpx auto;
+  background: #fff;
+  border-radius: 10rpx;
+}
+
+.bg-img image {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 10rpx;
+}
+
+.bg-content {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  height: 100rpx;
+  margin: -170rpx auto;
+  padding: 30rpx;
+  color: #fff;
+}
+
+.bg-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.bg-content text {
+  font-weight: bolder;
+  font-size: 1.2rem;
+  margin-top: -20rpx;
+}
+
+.video-time {
+  width: 50%;
+  font-size: 0.7rem;
+}
+
+.video-author {
+  width: 40%;
+  font-size: 0.9rem;
 }

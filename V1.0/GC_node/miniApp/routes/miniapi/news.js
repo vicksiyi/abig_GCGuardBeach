@@ -4,6 +4,7 @@ const passport = require('passport');
 const request = require('request');
 const Err = require('../..//utils/error');
 const New = require('../../models/New');
+const Video = require('../../models/Video');
 
 // $routes /api/find/ceshi
 // @desc 返回请求的json数据
@@ -33,6 +34,7 @@ router.get('/showNews', passport.authenticate('jwt', { session: false }), (req, 
 // @desc 获取视频列表
 // @access private
 router.get('/showVideos', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log("you")
     Video.find().skip(req.query.page * 10).limit(10).then(Video => {
         res.json(Video)
     }).catch(err => {
@@ -41,7 +43,7 @@ router.get('/showVideos', passport.authenticate('jwt', { session: false }), (req
     })
 })
 
-// $routes /mini/news/showVideos
+// $routes /mini/news/video
 // @desc 解析视频
 // @access private
 router.get('/video', (req, res) => {

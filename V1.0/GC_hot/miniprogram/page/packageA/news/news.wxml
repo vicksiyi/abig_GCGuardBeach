@@ -14,7 +14,7 @@
           </view>
         </block>
       </view>
-      <scroll-view style="height:{{windowHeight -75}}px;" scroll-y="true" class="scoll-h" >
+      <scroll-view style="height:{{windowHeight -75}}px;" scroll-y="true" class="scoll-h">
         <i-load-more wx:if="{{spinLoad}}" loading="{{ spinLoad }}" />
         <block wx:for="{{hot}}" wx:key="id">
           <view class="news_whole" data-item="item" bindtap="godetail" data-Data='{{item}}'>
@@ -40,22 +40,22 @@
       </scroll-view>
     </view>
     <view wx:else>
-      <view class="video_whole" wx:for="{{video}}" data-item="item" wx:key="id">
-        <view class="video">
-          <video src="{{item.src}}" bindfullscreenchange="screenChange" controls show-center-play-btn='{{playBtn}}' show-fullscreen-btn="{{fullscreen}}" show-progress='{{show_prog}}' direction="{{dir}}" style="width:100%;height:300rpx"></video>
+      <i-load-more wx:if="{{spinLoad}}" loading="{{ spinLoad }}" />
+      <block wx:for="{{videos}}" data-item="item" wx:key="id">
+        <view class="video_whole" bindtap="showVideo" data-Video="{{item.video_url}}">
+          <view class="bg-img">
+            <image src="{{item.video_image}}"></image>
+          </view>
+          <view class="bg-content">
+            <text>{{item.video_title}}</text>
+            <view class="bg-time">
+              <view class="video-author">{{item.video_author}}</view>
+              <view class="video-time">{{item.time}}</view>
+            </view>
+          </view>
         </view>
-        <view>
-          <view class="video_title">
-            <text>{{item.title}}</text>
-          </view>
-          <view class="video_source">
-            <text>{{item.source}}</text>
-          </view>
-          <view class="video_time">
-            <text>{{item.time}}</text>
-          </view>
-        </view>
-      </view>
+        <i-load-more wx:if="{{!videos.length && !spinLoad}}" tip="暂无数据" loading="{{false}}" />
+      </block>
     </view>
   </view>
 </view>

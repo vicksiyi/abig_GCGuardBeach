@@ -2,7 +2,7 @@ const app = getApp()
 const request = require('../../../utils/requests')
 Page({
   data: {
-    current: 0,
+    current: 1,
     currentTabsIndex: 0,
     windowHeight: '',
     playBtn: false,
@@ -36,22 +36,7 @@ Page({
         color: 'yellow'
       }
     ],
-    video: [
-      {
-        id: 1,
-        title: '7岁女孩身手矫健 把150斤父亲抱摔在沙滩上',
-        src: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
-        time: '2019/10/31 21：58',
-        source: '快手'
-      },
-      {
-        id: 2,
-        title: '7岁女孩身手矫健 把150斤父亲抱摔在沙滩上',
-        src: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
-        time: '2019/10/31 21：58',
-        source: '快手'
-      }
-    ],
+    videos: [],
     hot: [],
     spinLoad: false,
     keys: ['社会', '视频', '热点', '搞笑'],
@@ -63,8 +48,11 @@ Page({
       current: detail.key,
       currentTabsIndex: 0
     });
-    if (detail != 1) {
+    console.log(detail)
+    if (detail.key != 1) {
       _this.getNews(_this.data.keys[detail.key], 0)
+    } else {
+      _this.getVideos(0)
     }
   },
   screenChange(e) {
@@ -109,6 +97,9 @@ Page({
         })
       }
     })
+    wx.navigateTo({
+      url: '../../packageC/pages/VideosDetail/VideosDetail'
+    })
     wx.getStorage({
       key: 'Token',
       success(res) {
@@ -139,10 +130,43 @@ Page({
       }
     };
     result = await request.requestUtils(Item)
-    console.log(result)
     _this.setData({
       hot: result,
       spinLoad: false
+    })
+  },
+  getVideos: async function (page) {
+    let _this = this
+    let result = []
+    _this.setData({
+      spinLoad: true,
+      hot: ''
+    })
+    let Item = {
+      url: `http://${app.ip}:5001/mini/news/showVideos`,
+      method: "GET",
+      data: {
+        page: page
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': _this.data.token
+      }
+    };
+    result = await request.requestUtils(Item)
+    _this.setData({
+      videos: result,
+      spinLoad: false
+    })
+  },
+  showVideo: function (e) {
+    // e.currentTarget.dataset.video
+    wx.setStorage({
+      key: "video",
+      data: e.currentTarget.dataset.video
+    })
+    wx.navigateTo({
+      url: '../../packageC/pages/VideosDetail/VideosDetail'
     })
   }
 })
