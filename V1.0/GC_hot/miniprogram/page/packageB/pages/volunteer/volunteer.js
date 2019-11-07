@@ -1,5 +1,6 @@
 const app = getApp();
 const request = require('../../../../utils/requests');
+// const Num = require('../../resources/js/num');
 Page({
   data: {
     value: [],
@@ -74,6 +75,11 @@ Page({
             }
           };
           result = await request.requestUtils(Item)
+          // 获取数量
+          // let num = new Num();
+          // result.map((value)=>{
+          //   num.userNum(id, res.data)
+          // })
           _this.setData({
             value: result,
             spinLoad: false
@@ -84,7 +90,7 @@ Page({
   },
   joinIn: function (e) {
     wx.navigateTo({
-      url: `../volunteerJoin/volunteerJoin?id=${e.currentTarget.dataset.id}` 
+      url: `../volunteerJoin/volunteerJoin?id=${e.currentTarget.dataset.id}`
     })
   }
 })

@@ -48,7 +48,7 @@
           </view>
           <view class="volunteer-num">
             <view class="font-num">
-              0
+              点击可看
               <text>/{{item.msg_person}}</text>
             </view>
           </view>

@@ -3,8 +3,9 @@ const router = express.Router();
 const passport = require('passport');
 const Err = require('../../utils/error')
 const Msg = require('../../models/Msg');
+const MsgUser = require('../../models/MsgUser');
 
-// $routes /api/find/ceshi
+// $routes /mini/msgs/ceshi
 // @desc 返回请求的json数据
 // @access public
 router.get('/ceshi', (req, res) => {
@@ -42,11 +43,10 @@ router.get('/show', passport.authenticate('jwt', { session: false }), (req, res)
     })
 })
 
-// $routes /api/msgs/:id
+// $routes /mini/msgs/showOne/:id
 // @desc 获取单个信息
 // @access private
-
-router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/showOne/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Msg.findOne({ _id: req.params.id }).then(Msg => {
         if (!Msg) {
             return res.status(404).json('Null');
@@ -59,5 +59,71 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 })
 
 
+// $routes /mini/msgs/addUser
+// @desc 加入志愿者
+// @access private
+router.post('/addMsgUser', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    let item = {
+        openId: req.user[0].openId,
+        msgId: req.body.msgId,
+        nickName: req.user[0].nickName,
+        avatarUrl: req.user[0].avatarUrl
+    }
+    MsgUser.findOne({ openId: item.openId, msgId: item.msgId }).then(Msg => {
+        if (!Msg) {
+            new MsgUser(item).save().then(() => {
+                res.json({
+                    msg: "Success"
+                })
+            }).catch((err) => {
+                Err.ErrorFuc(err, req.originalUrl)
+                res.json(err);
+            })
+        } else {
+            res.json({
+                msg: "Existing"
+            })
+        }
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
+
+// $routes /mini/msgs/showMsgUser/:id
+// @desc 获取单个活动已加入人数
+// @access private
+router.get('/showMsgUser/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    MsgUser.find({ msgId: req.params.id }).then(Msg => {
+        res.json({
+            user: Msg
+        });
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
+
+
+// $routes /mini/msgs/userStatus/:id
+// @desc 检测是否已经加入
+// @access private
+router.get('/userStatus/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    MsgUser.findOne({ openId: req.user[0].openId, msgId: req.params.id }).then(Msg => {
+        if (!Msg) {
+            res.json({
+                status: false
+            })
+        } else {
+            res.json({
+                status: true
+            })
+        }
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
 
 module.exports = router;

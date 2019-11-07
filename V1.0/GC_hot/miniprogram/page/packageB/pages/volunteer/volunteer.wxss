@@ -142,6 +142,7 @@ page {
     padding: 10rpx;
     line-height: 30rpx;
     color: #19be6b;
+    font-size: 0.7rem;
 }
 
 .volunteer-pinc {

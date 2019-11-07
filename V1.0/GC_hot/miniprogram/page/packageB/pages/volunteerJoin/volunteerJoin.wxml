@@ -31,20 +31,20 @@
         <map id="map" longitude="{{value.msg_longitude}}" latitude="{{value.msg_latitude}}" scale="10" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location subkey="{{key}}"></map>
     </view>
 </view>
-<view class="person-msg">
+<view class="person-msg" wx:if="{{show}}">
     <view class="title">
         <text>志愿者名片墙</text>
     </view>
     <view>
-        <swiper  autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{num}}" circular="{{circular}}">
+        <swiper autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{person.length >2 ? num : 1 }}" circular="{{circular}}">
             <block wx:for="{{person}}" wx:key="*this">
                 <swiper-item>
                     <view class="swiper-row">
                         <view class="img">
-                            <image src="{{item.avatar}}"></image>
+                            <image src="{{item.avatarUrl}}"></image>
                         </view>
                         <view class="swiper-font">
-                            <text>{{item.name}}</text>
+                            <text>{{item.nickName}}</text>
                             <view class="swiper-time">{{item.time}}</view>
                         </view>
                     </view>
@@ -62,11 +62,13 @@
 <view class="submit">
     <image src="../../resources/images/join.png"></image>
     <view class="font">
-        <text>0</text>
+        <text>{{userNum}}</text>
         /{{value.msg_person}}
     </view>
     <view class="add-cart sub f16">
-        <button class="add-cart-btn" bindtap='buy'>加入活动</button>
+        <button wx:if="{{!addStatus}}" class="add-cart-btn" bindtap='joinIn'>加入活动</button>
+        <button wx:else class="add-cart-btn" bindtap='joinSuccess'>我的活动</button>
     </view>
 </view>
+<i-message id="message" />
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>

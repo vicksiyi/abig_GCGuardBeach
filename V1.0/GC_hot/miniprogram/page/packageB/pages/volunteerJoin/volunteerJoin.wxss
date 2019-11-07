@@ -187,7 +187,7 @@ swiper {
     width: 90%;
     margin: 30rpx auto;
     border-radius: 20rpx;
-    background-image: linear-gradient(to bottom right, #ffffff , #00CCFF);
+    background-image: linear-gradient(to bottom right, #ffffff, #00CCFF);
 }
 
 .person-msg .title {
@@ -225,4 +225,12 @@ swiper {
 
 .swiper-time {
     font-size: 0.6rem;
+    word-break:keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.i-spin{
+    width: 100%;
+    height: 100%;
 }
