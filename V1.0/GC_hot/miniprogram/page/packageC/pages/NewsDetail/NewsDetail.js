@@ -68,7 +68,8 @@ Page({
                 };
                 let result = await request.requestUtils(Item)
                 _this.setData({
-                  dataNews: result
+                  dataNews: result,
+                  spinShow: false
                 })
               })()
             }

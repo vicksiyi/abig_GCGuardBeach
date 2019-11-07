@@ -65,6 +65,7 @@
       "root": "page/packageB/",
       "pages": [
         "pages/volunteer/volunteer",
+        "pages/volunteerJoin/volunteerJoin",
         "pages/knowledge/knowledge",
         "pages/FullView/FullView"
       ]

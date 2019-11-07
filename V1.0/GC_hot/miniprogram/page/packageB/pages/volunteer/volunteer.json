@@ -2,6 +2,7 @@
   "usingComponents": {
     "i-tag": "../../../../dist/tag/index",
     "i-icon": "../../../../dist/icon/index",
-    "i-load-more": "../../../../dist/load-more/index"
+    "i-load-more": "../../../../dist/load-more/index",
+    "i-tag": "../../../../dist/tag/index"
   }
 }

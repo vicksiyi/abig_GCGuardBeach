@@ -14,6 +14,7 @@ const miniNews = require('./routes/miniapi/news');
 const miniFinds = require('./routes/miniapi/finds');
 const miniEmails = require('./routes/miniapi/emails');
 const miniChats = require('./routes/miniapi/chats');
+const miniMsgs = require('./routes/miniapi/msgs');
 
 // DB config
 const db = require('./config/keys').mongoURI;
@@ -41,6 +42,7 @@ app.use('/mini/news', miniNews);
 app.use('/mini/finds', miniFinds);
 app.use('/mini/emails', miniEmails);
 app.use('/mini/chats', miniChats);
+app.use('/mini/msgs', miniMsgs);
 
 app.listen(5001, () => {
     console.log('the mini port running');

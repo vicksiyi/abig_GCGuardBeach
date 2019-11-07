@@ -80,39 +80,70 @@ page {
     font-size: 30rpx;
 }
 
-.volunteercontainer {
-    margin-top: 20rpx;
-    margin-left: 25rpx;
-    width: 700rpx;
-    height: 800rpx;
+.volunteer-container {
+    width: 94%;
+    margin: 30rpx auto;
+    height: 230rpx;
+    border-radius: 10rpx;
     background-color: #fff;
 }
 
-.volunteerpicture {
-    width: 680rpx;
-    margin-left: 10rpx;
-    height: 490rpx;
-    display: flex;
-    justify-content: center;
-}
-
-.volunteertext {
-    margin-left: 30rpx;
-    font-size: 16px;
+.volunteer-title {
+    margin: 20rpx 0 0 20rpx;
+    font-weight: bolder;
+    font-size: 0.8rem;
     color: #1c2438;
-    font-weight: bold;
 }
 
-.volunteerintroduce {
-    margin-left: 30rpx;
-    margin-top: 10rpx;
-    font-size: 13px;
+.volunteer-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.volunteer-img {
+    width: 340rpx;
+    height: 170rpx;
+    margin: 5rpx 0 0 20rpx;
+}
+
+.volunteer-img image {
+    width: 340rpx;
+    height: 170rpx;
+    border-radius: 10rpx;
+}
+
+.volunteer-content-all {
+    margin-left: 15rpx;
+}
+
+.volunteer-time {
+    display: flex;
+    flex-direction: row;
+}
+
+.volunteer-time text {
+    padding: 10rpx;
+    font-size: 0.7rem;
+    color: #80848f;
+    line-height: 48rpx;
+}
+
+.volunteer-time text span {
+    font-size: 0.7rem;
     color: #80848f;
 }
 
-.volunteertips {
-    background-color: #e9eaec;
-    margin-top: 20rpx;
-    width: 700rpx;
-    height: 50rpx;
+.volunteer-time image {
+    width: 25rpx;
+    height: 25rpx;
+}
+
+.font-num {
+    padding: 10rpx;
+    line-height: 30rpx;
+    color: #19be6b;
+}
+
+.volunteer-pinc {
+    margin-left: 20rpx;
 }
