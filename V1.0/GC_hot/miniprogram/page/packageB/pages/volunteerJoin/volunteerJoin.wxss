@@ -4,7 +4,6 @@
     margin: 20rpx auto;
     border-radius: 10rpx;
     background: #fff;
-    box-shadow:rgb(11, 234, 235) 0px 0px 18px inset;
 }
 
 .title-img image {
@@ -35,7 +34,7 @@
     font-size: 1.1rem;
     font-weight: bolder;
     padding-left: 30rpx;
-    color: #1c2438;
+    color: #495060;
 }
 
 /* .border-content{
@@ -151,7 +150,6 @@ page {
 .content-msg {
     width: 90%;
     margin: 30rpx auto;
-    background: #fff;
     border-radius: 20rpx;
 }
 
@@ -168,8 +166,9 @@ page {
 }
 
 .content-msg .title text {
-    font-size: 1rem;
-    color: #1c2438;
+    font-size: 0.9rem;
+    font-weight: bolder;
+    color: #80848f;
     padding: 30rpx;
 }
 
@@ -178,4 +177,52 @@ page {
     font-size: 0.9rem;
     color: #495060;
     padding-block-end: 100rpx;
+}
+
+swiper {
+    height: 140rpx;
+}
+
+.person-msg {
+    width: 90%;
+    margin: 30rpx auto;
+    border-radius: 20rpx;
+    background-image: linear-gradient(to bottom right, #ffffff , #00CCFF);
+}
+
+.person-msg .title {
+    border-bottom: 1rpx solid #e9eaec;
+}
+
+.swiper-row {
+    width: 260rpx;
+    height: 80rpx;
+    margin: 30rpx;
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(to right, #f5f5f5 0%, #ff9900 100%);
+    border-radius: 74rpx 100rpx 30rpx 74rpx;
+}
+
+.person-msg .title text {
+    font-size: 0.9rem;
+    font-weight: bolder;
+    color: #fff;
+    padding: 30rpx;
+}
+
+.img image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+
+.swiper-font {
+    font-size: 0.7rem;
+    padding: 6rpx 0 0 25rpx;
+    color: #fff;
+}
+
+.swiper-time {
+    font-size: 0.6rem;
 }
