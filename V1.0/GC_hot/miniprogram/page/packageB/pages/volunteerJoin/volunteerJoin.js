@@ -28,7 +28,9 @@ Page({
     autoplay: true,
     interval: 2000,
     num: 2,
-    key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
+    key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O',
+    markers: [],
+    circular: true
   },
 
   /**
@@ -57,9 +59,18 @@ Page({
             }
           };
           result = await request.requestUtils(Item)
+          let mks = []
+          mks.push({
+            latitude: result.msg_latitude,
+            longitude: result.msg_longitude,
+            iconPath: "../../resources/images/location.png",
+            width: 50,
+            height: 50
+          })
           _this.setData({
             value: result,
-            spinShow: false
+            spinShow: false,
+            markers: mks
           })
         })()
       }

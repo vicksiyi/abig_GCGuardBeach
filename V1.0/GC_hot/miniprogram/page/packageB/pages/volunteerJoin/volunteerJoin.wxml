@@ -36,7 +36,7 @@
         <text>志愿者名片墙</text>
     </view>
     <view>
-        <swiper  autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{num}}">
+        <swiper  autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{num}}" circular="{{circular}}">
             <block wx:for="{{person}}" wx:key="*this">
                 <swiper-item>
                     <view class="swiper-row">
