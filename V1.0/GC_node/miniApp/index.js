@@ -31,7 +31,7 @@ mongoose.connect(db)
     .catch((err) => {
         console.log(err);
     })
-    
+
 app.use(passport.initialize());
 require('./config/userPassport')(passport);
 
@@ -88,7 +88,7 @@ var server = ws.createServer(function (conn) {
 });
 
 function broadcast(msg) {
-    console.log(msg)
+    console.log(server.connections)
     server.connections.forEach(function (conn) {
         conn.sendText(msg)
     })

@@ -4,5 +4,6 @@
     "i-icon": "../../../../dist/icon/index",
     "i-load-more": "../../../../dist/load-more/index",
     "i-tag": "../../../../dist/tag/index"
-  }
+  },
+  "navigationBarTitleText": "活动"
 }

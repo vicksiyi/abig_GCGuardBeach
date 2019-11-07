@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "i-spin": "../../../../dist/spin/index"
+  },
+  "navigationBarTitleText": "加入活动"
 }

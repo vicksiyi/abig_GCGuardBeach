@@ -82,7 +82,9 @@ Page({
       }
     })
   },
-  joinIn:function(e){
-    console.log(e.currentTarget.dataset.id)
+  joinIn: function (e) {
+    wx.navigateTo({
+      url: `../volunteerJoin/volunteerJoin?id=${e.currentTarget.dataset.id}` 
+    })
   }
 })

@@ -1,0 +1,50 @@
+<view class="title-img">
+    <image src="{{value.msg_image}}"></image>
+</view>
+<view class="title-content">
+    <view class="title-row">
+        <view class="title-free">可加入</view>
+        <view class="title-enjoy">
+            <text>点击生成图</text>
+            <view>
+                <image src="../../resources/images/enjoy.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="content-title">
+        <text>{{value.msg_title}}</text>
+    </view>
+    <view class="content-list">
+        <view>
+            <image src="../../resources/images/time.png"></image>
+        </view>
+        <text>{{value.msg_day}}</text>
+    </view>
+    <view class="content-list">
+        <view>
+            <image src="../../resources/images/address.png"></image>
+        </view>
+        <text>{{value.msg_address}}</text>
+        <span bindtap="navMap">位置></span>
+    </view>
+    <view class="map">
+        <map id="map" longitude="{{value.msg_longitude}}" latitude="{{value.msg_latitude}}" scale="10" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location></map>
+    </view>
+</view>
+<view class="content-msg">
+    <view class="title">
+        <text>活动备注</text>
+    </view>
+    <view class="msg">{{value.msg_content}}</view>
+</view>
+<view class="submit">
+    <image src="../../resources/images/join.png"></image>
+    <view class="font">
+        <text>0</text>
+        /{{value.msg_person}}
+    </view>
+    <view class="add-cart sub f16">
+        <button class="add-cart-btn" bindtap='buy'>加入活动</button>
+    </view>
+</view>
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>

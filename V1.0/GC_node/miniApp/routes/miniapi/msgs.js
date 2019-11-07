@@ -42,4 +42,22 @@ router.get('/show', passport.authenticate('jwt', { session: false }), (req, res)
     })
 })
 
+// $routes /api/msgs/:id
+// @desc 获取单个信息
+// @access private
+
+router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Msg.findOne({ _id: req.params.id }).then(Msg => {
+        if (!Msg) {
+            return res.status(404).json('Null');
+        }
+        res.json(Msg);
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
+
+
+
 module.exports = router;
