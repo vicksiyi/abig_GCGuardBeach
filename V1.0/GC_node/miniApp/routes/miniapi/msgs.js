@@ -70,22 +70,33 @@ router.post('/addMsgUser', passport.authenticate('jwt', { session: false }), (re
         nickName: req.user[0].nickName,
         avatarUrl: req.user[0].avatarUrl
     }
-    MsgUser.findOne({ openId: item.openId, msgId: item.msgId }).then(Msg => {
-        if (!Msg) {
-            new MsgUser(item).save().then(() => {
-                res.json({
-                    msg: "Success"
-                })
-            }).catch((err) => {
+    Msg.findOne({ _id: item.msgId }).then(msgFind => {
+        if (msgFind.msg_status == undefined) {
+            MsgUser.findOne({ openId: item.openId, msgId: item.msgId }).then(Msg => {
+                if (!Msg) {
+                    new MsgUser(item).save().then(() => {
+                        res.json({
+                            msg: "Success"
+                        })
+                    }).catch((err) => {
+                        Err.ErrorFuc(err, req.originalUrl)
+                        res.json(err);
+                    })
+                } else {
+                    res.json({
+                        msg: "Existing"
+                    })
+                }
+            }).catch(err => {
                 Err.ErrorFuc(err, req.originalUrl)
                 res.json(err);
             })
         } else {
             res.json({
-                msg: "Existing"
+                msg: 'End'
             })
         }
-    }).catch(err => {
+    }).catch((err) => {
         Err.ErrorFuc(err, req.originalUrl)
         res.json(err);
     })
@@ -125,5 +136,40 @@ router.get('/userStatus/:id', passport.authenticate('jwt', { session: false }), 
         res.json(err);
     })
 })
+
+// $routes /mini/msgs/myMsg
+// @desc 我加入的活动
+// @access private
+router.get('/myMsg', passport.authenticate('jwt', { session: false }), (req, res) => {
+    MsgUser.find({ openId: req.user[0].openId }).then(MsgTemp => {
+        let id = MsgTemp.map(item => {
+            return item.msgId
+        })
+        Msg.find({ _id: { $in: id } }).then((Msg) => {
+            res.json(Msg)
+        })
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
+
+
+// // $routes /mini/msgs/mySuccessMsg
+// // @desc 已完成的活动
+// // @access private
+// router.get('/mySuccessMsg', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     MsgUser.find({ openId: req.user[0].openId }).then(MsgTemp => {
+//         let id = MsgTemp.map(item => {
+//             return item.msgId
+//         })
+//         Msg.find({ _id: { $in: id } }).then((Msg) => {
+//             res.json(Msg)
+//         })
+//     }).catch(err => {
+//         Err.ErrorFuc(err, req.originalUrl)
+//         res.json(err);
+//     })
+// })
 
 module.exports = router;

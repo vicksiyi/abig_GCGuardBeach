@@ -47,13 +47,16 @@
             <image src="../../resources/images/num.png"></image>
           </view>
           <view class="volunteer-num">
-            <view class="font-num">
-              点击可看
+            <view class="font-num" style="{{item.msg_status == undefined ? '':'color:red'}}">
+              {{item.msg_status == undefined?'点击可看':'查看详细'}}
               <text>/{{item.msg_person}}</text>
             </view>
           </view>
           <view class="volunteer-pinc">
-            <i-tag class="i-tags" name="标签一" color="green" type="border">可加入</i-tag>
+            <i-tag wx:if="{{item.msg_status == undefined}}" class="i-tags" name="标签一" color="green" type="border">
+              可加入
+            </i-tag>
+            <i-tag wx:else class="i-tags" name="标签一" color="red" type="border">已完成</i-tag>
           </view>
         </view>
       </view>

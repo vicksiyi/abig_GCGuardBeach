@@ -20,7 +20,7 @@ Page({
       id: 3,
       title: "我的组织",
       type: "interactive",
-      url: "../../packageH/pages/myOrganization/myOrganization"
+      url: "../../packageH/pages/myVolunteer/myVolunteer"
     },
     {
       id: 4,

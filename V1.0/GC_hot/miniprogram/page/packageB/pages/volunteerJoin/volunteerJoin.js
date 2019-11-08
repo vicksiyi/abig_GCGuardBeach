@@ -122,6 +122,11 @@ Page({
         content: '已加入',
         type: 'warning'
       });
+    } else if (result.msg == "End") {
+      $Message({
+        content: '活动已结束',
+        type: 'warning'
+      });
     } else {
       $Message({
         content: '未知错误,请稍后重试...',
@@ -131,7 +136,7 @@ Page({
   },
   joinSuccess: function () {
     wx.navigateTo({
-      url: '../../../packageH/pages/myOrganization/myOrganization'
+      url: '../../../packageH/pages/myVolunteer/myVolunteer'
     })
   },
   joinVolunteer: async function () {

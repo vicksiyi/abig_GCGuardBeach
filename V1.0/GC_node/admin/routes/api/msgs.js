@@ -91,11 +91,26 @@ router.get('/edit/:id', passport.authenticate('jwt', { session: false }), (req, 
 // $routes /api/msgs/delete/:id
 // @desc 删除
 // @access private
-
 router.delete('/delete/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Msg.findOneAndRemove({ _id: req.params.id }).then(Msg => {
         Msg.save().then(Msg => {
             res.json(Msg);
+        })
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json(err);
+    })
+})
+
+// $routes /api/msgs/success/:id
+// @desc 已完成
+// @access private
+router.get('/success/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const msgFileds = {};
+    msgFileds.msg_status = true
+    Msg.findOneAndUpdate({ _id: req.params.id }, { $set: msgFileds }, { new: true }).then(Msg => {
+        res.json({
+            msg: "Success"
         })
     }).catch(err => {
         Err.ErrorFuc(err, req.originalUrl)

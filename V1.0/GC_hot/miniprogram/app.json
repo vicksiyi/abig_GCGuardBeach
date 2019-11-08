@@ -93,7 +93,8 @@
         "pages/about/about",
         "pages/feedback/feedback",
         "pages/rank/rank",
-        "pages/myOrganization/myOrganization"
+        "pages/myOrganization/myOrganization",
+        "pages/myVolunteer/myVolunteer"
       ]
     },
     {

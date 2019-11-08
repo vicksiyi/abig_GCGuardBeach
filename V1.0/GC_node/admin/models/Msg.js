@@ -35,6 +35,10 @@ const MsgSchema = new Schema({
         type: String,
         required: true
     },
+    msg_status: {
+        type: Boolean,
+        required: false
+    },
     time: {
         type: Date,
         default: Date.now

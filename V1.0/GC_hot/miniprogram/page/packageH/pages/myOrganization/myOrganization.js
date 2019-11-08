@@ -28,11 +28,14 @@ Page({
     room: [],
     scrollTop: 0
   },
-  onLoad: function () {
+  onLoad: function (options) {
     let _this = this
     let nameTemp = ''
     let avatarTemp = ''
 
+    _this.setData({
+      roomId: options.id
+    })
     // 历史信息
     _this.history(1)
 
@@ -95,7 +98,7 @@ Page({
     let data = JSON.stringify({
       type: 2,
       str: e.detail.value.msg,
-      room: '1',
+      room: _this.data.roomId,
       name: _this.data.name,
       avatar: _this.data.avatar
     })
@@ -161,7 +164,7 @@ Page({
     let data = JSON.stringify({
       type: 0,
       str: '',
-      room: '1',
+      room: _this.data.roomId,
       name: nameTemp,
       avatar: avatarTemp
     })
@@ -282,25 +285,27 @@ Page({
       let _this = this
       let dataTemp = _this.data.msgData;
       let roomTemp = _this.data.room;
-      if (res.type == 0) {
-        roomTemp.push(res)
-        _this.setData({
-          room: roomTemp
-        })
-      } else {
-        if (dataTemp.length > 30) {
-          dataTemp.shift()
+      if (res.room == _this.data.roomId) {
+        if (res.type == 0) {
+          roomTemp.push(res)
+          _this.setData({
+            room: roomTemp
+          })
+        } else {
+          if (dataTemp.length > 30) {
+            dataTemp.shift()
+          }
+          dataTemp.push(res)
+          _this.setData({
+            msgData: dataTemp,
+            scrollTop: dataTemp.length * 1000
+          })
         }
-        dataTemp.push(res)
-        _this.setData({
-          msgData: dataTemp,
-          scrollTop: dataTemp.length * 1000
-        })
       }
       console.log(res, "接收到了消息")
     })
   },
-  onUnload:function(){
+  onUnload: function () {
     clearTimeout(heartBeatTimeOut)
     wx.closeSocket()
   }

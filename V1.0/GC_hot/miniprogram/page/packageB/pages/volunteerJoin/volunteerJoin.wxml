@@ -3,7 +3,9 @@
 </view>
 <view class="title-content">
     <view class="title-row">
-        <view class="title-free">可加入</view>
+        <view class="title-free" style="{{value.msg_status == undefined?'':'color:#bbbec4;'}}">
+            {{value.msg_status == undefined?'可加入':'已结束'}}
+        </view>
         <view class="title-enjoy">
             <text>点击生成图</text>
             <view>
@@ -36,7 +38,7 @@
         <text>志愿者名片墙</text>
     </view>
     <view>
-        <swiper autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{person.length >2 ? num : 1 }}" circular="{{circular}}">
+        <swiper autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{person.length >1 ? num : 1 }}" circular="{{circular}}">
             <block wx:for="{{person}}" wx:key="*this">
                 <swiper-item>
                     <view class="swiper-row">
@@ -66,7 +68,9 @@
         /{{value.msg_person}}
     </view>
     <view class="add-cart sub f16">
-        <button wx:if="{{!addStatus}}" class="add-cart-btn" bindtap='joinIn'>加入活动</button>
+        <button wx:if="{{!addStatus && value.msg_status == undefined }}" class="add-cart-btn" bindtap='joinIn'>
+            加入活动
+        </button>
         <button wx:else class="add-cart-btn" bindtap='joinSuccess'>我的活动</button>
     </view>
 </view>
