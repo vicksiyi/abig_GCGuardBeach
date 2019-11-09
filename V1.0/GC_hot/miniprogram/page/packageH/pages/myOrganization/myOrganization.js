@@ -26,7 +26,9 @@ Page({
     classRoom: {},
     showClass: false,
     room: [],
-    scrollTop: 0
+    scrollTop: 0,
+    showIcon: false,
+    indicatorDots: true
   },
   onLoad: function (options) {
     let _this = this
@@ -292,7 +294,7 @@ Page({
             room: roomTemp
           })
         } else {
-          if (dataTemp.length > 30) {
+          if (dataTemp.length > 100) {
             dataTemp.shift()
           }
           dataTemp.push(res)
@@ -308,5 +310,53 @@ Page({
   onUnload: function () {
     clearTimeout(heartBeatTimeOut)
     wx.closeSocket()
+  },
+  icon: function () {
+    this.setData({
+      showIcon: !this.data.showIcon
+    })
+  },
+  // 表情包
+  showFish: function () {
+    this.setData({
+      showFish: !this.data.showFish
+    })
+  },
+  // 图片
+  showPhoto: function () {
+    console.log("图片")
+  },
+  // 发送表情包
+  sendIcon: function (e) {
+    let _this = this;
+    let url = `cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/Emotion/${e.currentTarget.dataset.index}.gif`
+
+
+    let data = JSON.stringify({
+      type: 3,
+      str: url,
+      room: _this.data.roomId,
+      name: _this.data.name,
+      avatar: _this.data.avatar
+    })
+
+    _this.setData({
+      showFish: false,
+      showIcon: false
+    })
+    _this.sendSocketMessage({
+      msg: data,
+      data: data,
+      success: () => {
+        console.log("客户端发送成功")
+      },
+      fail: function (err) {
+        console.log('发送失败');
+        $Message({
+          content: '发送失败',
+          type: 'error'
+        });
+      }
+    })
   }
 })

@@ -65,6 +65,7 @@ var server = ws.createServer(function (conn) {
                 broadcast(JSON.stringify(data))
                 break;
             case 2:
+            case 3:
                 broadcast(JSON.stringify(data))
                 break;
             default:

@@ -7,6 +7,102 @@
     flex-direction: row;
     justify-content: space-around;
     box-shadow: 0 2px 2px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12);
+    z-index: 2;
+}
+
+.function-list {
+    width: 180rpx;
+    height: 80rpx;
+    position: fixed;
+    bottom: 80px;
+    right: -180rpx;
+    z-index: 1;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    border-radius: 50rpx 0 0 50rpx;
+    justify-content: space-around;
+}
+
+.function-list image {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx;
+}
+
+.icon-mask {
+    animation: showIcon 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+
+@keyframes showIcon {
+    0% {
+        right: -180rpx;
+        opacity: 0;
+    }
+
+    100% {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+.icon-close {
+    animation: closeIcon 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+
+@keyframes closeIcon {
+    0% {
+        right: 0;
+        opacity: 1;
+    }
+
+    100% {
+        right: -180rpx;
+        opacity: 0;
+    }
+}
+
+.submit-icon {
+    position: fixed;
+    bottom: 50px;
+    right: 30rpx;
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.anim {
+    animation: jiggle 2s ease-in infinite;
+}
+
+@keyframes jiggle {
+
+    48%,
+    62% {
+        transform: scale(1.0, 1.0)
+    }
+
+    50% {
+        transform: scale(1.1, 0.9)
+    }
+
+    56% {
+        transform: scale(0.9, 1.1) translate(0, -5px)
+    }
+
+    59% {
+        transform: scale(1.0, 1.0) translate(0, -3px)
+    }
+}
+
+.submit-icon image {
+    width: 60rpx;
+    height: 60rpx;
 }
 
 page {
@@ -151,6 +247,16 @@ page {
     margin-left: auto;
 }
 
+.arrow-left image {
+    width: 300rpx;
+    height: 300rpx;
+}
+
+.arrow-left2 image {
+    width: 300rpx;
+    height: 300rpx;
+}
+
 .arrow-left2 .left2 {
     width: 0;
     height: 0;
@@ -232,5 +338,76 @@ page {
         transform: scale(0);
         opacity: 0;
         bottom: 300rpx;
+    }
+}
+
+/* 表情包 */
+.fish {
+    width: 80%;
+    height: 400rpx;
+    background: #fff;
+    z-index: 5;
+    position: fixed;
+    left: 10%;
+    bottom: 30%;
+    border-radius: 10rpx;
+}
+
+.fish-img {
+    width: 25%;
+    height: 160rpx;
+    list-style-type: none;
+    float: left;
+    margin-top: 20rpx;
+}
+
+.fish-img image {
+    width: 80%;
+    max-height: 160rpx;
+    margin: auto;
+}
+
+swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.fish-close {
+    animation: closeFish 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+@keyframes closeFish {
+    0% {
+        transform: rotateX(10deg);
+        width: 80%;
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateX(120deg);
+        width: 0;
+        opacity: 0;
+    }
+}
+
+.fish-mask {
+    animation: maskFish 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+@keyframes maskFish {
+    0% {
+        transform: rotateX(120deg);
+        width: 0;
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateX(10deg);
+        width: 80%;
+        opacity: 1;
     }
 }

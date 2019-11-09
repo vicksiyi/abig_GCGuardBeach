@@ -13,6 +13,20 @@
         </view>
     </view>
 </block>
+<!-- 表情包 -->
+<view class="fish {{showFish?'fish-mask':'fish-close'}}">
+    <swiper indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{[0, 1, 2, 3, 4]}}" wx:key="*this" wx:for-item="i">
+            <swiper-item>
+                <block wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:for-item="j">
+                    <view class="fish-img" bindtap="sendIcon" data-Index="{{j+i*8}}">
+                        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/Emotion/{{j+i*8}}.gif"></image>
+                    </view>
+                </block>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
 <!-- 消息体 -->
 <view class="content" style="height:{{height - 50}}px">
     <scroll-view scroll-y='true' enable-back-to-top='true' style="height:{{height - 50}}px" scroll-top='{{scrollTop}}' scroll-with-animation="true">
@@ -30,8 +44,11 @@
                     <span>{{item.time}}</span>
                     <!-- 正文 -->
                     <view class="arrow-left">
-                        <view class="left"></view>
-                        <view class="content">{{item.str}}</view>
+                        <view class="left" wx:if="{{item.type==2}}"></view>
+                        <view class="content" wx:if="{{item.type==2}}">{{item.str}}</view>
+                        <view wx:else>
+                            <image src="{{item.str}}"></image>
+                        </view>
                     </view>
                 </view>
             </view>
@@ -43,8 +60,11 @@
                     <span>{{item.time}}</span>
                     <!-- 正文 -->
                     <view class="arrow-left2">
-                        <view class="content2">{{item.str}}</view>
-                        <view class="left2"></view>
+                        <view class="content2" wx:if="{{item.type==2}}">{{item.str}}</view>
+                        <view wx:if="{{item.type==2}}" class="left2"></view>
+                        <view wx:else>
+                            <image src="{{item.str}}"></image>
+                        </view>
                     </view>
                 </view>
                 <!-- 头像 -->
@@ -66,4 +86,17 @@
         </view>
     </view>
 </form>
+<!-- 功能 -->
+<view class="submit-icon anim">
+    <image bindtap="icon" src="../../resources/images/left.png"></image>
+</view>
+<!-- 功能列表 -->
+<view class="function-list {{showIcon?'icon-mask':'icon-close'}}">
+    <view>
+        <image bindtap="showFish" src="../../resources/images/up.png"></image>
+    </view>
+    <view>
+        <image bindtap="showPhoto" src="../../resources/images/photo.png"></image>
+    </view>
+</view>
 <i-message id="message" />
