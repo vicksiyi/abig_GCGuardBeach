@@ -14,7 +14,7 @@
     </view>
 </block>
 <!-- 表情包 -->
-<view class="fish {{showFish?'fish-mask':'fish-close'}}">
+<view wx:if="{{showFirst}}" class="fish {{showFish?'fish-mask':'fish-close'}}">
     <swiper indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
         <block wx:for="{{[0, 1, 2, 3, 4]}}" wx:key="*this" wx:for-item="i">
             <swiper-item>

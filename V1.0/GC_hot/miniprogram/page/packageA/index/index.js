@@ -639,17 +639,5 @@ Page({
         console.log(res);
       }
     });
-  },
-  onShow() {
-    // (async () => {
-    //   let data = await requests.requestUtils({
-    //     url: 'http://localhost:5000/mini/news/video',
-    //     data: {
-    //       video_url: 'https://vd4.bdstatic.com/mda-jjj6d9gk23w64fey/mda-jjj6d9gk23w64fey.mp4?auth_key=1572356614-0-0-7be48ef3b26d38ad438117da9d5503d9%26bcevod_channel=searchbox_feed'
-    //     },
-
-    //   })
-    //   console.log(data)
-    // })()
   }
 })

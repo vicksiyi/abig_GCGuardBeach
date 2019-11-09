@@ -185,6 +185,7 @@ router.post('/addNews', passport.authenticate('jwt', { session: false }), (req, 
 // @access private
 router.get('/addVideos', passport.authenticate('jwt', { session: false }), (req, res) => {
     (async () => {
+        console.log(req.body["video_proto_url"])
         try {
             const request_data = await superagent.get(req.body["video_proto_url"]).set(
                 "User-Agent", randomUA()

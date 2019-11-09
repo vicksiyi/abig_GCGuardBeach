@@ -1,6 +1,10 @@
 const app = getApp();
 const request = require('../../../../utils/requests');
 // const Num = require('../../resources/js/num');
+const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
+const Utils = require('../../../../utils/util');
+const utils = new Utils();
+var qqmapsdk;
 Page({
   data: {
     value: [],
@@ -47,10 +51,9 @@ Page({
         }
       };
       result = await request.requestUtils(Item)
-      _this.setData({
-        value: result,
-        spinLoad: false
-      })
+
+      // 添加距离
+      _this.calLocation(result)
     })()
   },
   onLoad: function () {
@@ -75,15 +78,9 @@ Page({
             }
           };
           result = await request.requestUtils(Item)
-          // 获取数量
-          // let num = new Num();
-          // result.map((value)=>{
-          //   num.userNum(id, res.data)
-          // })
-          _this.setData({
-            value: result,
-            spinLoad: false
-          })
+
+          // 添加距离
+          _this.calLocation(result)
         })()
       }
     })
@@ -92,5 +89,39 @@ Page({
     wx.navigateTo({
       url: `../volunteerJoin/volunteerJoin?id=${e.currentTarget.dataset.id}`
     })
+  },
+  // 距离计算
+  calLocation: function (result) {
+    let _this = this
+    qqmapsdk = new QQMapWX({
+      key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O' // 必填
+    });
+    let dest = []
+    result.map((value, index) => {
+      dest = [{
+        latitude: value.msg_latitude,
+        longitude: value.msg_longitude
+      }]
+      //调用距离计算接口
+      qqmapsdk.calculateDistance({
+        to: dest, //终点坐标
+        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
+        success: function (res) {//成功后的回调
+          //  米转公里
+          result[index].msg_distance = utils.distanceFormat(res.result.elements[0].distance)
+
+          _this.setData({
+            value: result,
+            spinLoad: false
+          })
+        },
+        fail: function (error) {
+          console.error(error);
+        },
+        complete: function (res) {
+          console.log(res);
+        }
+      });
+    });
   }
 })

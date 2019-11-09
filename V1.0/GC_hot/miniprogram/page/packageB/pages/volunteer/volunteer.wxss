@@ -138,6 +138,12 @@ page {
     height: 25rpx;
 }
 
+.volunteer-time span {
+    font-size: 0.8rem;
+    color: #dddee1;
+    padding: 20rpx;
+}
+
 .font-num {
     padding: 10rpx;
     line-height: 30rpx;

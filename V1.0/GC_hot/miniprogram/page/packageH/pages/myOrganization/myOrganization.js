@@ -28,7 +28,8 @@ Page({
     room: [],
     scrollTop: 0,
     showIcon: false,
-    indicatorDots: true
+    indicatorDots: true,
+    showFirst: false
   },
   onLoad: function (options) {
     let _this = this
@@ -36,7 +37,7 @@ Page({
     let avatarTemp = ''
 
     wx.setNavigationBarTitle({ title: options.title })
-    
+
     _this.setData({
       roomId: options.id
     })
@@ -321,7 +322,8 @@ Page({
   // 表情包
   showFish: function () {
     this.setData({
-      showFish: !this.data.showFish
+      showFish: !this.data.showFish,
+      showFirst: true
     })
   },
   // 图片

@@ -40,6 +40,7 @@
           </view>
           <view>
             <text>{{item.msg_address}}</text>
+            <text>距离:{{item.msg_distance}}公里</text>
           </view>
         </view>
         <view class="volunteer-time">
