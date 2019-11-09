@@ -114,7 +114,6 @@ router.get('/video', (req, res) => {
 // @desc 更新搜狐视频(链接过期问题)
 // @access private
 router.post('/updateVideo', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req.body)
     New.findOne({
         _id: req.body._id
     }).then(NewData => {

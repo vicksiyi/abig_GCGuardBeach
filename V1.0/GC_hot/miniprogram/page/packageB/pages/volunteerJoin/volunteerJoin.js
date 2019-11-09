@@ -28,7 +28,6 @@ Page({
    */
   onLoad: function (options) {
     let _this = this
-    let result = {}
     _this.setData({
       spinShow: true
     })
@@ -39,45 +38,13 @@ Page({
         _this.setData({
           token: res.data
         });
-        (async () => {
-          let Item = {
-            url: `http://${app.ip}:5001/mini/msgs/showOne/${options.id}`,
-            method: "GET",
-            header: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': res.data
-            }
-          };
-          let num = new Num();
-          // 获取已加入的人数
-          let userNumTemp = await num.userNum(options.id, res.data);
-          // 检测是否已经加入
-          let statusTemp = await num.userStatus(options.id, res.data)
-          // 加载信息
-          result = await request.requestUtils(Item)
-          let mks = []
-          // 画地图logo
-          mks.push({
-            latitude: result.msg_latitude,
-            longitude: result.msg_longitude,
-            iconPath: "../../resources/images/location.png",
-            width: 50,
-            height: 50
-          })
-          // 格式化 时间
-          userNumTemp.user.map((value, index) => {
-            userNumTemp.user[index].time = _this.cleanTime(value.time)
-          })
-          _this.setData({
-            value: result,
-            spinShow: false,
-            markers: mks,
-            userNum: userNumTemp.user.length,
-            person: userNumTemp.user,
-            addStatus: statusTemp.status,
-            show: true
-          })
-        })()
+
+        // 获取已加入的人数
+        _this.getUserNum(options.id, res.data);
+        // 检测是否已经加入
+        _this.getUserStatus(options.id, res.data);
+        // 获取活动的信息
+        _this.getMsg(options.id, res.data);
       }
     })
   },
@@ -162,5 +129,71 @@ Page({
   // 清洗time
   cleanTime: function (time) {
     return time.split("T")[0]
+  },
+  /**
+   * 获取已加入的人数
+   * @param {*} id 活动ID
+   * @param {*} token token
+   */
+  getUserNum: async function (id, token) {
+    let _this = this;
+    let num = new Num();
+    let userNumTemp = await num.userNum(id, token);
+    // 格式化 时间
+    userNumTemp.user.map((value, index) => {
+      userNumTemp.user[index].time = _this.cleanTime(value.time)
+    })
+
+    _this.setData({
+      userNum: userNumTemp.user.length,
+      person: userNumTemp.user
+    })
+  },
+  /**
+   * 检测是否已经加入
+   * @param {*} id 活动ID
+   * @param {*} token token
+   */
+  getUserStatus: async function (id, token) {
+    let _this = this;
+    let num = new Num();
+    let statusTemp = await num.userStatus(id, token)
+    _this.setData({
+      addStatus: statusTemp.status
+    })
+  },
+  /**
+   * 获取活动的信息
+   * @param {*} id 活动ID
+   * @param {*} token token
+   */
+  getMsg: async function (id, token) {
+    let _this = this;
+    let result = {};
+    let Item = {
+      url: `http://${app.ip}:5001/mini/msgs/showOne/${id}`,
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
+      }
+    };
+    // 加载信息
+    result = await request.requestUtils(Item)
+    let mks = []
+    // 画地图logo
+    mks.push({
+      latitude: result.msg_latitude,
+      longitude: result.msg_longitude,
+      iconPath: "../../resources/images/location.png",
+      width: 50,
+      height: 50
+    })
+    _this.setData({
+      value: result,
+      spinShow: false,
+      markers: mks,
+      show: true
+    })
   }
 })

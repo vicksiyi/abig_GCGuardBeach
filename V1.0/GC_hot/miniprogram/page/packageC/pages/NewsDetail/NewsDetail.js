@@ -26,56 +26,77 @@ Page({
         _this.setData({
           dataNews: dataTemp
         })
-        if (dataTemp.new_iframe == 'http:undefined' || dataTemp.new_iframe == undefined) {
+        if (dataTemp.new_iframe == 'http:undefined' || dataTemp.new_iframe == undefined) { // 没视频的时候
           var article = dataTemp.new_content
           WxParse.wxParse('article', 'html', article, _this, 5);
           _this.setData({
             spinShow: false
           })
-        } else {
+        } else { //有视频的时候
           let video_url = dataTemp.new_content.split("video src=")[1].split("\">")[0].replace(/[\"]/g, "")
+          // 检测视频是否有效
           _this.testVideo(video_url, dataTemp.new_content, dataTemp._id, dataTemp.new_iframe)
         }
       }
     })
   },
+  /**
+   * 检测视频是否有效
+   * @param {*} url 视频地址
+   * @param {*} content 正文
+   * @param {*} id 新闻ID
+   * @param {*} from_url 来自那篇文章
+   */
   testVideo: function (url, content, id, from_url) {
     let _this = this
     wx.request({
       url: url,
       success(res) {
-        if (res.statusCode == 200) {
+        if (res.statusCode == 200) { // 视频有效
           WxParse.wxParse('article', 'html', content, _this, 5);
           _this.setData({
             spinShow: false
           })
-        } else {
+        } else { // 视频无效
           wx.getStorage({
             key: 'Token',
             success(res) {
-              (async () => {
-                let Item = {
-                  url: `http://${app.ip}:5001/mini/news/updateVideo`,
-                  method: "POST",
-                  data: {
-                    _id: id,
-                    url: from_url
-                  },
-                  header: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': res.data
-                  }
-                };
-                let result = await request.requestUtils(Item)
-                _this.setData({
-                  dataNews: result,
-                  spinShow: false
-                })
-              })()
+              // 更新视频
+              _this.getUpdateVideo(id, from_url, res.data)
             }
           })
         }
       }
+    })
+  },
+  /**
+   * 更新视频
+   * @param {*} id 新闻ID
+   * @param {*} from_url 来自那篇文章
+   * @param {*} token token
+   */
+  getUpdateVideo: async function (id, from_url, token) {
+    let _this = this;
+    let Item = {
+      url: `http://${app.ip}:5001/mini/news/updateVideo`,
+      method: "POST",
+      data: {
+        _id: id,
+        url: from_url
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
+      }
+    };
+    let result = await request.requestUtils(Item)
+
+    var article = result.new_content
+    WxParse.wxParse('article', 'html', article, _this, 5);
+
+    _this.setData({
+      dataNews: result,
+      spinShow: false
     })
   }
 })
