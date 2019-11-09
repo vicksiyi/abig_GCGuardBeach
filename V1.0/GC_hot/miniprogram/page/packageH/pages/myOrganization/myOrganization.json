@@ -2,5 +2,6 @@
   "usingComponents": {
     "i-message": "../../../dist/message/index"
   },
-  "disabledScroll": true
+  "disabledScroll": true,
+  "navigationBarTitleText": "聊天"
 }

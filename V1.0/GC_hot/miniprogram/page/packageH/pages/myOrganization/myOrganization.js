@@ -35,6 +35,8 @@ Page({
     let nameTemp = ''
     let avatarTemp = ''
 
+    wx.setNavigationBarTitle({ title: options.title })
+    
     _this.setData({
       roomId: options.id
     })

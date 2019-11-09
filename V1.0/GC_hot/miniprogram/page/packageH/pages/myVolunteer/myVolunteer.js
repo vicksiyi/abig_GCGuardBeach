@@ -57,13 +57,17 @@ Page({
     return result
   },
   joinIn: function (e) {
+    let _this = this
+    let res = _this.data.value[e.currentTarget.dataset.id]
     wx.navigateTo({
-      url: `../myOrganization/myOrganization?id=${e.currentTarget.dataset.id}`
+      url: `../myOrganization/myOrganization?id=${res._id}&title=${res.msg_title}`
     })
   },
   show: function (e) {
+    let _this = this
+    let res = _this.data.value[e.currentTarget.dataset.id]
     wx.navigateTo({
-      url: `../../../packageB/pages/volunteerJoin/volunteerJoin?id=${e.currentTarget.dataset.id}`
+      url: `../../../packageB/pages/volunteerJoin/volunteerJoin?id=${res._id}`
     })
   }
 })

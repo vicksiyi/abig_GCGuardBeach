@@ -1,7 +1,7 @@
 <!-- 列表 -->
 <view>
     <block wx:for="{{value}}">
-        <view class="volunteer-container" bindtap="{{item.msg_status == undefined ? 'joinIn':'show'}}" data-Id="{{item._id}}">
+        <view class="volunteer-container" bindtap="{{item.msg_status == undefined ? 'joinIn':'show'}}" data-Id="{{index}}">
             <view class="volunteer-title">{{item.msg_title}}</view>
             <view class="volunteer-content">
                 <view class="volunteer-img">
