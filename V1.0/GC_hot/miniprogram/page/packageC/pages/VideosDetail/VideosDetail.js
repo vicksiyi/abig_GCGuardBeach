@@ -14,6 +14,9 @@ Page({
    */
   onLoad: function (options) {
     let _this = this
+
+    wx.setNavigationBarTitle({ title: options.title })
+
     wx.getSystemInfo({
       success(res) {
         _this.setData({

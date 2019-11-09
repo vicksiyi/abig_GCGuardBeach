@@ -42,7 +42,7 @@
     <view wx:else>
       <i-load-more wx:if="{{spinLoad}}" loading="{{ spinLoad }}" />
       <block wx:for="{{videos}}" data-item="item" wx:key="id">
-        <view class="video_whole" bindtap="showVideo" data-Video="{{item.video_url}}">
+        <view class="video_whole" bindtap="showVideo" data-Index="{{index}}">
           <view class="bg-img">
             <image src="{{item.video_image}}"></image>
           </view>

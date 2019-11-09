@@ -157,13 +157,13 @@ Page({
     })
   },
   showVideo: function (e) {
-    // e.currentTarget.dataset.video
+    let _this = this
     wx.setStorage({
       key: "video",
-      data: e.currentTarget.dataset.video
+      data: _this.data.videos[e.currentTarget.dataset.index].video_url
     })
     wx.navigateTo({
-      url: '../../packageC/pages/VideosDetail/VideosDetail'
+      url: `../../packageC/pages/VideosDetail/VideosDetail?title=${_this.data.videos[e.currentTarget.dataset.index].video_title}`
     })
   }
 })

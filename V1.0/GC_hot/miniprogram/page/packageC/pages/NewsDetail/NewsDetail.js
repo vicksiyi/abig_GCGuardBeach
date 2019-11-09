@@ -26,6 +26,7 @@ Page({
         _this.setData({
           dataNews: dataTemp
         })
+        wx.setNavigationBarTitle({ title: dataTemp.new_title })
         if (dataTemp.new_iframe == 'http:undefined' || dataTemp.new_iframe == undefined) { // 没视频的时候
           var article = dataTemp.new_content
           WxParse.wxParse('article', 'html', article, _this, 5);
