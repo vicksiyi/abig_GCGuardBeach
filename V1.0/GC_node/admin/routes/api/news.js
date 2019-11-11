@@ -73,7 +73,7 @@ const list_video = ($) => {
         return data_json
     } catch (err) {
         throw {
-            msg: 'error 404'
+            msg: 'error video 404'
         }
     }
 }
@@ -136,6 +136,7 @@ router.post('/addNews', passport.authenticate('jwt', { session: false }), (req, 
             const request_data = await superagent.get(req.body.url).set(
                 "User-Agent", randomUA()
             );
+            console.log(request_data.text)
             const $ = cheerio.load(request_data.text)
             let title = $('div.text-title h1').text().replace(/\s+/g, ""); // 标题
             let time = $('div.article-info span.time').text().replace(/\s+/g, ""); // 时间

@@ -40,7 +40,8 @@ Page({
     hot: [],
     spinLoad: false,
     keys: ['社会', '视频', '热点', '搞笑'],
-    keys2: ['社会', '财经', '美食', '科普', '艺术']
+    keys2: ['社会', '财经', '美食', '科普', '艺术'],
+    page: 0
   },
   handleChange({ detail }) {
     let _this = this
@@ -165,5 +166,8 @@ Page({
     wx.navigateTo({
       url: `../../packageC/pages/VideosDetail/VideosDetail?title=${_this.data.videos[e.currentTarget.dataset.index].video_title}`
     })
+  },
+  bottomChange: async function () {
+    console.log(0)
   }
 })

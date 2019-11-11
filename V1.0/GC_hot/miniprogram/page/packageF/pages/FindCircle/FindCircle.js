@@ -150,6 +150,7 @@ Page({
             page: _this.data.page + 1
           })
         }
+        console.log(result)
         if (status < 2) {
           // 添加
           valueTemp.push(...result)

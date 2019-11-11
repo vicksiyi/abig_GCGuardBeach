@@ -1,6 +1,6 @@
 <!-- <i-load-more loading="{{ load }}" /> -->
-<i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
 <scroll-view scroll-y="true" bindscrolltolower="bottomChange" style="height: {{height}}px;">
+  <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
   <block wx:for="{{value}}">
     <view class="content">
       <view class="avatar">
