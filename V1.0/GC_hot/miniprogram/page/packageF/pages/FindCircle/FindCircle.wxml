@@ -1,21 +1,47 @@
-<view>
-  <image class="top_image" src="../../../../images/findsth.png"></image>
-</view>
-<view  wx:for="{{array}}" wx:for-item="item" wx:key="id">
-  <i-divider class="divi"></i-divider>
-  <view class="container">
-    <i-avatar class="avatar_img" src="{{item.headportrait}}" size="large" shape="square"></i-avatar>
-    <text class="nickname">{{item. headname}}</text>
-    <text class="time">{{item.headtime}}</text>
-    <i-icon class="zan" type="praise" />
-    <textarea  class="contant">{{item.contenttext}}</textarea>
-    <!-- 社区图片 -->
-    <view class="picturecontainer">
-      <view class="contentpicture">
-        <view class="pcitem" wx:for="{{item.contentpicture}}" wx:for-item="pictureName" wx:key="id">
-          <image style="width:180rpx; height:180rpx;" mode="aspectFill" src="{{pictureName.photo}}"></image>
+<!-- <i-load-more loading="{{ load }}" /> -->
+<block wx:for="{{value}}">
+  <view class="content">
+    <view class="avatar">
+      <image src="{{item.avatarUrl}}"></image>
+    </view>
+    <view class="content-title">
+      <view class="content-content">
+        <view class="content-title-name">
+          <text>{{item.nickName}}</text>
+          <text style="color:#bbbec4;">{{item.time}}</text>
+        </view>
+        <view class="content-msg">{{item.content}}</view>
+        <view class="content-title-img">
+          <block wx:for="{{item.picture}}" wx:for-item="image">
+            <view bindtap="showImage" data-Url="{{image}}">
+              <image src="{{image}}"></image>
+            </view>
+          </block>
+        </view>
+        <view class="content-title-map" bindtap="map" data-Index="{{index}}">
+          <view>
+            <image src="../../resources/images/map.png"></image>
+          </view>
+          <view class="msg">
+            <text>广东石油化工学院官渡校区隔壁浪漫海滩</text>
+          </view>
+        </view>
+      </view>
+      <view class="mode">
+        <view bindtap="msgMode">
+          <image src="../../resources/images/msg.png"></image>
+          <text>评论</text>
+        </view>
+        <view bindtap="zhaoMode">
+          <image src="../../resources/images/zhao.png"></image>
+          <text>号召</text>
+        </view>
+        <view bindtap="enjoyMode">
+          <image src="../../resources/images/enjoy.png"></image>
+          <text>分享</text>
         </view>
       </view>
     </view>
   </view>
-</view>
+</block>
+<i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />

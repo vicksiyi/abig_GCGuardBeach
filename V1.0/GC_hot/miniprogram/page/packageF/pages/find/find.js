@@ -4,6 +4,7 @@ const {
 const Utils = require('../../../../utils/util');
 const requests = require('../../../../utils/requests');
 const utils = new Utils()
+const app = getApp();
 Page({
   data: {
     currentData: 0,
@@ -207,7 +208,7 @@ Page({
     let _this = this
     let Token = ''
     let item = {}
-    item.url = 'http://localhost:5001/mini/finds/add';
+    item.url = `http://${app.ip}:5001/mini/finds/add`;
     item.data = {
       picture: JSON.stringify(_this.data.fileID),
       content: _this.data.content

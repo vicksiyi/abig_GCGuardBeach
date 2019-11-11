@@ -1,75 +1,102 @@
-.top_image{
-  position:absolute;
-  height: 150rpx;
-}
-.divi{
-  position:relative;
-  top:100rpx;
-}
-.container{
-  position:relative;
-  top:56rpx;
-  /*  */
-  height: 192rpx;
-  /* background: blue; */
-}
-
-.avatar_img{
-  position:relative;
-  top:-180rpx;
-  right:300rpx;
-  /* width:70rpx;
-  height: 70rpx; */
-}
-.nickname{
-  position:relative;
-  top:-240rpx;
-  right:120rpx;
-  font-size:40rpx;
-}
-.time{
-  position:relative;
-  top:-280rpx;
-  right:-100rpx;
-  font-size:24rpx;
-}
-.zan{
-   position:relative;
-  top:-350rpx;
-  right:-250rpx;
-}
-.contant{
-    position:relative;
-  top:-300rpx;
-  right:5rpx;
-  font-size:32rpx;
-  /*  */
-  height:46rpx;
-}
-.picturecontainer {
-  /* display: flex; */
+.content {
+  display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  margin: 30rpx auto;
+  width: 96%;
 }
 
-.contentpicture {
-  /* margin-left: 70rpx; */
-  margin-left: -183rpx;
-  margin-bottom: -52rpx;
-  /* 20 */
-  background-color: #deeee5;
-  border-radius: 10px;
-  /*  */
-  margin-top:-285rpx;
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 20rpx;
 }
 
-.pcitem {
-  width: 180rpx;
-  height: 180rpx;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
+.avatar image {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 10rpx;
+  border-radius: 50%;
+}
+
+.content-title {
+  width: 90%;
+  margin: auto;
+}
+
+.content-title-name text {
+  font-size: 0.8rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #5cadff;
+}
+
+.content-title-map {
+  display: flex;
+  flex-direction: row;
+}
+
+.content-msg {
+  width: 90%;
+  font-size: 0.8rem;
+  color: #495060;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-top: 10rpx;
-  margin-bottom: 10rpx;
-  float: left;
-  background-color: #fff;
+}
+
+.content-title-map {
+  width: 90%;
+  height: 100rpx;
+  background: #e9eaec;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+}
+
+.content-title-map .msg {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.msg text {
+  font-size: 0.8rem;
+  color: #495060;
+  line-height: 100rpx;
+}
+
+.content-title-map image {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 10rpx;
+}
+
+.content-title-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+  margin-top: 20rpx;
+}
+
+.content-title-img image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 10rpx;
+}
+
+.mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 86%;
+  margin: 20rpx;
+}
+
+.mode image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.mode text {
+  font-size: 0.6rem;
+  padding: 5rpx;
+  color: #bbbec4;
 }
