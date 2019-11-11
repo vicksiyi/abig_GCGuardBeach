@@ -1,47 +1,51 @@
 <!-- <i-load-more loading="{{ load }}" /> -->
-<block wx:for="{{value}}">
-  <view class="content">
-    <view class="avatar">
-      <image src="{{item.avatarUrl}}"></image>
-    </view>
-    <view class="content-title">
-      <view class="content-content">
-        <view class="content-title-name">
-          <text>{{item.nickName}}</text>
-          <text style="color:#bbbec4;">{{item.time}}</text>
-        </view>
-        <view class="content-msg">{{item.content}}</view>
-        <view class="content-title-img">
-          <block wx:for="{{item.picture}}" wx:for-item="image">
-            <view bindtap="showImage" data-Url="{{image}}">
-              <image src="{{image}}"></image>
-            </view>
-          </block>
-        </view>
-        <view class="content-title-map" bindtap="map" data-Index="{{index}}" data-Str="{{item.str}}">
-          <view>
-            <image src="../../resources/images/map.png"></image>
-          </view>
-          <view class="msg">
-            <text>{{item.str}}</text>
-          </view>
-        </view>
-      </view>
-      <view class="mode">
-        <view bindtap="msgMode">
-          <image src="../../resources/images/msg.png"></image>
-          <text>评论</text>
-        </view>
-        <view bindtap="zhaoMode">
-          <image src="../../resources/images/zhao.png"></image>
-          <text>号召</text>
-        </view>
-        <view bindtap="enjoyMode">
-          <image src="../../resources/images/enjoy.png"></image>
-          <text>分享</text>
-        </view>
-      </view>
-    </view>
-  </view>
-</block>
 <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
+<scroll-view scroll-y="true" bindscrolltolower="bottomChange" style="height: {{height}}px;">
+  <block wx:for="{{value}}">
+    <view class="content">
+      <view class="avatar">
+        <image src="{{item.avatarUrl}}"></image>
+      </view>
+      <view class="content-title">
+        <view class="content-content">
+          <view class="content-title-name">
+            <text>{{item.nickName}}</text>
+            <text style="color:#bbbec4;">{{item.time}}</text>
+          </view>
+          <view class="content-msg">{{item.content}}</view>
+          <view class="content-title-img">
+            <block wx:for="{{item.picture}}" wx:for-item="image">
+              <view bindtap="showImage" data-Url="{{image}}">
+                <image src="{{image}}"></image>
+              </view>
+            </block>
+          </view>
+          <view class="content-title-map" bindtap="map" data-Index="{{index}}" data-Str="{{item.str}}">
+            <view>
+              <image src="../../resources/images/map.png"></image>
+            </view>
+            <view class="msg">
+              <text>{{item.str}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="mode">
+          <view bindtap="msgMode">
+            <image src="../../resources/images/msg.png"></image>
+            <text>评论</text>
+          </view>
+          <view bindtap="zhaoMode">
+            <image src="../../resources/images/zhao.png"></image>
+            <text>号召</text>
+          </view>
+          <view bindtap="enjoyMode">
+            <image src="../../resources/images/enjoy.png"></image>
+            <text>分享</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <i-load-more wx:if="{{endShow}}" loading="{{ true }}" />
+  <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
+</scroll-view>

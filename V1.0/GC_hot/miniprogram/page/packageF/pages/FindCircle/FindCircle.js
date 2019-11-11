@@ -6,17 +6,28 @@ const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
 const qqmapsdk = new QQMapWX({
   key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
 });
+var status = 0  //防止异步问题再添加一个
 Page({
 
   data: {
     value: [],
     token: '',
-    load: false
+    load: false,
+    height: 0,
+    page: 0,
+    endLoad: false
   },
   onLoad: function (options) {
     let _this = this;
     _this.setData({
       load: true
+    })
+    wx.getSystemInfo({
+      success(res) {
+        _this.setData({
+          height: res.windowHeight
+        })
+      }
     })
     wx.getStorage({
       key: 'Token',
@@ -113,5 +124,41 @@ Page({
     wx.navigateTo({
       url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + `&sign=${sig}`
     });
+  },
+  // 到底部时候触发
+  bottomChange: function () {
+    let _this = this;
+    // 到底了就不添加了
+    if (!_this.data.endLoad) {
+      (async () => {
+        // 加载
+        _this.setData({
+          endShow: true
+        });
+        // 获取数据
+        let result = await _this.getFindData(_this.data.page + 1, _this.data.token)
+
+        let valueTemp = _this.data.value;
+        if (result.length < 10) {
+          _this.setData({
+            endLoad: true,
+            endShow: false
+          })
+          status++
+        } else {
+          _this.setData({
+            page: _this.data.page + 1
+          })
+        }
+        if (status < 2) {
+          // 添加
+          valueTemp.push(...result)
+          _this.setData({
+            value: valueTemp,
+            endShow: false
+          })
+        }
+      })()
+    }
   }
 })
