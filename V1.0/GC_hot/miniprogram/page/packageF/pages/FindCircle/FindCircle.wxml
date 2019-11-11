@@ -18,12 +18,12 @@
             </view>
           </block>
         </view>
-        <view class="content-title-map" bindtap="map" data-Index="{{index}}">
+        <view class="content-title-map" bindtap="map" data-Index="{{index}}" data-Str="{{item.str}}">
           <view>
             <image src="../../resources/images/map.png"></image>
           </view>
           <view class="msg">
-            <text>广东石油化工学院官渡校区隔壁浪漫海滩</text>
+            <text>{{item.str}}</text>
           </view>
         </view>
       </view>

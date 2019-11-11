@@ -9,21 +9,22 @@ function Location() { }
  * @param {*} latitude 经度
  * @param {*} longitude 纬度
  */
-Location.prototype.msg = (latitude, longitude) => {
-    qqmapsdk.reverseGeocoder({
+Location.prototype.msg = async (latitude, longitude) => {
+    let result = ''
+    let temp = await qqmapsdk.reverseGeocoder({
         location: {
             latitude: latitude,
             longitude: longitude
         },
         sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
         success: function (res) {
-            console.log(res.result.address)
             return res.result.address
         },
         fail: function (error) {
             console.error(error);
         }
     });
+    return result
 }
 
 /**

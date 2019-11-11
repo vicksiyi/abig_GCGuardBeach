@@ -2,6 +2,10 @@ const request = require("../../../../utils/requests");
 const app = getApp();
 const Location = require('../../../../utils/locations');
 const locations = new Location();
+const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
+const qqmapsdk = new QQMapWX({
+  key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
+});
 Page({
 
   data: {
@@ -36,6 +40,7 @@ Page({
    * @param {*} token token
    */
   getFindData: async function (page, token) {
+    let _this = this;
     let Item = {
       url: `http://${app.ip}:5001/mini/finds?page=${page}`,
       method: "GET",
@@ -46,6 +51,7 @@ Page({
     };
     let result = await request.requestUtils(Item)
     let tempPlace = {};
+    let temp = ''
     result.map((value, index) => {
       result[index].time = value.time.split("T")[0]
       result[index].picture = JSON.parse(value.picture)
@@ -53,10 +59,22 @@ Page({
       // 阻塞
       locations.sleep(300);
       // 获取位置
-      (async () => {
-        let str = await locations.msg(tempPlace.latitude, tempPlace.longitude)
-        console.log(str)
-      })()
+      qqmapsdk.reverseGeocoder({
+        location: {
+          latitude: tempPlace.latitude,
+          longitude: tempPlace.longitude
+        },
+        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
+        success: function (res) {
+          temp = 'value[' + (index + page * 10) + '].str';
+          _this.setData({
+            [temp]: res.result.address
+          })
+        },
+        fail: function (error) {
+          console.error(error);
+        }
+      });
     })
     return result
   },
@@ -89,14 +107,11 @@ Page({
 
     let endPoint = JSON.stringify({  //终点
       'latitude': res.latitude,
-      'longitude': res.longitude
+      'longitude': res.longitude,
+      'name': e.currentTarget.dataset.str
     });
     wx.navigateTo({
       url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + `&sign=${sig}`
     });
-  },
-  // 根据坐标返回位置
-  locationMsg: function (latitude, longitude) {
-    locations.msg(latitude, longitude)
   }
 })
