@@ -1,5 +1,7 @@
 const app = getApp()
 const request = require('../../../utils/requests')
+var tempSc = 0;
+var upShowSc = false;
 Page({
   data: {
     current: 0,
@@ -43,7 +45,10 @@ Page({
     keys2: ['社会', '财经', '美食', '科普', '艺术'],
     page: 0,
     type: '',
-    endShow: false
+    endShow: false,
+    scollTop: 0,
+    upShowTemp: false,
+    fei: false
   },
   handleChange({ detail }) {
     let _this = this
@@ -53,9 +58,9 @@ Page({
       type: _this.data.keys[detail.key],
       page: 0,
       endShow: false,
-      hot: []
+      hot: [],
+      scollTop: 0
     });
-    console.log(detail)
     if (detail.key != 1) {
       _this.getNews(_this.data.keys[detail.key], 0)
     } else {
@@ -82,7 +87,8 @@ Page({
       type: _this.data.keys2[index],
       page: 0,
       endShow: false,
-      hot: []
+      hot: [],
+      scollTop: 0
     });
     _this.getNews(_this.data.keys2[index], 0)
   },
@@ -125,8 +131,6 @@ Page({
       _this.setData({
         spinLoad: true
       })
-    }else{
-      
     }
     let Item = {
       url: `http://${app.ip}:5001/mini/news/showNews`,
@@ -195,5 +199,41 @@ Page({
     _this.setData({
       page: _this.data.page + 1
     })
+  },
+  // 火箭效果
+  scrollChange: function (e) {
+    let _this = this
+    if (e.detail.scrollTop > 100) {
+      _this.setData({
+        upShowTemp: true
+      })
+
+      if (tempSc > e.detail.scrollTop) {
+        upShowSc = true
+      } else {
+        upShowSc = false
+      }
+      _this.setData({
+        upShow: upShowSc
+      })
+    } else {
+      _this.setData({
+        upShowTemp: false
+      })
+    }
+    tempSc = e.detail.scrollTop
+  },
+  feiUp: function () {
+    let _this = this
+    _this.setData({
+      fei: true,
+    })
+
+    setTimeout(() => {
+      _this.setData({
+        fei: false,
+        scollTop: 0
+      })
+    }, 1000);
   }
 })
