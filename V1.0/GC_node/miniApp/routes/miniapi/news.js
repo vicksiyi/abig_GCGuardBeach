@@ -52,7 +52,6 @@ router.get('/ceshi', passport.authenticate('jwt', { session: false }), (req, res
 // @desc 获取新闻列表
 // @access private
 router.get('/showNews', passport.authenticate('jwt', { session: false }), (req, res) => {
-    // res.json(req.query.type)
     New.find({
         new_type: req.query.type
     }).skip(req.query.page * 10).limit(10).then(New => {

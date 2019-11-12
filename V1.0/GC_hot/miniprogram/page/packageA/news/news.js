@@ -41,13 +41,19 @@ Page({
     spinLoad: false,
     keys: ['社会', '视频', '热点', '搞笑'],
     keys2: ['社会', '财经', '美食', '科普', '艺术'],
-    page: 0
+    page: 0,
+    type: '',
+    endShow: false
   },
   handleChange({ detail }) {
     let _this = this
     _this.setData({
       current: detail.key,
-      currentTabsIndex: 0
+      currentTabsIndex: 0,
+      type: _this.data.keys[detail.key],
+      page: 0,
+      endShow: false,
+      hot: []
     });
     console.log(detail)
     if (detail.key != 1) {
@@ -72,7 +78,11 @@ Page({
     let _this = this
     var index = event.currentTarget.dataset.index;
     _this.setData({
-      currentTabsIndex: index
+      currentTabsIndex: index,
+      type: _this.data.keys2[index],
+      page: 0,
+      endShow: false,
+      hot: []
     });
     _this.getNews(_this.data.keys2[index], 0)
   },
@@ -111,10 +121,13 @@ Page({
   getNews: async function (type, page) {
     let _this = this
     let result = []
-    _this.setData({
-      spinLoad: true,
-      hot: ''
-    })
+    if (page == 0) {
+      _this.setData({
+        spinLoad: true
+      })
+    }else{
+      
+    }
     let Item = {
       url: `http://${app.ip}:5001/mini/news/showNews`,
       method: "GET",
@@ -128,8 +141,15 @@ Page({
       }
     };
     result = await request.requestUtils(Item)
+    let temp = _this.data.hot;
+    if (result.length < 10) {
+      _this.setData({
+        endShow: true
+      })
+    }
+    temp.push(...result)
     _this.setData({
-      hot: result,
+      hot: temp,
       spinLoad: false
     })
   },
@@ -168,6 +188,12 @@ Page({
     })
   },
   bottomChange: async function () {
-    console.log(0)
+    let _this = this;
+    let type = _this.data.type || '社会';
+
+    _this.getNews(type, _this.data.page + 1)
+    _this.setData({
+      page: _this.data.page + 1
+    })
   }
 })

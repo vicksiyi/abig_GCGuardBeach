@@ -60,34 +60,38 @@ Page({
         'Authorization': token
       }
     };
-    let result = await request.requestUtils(Item)
-    let tempPlace = {};
-    let temp = ''
-    result.map((value, index) => {
-      result[index].time = value.time.split("T")[0]
-      result[index].picture = JSON.parse(value.picture)
-      tempPlace = JSON.parse(value.place)
-      // 阻塞
-      locations.sleep(300);
-      // 获取位置
-      qqmapsdk.reverseGeocoder({
-        location: {
-          latitude: tempPlace.latitude,
-          longitude: tempPlace.longitude
-        },
-        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-        success: function (res) {
-          temp = 'value[' + (index + page * 10) + '].str';
-          _this.setData({
-            [temp]: res.result.address
-          })
-        },
-        fail: function (error) {
-          console.error(error);
-        }
-      });
-    })
-    return result
+    try {
+      let result = await request.requestUtils(Item)
+      let tempPlace = {};
+      let temp = ''
+      result.map((value, index) => {
+        result[index].time = value.time.split("T")[0]
+        result[index].picture = JSON.parse(value.picture)
+        tempPlace = JSON.parse(value.place)
+        // 阻塞
+        locations.sleep(300);
+        // 获取位置
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: tempPlace.latitude,
+            longitude: tempPlace.longitude
+          },
+          sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
+          success: function (res) {
+            temp = 'value[' + (index + page * 10) + '].str';
+            _this.setData({
+              [temp]: res.result.address
+            })
+          },
+          fail: function (error) {
+            console.error(error);
+          }
+        });
+      })
+      return result
+    } catch (err) {
+      console.log(err)
+    }
   },
   // 放大浏览
   showImage: function (e) {

@@ -37,6 +37,8 @@
           </view>
         </block>
         <i-load-more wx:if="{{!hot.length && !spinLoad}}" tip="暂无数据" loading="{{false}}" />
+        <i-load-more wx:if="{{endShow}}" tip="我们也是有底线的" loading="{{ false }}" />
+        <i-load-more wx:if="{{!endShow && !spinLoad}}" loading="{{ true }}" />
       </scroll-view>
     </view>
     <view wx:else>
