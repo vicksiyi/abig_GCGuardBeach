@@ -38,7 +38,7 @@
             <image src="../../resources/images/zhao.png"></image>
             <text>号召</text>
           </view>
-          <view bindtap="enjoyMode">
+          <view bindtap="enjoyMode" data-Index="{{index}}">
             <image src="../../resources/images/enjoy.png"></image>
             <text>分享</text>
           </view>
@@ -46,6 +46,21 @@
       </view>
     </view>
   </block>
+  <!-- 生成图 -->
+  <view class="canvas-bg" wx:if="{{canvasShow}}">
+    <view class="canvas-close" bindtap="closeCanvas">
+      <image src="../../resources/images/close.png"></image>
+    </view>
+    <view class="content-canvas {{canvasShow?'show-canvas':''}}">
+      <view class="canvas-content">
+        <canvas canvas-id="canvas-map" style="width: 600rpx; height: 750rpx;" class="share-canvas"></canvas>
+      </view>
+      <view>
+        <i-button bind:click="saveImage" type="primary">保存到相册</i-button>
+      </view>
+    </view>
+  </view>
+  <i-message id="message" />
   <i-load-more wx:if="{{endShow}}" loading="{{ true }}" />
   <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
 </scroll-view>

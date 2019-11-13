@@ -183,9 +183,9 @@ Page({
     oauth.loginUser()
 
     // 测试所用
-    // wx.navigateTo({
-    //   url:"../../packageB/pages/volunteer/volunteer"
-    // })
+    wx.navigateTo({
+      url:"../../packageF/pages/FindCircle/FindCircle"
+    })
     wx.getLocation({
       type: 'wgs84',
       success(res) {

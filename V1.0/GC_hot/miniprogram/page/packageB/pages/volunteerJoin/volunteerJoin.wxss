@@ -248,7 +248,7 @@ swiper {
 
 .content {
     width: 80%;
-    height: 100rpx;
+    /* height: 100rpx; */
     margin: 80rpx auto;
 }
 

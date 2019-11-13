@@ -1,6 +1,7 @@
 const request = require("../../../../utils/requests");
 const app = getApp();
 const Location = require('../../../../utils/locations');
+const { $Message } = require('../../../../dist/base/index');
 const locations = new Location();
 const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
 const qqmapsdk = new QQMapWX({
@@ -15,12 +16,22 @@ Page({
     load: false,
     height: 0,
     page: 0,
-    endLoad: false
+    endLoad: false,
+    widthTemp: 0,
+    heightTemp: 0
   },
   onLoad: function (options) {
     let _this = this;
     _this.setData({
       load: true
+    })
+    wx.getSystemInfo({
+      success(res) {
+        _this.setData({
+          widthTemp: res.screenWidth,
+          heightTemp: res.screenHeight
+        })
+      }
     })
     wx.getSystemInfo({
       success(res) {
@@ -101,15 +112,91 @@ Page({
   },
   // 评论
   msgMode: function () {
-    console.log('评论')
+
   },
   // 号召
   zhaoMode: function () {
     console.log('号召')
   },
   // 分享
-  enjoyMode: function () {
-    console.log('分享')
+  enjoyMode: function (e) {
+    let _this = this
+    wx.showLoading({
+      title: '生成中...',
+      mask: true
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      _this.setData({
+        canvasShow: true
+      })
+    }, 1000);
+    let data = _this.data.value[e.currentTarget.dataset.index];
+    let percentWidth = _this.data.widthTemp / 375
+    let percentHeight = _this.data.heightTemp / 667
+    // 图片
+    wx.getImageInfo({
+      src: data.picture[0],
+      success: res => {
+        wx.getImageInfo({ // 或者用wx.downloadFile
+          src: data.avatarUrl,
+          success: re => {
+            const ctx = wx.createCanvasContext('canvas-map')
+
+            // 背景图片
+            ctx.drawImage('../../resources/images/ma.jpg', 0, 0, 300 * percentWidth, 375 * percentHeight)
+
+            // 昵称
+            ctx.setFontSize(12)
+            ctx.setFillStyle('#5cadff')
+            ctx.fillText(data.nickName, 50 * percentWidth, 25 * percentHeight)
+            // 时间
+            ctx.setFontSize(12)
+            ctx.setFillStyle('#bbbec4')
+            ctx.fillText(data.time, (60 + ctx.measureText(data.nickName).width * 0.5 + ctx.measureText(data.time).width * 0.3) * percentWidth, 25 * percentHeight)
+
+            // 正文
+            let temp = data.content.split("")
+            if (temp.length <= 20) {
+              ctx.setFontSize(11)
+              ctx.setFillStyle('#495060')
+              ctx.fillText(data.content, 50, 45 * percentHeight)
+            } else if (temp.length > 60) {
+              for (let i = 0; i < 2; i++) {
+                ctx.setFontSize(11)
+                ctx.setFillStyle('#495060')
+                ctx.fillText(data.content.slice(20 * i, 20 * i + 20), 50, (45 + i * 15) * percentHeight)
+              }
+              ctx.setFontSize(11)
+              ctx.setFillStyle('#495060')
+              ctx.fillText(data.content.slice(40, 60) + '...', 50, 75 * percentHeight)
+            } else {
+              for (let i = 0; i < Math.trunc(temp.length / 20); i++) {
+                ctx.setFontSize(11)
+                ctx.setFillStyle('#495060')
+                ctx.fillText(data.content.slice(20 * i, 20 * i + 20), 50, (45 + i * 15) * percentHeight)
+              }
+              ctx.setFontSize(11)
+              ctx.setFillStyle('#495060')
+              ctx.fillText(data.content.slice(20 * Math.trunc(temp.length / 20), 20 + 20 * Math.trunc(temp.length / 20)), 50, (45 + Math.trunc(temp.length / 20) * 15) * percentHeight)
+            }
+            // 图片
+            ctx.drawImage(res.path, 20, 80, 260 * percentWidth, 160 * percentHeight)
+
+            // 头像
+            // ctx.save();
+            ctx.arc(30, 30, 15, 0, 2 * Math.PI);
+            // 从画布上裁剪出这个圆形
+            ctx.clip();
+            ctx.drawImage(re.path, 15, 15, 30 * percentWidth, 30 * percentHeight)
+            // // 号召
+            // ctx.rotate(Math.PI / 3);
+            // ctx.drawImage('../../resources/images/zhaohuan.png', 200, 160, 60 * percentWidth, 60 * percentHeight)
+            ctx.draw()
+          }
+        })
+      }
+    })
   },
   // 导航
   map: function (e) {
@@ -165,5 +252,93 @@ Page({
         }
       })()
     }
+  },
+  closeCanvas: function () {
+    this.setData({
+      canvasShow: false
+    })
+  },
+  // 保存图片
+  saveImage() {
+    let _this = this
+    wx.showLoading({
+      title: '保存中...',
+      mask: true
+    })
+    setTimeout(() => {
+      wx.canvasToTempFilePath({
+        canvasId: 'canvas-map',
+        success(res) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success() {
+              wx.hideLoading()
+              $Message({
+                content: '图片已保存到相册',
+                type: 'success'
+              });
+            },
+            fail(err) {
+              wx.hideLoading()
+              if (err.errMsg == 'saveImageToPhotosAlbum:fail auth deny') {
+                $Message({
+                  content: '必须获取权限才可图片保存'
+                });
+                console.log("打开设置窗口");
+                wx.showModal({
+                  title: '跳转',
+                  content: '是否进入开启权限页面',
+                  confirmText: '确定',
+                  confirmColor: '#19be6b',
+                  success(res2) {
+                    if (res2.confirm) {
+                      wx.openSetting({
+                        success(data) {
+                          if (data.authSetting["scope.writePhotosAlbum"]) {
+                            $Message({
+                              content: '获取权限成功，再次点击图片保存到相册',
+                              type: 'success'
+                            });
+                          } else {
+                            $Message({
+                              content: '获取权限失败',
+                              type: 'error'
+                            });
+                          }
+                        },
+                        fail(err) {
+                          console.log(err)
+                          $Message({
+                            content: '未知错误',
+                            type: 'error'
+                          });
+                        }
+                      })
+                    } else {
+                      $Message({
+                        content: '用户取消选择'
+                      });
+                    }
+                  }
+                })
+              }
+              // if (res.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
+              //   console.log("打开设置窗口");
+              //   wx.openSetting({
+              //     success(settingdata) {
+              //       console.log(settingdata)
+              //       if (settingdata.authSetting["scope.writePhotosAlbum"]) {
+              //         console.log("获取权限成功，再次点击图片保存到相册")
+              //       } else {
+              //         console.log("获取权限失败")
+              //       }
+              //     }
+              //   })
+              // }
+            }
+          });
+        }
+      });
+    }, 3000)
   }
 })

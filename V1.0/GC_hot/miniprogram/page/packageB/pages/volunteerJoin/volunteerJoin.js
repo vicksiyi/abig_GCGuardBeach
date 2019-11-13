@@ -211,10 +211,16 @@ Page({
   },
   enjoy: async function (e) {
     let _this = this
-    _this.setData({
-      canvasShow: true
+    wx.showLoading({
+      title: '生成中...',
+      mask: true
     })
-    console.log(_this.data.height)
+    setTimeout(() => {
+      wx.hideLoading()
+      _this.setData({
+        canvasShow: true
+      })
+    }, 1000);
     let percentWidth = _this.data.width / 375
     let percentHeight = _this.data.height / 667
     wx.getImageInfo({ // 或者用wx.downloadFile
@@ -290,6 +296,10 @@ Page({
   // 保存图片
   saveImage() {
     let _this = this
+    wx.showLoading({
+      title: '保存中...',
+      mask: true
+    })
     setTimeout(() => {
       wx.canvasToTempFilePath({
         canvasId: 'canvas-map',
@@ -297,20 +307,14 @@ Page({
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success() {
-              console.log(res.tempFilePath)
-              _this.setData({
-                spinNow: false
-              })
+              wx.hideLoading()
               $Message({
                 content: '图片已保存到相册',
                 type: 'success'
               });
             },
             fail(err) {
-              _this.setData({
-                spinNow: false
-              })
-              console.log(err)
+              wx.hideLoading()
               if (err.errMsg == 'saveImageToPhotosAlbum:fail auth deny') {
                 $Message({
                   content: '必须获取权限才可图片保存'
@@ -353,19 +357,6 @@ Page({
                   }
                 })
               }
-              // if (res.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
-              //   console.log("打开设置窗口");
-              //   wx.openSetting({
-              //     success(settingdata) {
-              //       console.log(settingdata)
-              //       if (settingdata.authSetting["scope.writePhotosAlbum"]) {
-              //         console.log("获取权限成功，再次点击图片保存到相册")
-              //       } else {
-              //         console.log("获取权限失败")
-              //       }
-              //     }
-              //   })
-              // }
             }
           });
         }
