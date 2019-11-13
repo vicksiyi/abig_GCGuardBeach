@@ -35,6 +35,10 @@ Page({
     _this.setData({
       spinShow: true
     })
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
     wx.getSystemInfo({
       success(res) {
         _this.setData({
@@ -88,6 +92,7 @@ Page({
     // 加入志愿者活动
     result = await _this.joinVolunteer()
 
+    wx.hideLoading()
     _this.setData({
       spinShow: false,
       addStatus: true
@@ -124,6 +129,10 @@ Page({
     let result = {}
     _this.setData({
       spinShow: true
+    })
+    wx.showLoading({
+      title: '正在加入...',
+      mask: true
     })
     let Item = {
       url: `http://${app.ip}:5001/mini/msgs/addMsgUser`,
@@ -202,6 +211,7 @@ Page({
       width: 50,
       height: 50
     })
+    wx.hideLoading()
     _this.setData({
       value: result,
       spinShow: false,
