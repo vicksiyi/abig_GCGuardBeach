@@ -22,7 +22,9 @@ Page({
     token: '',
     addStatus: false,
     userNum: 0,
-    show: false  //防止滑动
+    show: false,  //防止滑动
+    width: 0,
+    height: 0
   },
 
   /**
@@ -32,6 +34,14 @@ Page({
     let _this = this
     _this.setData({
       spinShow: true
+    })
+    wx.getSystemInfo({
+      success(res) {
+        _this.setData({
+          width: res.screenWidth,
+          height: res.screenHeight
+        })
+      }
     })
     // options.id
     wx.getStorage({
@@ -204,13 +214,16 @@ Page({
     _this.setData({
       canvasShow: true
     })
+    console.log(_this.data.height)
+    let percentWidth = _this.data.width / 375
+    let percentHeight = _this.data.height / 667
     wx.getImageInfo({ // 或者用wx.downloadFile
       src: _this.data.value.msg_image,
       success: re => {
         const ctx = wx.createCanvasContext('canvas-map')
 
         // 背景图片
-        ctx.drawImage('../../resources/images/ma.jpg', 0, 0, 300, 375)
+        ctx.drawImage('../../resources/images/ma.jpg', 0, 0, 300 * percentWidth, 375 * percentHeight)
 
         // 活动图片
         // ctx.save();
@@ -219,32 +232,32 @@ Page({
         let str = 'GC海滩卫士~志愿者招募';
         ctx.setFontSize(15)
         ctx.setFillStyle('#1c2438')
-        ctx.fillText(str, 150 - ctx.measureText(str).width * 0.5, 25)
-        ctx.drawImage(re.path, 20, 40, 260, 160)
+        ctx.fillText(str, 150 - ctx.measureText(str).width * 0.5, 25 * percentHeight)
+        ctx.drawImage(re.path, 20 * percentWidth, 40, 260 * percentHeight, 160)
         // 任务
-        ctx.drawImage('../../resources/images/renwu.png', 30, 210, 12, 12)
+        ctx.drawImage('../../resources/images/renwu.png', 30 * percentWidth, 210 * percentHeight, 12, 12)
         ctx.setFontSize(12)
         ctx.setFillStyle('#80848f')
-        ctx.fillText(_this.data.value.msg_title, 50, 220)
+        ctx.fillText(_this.data.value.msg_title, 50 * percentWidth, 220 * percentHeight)
         // 地址
-        ctx.drawImage('../../resources/images/address.png', 30, 230, 12, 12)
+        ctx.drawImage('../../resources/images/address.png', 30 * percentWidth, 230 * percentHeight, 12, 12)
         ctx.setFontSize(12)
         ctx.setFillStyle('#80848f')
-        ctx.fillText(_this.data.value.msg_address, 50, 240)
+        ctx.fillText(_this.data.value.msg_address, 50 * percentWidth, 240 * percentHeight)
         // 时间
-        ctx.drawImage('../../resources/images/time.png', 30, 250, 12, 12)
+        ctx.drawImage('../../resources/images/time.png', 30 * percentWidth, 250 * percentHeight, 12, 12)
         ctx.setFontSize(12)
         ctx.setFillStyle('#80848f')
-        ctx.fillText(_this.data.value.msg_day, 50, 260)
+        ctx.fillText(_this.data.value.msg_day, 50 * percentWidth, 260 * percentHeight)
 
         if (_this.data.value.msg_status == undefined) {
           // 加入
           ctx.rotate(20 * Math.PI / 60);
-          ctx.drawImage('../../resources/images/joinSuc.png', 300, -120, 70, 70)
+          ctx.drawImage('../../resources/images/joinSuc.png', 300 * percentWidth, -120 * percentHeight, 70, 70)
         } else {
           // 加入
           ctx.rotate(20 * Math.PI / 60);
-          ctx.drawImage('../../resources/images/end.png', 300, -120, 70, 70)
+          ctx.drawImage('../../resources/images/end.png', 300 * percentWidth, -120, 70, 70)
         }
         // ctx.draw(true, _this.saveImage())
         ctx.draw()
