@@ -7,7 +7,9 @@ const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
 const qqmapsdk = new QQMapWX({
   key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
 });
-var status = 0  //防止异步问题再添加一个
+var upShowSc = false; // 飞机状态
+var tempSc = 0; // 上一次高度 
+var status = 0;  //防止异步问题再添加一个
 Page({
 
   data: {
@@ -18,7 +20,8 @@ Page({
     page: 0,
     endLoad: false,
     widthTemp: 0,
-    heightTemp: 0
+    heightTemp: 0,
+    scollTop:0
   },
   onLoad: function (options) {
     let _this = this;
@@ -340,5 +343,41 @@ Page({
         }
       });
     }, 3000)
+  },
+  // 火箭效果
+  scrollChange: function (e) {
+    let _this = this
+    if (e.detail.scrollTop > 100) {
+      _this.setData({
+        upShowTemp: true
+      })
+
+      if (tempSc > e.detail.scrollTop) {
+        upShowSc = true
+      } else {
+        upShowSc = false
+      }
+      _this.setData({
+        upShow: upShowSc
+      })
+    } else {
+      _this.setData({
+        upShowTemp: false
+      })
+    }
+    tempSc = e.detail.scrollTop
+  },
+  feiUp: function () {
+    let _this = this
+    _this.setData({
+      fei: true,
+    })
+
+    setTimeout(() => {
+      _this.setData({
+        fei: false,
+        scollTop: 0
+      })
+    }, 1000);
   }
 })

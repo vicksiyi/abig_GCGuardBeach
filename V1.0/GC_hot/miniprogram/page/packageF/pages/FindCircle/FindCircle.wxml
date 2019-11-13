@@ -1,5 +1,5 @@
 <!-- <i-load-more loading="{{ load }}" /> -->
-<scroll-view scroll-y="true" bindscrolltolower="bottomChange" style="height: {{height}}px;">
+<scroll-view scroll-y="true" bindscrolltolower="bottomChange"   bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height}}px;">
   <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
   <block wx:for="{{value}}">
     <view class="content">
@@ -64,3 +64,9 @@
   <i-load-more wx:if="{{endShow}}" loading="{{ true }}" />
   <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
 </scroll-view>
+
+<!-- 火箭 -->
+<view wx:if="{{upShowTemp}}" class="up {{upShow?'up-mask':'up-close'}} {{fei?'fei-up-mask':''}}">
+  <image class="{{fei?'fei-up-Image':''}}" bindtap="feiUp" src="../../../../images/up.{{fei?'gif':'png'}}"></image>
+  <!-- <image src="../../../images/up.gif"></image> -->
+</view>
