@@ -2,6 +2,8 @@ const app = getApp();
 const request = require('../../../../utils/requests');
 const { $Message } = require('../../../../dist/base/index');
 const Num = require('../../resources/js/num');
+const base64src = require('../../../../utils/base64src');
+
 Page({
 
   /**
@@ -47,6 +49,7 @@ Page({
         _this.getMsg(options.id, res.data);
       }
     })
+    // _this.enjoy()
   },
   // 导航
   navMap: function () {
@@ -194,6 +197,171 @@ Page({
       spinShow: false,
       markers: mks,
       show: true
+    })
+  },
+  enjoy: async function (e) {
+    let _this = this
+    _this.setData({
+      canvasShow: true
+    })
+    wx.getImageInfo({ // 或者用wx.downloadFile
+      src: _this.data.value.msg_image,
+      success: re => {
+        const ctx = wx.createCanvasContext('canvas-map')
+
+        // 背景图片
+        ctx.drawImage('../../resources/images/ma.jpg', 0, 0, 300, 375)
+
+        // 活动图片
+        // ctx.save();
+        // ctx.arc(260, 160, 20, 0, 10)
+        // ctx.clip();
+        let str = 'GC海滩卫士~志愿者招募';
+        ctx.setFontSize(15)
+        ctx.setFillStyle('#1c2438')
+        ctx.fillText(str, 150 - ctx.measureText(str).width * 0.5, 25)
+        ctx.drawImage(re.path, 20, 40, 260, 160)
+        // 任务
+        ctx.drawImage('../../resources/images/renwu.png', 30, 210, 12, 12)
+        ctx.setFontSize(12)
+        ctx.setFillStyle('#80848f')
+        ctx.fillText(_this.data.value.msg_title, 50, 220)
+        // 地址
+        ctx.drawImage('../../resources/images/address.png', 30, 230, 12, 12)
+        ctx.setFontSize(12)
+        ctx.setFillStyle('#80848f')
+        ctx.fillText(_this.data.value.msg_address, 50, 240)
+        // 时间
+        ctx.drawImage('../../resources/images/time.png', 30, 250, 12, 12)
+        ctx.setFontSize(12)
+        ctx.setFillStyle('#80848f')
+        ctx.fillText(_this.data.value.msg_day, 50, 260)
+
+        if (_this.data.value.msg_status == undefined) {
+          // 加入
+          ctx.rotate(20 * Math.PI / 60);
+          ctx.drawImage('../../resources/images/joinSuc.png', 300, -120, 70, 70)
+        } else {
+          // 加入
+          ctx.rotate(20 * Math.PI / 60);
+          ctx.drawImage('../../resources/images/end.png', 300, -120, 70, 70)
+        }
+        // ctx.draw(true, _this.saveImage())
+        ctx.draw()
+      }
+    })
+  },
+  /**
+   * 获取小程序码
+   */
+  getMode: function () {
+    let result = {};
+    (async () => {
+      let Item = {
+        url: `http://${app.ip}:5001/mini/chats/mode`,
+        method: "GET",
+        data: {
+          path: '../../index'
+        },
+        header: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': _this.data.token
+        }
+      };
+      // 加载信息
+      result = await request.requestUtils(Item)
+      console.log(result)
+      console.log(`data:image/png;base64,${wx.arrayBufferToBase64(wx.base64ToArrayBuffer(result))}`)
+    })()
+  },
+  // 保存图片
+  saveImage() {
+    let _this = this
+    setTimeout(() => {
+      wx.canvasToTempFilePath({
+        canvasId: 'canvas-map',
+        success(res) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success() {
+              console.log(res.tempFilePath)
+              _this.setData({
+                spinNow: false
+              })
+              $Message({
+                content: '图片已保存到相册',
+                type: 'success'
+              });
+            },
+            fail(err) {
+              _this.setData({
+                spinNow: false
+              })
+              console.log(err)
+              if (err.errMsg == 'saveImageToPhotosAlbum:fail auth deny') {
+                $Message({
+                  content: '必须获取权限才可图片保存'
+                });
+                console.log("打开设置窗口");
+                wx.showModal({
+                  title: '跳转',
+                  content: '是否进入开启权限页面',
+                  confirmText: '确定',
+                  confirmColor: '#19be6b',
+                  success(res2) {
+                    if (res2.confirm) {
+                      wx.openSetting({
+                        success(data) {
+                          if (data.authSetting["scope.writePhotosAlbum"]) {
+                            $Message({
+                              content: '获取权限成功，再次点击图片保存到相册',
+                              type: 'success'
+                            });
+                          } else {
+                            $Message({
+                              content: '获取权限失败',
+                              type: 'error'
+                            });
+                          }
+                        },
+                        fail(err) {
+                          console.log(err)
+                          $Message({
+                            content: '未知错误',
+                            type: 'error'
+                          });
+                        }
+                      })
+                    } else {
+                      $Message({
+                        content: '用户取消选择'
+                      });
+                    }
+                  }
+                })
+              }
+              // if (res.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
+              //   console.log("打开设置窗口");
+              //   wx.openSetting({
+              //     success(settingdata) {
+              //       console.log(settingdata)
+              //       if (settingdata.authSetting["scope.writePhotosAlbum"]) {
+              //         console.log("获取权限成功，再次点击图片保存到相册")
+              //       } else {
+              //         console.log("获取权限失败")
+              //       }
+              //     }
+              //   })
+              // }
+            }
+          });
+        }
+      });
+    }, 3000)
+  },
+  closeCanvas: function () {
+    this.setData({
+      canvasShow: false
     })
   }
 })

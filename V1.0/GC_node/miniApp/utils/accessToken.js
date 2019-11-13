@@ -9,7 +9,11 @@ const access_token = () => {
     request.get(`${keys.mini_token_url}?grant_type=client_credential&appid=${keys.APPID}&secret=${keys.SECRET}`, function (error, response, body) {
         access_token = JSON.parse(body).access_token
     })
-    return access_token
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(access_token)
+        }, 1000)
+    })
 }
 
 module.exports = {

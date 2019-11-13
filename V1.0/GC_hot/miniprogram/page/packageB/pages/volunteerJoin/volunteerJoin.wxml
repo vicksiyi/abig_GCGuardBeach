@@ -6,7 +6,7 @@
         <view class="title-free" style="{{value.msg_status == undefined?'':'color:#bbbec4;'}}">
             {{value.msg_status == undefined?'可加入':'已结束'}}
         </view>
-        <view class="title-enjoy">
+        <view class="title-enjoy" bindtap="enjoy">
             <text>点击生成图</text>
             <view>
                 <image src="../../resources/images/enjoy.png"></image>
@@ -72,6 +72,20 @@
             加入活动
         </button>
         <button wx:else class="add-cart-btn" bindtap='joinSuccess'>我的活动</button>
+    </view>
+</view>
+<!-- 生成图 -->
+<view class="canvas-bg" wx:if="{{canvasShow}}">
+    <view class="canvas-close" bindtap="closeCanvas">
+        <image src="../../resources/images/close.png"></image>
+    </view>
+    <view class="content {{canvasShow?'show-canvas':''}}">
+        <view class="canvas-content">
+            <canvas canvas-id="canvas-map" style="width: 600rpx; height: 750rpx;" class="share-canvas"></canvas>
+        </view>
+        <view>
+            <i-button bind:click="saveImage" type="primary">保存到相册</i-button>
+        </view>
     </view>
 </view>
 <i-message id="message" />

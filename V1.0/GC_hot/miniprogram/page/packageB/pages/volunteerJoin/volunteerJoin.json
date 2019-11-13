@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "i-spin": "../../../../dist/spin/index",
-    "i-message": "../../../dist/message/index"
+    "i-message": "../../../dist/message/index",
+    "i-button": "../../../dist/button/index"
   },
   "navigationBarTitleText": "加入活动"
 }
