@@ -1,12 +1,8 @@
 const request = require("../../../../utils/requests");
 const app = getApp();
 const Location = require('../../../../utils/locations');
-const { $Message } = require('../../../../dist/base/index');
 const locations = new Location();
-const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
-const qqmapsdk = new QQMapWX({
-  key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
-});
+const { $Message } = require('../../../../dist/base/index');
 var upShowSc = false; // 飞机状态
 var tempSc = 0; // 上一次高度 
 var status = 0;  //防止异步问题再添加一个
@@ -21,7 +17,7 @@ Page({
     endLoad: false,
     widthTemp: 0,
     heightTemp: 0,
-    scollTop:0
+    scollTop: 0
   },
   onLoad: function (options) {
     let _this = this;
@@ -85,22 +81,12 @@ Page({
         // 阻塞
         locations.sleep(300);
         // 获取位置
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: tempPlace.latitude,
-            longitude: tempPlace.longitude
-          },
-          sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-          success: function (res) {
-            temp = 'value[' + (index + page * 10) + '].str';
-            _this.setData({
-              [temp]: res.result.address
-            })
-          },
-          fail: function (error) {
-            console.error(error);
-          }
-        });
+        locations.LLToAddress(tempPlace.latitude, tempPlace.longitude, res => {
+          temp = 'value[' + (index + page * 10) + '].str';
+          _this.setData({
+            [temp]: res.result.address
+          })
+        })
       })
       return result
     } catch (err) {
@@ -282,7 +268,7 @@ Page({
               });
             },
             fail(err) {
-              wx.hideLoading()
+              wx.hideLoading();
               if (err.errMsg == 'saveImageToPhotosAlbum:fail auth deny') {
                 $Message({
                   content: '必须获取权限才可图片保存'
@@ -310,34 +296,21 @@ Page({
                           }
                         },
                         fail(err) {
-                          console.log(err)
+                          console.log(err);
                           $Message({
                             content: '未知错误',
                             type: 'error'
                           });
                         }
-                      })
+                      });
                     } else {
                       $Message({
                         content: '用户取消选择'
                       });
-                    }
+                    };
                   }
-                })
-              }
-              // if (res.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
-              //   console.log("打开设置窗口");
-              //   wx.openSetting({
-              //     success(settingdata) {
-              //       console.log(settingdata)
-              //       if (settingdata.authSetting["scope.writePhotosAlbum"]) {
-              //         console.log("获取权限成功，再次点击图片保存到相册")
-              //       } else {
-              //         console.log("获取权限失败")
-              //       }
-              //     }
-              //   })
-              // }
+                });
+              };
             }
           });
         }

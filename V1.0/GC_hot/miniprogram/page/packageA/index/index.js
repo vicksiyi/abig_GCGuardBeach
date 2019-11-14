@@ -1,13 +1,12 @@
 const {
   $Message
 } = require('../../../dist/base/index');
-const QQMapWX = require('../../../utils/qqmap-wx-jssdk');
 const requests = require('../../../utils/requests');
 const weatherLogoList = require('../../../utils/weatherLogo');
 const Utils = require('../../../utils/util');
-const plugin = requirePlugin('routePlan');
+const Location = require('../../../utils/locations');
+const locations = new Location();
 const Oauth = require('../../../utils/oauth');
-var qqmapsdk;
 const utils = new Utils();
 const oauth = new Oauth();
 Page({
@@ -56,10 +55,10 @@ Page({
     loadMap: true
   },
   // 跳转到全览页面
-  view:function(){
- wx.navigateTo({
-   url: '../../packageB/pages/FullView/FullView',
- })
+  view: function () {
+    wx.navigateTo({
+      url: '../../packageB/pages/FullView/FullView',
+    })
   },
   /**
    * 点击弹出
@@ -183,9 +182,9 @@ Page({
     oauth.loginUser()
 
     // 测试所用
-    wx.navigateTo({
-      url:"../../packageF/pages/FindCircle/FindCircle"
-    })
+    // wx.navigateTo({
+    //   url: "../../packageF/pages/FindCircle/FindCircle"
+    // })
     wx.getLocation({
       type: 'wgs84',
       success(res) {
@@ -257,20 +256,11 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: function (res) {
-              // 用户已经授权过,不改变 isHide 的值
-              // 用户授权成功后，调用微信的 wx.login 接口，从而获取code
-              // wx.login({
-              //   success: res => {
-              // 获取到用户的 code 之后：res.code
-              // console.log("用户的code:" + res.code);
               var userInfo = res.userInfo
               var nickName = userInfo.nickName
               var avatarUrl = userInfo.avatarUrl
-              // console.log("用户名为:" + nickName);
               wx.setStorageSync('name', nickName);
               wx.setStorageSync('avatar', avatarUrl);
-              // }
-              // });
             }
           });
         } else {
@@ -297,31 +287,12 @@ Page({
   weatherAll: function (latitude = '', longitude = '') {
     let _this = this
     if (latitude && longitude) {
-      // 实例化API核心类
-      qqmapsdk = new QQMapWX({
-        key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
-      });
-      qqmapsdk.reverseGeocoder({
-        //位置坐标，默认获取当前位置，非必须参数 
-        //Object格式
-        location: {
-          latitude: latitude,
-          longitude: longitude
-        },
-        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-
-        success: function (res) { //成功后的回调
-          // 渲染天气
-          let start = [res.result.address_component.city, '-', res.result.address_component.district, '-', res.result.address_component.street_number].join("")
-          let city = res.result.address_component
-          _this.weatherApply(start, city)
-        },
-        fail: function (error) {
-          console.error(error);
-        },
-        complete: function (res) {
-          console.log(res);
-        }
+      // 获取地区
+      locations.LLToAddress(latitude, longitude, (res) => {
+        // 渲染天气
+        let start = [res.result.address_component.city, '-', res.result.address_component.district, '-', res.result.address_component.street_number].join("")
+        let city = res.result.address_component
+        _this.weatherApply(start, city)
       })
     } else {
       _this.weatherApply()
@@ -399,7 +370,6 @@ Page({
    */
   weatherLogoFun: function (dat_condition) {
     let _this = this
-    console.log(dat_condition)
     let dat_condition_list = []
     for (let i = 0; i < _this.data.weatherLogoList.length; i++) {
       dat_condition_list.push(_this.data.weatherLogoList[i].name)
@@ -436,64 +406,34 @@ Page({
    */
   gcAll: function (latitude = '', longitude = '') {
     let _this = this
-    console.log(latitude, longitude)
+    // console.log(latitude, longitude)
     if (latitude && longitude) {
-      // 实例化API核心类
-      qqmapsdk = new QQMapWX({
-        key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
-      });
-      qqmapsdk.search({
-        keyword: '海滩',  //搜索关键词
-        location: {
-          latitude: latitude,
-          longitude: longitude
-        },  //设置周边搜索中心点
-        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-        success: function (res) { //搜索成功后的回调
-          var mks = []
-          console.log(res)
-          for (var i = 0; i < res.data.length; i++) {
-            // 测试所用
-            if (res.data[i].title == "西葛沙滩") {
-              mks.push({ // 获取返回结果，放到mks数组中
-                title: res.data[i].title,
-                id: res.data[i].id,
-                latitude: res.data[i].location.lat,
-                longitude: res.data[i].location.lng,
-                iconPath: "../../../images/map_success.png", //图标路径
-                width: 50,
-                height: 50,
-                address: res.data[i].address,
-                tel: res.data[i].tel,
-                category: res.data[i].category.split(":")[1]
-              })
-            } else {
-              mks.push({ // 获取返回结果，放到mks数组中
-                title: res.data[i].title,
-                id: res.data[i].id,
-                latitude: res.data[i].location.lat,
-                longitude: res.data[i].location.lng,
-                iconPath: "../../../images/map_error.png", //图标路径
-                width: 50,
-                height: 50,
-                address: res.data[i].address,
-                tel: res.data[i].tel,
-                category: res.data[i].category.split(":")[1]
-              })
-            }
-            _this.setData({ //设置markers属性，将搜索结果显示在地图中
-              markers: mks
-            })
+      locations.LLToNear('海滩', latitude, longitude, (res) => {
+        var mks = [];
+        let Item = {}
+        for (var i = 0; i < res.data.length; i++) {
+          Item = { // 获取返回结果，放到mks数组中
+            title: res.data[i].title,
+            id: res.data[i].id,
+            latitude: res.data[i].location.lat,
+            longitude: res.data[i].location.lng,
+            iconPath: "../../../images/map_error.png", //图标路径
+            width: 50,
+            height: 50,
+            address: res.data[i].address,
+            tel: res.data[i].tel,
+            category: res.data[i].category.split(":")[1]
           }
-          console.log(res)
-        },
-        fail: function (res) {
-          console.log(res);
-        },
-        complete: function (res) {
-          console.log(res);
+          // 测试所用
+          if (res.data[i].title == "西葛沙滩") {
+            Item.iconPath = "../../../images/map_success.png"
+          }
+          mks.push(Item)
+          _this.setData({ //设置markers属性，将搜索结果显示在地图中
+            markers: mks
+          })
         }
-      });
+      })
     } else {
       $Message({
         content: '地图请求失败',
@@ -503,7 +443,6 @@ Page({
   },
   // 点击标记点时触发
   markersChange: function (res) {
-    console.log(res)
     let _this = this
     _this.setData({ // 防止加载没完，弹框出
       spinShow: false,
@@ -515,7 +454,6 @@ Page({
     })
     // 距离计算
     _this.calLocation(data.latitude, data.longitude)
-    console.log(data)
   },
   /**
    * 获取所点击markers信息
@@ -608,9 +546,6 @@ Page({
   // 距离计算
   calLocation: function (latitude, longitude) {
     let _this = this
-    qqmapsdk = new QQMapWX({
-      key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O' // 必填
-    });
     let dest = [{
       latitude: latitude,
       longitude: longitude
@@ -620,23 +555,12 @@ Page({
       distance: 0
     })
     //调用距离计算接口
-    qqmapsdk.calculateDistance({
-      to: dest, //终点坐标
-      sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-      success: function (res) {//成功后的回调
-        console.log(res.result.elements[0].distance);
-        _this.setData({
-          // 米转公里
-          distance: utils.distanceFormat(res.result.elements[0].distance),
-          loadDistance: false
-        })
-      },
-      fail: function (error) {
-        console.error(error);
-      },
-      complete: function (res) {
-        console.log(res);
-      }
-    });
+    locations.calculateDistance(dest, res => {
+      _this.setData({
+        // 米转公里
+        distance: utils.distanceFormat(res.result.elements[0].distance),
+        loadDistance: false
+      })
+    })
   }
 })

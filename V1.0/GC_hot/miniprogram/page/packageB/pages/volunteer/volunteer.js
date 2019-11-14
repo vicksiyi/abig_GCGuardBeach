@@ -1,10 +1,9 @@
 const app = getApp();
 const request = require('../../../../utils/requests');
-// const Num = require('../../resources/js/num');
-const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
+const Location = require('../../../../utils/locations');
+const locations = new Location();
 const Utils = require('../../../../utils/util');
 const utils = new Utils();
-var qqmapsdk;
 Page({
   data: {
     value: [],
@@ -93,9 +92,6 @@ Page({
   // 距离计算
   calLocation: function (result) {
     let _this = this
-    qqmapsdk = new QQMapWX({
-      key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O' // 必填
-    });
     let dest = []
     result.map((value, index) => {
       dest = [{
@@ -103,24 +99,14 @@ Page({
         longitude: value.msg_longitude
       }]
       //调用距离计算接口
-      qqmapsdk.calculateDistance({
-        to: dest, //终点坐标
-        sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-        success: function (res) {//成功后的回调
-          //  米转公里
-          result[index].msg_distance = utils.distanceFormat(res.result.elements[0].distance)
+      locations.calculateDistance(dest, res => {
+        //  米转公里
+        result[index].msg_distance = utils.distanceFormat(res.result.elements[0].distance)
 
-          _this.setData({
-            value: result,
-            spinLoad: false
-          })
-        },
-        fail: function (error) {
-          console.error(error);
-        },
-        complete: function (res) {
-          console.log(res);
-        }
+        _this.setData({
+          value: result,
+          spinLoad: false
+        })
       });
     });
   }
