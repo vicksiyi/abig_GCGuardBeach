@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 const Find = require('../../models/Find');
 const Err = require('../../utils/error');
-const User = require('../../models/User')
 
 
 // $routes /api/find/ceshi
