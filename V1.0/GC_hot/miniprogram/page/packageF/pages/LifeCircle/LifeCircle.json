@@ -4,5 +4,5 @@
   },
   "navigationStyle": "custom",
   "navigationBarTextStyle": "black",
-  "disableScroll": true
+  "navigationBarTitleText": "生活圈"
 }

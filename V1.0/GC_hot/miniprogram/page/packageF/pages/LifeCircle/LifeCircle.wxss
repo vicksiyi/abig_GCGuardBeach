@@ -185,3 +185,25 @@ swiper {
     padding: 0 10rpx 10rpx 10rpx;
     line-height: 30rpx;
 }
+
+.write{
+    position: fixed;
+    right: 30rpx;
+    bottom: 100rpx;
+    border-radius: 50%;
+}
+
+.write image{
+    width: 80rpx;
+    height: 80rpx;
+    box-shadow: 0 0 5px #ff9900;
+    border-radius: 50%;
+}
+
+/* .block{
+    overflow: scroll;
+} */
+
+swiper-item{
+    overflow: scroll;
+}

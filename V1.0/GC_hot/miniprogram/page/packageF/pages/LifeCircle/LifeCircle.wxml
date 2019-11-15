@@ -10,7 +10,7 @@
     </view>
 </view>
 <!-- 轮播 -->
-<view style="height:{{height -70}}px">
+<view style="height:{{height -70}}px;">
     <swiper current="{{current}}" bindchange="currentChange" circular="{{true}}" indicator-dots="{{false}}" autoplay="{{false}}">
         <swiper-item>
             <template is="life" data="{{value,picture}}"></template>
@@ -22,4 +22,8 @@
             <template is="life" data="{{valueSelect,picture}}"></template>
         </swiper-item>
     </swiper>
+</view>
+<!-- 写 -->
+<view class="write" bindtap="write">
+    <image src="../../resources/images/write.png"></image>
 </view>

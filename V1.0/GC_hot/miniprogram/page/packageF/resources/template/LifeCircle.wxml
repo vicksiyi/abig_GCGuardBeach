@@ -1,40 +1,198 @@
 <template name="life">
-    <view class="content">
-        <view class="avatar">
-            <image src="https://wx.qlogo.cn/mmopen/vi_32/HpGXpDeYfc4nupOOcx6tTictib6Rf5PlEkMjV4Iiakb1jBnylCYw0Acv1SveqibVciabuibJxm2VCJpFgGaic3UHpmk1w/132"></image>
-        </view>
-        <view class="content-title">
-            <view class="content-content">
-                <view class="content-title-name">
-                    <text>GC怪兽</text>
-                    <text style="color:#bbbec4;">2019/12/01 00:00:00</text>
-                </view>
-                <view class="content-msg">
-                    @所有人
+    <view class="block">
+        <view class="content">
+            <view class="avatar">
+                <image src="https://wx.qlogo.cn/mmopen/vi_32/HpGXpDeYfc4nupOOcx6tTictib6Rf5PlEkMjV4Iiakb1jBnylCYw0Acv1SveqibVciabuibJxm2VCJpFgGaic3UHpmk1w/132"></image>
+            </view>
+            <view class="content-title">
+                <view class="content-content">
+                    <view class="content-title-name">
+                        <text>GC怪兽</text>
+                        <text style="color:#bbbec4;">2019/12/01 00:00:00</text>
+                    </view>
+                    <view class="content-msg">
+                        @所有人
 明天的集合地点大家再看一下
 时间为：明天早上7:15分，请提前十分钟集合完毕。
 有校服的穿好校服，可以穿长袖，没校服的穿黑裤子白上衣。
+                    </view>
+                    <template is="image" data="{{picture}}"></template>
                 </view>
-                <template is="image" data="{{picture}}"></template>
+                <view class="mode">
+                    <view bindtap="msgMode">
+                        <image src="../../resources/images/msg.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="zhaoMode">
+                        <image src="../../resources/images/zhao.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="enjoyMode" data-Index="{{index}}">
+                        <image src="../../resources/images/enjoy.png"></image>
+                        <text>分享</text>
+                    </view>
+                </view>
+                <!-- 标签 -->
+                <view class="tag">
+                    <image src="../../resources/images/tag.png"></image>
+                    <text>我家有猫</text>
+                </view>
             </view>
-            <view class="mode">
-                <view bindtap="msgMode">
-                    <image src="../../resources/images/msg.png"></image>
-                    <text>0</text>
+        </view>
+        <view class="content">
+            <view class="avatar">
+                <image src="https://wx.qlogo.cn/mmopen/vi_32/HpGXpDeYfc4nupOOcx6tTictib6Rf5PlEkMjV4Iiakb1jBnylCYw0Acv1SveqibVciabuibJxm2VCJpFgGaic3UHpmk1w/132"></image>
+            </view>
+            <view class="content-title">
+                <view class="content-content">
+                    <view class="content-title-name">
+                        <text>GC怪兽</text>
+                        <text style="color:#bbbec4;">2019/12/01 00:00:00</text>
+                    </view>
+                    <view class="content-msg">
+                        @所有人
+明天的集合地点大家再看一下
+时间为：明天早上7:15分，请提前十分钟集合完毕。
+有校服的穿好校服，可以穿长袖，没校服的穿黑裤子白上衣。
+                    </view>
+                    <template is="image" data="{{picture}}"></template>
                 </view>
-                <view bindtap="zhaoMode">
-                    <image src="../../resources/images/zhao.png"></image>
-                    <text>0</text>
+                <view class="mode">
+                    <view bindtap="msgMode">
+                        <image src="../../resources/images/msg.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="zhaoMode">
+                        <image src="../../resources/images/zhao.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="enjoyMode" data-Index="{{index}}">
+                        <image src="../../resources/images/enjoy.png"></image>
+                        <text>分享</text>
+                    </view>
                 </view>
-                <view bindtap="enjoyMode" data-Index="{{index}}">
-                    <image src="../../resources/images/enjoy.png"></image>
-                    <text>分享</text>
+                <!-- 标签 -->
+                <view class="tag">
+                    <image src="../../resources/images/tag.png"></image>
+                    <text>我家有猫</text>
                 </view>
             </view>
-            <!-- 标签 -->
-            <view class="tag">
-                <image src="../../resources/images/tag.png"></image>
-                <text>我家有猫</text>
+        </view>
+        <view class="content">
+            <view class="avatar">
+                <image src="https://wx.qlogo.cn/mmopen/vi_32/HpGXpDeYfc4nupOOcx6tTictib6Rf5PlEkMjV4Iiakb1jBnylCYw0Acv1SveqibVciabuibJxm2VCJpFgGaic3UHpmk1w/132"></image>
+            </view>
+            <view class="content-title">
+                <view class="content-content">
+                    <view class="content-title-name">
+                        <text>GC怪兽</text>
+                        <text style="color:#bbbec4;">2019/12/01 00:00:00</text>
+                    </view>
+                    <view class="content-msg">
+                        @所有人
+明天的集合地点大家再看一下
+时间为：明天早上7:15分，请提前十分钟集合完毕。
+有校服的穿好校服，可以穿长袖，没校服的穿黑裤子白上衣。
+                    </view>
+                    <template is="image" data="{{picture}}"></template>
+                </view>
+                <view class="mode">
+                    <view bindtap="msgMode">
+                        <image src="../../resources/images/msg.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="zhaoMode">
+                        <image src="../../resources/images/zhao.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="enjoyMode" data-Index="{{index}}">
+                        <image src="../../resources/images/enjoy.png"></image>
+                        <text>分享</text>
+                    </view>
+                </view>
+                <!-- 标签 -->
+                <view class="tag">
+                    <image src="../../resources/images/tag.png"></image>
+                    <text>我家有猫</text>
+                </view>
+            </view>
+        </view>
+        <view class="content">
+            <view class="avatar">
+                <image src="https://wx.qlogo.cn/mmopen/vi_32/HpGXpDeYfc4nupOOcx6tTictib6Rf5PlEkMjV4Iiakb1jBnylCYw0Acv1SveqibVciabuibJxm2VCJpFgGaic3UHpmk1w/132"></image>
+            </view>
+            <view class="content-title">
+                <view class="content-content">
+                    <view class="content-title-name">
+                        <text>GC怪兽</text>
+                        <text style="color:#bbbec4;">2019/12/01 00:00:00</text>
+                    </view>
+                    <view class="content-msg">
+                        @所有人
+明天的集合地点大家再看一下
+时间为：明天早上7:15分，请提前十分钟集合完毕。
+有校服的穿好校服，可以穿长袖，没校服的穿黑裤子白上衣。
+                    </view>
+                    <template is="image" data="{{picture}}"></template>
+                </view>
+                <view class="mode">
+                    <view bindtap="msgMode">
+                        <image src="../../resources/images/msg.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="zhaoMode">
+                        <image src="../../resources/images/zhao.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="enjoyMode" data-Index="{{index}}">
+                        <image src="../../resources/images/enjoy.png"></image>
+                        <text>分享</text>
+                    </view>
+                </view>
+                <!-- 标签 -->
+                <view class="tag">
+                    <image src="../../resources/images/tag.png"></image>
+                    <text>我家有猫</text>
+                </view>
+            </view>
+        </view>
+        <view class="content">
+            <view class="avatar">
+                <image src="https://wx.qlogo.cn/mmopen/vi_32/HpGXpDeYfc4nupOOcx6tTictib6Rf5PlEkMjV4Iiakb1jBnylCYw0Acv1SveqibVciabuibJxm2VCJpFgGaic3UHpmk1w/132"></image>
+            </view>
+            <view class="content-title">
+                <view class="content-content">
+                    <view class="content-title-name">
+                        <text>GC怪兽</text>
+                        <text style="color:#bbbec4;">2019/12/01 00:00:00</text>
+                    </view>
+                    <view class="content-msg">
+                        @所有人
+明天的集合地点大家再看一下
+时间为：明天早上7:15分，请提前十分钟集合完毕。
+有校服的穿好校服，可以穿长袖，没校服的穿黑裤子白上衣。
+                    </view>
+                    <template is="image" data="{{picture}}"></template>
+                </view>
+                <view class="mode">
+                    <view bindtap="msgMode">
+                        <image src="../../resources/images/msg.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="zhaoMode">
+                        <image src="../../resources/images/zhao.png"></image>
+                        <text>0</text>
+                    </view>
+                    <view bindtap="enjoyMode" data-Index="{{index}}">
+                        <image src="../../resources/images/enjoy.png"></image>
+                        <text>分享</text>
+                    </view>
+                </view>
+                <!-- 标签 -->
+                <view class="tag">
+                    <image src="../../resources/images/tag.png"></image>
+                    <text>我家有猫</text>
+                </view>
             </view>
         </view>
     </view>

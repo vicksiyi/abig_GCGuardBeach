@@ -72,5 +72,10 @@ Page({
       urls: e.currentTarget.dataset.image,
       current: e.currentTarget.dataset.url
     })
+  },
+  write: function () {
+    wx.navigateTo({
+      url: '../../../packageD/pages/write/write'
+    })
   }
 })

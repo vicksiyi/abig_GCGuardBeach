@@ -183,7 +183,7 @@ Page({
 
     // 测试所用
     // wx.navigateTo({
-    //   url: "../../packageF/pages/LifeCircle/LifeCircle"
+    //   url: "../../packageD/pages/write/write"
     // })
     wx.getLocation({
       type: 'wgs84',

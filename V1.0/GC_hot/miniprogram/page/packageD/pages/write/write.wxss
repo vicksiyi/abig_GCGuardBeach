@@ -1,0 +1,128 @@
+.content {
+    width: 95%;
+    margin: 30rpx auto;
+    height: 500rpx;
+}
+
+textarea {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: auto;
+    color: #495060;
+    height: 500rpx;
+}
+
+.select {
+    width: 100%;
+    height: 100rpx;
+    position: fixed;
+    bottom: 0;
+    background: #f8f8f9;
+    margin: auto;
+}
+
+.select image {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 20rpx;
+}
+
+.select text {
+    font-size: 1.1rem;
+    color: #dddee1;
+    position: relative;
+    top: -35rpx;
+}
+
+
+.submit {
+    float: right;
+    margin-right: 30rpx;
+}
+
+.submit image {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 10rpx;
+}
+
+.anim {
+    animation: jiggle 2s ease-in infinite;
+}
+
+@keyframes jiggle {
+
+    48%,
+    62% {
+        transform: scale(1.0, 1.0)
+    }
+
+    50% {
+        transform: scale(1.1, 0.9)
+    }
+
+    56% {
+        transform: scale(0.9, 1.1) translate(0, -5px)
+    }
+
+    59% {
+        transform: scale(1.0, 1.0) translate(0, -3px)
+    }
+}
+
+.picture {
+    width: 80%;
+    height: auto;
+    /* background: #f8f8f9; */
+    position: fixed;
+    bottom: 100rpx;
+    justify-content: space-around;
+    z-index: 3;
+}
+
+.picture image {
+    width: 160rpx;
+    height: 160rpx;
+    margin: 20rpx 0 0 20rpx;
+    border-radius: 10rpx;
+}
+
+.show-picture {
+    animation: showPicture 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.close-picture {
+    animation: closePicture 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+
+@keyframes showPicture {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+        transform-origin: 0 100% 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        transform-origin: 0 100% 0;
+    }
+}
+
+@keyframes closePicture {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        transform-origin: 0 100% 0;
+    }
+
+    100% {
+        transform: scale(0.2);
+        opacity: 0;
+        transform-origin: 0 100% 0;
+    }
+}

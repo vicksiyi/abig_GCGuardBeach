@@ -104,6 +104,12 @@
         "pages/email/email",
         "pages/phone/phone"
       ]
+    },
+    {
+      "root": "page/packageD/",
+      "pages": [
+        "pages/write/write"
+      ]
     }
   ],
   "usingComponents": {
