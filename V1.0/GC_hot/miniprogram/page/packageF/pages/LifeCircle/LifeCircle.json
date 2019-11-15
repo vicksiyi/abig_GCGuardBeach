@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-tag": "../../../dist/tag/index"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "disableScroll": true
+}

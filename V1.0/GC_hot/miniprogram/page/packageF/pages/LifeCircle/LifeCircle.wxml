@@ -1,0 +1,25 @@
+<import src="../../resources/template/LifeCircle.wxml" />
+<!-- 标签 -->
+<view class="border">
+    <view class="tap">
+        <block wx:for="{{list}}">
+            <view class="font {{item == selectList?'select':''}}" bindtap="listChange" data-Id="{{index}}">
+                <text>{{item}}</text>
+            </view>
+        </block>
+    </view>
+</view>
+<!-- 轮播 -->
+<view style="height:{{height -70}}px">
+    <swiper current="{{current}}" bindchange="currentChange" circular="{{true}}" indicator-dots="{{false}}" autoplay="{{false}}">
+        <swiper-item>
+            <template is="life" data="{{value,picture}}"></template>
+        </swiper-item>
+        <swiper-item>
+            <template is="life" data="{{valueFocus,picture}}"></template>
+        </swiper-item>
+        <swiper-item>
+            <template is="life" data="{{valueSelect,picture}}"></template>
+        </swiper-item>
+    </swiper>
+</view>

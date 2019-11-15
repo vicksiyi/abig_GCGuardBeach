@@ -75,7 +75,8 @@
       "pages": [
         "pages/find/find",
         "pages/FindCircle/FindCircle",
-        "pages/record/record"
+        "pages/record/record",
+        "pages/LifeCircle/LifeCircle"
       ]
     },
     {

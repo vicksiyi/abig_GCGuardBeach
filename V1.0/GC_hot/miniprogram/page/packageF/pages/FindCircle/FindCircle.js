@@ -96,7 +96,8 @@ Page({
   // 放大浏览
   showImage: function (e) {
     wx.previewImage({
-      urls: [e.currentTarget.dataset.url]
+      urls: e.currentTarget.dataset.image,
+      current:e.currentTarget.dataset.url
     })
   },
   // 评论
