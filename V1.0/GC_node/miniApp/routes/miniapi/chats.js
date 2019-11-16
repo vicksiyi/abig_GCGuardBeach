@@ -46,22 +46,30 @@ router.get('/mode', passport.authenticate('jwt', { session: false }), (req, res)
 // $routes /mini/chats/send
 // @desc 发送生活圈
 // @access private
-router.get('/send', passport.authenticate('jwt', { session: false }), (req, res) => {
-    new Life({
-        nickName: req.user[0].nickName,
-        avatarUrl: req.user[0].avatarUrl,
-        picture: JSON.parse(req.body.picture),
-        content: req.body.content,
-        openId: req.user[0].openId,
-        type: req.body.type //需检查
-    }).save().then(life => {
+router.post('/send', passport.authenticate('jwt', { session: false }), (req, res) => {
+    LifeType.findOne({ twoType: req.body.type }).then(lifetype => {
+        if (lifetype) {
+            new Life({
+                nickName: req.user[0].nickName,
+                avatarUrl: req.user[0].avatarUrl,
+                picture: JSON.parse(req.body.picture),
+                content: req.body.content,
+                openId: req.user[0].openId,
+                type: req.body.type //需检查
+            }).save().then(life => {
+                res.json({
+                    msg: "Success"
+                })
+            }).catch(err => {
+                Err.ErrorFuc(err, req.originalUrl)
+                res.json({
+                    msg: 'Error'
+                })
+            })
+            return
+        }
         res.json({
-            msg: "Success"
-        })
-    }).catch(err => {
-        Err.ErrorFuc(err, req.originalUrl)
-        res.json({
-            msg: 'Error'
+            msg: '字段错误!'
         })
     })
 })

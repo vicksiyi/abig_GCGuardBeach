@@ -1,6 +1,8 @@
 const {
   $Message
 } = require('../../../../dist/base/index');
+const app = getApp();
+const request = require("../../../../utils/requests");
 Page({
 
   /**
@@ -9,14 +11,7 @@ Page({
   data: {
     height: 0,
     num: 0,
-    picture: [
-      "https://f10.baidu.com/it/u=752933719,2910359121&fm=72",
-      "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1791756207,2978103232&fm=26&gp=0.jpg",
-      "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2827671765,2134146140&fm=26&gp=0.jpg",
-      "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3018012401,1671622766&fm=26&gp=0.jpg",
-      "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2720935957,2361862842&fm=26&gp=0.jpg",
-      "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3965504300,834220496&fm=26&gp=0.jpg"
-    ],
+    picture: [],
     msg: '',
     visible2: false,
     actions2: [{
@@ -26,17 +21,47 @@ Page({
     id: 0,
     showPhoto: false,
     showStatus: false,
-    tag: '我家有猫'
+    tag: 'GC海滩卫士',
+    token: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let _this = this
+    if (options.type != undefined && options.type) {
+      _this.setData({
+        tag: options.type
+      })
+    }
     wx.getSystemInfo({
       success(res) {
         _this.setData({
           height: res.windowHeight
+        })
+      }
+    })
+    wx.getStorage({
+      key: 'picture',
+      success(res) {
+        _this.setData({
+          picture: JSON.parse(res.data)
+        })
+      }
+    })
+    wx.getStorage({
+      key: 'Token',
+      success(res) {
+        _this.setData({
+          token: res.data
+        })
+      }
+    })
+    wx.getStorage({
+      key: 'msg',
+      success(res) {
+        _this.setData({
+          msg: res.data
         })
       }
     })
@@ -105,8 +130,81 @@ Page({
     })
   },
   selectTag: function () {
+    wx.setStorage({
+      key: "picture",
+      data: JSON.stringify(this.data.picture)
+    })
+    wx.setStorage({
+      key: "msg",
+      data: this.data.msg
+    })
     wx.navigateTo({
       url: '../selectTag/selectTag'
+    })
+  },
+  onUnload: function () {
+    wx.removeStorage({
+      key: 'picture',
+      success(res) {
+        console.log(res)
+      }
+    })
+    wx.removeStorage({
+      key: 'msg',
+      success(res) {
+        console.log(res)
+      }
+    })
+    wx.removeStorage({
+      key: 'type',
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+  msgChange: function (e) {
+    this.setData({
+      msg: e.detail.value
+    })
+  },
+  submit: function () {
+    let _this = this
+    let Item = {
+      url: `http://${app.ip}:5001/mini/chats/send`,
+      method: "POST",
+      data: {
+        picture: JSON.stringify(_this.data.picture),
+        content: _this.data.msg,
+        type: _this.data.tag
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': _this.data.token
+      }
+    };
+    request.requestUtils(Item, res => {
+      if (res.msg == "Success") {
+        $Message({
+          content: '发布成功！',
+          type: 'success'
+        });
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000);
+      }
+    })
+  },
+  onShow: function () {
+    let _this = this
+    wx.getStorage({
+      key: 'type',
+      success(res) {
+        _this.setData({
+          tag: res.data
+        })
+      }
     })
   }
 })

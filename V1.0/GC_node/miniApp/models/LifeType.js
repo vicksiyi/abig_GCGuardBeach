@@ -11,6 +11,10 @@ const LifeTypeSchema = new Schema({
         type: String,
         required: true
     },
+    image: {          // 图片
+        type: String,
+        required: true
+    },
     time: {
         type: Date,
         default: Date.now

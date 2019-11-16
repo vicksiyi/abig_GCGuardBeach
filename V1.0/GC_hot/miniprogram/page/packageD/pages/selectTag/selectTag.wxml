@@ -19,7 +19,9 @@
                     <text>{{item.type}}</text>
                 </view>
                 <view class="btn-right">
-                    <button type="primary" plain="{{true}}" class="btn">选择</button>
+                    <button bindtap="selectType" data-Type="{{item.type}}" type="primary" plain="{{true}}" class="btn">
+                        选择
+                    </button>
                 </view>
             </view>
         </block>

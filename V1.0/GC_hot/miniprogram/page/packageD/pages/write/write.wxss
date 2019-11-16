@@ -4,6 +4,12 @@
     height: 500rpx;
 }
 
+.content text {
+    float: right;
+    margin-right: 100rpx;
+    color: #dddee1;
+}
+
 textarea {
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: auto;

@@ -1,5 +1,6 @@
 <view class="content">
-    <textarea maxlength="{{500}}" placeholder="说点什么吧" placeholder-style="color:#bbbec4;" />
+    <textarea maxlength="{{500}}" value="{{msg}}" placeholder="说点什么吧" bindinput="msgChange" placeholder-style="color:#bbbec4;" />
+    <text>{{500-msg.length}}</text>
 </view>
 <!-- 标签 -->
 <view class="tag" bindtap="selectTag">
@@ -18,7 +19,7 @@
     <image bindtap="showPicture" src="../../resources/images/photo.png"></image>
     <text>{{picture.length}}/9</text>
     <text style="font-size: 0.8rem;">(长按图片可删除)</text>
-    <view class="submit anim">
+    <view class="submit anim" bindtap="submit">
         <image src="../../resources/images/submit.png"></image>
     </view>
 </view>
