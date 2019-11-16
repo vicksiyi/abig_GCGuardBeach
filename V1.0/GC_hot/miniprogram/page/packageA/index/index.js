@@ -183,7 +183,7 @@ Page({
 
     // 测试所用
     // wx.navigateTo({
-    //   url: "../../packageD/pages/write/write"
+    //   url: "../../packageD/pages/selectTag/selectTag"
     // })
     wx.getLocation({
       type: 'wgs84',
@@ -323,29 +323,29 @@ Page({
     }
     // 天气
     let num = 0 // 只作一次更改
-    let event = async (itemTemp) => {
-      let result = await requests.requestUtils(itemTemp)
-      // 如果区域没有搜索到，则进行市区查询
-      if (result.data.city != city.city && num <= 0) {
-        num++ // 防止两次打印
-        item.data.city = city.city
-        return event(item)
-      }
+    let event = (itemTemp) => {
+      requests.requestUtils(itemTemp, result => {
+        // 如果区域没有搜索到，则进行市区查询
+        if (result.data.city != city.city && num <= 0) {
+          num++ // 防止两次打印
+          item.data.city = city.city
+          return event(item)
+        }
 
-      // 空气质量颜色问题
-      _this.weatherColorFun(result.data.weather.quality_level)
+        // 空气质量颜色问题
+        _this.weatherColorFun(result.data.weather.quality_level)
 
-      // 根据气候选Logo
-      _this.weatherLogoFun(result.data.weather.dat_condition)
+        // 根据气候选Logo
+        _this.weatherLogoFun(result.data.weather.dat_condition)
 
-      // 星期数
-      _this.weatherWeek()
+        // 星期数
+        _this.weatherWeek()
 
-      _this.setData({
-        weatherResult: result.data.weather,
-        spinShow: false
+        _this.setData({
+          weatherResult: result.data.weather,
+          spinShow: false
+        })
       })
-      console.log(result.data.weather)
     }
     event(item)
   },

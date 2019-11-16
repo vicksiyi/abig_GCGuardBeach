@@ -80,8 +80,7 @@ Page({
           },
           data: item
         };
-        (async () => {
-          let result = await request.requestUtils(Item, 5000)
+        request.requestUtils(Item, result => {
           if (result.msg == "Success") {
             _this.setData({
               numTest: result.num,
@@ -103,7 +102,8 @@ Page({
               })
             }, 1000)
           }
-        })()
+        })
+
       }
     })
   },

@@ -59,7 +59,7 @@ Page({
       });
     }
   },
-  submit: async function () {
+  submit: function () {
     let _this = this
     if (!_this.data.content) {
       $Message({
@@ -83,24 +83,25 @@ Page({
         'Authorization': _this.data.token
       }
     }
-    let result = await request.requestUtils(Item)
-    if (result.msg == "Success") {
-      $Message({
-        content: '反馈成功',
-        type: 'success'
-      });
-      setTimeout(() => {
-        wx.switchTab({
-          url: '../../../packageA/mine/mine'
-        })
-      }, 1000)
-    } else {
-      $Message({
-        content: '反馈失败',
-        type: 'error'
-      });
-    }
-    wx.hideLoading()
+    request.requestUtils(Item, result => {
+      if (result.msg == "Success") {
+        $Message({
+          content: '反馈成功',
+          type: 'success'
+        });
+        setTimeout(() => {
+          wx.switchTab({
+            url: '../../../packageA/mine/mine'
+          })
+        }, 1000)
+      } else {
+        $Message({
+          content: '反馈失败',
+          type: 'error'
+        });
+      }
+      wx.hideLoading()
+    })
   },
   onLoad: function () {
     let _this = this

@@ -21,7 +21,8 @@
   "tabBar": {
     "color": "#80848f",
     "selectedColor": "#2b85e4",
-    "list": [{
+    "list": [
+      {
         "pagePath": "page/packageA/index/index",
         "text": "首页",
         "iconPath": "images/icon/home.png",
@@ -108,7 +109,8 @@
     {
       "root": "page/packageD/",
       "pages": [
-        "pages/write/write"
+        "pages/write/write",
+        "pages/selectTag/selectTag"
       ]
     }
   ],

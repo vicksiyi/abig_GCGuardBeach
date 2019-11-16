@@ -25,7 +25,8 @@ Page({
     }],
     id: 0,
     showPhoto: false,
-    showStatus: false
+    showStatus: false,
+    tag: '我家有猫'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -101,6 +102,11 @@ Page({
     _this.setData({
       showPhoto: !_this.data.showPhoto,
       showStatus: true
+    })
+  },
+  selectTag: function () {
+    wx.navigateTo({
+      url: '../selectTag/selectTag'
     })
   }
 })

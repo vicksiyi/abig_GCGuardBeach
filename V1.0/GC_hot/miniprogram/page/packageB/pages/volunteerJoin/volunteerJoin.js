@@ -83,48 +83,47 @@ Page({
   // 加入
   joinIn: async function () {
     let _this = this
-    let result = {}
     $Message({
       content: '加载中...',
       type: 'warning',
       duration: 1
     });
     // 加入志愿者活动
-    result = await _this.joinVolunteer()
-
-    wx.hideLoading()
-    _this.setData({
-      spinShow: false,
-      addStatus: true
+    _this.joinVolunteer(result => {
+      wx.hideLoading()
+      _this.setData({
+        spinShow: false,
+        addStatus: true
+      })
+      if (result.msg == "Success") {
+        $Message({
+          content: '加入成功',
+          type: 'success'
+        });
+      } else if (result.msg == "Existing") {
+        $Message({
+          content: '已加入',
+          type: 'warning'
+        });
+      } else if (result.msg == "End") {
+        $Message({
+          content: '活动已结束',
+          type: 'warning'
+        });
+      } else {
+        $Message({
+          content: '未知错误,请稍后重试...',
+          type: 'error'
+        });
+      }
     })
-    if (result.msg == "Success") {
-      $Message({
-        content: '加入成功',
-        type: 'success'
-      });
-    } else if (result.msg == "Existing") {
-      $Message({
-        content: '已加入',
-        type: 'warning'
-      });
-    } else if (result.msg == "End") {
-      $Message({
-        content: '活动已结束',
-        type: 'warning'
-      });
-    } else {
-      $Message({
-        content: '未知错误,请稍后重试...',
-        type: 'error'
-      });
-    }
   },
   joinSuccess: function () {
     wx.navigateTo({
       url: '../../../packageH/pages/myVolunteer/myVolunteer'
     })
   },
-  joinVolunteer: async function () {
+  joinVolunteer: function (back) {
     let _this = this
     let result = {}
     _this.setData({
@@ -145,8 +144,9 @@ Page({
         'Authorization': _this.data.token
       }
     };
-    result = await request.requestUtils(Item)
-    return result
+    request.requestUtils(Item, result => {
+      back(result)
+    })
   },
   // 清洗time
   cleanTime: function (time) {
@@ -157,31 +157,33 @@ Page({
    * @param {*} id 活动ID
    * @param {*} token token
    */
-  getUserNum: async function (id, token) {
+  getUserNum: function (id, token) {
     let _this = this;
     let num = new Num();
-    let userNumTemp = await num.userNum(id, token);
-    // 格式化 时间
-    userNumTemp.user.map((value, index) => {
-      userNumTemp.user[index].time = _this.cleanTime(value.time)
-    })
+    num.userNum(id, token, userNumTemp => {
+      // 格式化 时间
+      userNumTemp.user.map((value, index) => {
+        userNumTemp.user[index].time = _this.cleanTime(value.time)
+      })
 
-    _this.setData({
-      userNum: userNumTemp.user.length,
-      person: userNumTemp.user
-    })
+      _this.setData({
+        userNum: userNumTemp.user.length,
+        person: userNumTemp.user
+      })
+    });
   },
   /**
    * 检测是否已经加入
    * @param {*} id 活动ID
    * @param {*} token token
    */
-  getUserStatus: async function (id, token) {
+  getUserStatus: function (id, token) {
     let _this = this;
     let num = new Num();
-    let statusTemp = await num.userStatus(id, token)
-    _this.setData({
-      addStatus: statusTemp.status
+    num.userStatus(id, token, statusTemp => {
+      _this.setData({
+        addStatus: statusTemp.status
+      })
     })
   },
   /**
@@ -191,7 +193,6 @@ Page({
    */
   getMsg: async function (id, token) {
     let _this = this;
-    let result = {};
     let Item = {
       url: `http://${app.ip}:5001/mini/msgs/showOne/${id}`,
       method: "GET",
@@ -201,22 +202,23 @@ Page({
       }
     };
     // 加载信息
-    result = await request.requestUtils(Item)
-    let mks = []
-    // 画地图logo
-    mks.push({
-      latitude: result.msg_latitude,
-      longitude: result.msg_longitude,
-      iconPath: "../../resources/images/location.png",
-      width: 50,
-      height: 50
-    })
-    wx.hideLoading()
-    _this.setData({
-      value: result,
-      spinShow: false,
-      markers: mks,
-      show: true
+    request.requestUtils(Item, result => {
+      let mks = []
+      // 画地图logo
+      mks.push({
+        latitude: result.msg_latitude,
+        longitude: result.msg_longitude,
+        iconPath: "../../resources/images/location.png",
+        width: 50,
+        height: 50
+      })
+      wx.hideLoading()
+      _this.setData({
+        value: result,
+        spinShow: false,
+        markers: mks,
+        show: true
+      })
     })
   },
   enjoy: async function (e) {
@@ -284,24 +286,22 @@ Page({
    * 获取小程序码
    */
   getMode: function () {
-    let result = {};
-    (async () => {
-      let Item = {
-        url: `http://${app.ip}:5001/mini/chats/mode`,
-        method: "GET",
-        data: {
-          path: '../../index'
-        },
-        header: {
-          'Content-Type': 'application/json;charset=utf-8',
-          'Authorization': _this.data.token
-        }
-      };
-      // 加载信息
-      result = await request.requestUtils(Item)
+    let Item = {
+      url: `http://${app.ip}:5001/mini/chats/mode`,
+      method: "GET",
+      data: {
+        path: '../../index'
+      },
+      header: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': _this.data.token
+      }
+    };
+    // 加载信息
+    request.requestUtils(Item, result => {
       console.log(result)
       console.log(`data:image/png;base64,${wx.arrayBufferToBase64(wx.base64ToArrayBuffer(result))}`)
-    })()
+    })
   },
   // 保存图片
   saveImage() {

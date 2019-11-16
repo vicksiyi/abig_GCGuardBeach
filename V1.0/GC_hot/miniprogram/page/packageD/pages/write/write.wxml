@@ -1,5 +1,10 @@
-<view class="content" >
+<view class="content">
     <textarea maxlength="{{500}}" placeholder="说点什么吧" placeholder-style="color:#bbbec4;" />
+</view>
+<!-- 标签 -->
+<view class="tag" bindtap="selectTag">
+    <image src="../../resources/images/tag.png"></image>
+    <text>{{tag}}</text>
 </view>
 <!-- 图片 -->
 <view wx:if="{{showStatus}}" class="picture {{showPhoto?'show-picture':'close-picture'}}">

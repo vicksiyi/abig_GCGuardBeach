@@ -76,7 +76,7 @@ Page({
    * @param {*} from_url 来自那篇文章
    * @param {*} token token
    */
-  getUpdateVideo: async function (id, from_url, token) {
+  getUpdateVideo: function (id, from_url, token) {
     let _this = this;
     let Item = {
       url: `http://${app.ip}:5001/mini/news/updateVideo`,
@@ -90,14 +90,14 @@ Page({
         'Authorization': token
       }
     };
-    let result = await request.requestUtils(Item)
+    request.requestUtils(Item, result => {
+      var article = result.new_content
+      WxParse.wxParse('article', 'html', article, _this, 5);
 
-    var article = result.new_content
-    WxParse.wxParse('article', 'html', article, _this, 5);
-
-    _this.setData({
-      dataNews: result,
-      spinShow: false
+      _this.setData({
+        dataNews: result,
+        spinShow: false
+      })
     })
   }
 })

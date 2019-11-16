@@ -31,29 +31,26 @@ Page({
   },
   inputTyping: function (e) {
     let _this = this
-    let result = ''
     _this.setData({
       spinLoad: true,
       inputVal: e.detail.value,
       value: ''
     });
-    (async () => {
-      let Item = {
-        url: `http://${app.ip}:5001/mini/msgs/show`,
-        method: "GET",
-        data: {
-          keyword: e.detail.value
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': _this.data.token
-        }
-      };
-      result = await request.requestUtils(Item)
-
+    let Item = {
+      url: `http://${app.ip}:5001/mini/msgs/show`,
+      method: "GET",
+      data: {
+        keyword: e.detail.value
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': _this.data.token
+      }
+    };
+    request.requestUtils(Item, result => {
       // 添加距离
       _this.calLocation(result)
-    })()
+    })
   },
   onLoad: function () {
     let _this = this
@@ -67,20 +64,18 @@ Page({
         _this.setData({
           token: res.data
         });
-        (async () => {
-          let Item = {
-            url: `http://${app.ip}:5001/mini/msgs/showMsgs`,
-            method: "GET",
-            header: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': res.data
-            }
-          };
-          result = await request.requestUtils(Item)
-
+        let Item = {
+          url: `http://${app.ip}:5001/mini/msgs/showMsgs`,
+          method: "GET",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': res.data
+          }
+        };
+        request.requestUtils(Item, result => {
           // 添加距离
           _this.calLocation(result)
-        })()
+        })
       }
     })
   },

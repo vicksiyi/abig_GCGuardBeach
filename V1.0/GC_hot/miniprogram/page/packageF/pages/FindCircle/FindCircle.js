@@ -45,13 +45,12 @@ Page({
         _this.setData({
           token: res.data
         });
-        (async () => {
-          let result = await _this.getFindData(0, res.data)
+        _this.getFindData(0, res.data, result => {
           _this.setData({
             load: false,
             value: result
           })
-        })()
+        })
       }
     })
   },
@@ -60,7 +59,7 @@ Page({
    * @param {*} page 第几页
    * @param {*} token token
    */
-  getFindData: async function (page, token) {
+  getFindData: function (page, token, back) {
     let _this = this;
     let Item = {
       url: `http://${app.ip}:5001/mini/finds?page=${page}`,
@@ -71,24 +70,26 @@ Page({
       }
     };
     try {
-      let result = await request.requestUtils(Item)
-      let tempPlace = {};
-      let temp = ''
-      result.map((value, index) => {
-        result[index].time = value.time.split("T")[0]
-        result[index].picture = JSON.parse(value.picture)
-        tempPlace = JSON.parse(value.place)
-        // 阻塞
-        locations.sleep(300);
-        // 获取位置
-        locations.LLToAddress(tempPlace.latitude, tempPlace.longitude, res => {
-          temp = 'value[' + (index + page * 10) + '].str';
-          _this.setData({
-            [temp]: res.result.address
+      request.requestUtils(Item, result => {
+        let tempPlace = {};
+        let temp = ''
+        result.map((value, index) => {
+          result[index].time = value.time.split("T")[0]
+          result[index].picture = JSON.parse(value.picture)
+          tempPlace = JSON.parse(value.place)
+          // 阻塞
+          locations.sleep(300);
+          // 获取位置
+          locations.LLToAddress(tempPlace.latitude, tempPlace.longitude, res => {
+            temp = 'value[' + (index + page * 10) + '].str';
+            _this.setData({
+              [temp]: res.result.address
+            })
           })
         })
+        back(result)
       })
-      return result
+
     } catch (err) {
       console.log(err)
     }
@@ -97,7 +98,7 @@ Page({
   showImage: function (e) {
     wx.previewImage({
       urls: e.currentTarget.dataset.image,
-      current:e.currentTarget.dataset.url
+      current: e.currentTarget.dataset.url
     })
   },
   // 评论
@@ -211,14 +212,12 @@ Page({
     let _this = this;
     // 到底了就不添加了
     if (!_this.data.endLoad) {
-      (async () => {
-        // 加载
-        _this.setData({
-          endShow: true
-        });
-        // 获取数据
-        let result = await _this.getFindData(_this.data.page + 1, _this.data.token)
-
+      // 加载
+      _this.setData({
+        endShow: true
+      });
+      // 获取数据
+      _this.getFindData(_this.data.page + 1, _this.data.token, result => {
         let valueTemp = _this.data.value;
         if (result.length < 10) {
           _this.setData({
@@ -240,7 +239,7 @@ Page({
             endShow: false
           })
         }
-      })()
+      })
     }
   },
   closeCanvas: function () {

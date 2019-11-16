@@ -26,13 +26,12 @@ Page({
         _this.setData({
           token: res.data
         });
-        (async () => {
-          let result = await _this.showMsg(res.data, 'myMsg')
+        _this.showMsg(res.data, 'myMsg', result => {
           _this.setData({
             value: result,
             spinLoad: false
           })
-        })()
+        })
       }
     })
   },
@@ -43,7 +42,7 @@ Page({
       currentTap: _this.data.statusTap[detail.key]
     });
   },
-  showMsg: async function (token, event) {
+  showMsg: function (token, event, back) {
     // mySuccessMsg
     let Item = {
       url: `http://${app.ip}:5001/mini/msgs/${event}`,
@@ -53,8 +52,9 @@ Page({
         'Authorization': token
       }
     };
-    let result = await request.requestUtils(Item)
-    return result
+    request.requestUtils(Item, result => {
+      back(result)
+    })
   },
   joinIn: function (e) {
     let _this = this

@@ -230,9 +230,8 @@ Page({
               latitude: res.latitude,
               longitude: res.longitude
             });
-            (async () => {
-              // 阻塞等待数据上传
-              let result = await requests.requestUtils(item);
+            // 阻塞等待数据上传
+            requests.requestUtils(item, result => {
               console.log(result);
               if (result.msg == 'Success') {
                 $Message({
@@ -258,7 +257,7 @@ Page({
                   })
                 }, 1000);
               }
-            })()
+            });
           },
           fail() {
             _this.modelLocation()

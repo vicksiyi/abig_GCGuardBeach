@@ -25,14 +25,13 @@ Page({
             'Authorization': res.data
           }
         };
-        (async () => {
-          let result = await request.requestUtils(Item)
+        request.requestUtils(Item, result => {
           console.log(result)
           _this.setData({
             userInfo: result,
             spinShow: false
           })
-        })()
+        })
       }
     })
   },
@@ -112,8 +111,7 @@ Page({
             'Authorization': res.data
           }
         };
-        (async () => {
-          let result = await request.requestUtils(Item)
+        request.requestUtils(Item, result => {
           if (result.msg == "Success") {
             $Message({
               content: '修改成功',
@@ -130,7 +128,7 @@ Page({
               url: '../../../packageA/mine/mine'
             })
           }, 1000)
-        })()
+        })
       }
     })
   },

@@ -126,3 +126,25 @@ textarea {
         transform-origin: 0 100% 0;
     }
 }
+
+
+.tag {
+    background: #f1f1f1;
+    font-size: 0.7rem;
+    border-radius: 30rpx;
+    color: #ff9900;
+    font-family: sans-serif;
+    display: inline-block;
+    margin-left: 30rpx;
+}
+
+.tag image {
+    width: 30rpx;
+    height: 30rpx;
+    padding-left: 10rpx;
+}
+
+.tag text {
+    padding: 0 10rpx 10rpx 10rpx;
+    line-height: 30rpx;
+}
