@@ -13,6 +13,8 @@ var status = 0;  //防止异步问题再添加一个
 Page({
 
   data: {
+    pinglun:true,
+    currentTab: '',
     value: [],
     token: '',
     load: false,
@@ -21,7 +23,23 @@ Page({
     endLoad: false,
     widthTemp: 0,
     heightTemp: 0,
-    scollTop:0
+    scollTop: 0
+  },
+  /*** 点击tab切换***/
+  swichNav: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.target.dataset.current
+    });
+    if (e.target.dataset.current!=0){
+      that.setData({
+        pinglun: false
+      }); 
+    } else if (e.target.dataset.current == 0) {
+      that.setData({
+        pinglun: true
+      });
+    }
   },
   onLoad: function (options) {
     let _this = this;
@@ -58,12 +76,6 @@ Page({
         })()
       }
     })
-  },
-  // 跳转到详情页
-  goMore:function(){
-wx.navigateTo({
-  url: '../findDetail/findDetal',
-})
   },
   /**
    * 获取发现信息
@@ -113,6 +125,7 @@ wx.navigateTo({
       console.log(err)
     }
   },
+
   // 放大浏览
   showImage: function (e) {
     wx.previewImage({

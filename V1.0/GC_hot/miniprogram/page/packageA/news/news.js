@@ -11,33 +11,6 @@ Page({
     fullscreen: true,
     show_pro: true,
     dir: 'horizontal',
-    push: [
-      {
-        name: '社会',
-        checked: false,
-        color: 'default'
-      },
-      {
-        name: '财经',
-        checked: false,
-        color: 'red'
-      },
-      {
-        name: '美食',
-        checked: true,
-        color: 'blue'
-      },
-      {
-        name: '科普',
-        checked: true,
-        color: 'green'
-      },
-      {
-        name: '艺术',
-        checked: true,
-        color: 'yellow'
-      }
-    ],
     videos: [],
     hot: [],
     spinLoad: false,

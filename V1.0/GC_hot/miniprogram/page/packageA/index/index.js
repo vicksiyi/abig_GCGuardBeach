@@ -184,7 +184,7 @@ Page({
 
     // 测试所用
     wx.navigateTo({
-      url:"../../packageF/pages/FindCircle/FindCircle"
+      url:"../../packageF/pages/findDetail/findDetail"
     })
     wx.getLocation({
       type: 'wgs84',
