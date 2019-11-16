@@ -1,0 +1,32 @@
+<view class="content">
+    <textarea maxlength="{{500}}" value="{{msg}}" placeholder="说点什么吧" bindinput="msgChange" placeholder-style="color:#bbbec4;" />
+    <text>{{500-msg.length}}</text>
+</view>
+<!-- 标签 -->
+<view class="tag" bindtap="selectTag">
+    <image src="../../resources/images/tag.png"></image>
+    <text>{{tag}}</text>
+</view>
+<!-- 图片 -->
+<view wx:if="{{showStatus}}" class="picture {{showPhoto?'show-picture':'close-picture'}}">
+    <block wx:for="{{picture}}">
+        <image bindtap="showImage" data-Image="{{picture}}" data-Url="{{item}}" bindlongpress="deleteImage" data-Id="{{index}}" src="{{item}}"></image>
+    </block>
+    <image bindtap="addImage" wx:if="{{picture.length < 9}}" src="../../resources/images/add.png"></image>
+</view>
+<!-- 选择 -->
+<view class="select">
+    <image bindtap="showPicture" src="../../resources/images/photo.png"></image>
+    <text>{{picture.length}}/9</text>
+    <text style="font-size: 0.8rem;">(长按图片可删除)</text>
+    <view class="submit anim" bindtap="submit">
+        <image src="../../resources/images/submit.png"></image>
+    </view>
+</view>
+<i-message id="message" />
+<i-action-sheet visible="{{ visible2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleCancel2" bind:click="handleClickItem2" mask-closable="{{ false }}">
+    <view slot="header" style="padding: 16px">
+        <view style="color: #444;font-size: 16px">确定删除此照片吗？</view>
+        <text>删除后无法恢复哦</text>
+    </view>
+</i-action-sheet>

@@ -1,12 +1,8 @@
 const request = require("../../../../utils/requests");
 const app = getApp();
 const Location = require('../../../../utils/locations');
-const { $Message } = require('../../../../dist/base/index');
 const locations = new Location();
-const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
-const qqmapsdk = new QQMapWX({
-  key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
-});
+const { $Message } = require('../../../../dist/base/index');
 var upShowSc = false; // 飞机状态
 var tempSc = 0; // 上一次高度 
 var status = 0;  //防止异步问题再添加一个
@@ -21,7 +17,7 @@ Page({
     endLoad: false,
     widthTemp: 0,
     heightTemp: 0,
-    scollTop:0
+    scollTop: 0
   },
   onLoad: function (options) {
     let _this = this;
@@ -49,13 +45,12 @@ Page({
         _this.setData({
           token: res.data
         });
-        (async () => {
-          let result = await _this.getFindData(0, res.data)
+        _this.getFindData(0, res.data, result => {
           _this.setData({
             load: false,
             value: result
           })
-        })()
+        })
       }
     })
   },
@@ -70,7 +65,7 @@ wx.navigateTo({
    * @param {*} page 第几页
    * @param {*} token token
    */
-  getFindData: async function (page, token) {
+  getFindData: function (page, token, back) {
     let _this = this;
     let Item = {
       url: `http://${app.ip}:5001/mini/finds?page=${page}`,
@@ -81,34 +76,26 @@ wx.navigateTo({
       }
     };
     try {
-      let result = await request.requestUtils(Item)
-      let tempPlace = {};
-      let temp = ''
-      result.map((value, index) => {
-        result[index].time = value.time.split("T")[0]
-        result[index].picture = JSON.parse(value.picture)
-        tempPlace = JSON.parse(value.place)
-        // 阻塞
-        locations.sleep(300);
-        // 获取位置
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: tempPlace.latitude,
-            longitude: tempPlace.longitude
-          },
-          sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
-          success: function (res) {
+      request.requestUtils(Item, result => {
+        let tempPlace = {};
+        let temp = ''
+        result.map((value, index) => {
+          result[index].time = value.time.split("T")[0]
+          result[index].picture = JSON.parse(value.picture)
+          tempPlace = JSON.parse(value.place)
+          // 阻塞
+          locations.sleep(300);
+          // 获取位置
+          locations.LLToAddress(tempPlace.latitude, tempPlace.longitude, res => {
             temp = 'value[' + (index + page * 10) + '].str';
             _this.setData({
               [temp]: res.result.address
             })
-          },
-          fail: function (error) {
-            console.error(error);
-          }
-        });
+          })
+        })
+        back(result)
       })
-      return result
+
     } catch (err) {
       console.log(err)
     }
@@ -116,7 +103,8 @@ wx.navigateTo({
   // 放大浏览
   showImage: function (e) {
     wx.previewImage({
-      urls: [e.currentTarget.dataset.url]
+      urls: e.currentTarget.dataset.image,
+      current: e.currentTarget.dataset.url
     })
   },
   // 评论
@@ -230,14 +218,12 @@ wx.navigateTo({
     let _this = this;
     // 到底了就不添加了
     if (!_this.data.endLoad) {
-      (async () => {
-        // 加载
-        _this.setData({
-          endShow: true
-        });
-        // 获取数据
-        let result = await _this.getFindData(_this.data.page + 1, _this.data.token)
-
+      // 加载
+      _this.setData({
+        endShow: true
+      });
+      // 获取数据
+      _this.getFindData(_this.data.page + 1, _this.data.token, result => {
         let valueTemp = _this.data.value;
         if (result.length < 10) {
           _this.setData({
@@ -259,7 +245,7 @@ wx.navigateTo({
             endShow: false
           })
         }
-      })()
+      })
     }
   },
   closeCanvas: function () {
@@ -288,7 +274,7 @@ wx.navigateTo({
               });
             },
             fail(err) {
-              wx.hideLoading()
+              wx.hideLoading();
               if (err.errMsg == 'saveImageToPhotosAlbum:fail auth deny') {
                 $Message({
                   content: '必须获取权限才可图片保存'
@@ -316,34 +302,21 @@ wx.navigateTo({
                           }
                         },
                         fail(err) {
-                          console.log(err)
+                          console.log(err);
                           $Message({
                             content: '未知错误',
                             type: 'error'
                           });
                         }
-                      })
+                      });
                     } else {
                       $Message({
                         content: '用户取消选择'
                       });
-                    }
+                    };
                   }
-                })
-              }
-              // if (res.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
-              //   console.log("打开设置窗口");
-              //   wx.openSetting({
-              //     success(settingdata) {
-              //       console.log(settingdata)
-              //       if (settingdata.authSetting["scope.writePhotosAlbum"]) {
-              //         console.log("获取权限成功，再次点击图片保存到相册")
-              //       } else {
-              //         console.log("获取权限失败")
-              //       }
-              //     }
-              //   })
-              // }
+                });
+              };
             }
           });
         }

@@ -14,5 +14,10 @@ Page({
     this.setData({
       spinShow: false
     })
+  },
+  life: function () {
+    wx.navigateTo({
+      url: '../../packageF/pages/LifeCircle/LifeCircle',
+    })
   }
 })

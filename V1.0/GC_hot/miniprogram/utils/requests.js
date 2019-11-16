@@ -1,4 +1,4 @@
-const requestUtils = (options, clrTime) => {
+const requestUtils = (options, back) => {
     let tempRequest = {}
     wx.request({
         url: options.url || '',
@@ -7,33 +7,13 @@ const requestUtils = (options, clrTime) => {
         header: options.header || '',
         success(s) {
             // s.data.msg = 'success'
-            tempRequest = s.data
+            back(s.data)
         },
         fail(err) {
-            // tempRequest = {
-            //     msg: 'error'
-            // }
             console.log(err)
         }
     })
-    // 定时器&5秒超时
-    var time = setTimeout(() => {
-        console.log('停止')
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                reject("超时")
-            }, 0);
-        })
-    }, 5000)
-
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            clearTimeout(time)
-            resolve(tempRequest)
-        }, clrTime != undefined ? clrTime : 2000);
-    })
 }
-
 module.exports = {
     requestUtils: requestUtils
 }

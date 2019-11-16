@@ -97,7 +97,7 @@ Page({
       }
     })
   },
-  getNews: async function (type, page) {
+  getNews: function (type, page) {
     let _this = this
     let result = []
     if (page == 0) {
@@ -117,22 +117,22 @@ Page({
         'Authorization': _this.data.token
       }
     };
-    result = await request.requestUtils(Item)
-    let temp = _this.data.hot;
-    if (result.length < 10) {
+    request.requestUtils(Item, result => {
+      let temp = _this.data.hot;
+      if (result.length < 10) {
+        _this.setData({
+          endShow: true
+        })
+      }
+      temp.push(...result)
       _this.setData({
-        endShow: true
+        hot: temp,
+        spinLoad: false
       })
-    }
-    temp.push(...result)
-    _this.setData({
-      hot: temp,
-      spinLoad: false
     })
   },
   getVideos: async function (page) {
     let _this = this
-    let result = []
     _this.setData({
       spinLoad: true,
       hot: ''
@@ -148,10 +148,11 @@ Page({
         'Authorization': _this.data.token
       }
     };
-    result = await request.requestUtils(Item)
-    _this.setData({
-      videos: result,
-      spinLoad: false
+    request.requestUtils(Item, result => {
+      _this.setData({
+        videos: result,
+        spinLoad: false
+      })
     })
   },
   showVideo: function (e) {

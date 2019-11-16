@@ -1,19 +1,22 @@
 <view class="whole">
-  <radio-group class="radio-group" bindchange="radioChange">
-    <label class="radio" wx:for-items="{{items}}">
-      <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
-    </label>
-  </radio-group>
-  <view style="margin-left:80rpx;margin-right:80rpx;">
+  <view class="radio-group">
+    <radio-group bindchange="radioChange">
+      <label class="radio" wx:for-items="{{items}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />
+        {{item.value}}
+      </label>
+    </radio-group>
+  </view>
+  <view class="content">
     <textarea class="textarea" maxlength='{{max}}' placeholder="{{value1}}" value="{{content}}" bindinput="inputs">
       <view class="tip">
-        <span class='title-right-count'>{{currentWordNumber|0}}</span>/{{max}}</view>
+        <span class='title-right-count'>{{currentWordNumber|0}}</span>
+        /{{max}}
+      </view>
     </textarea>
   </view>
-  <view style="margin-left:80rpx;margin-right:80rpx;">
-    <input class="text" value="{{value2}}" type="number" placeholder='手机号码' />
-  </view>
-  <view style="margin-left:80rpx;margin-right:80rpx;">
-    <button class="submit">提交</button>
+  <view class="content-submit">
+    <button class="submit" bindtap="submit">提交</button>
   </view>
 </view>
+<i-message id="message" />

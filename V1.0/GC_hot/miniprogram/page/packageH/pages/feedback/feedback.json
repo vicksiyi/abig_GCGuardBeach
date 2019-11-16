@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-message": "../../../dist/message/index"
+  },
   "navigationBarTitleText": "意见反馈"
 }

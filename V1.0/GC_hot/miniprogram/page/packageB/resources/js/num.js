@@ -2,7 +2,7 @@ const app = getApp()
 const request = require('../../../../utils/requests');
 function Num() { }
 // 缓存Token
-Num.prototype.userNum = async (id, token) => {
+Num.prototype.userNum = async (id, token, back) => {
     let result = {}
     let Item = {
         url: `http://${app.ip}:5001/mini/msgs/showMsgUser/${id}`,
@@ -12,11 +12,12 @@ Num.prototype.userNum = async (id, token) => {
             'Authorization': token
         }
     };
-    result = await request.requestUtils(Item)
-    return result
+    request.requestUtils(Item, result => {
+        back(result)
+    })
 }
 
-Num.prototype.userStatus = async (id, token) => {
+Num.prototype.userStatus = async (id, token, back) => {
     let result = {}
     let Item = {
         url: `http://${app.ip}:5001/mini/msgs/userStatus/${id}`,
@@ -26,8 +27,9 @@ Num.prototype.userStatus = async (id, token) => {
             'Authorization': token
         }
     };
-    result = await request.requestUtils(Item)
-    return result
+    request.requestUtils(Item, result => {
+        back(result)
+    })
 }
 
 module.exports = Num

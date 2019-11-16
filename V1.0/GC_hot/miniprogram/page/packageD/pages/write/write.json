@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "i-action-sheet": "../../../../dist/action-sheet/index",
+    "i-message": "../../../../dist/message/index",
+    "i-divider": "../../../../dist/divider/index",
+    "i-load-more": "../../../../dist/load-more/index",
+    "i-drawer": "../../../../dist/drawer/index",
+    "i-spin": "../../../../dist/spin/index"
+  },
+  "navigationBarTitleText": "发圈"
+}

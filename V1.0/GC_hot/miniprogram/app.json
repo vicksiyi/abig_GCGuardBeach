@@ -77,7 +77,8 @@
         "pages/find/find",
         "pages/FindCircle/FindCircle",
         "pages/record/record",
-        "pages/findDetail/findDetail"
+        "pages/findDetail/findDetail",
+        "pages/LifeCircle/LifeCircle"
       ]
     },
     {
@@ -104,6 +105,13 @@
       "pages": [
         "pages/email/email",
         "pages/phone/phone"
+      ]
+    },
+    {
+      "root": "page/packageD/",
+      "pages": [
+        "pages/write/write",
+        "pages/selectTag/selectTag"
       ]
     }
   ],

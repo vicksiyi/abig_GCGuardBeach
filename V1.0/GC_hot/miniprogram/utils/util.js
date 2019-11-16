@@ -87,4 +87,27 @@ Utils.prototype.distanceFormat = (distance) => {
   return Math.round((distance / 100) / 10).toFixed(1)
 }
 
+/**
+ * 聚类
+ * @param {*} array 需要聚类的数组
+ */
+Utils.prototype.aggregationFunc = (array) => {
+  let valueTemp = [{}]
+  let oneType = []
+  let i = 0;
+  array.map((value, index) => {
+    if (oneType.indexOf(value.oneType) == -1) {
+      i = oneType.push(value.oneType)
+      valueTemp[i - 1] = {}
+      valueTemp[i - 1].select = new Array();
+      valueTemp[i - 1].title = value.oneType
+    }
+    valueTemp[oneType.indexOf(value.oneType)].select.push({
+      image: value.image,
+      type: value.twoType
+    })
+  })
+  return valueTemp
+}
+
 module.exports = Utils
