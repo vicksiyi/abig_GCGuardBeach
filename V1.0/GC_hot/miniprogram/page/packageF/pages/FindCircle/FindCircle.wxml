@@ -1,7 +1,7 @@
-<!-- <i-load-more loading="{{ load }}" /> -->
+<import src="../../resources/template/LifeCircle.wxml" />
 <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height}}px;">
   <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
-  <block wx:for="{{value}}" bindtap="goMore">
+  <block wx:for="{{value}}" wx:key="this">
     <view class="content">
       <view class="avatar">
         <image src="{{item.avatarUrl}}"></image>
@@ -13,13 +13,15 @@
             <text style="color:#bbbec4;">{{item.time}}</text>
           </view>
           <view class="content-msg">{{item.content}}</view>
-          <view class="content-title-img">
+          <!-- <view class="content-title-img">
             <block wx:for="{{item.picture}}" wx:for-item="image">
               <view bindtap="showImage" data-Image="{{item.picture}}" data-Url="{{image}}">
                 <image src="{{image}}"></image>
               </view>
             </block>
-          </view>
+          </view> -->
+          <template is="image" data="{{picture:item.picture}}"></template>
+
           <view class="content-title-map" bindtap="map" data-Index="{{index}}" data-Str="{{item.str}}">
             <view>
               <image src="../../resources/images/map.png"></image>
@@ -30,11 +32,11 @@
           </view>
         </view>
         <view class="mode">
-          <view bindtap="msgMode">
+          <view bindtap="goMore">
             <image src="../../resources/images/msg.png"></image>
             <text>评论</text>
           </view>
-          <view bindtap="zhaoMode">
+          <view bindtap="goMore">
             <image src="../../resources/images/zhao.png"></image>
             <text>号召</text>
           </view>

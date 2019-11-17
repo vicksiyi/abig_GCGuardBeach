@@ -55,10 +55,10 @@ Page({
     })
   },
   // 跳转到详情页
-  goMore:function(){
-wx.navigateTo({
-  url: '../findDetail/findDetal',
-})
+  goMore: function () {
+    wx.navigateTo({
+      url: '../findDetail/findDetail',
+    })
   },
   /**
    * 获取发现信息

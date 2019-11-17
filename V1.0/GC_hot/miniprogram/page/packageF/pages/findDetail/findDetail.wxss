@@ -150,19 +150,19 @@
 
 @keyframes myshow {
   0% {
-      transform: scale(1);
-      opacity: 0.5;
+    transform: scale(1);
+    opacity: 0.5;
   }
 
   50% {
-      transform: scale(1.5);
-      opacity: 0;
-      /*圆形放大的同时，透明度逐渐减小为0*/
+    transform: scale(1.5);
+    opacity: 0;
+    /*圆形放大的同时，透明度逐渐减小为0*/
   }
 
   100% {
-      transform: scale(1);
-      opacity: 1;
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -172,51 +172,61 @@
   line-height: 40px;
   background-color: #fff;
 }
+
 .swiper-tab-list {
   font-size: 13px;
   display: inline-block;
   width: 33.3%;
   color: #777;
 }
+
 .on {
   color: #5cadff;
-  border-bottom:5rpx solid #528dc3;
+  border-bottom: 5rpx solid #528dc3;
 }
+
 .swiper-box {
   display: block;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
-.pinglun{
+
+.pinglun {
   height: 400rpx;
-  display:flex;
+  display: flex;
 }
-.pinglun-msg{
-margin-top:-28rpx;
-font-size: 0.8rem;
-color: #495060;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+.pinglun-msg {
+  margin-top: -28rpx;
+  font-size: 0.8rem;
+  color: #495060;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.pinglun-tip{
-margin-top:-30rpx;
+
+.pinglun-tip {
+  margin-top: -30rpx;
 }
-.pinglun-title-name  {
-  margin-top:-195rpx;
+
+.pinglun-title-name {
+  margin-top: -195rpx;
 }
-.div{
-  margin-top:-57rpx;
+
+.div {
+  margin-top: -57rpx;
 }
+
 .foot-nav {
   height: 46px;
 }
+
 .foot-nav .con {
   position: fixed;
   height: 46px;
   left: 0;
   bottom: 0;
   right: 0;
-  background:#f8f8f9;
+  background: #f8f8f9;
   z-index: 999;
 }
 
@@ -226,6 +236,7 @@ margin-top:-30rpx;
   margin-top: 9px;
   margin-left: 37px;
 }
+
 .foot-btn .btn {
   background: linear-gradient(to right, #2b85e4, #7cc2f0);
   color: #fff;
