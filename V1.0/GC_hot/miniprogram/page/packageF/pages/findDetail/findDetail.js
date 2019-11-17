@@ -1,14 +1,20 @@
 const request = require("../../../../utils/requests");
 const app = getApp();
 const Location = require('../../../../utils/locations');
-const locations = new Location();
 const { $Message } = require('../../../../dist/base/index');
+const locations = new Location();
+const QQMapWX = require('../../../../utils/qqmap-wx-jssdk');
+const qqmapsdk = new QQMapWX({
+  key: 'RLLBZ-M3BR4-NTZUE-XDWN4-LIFB7-VKB4O'
+});
 var upShowSc = false; // 飞机状态
 var tempSc = 0; // 上一次高度 
 var status = 0;  //防止异步问题再添加一个
 Page({
 
   data: {
+    pinglun:true,
+    currentTab: '',
     value: [],
     token: '',
     load: false,
@@ -18,6 +24,22 @@ Page({
     widthTemp: 0,
     heightTemp: 0,
     scollTop: 0
+  },
+  /*** 点击tab切换***/
+  swichNav: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.target.dataset.current
+    });
+    if (e.target.dataset.current!=0){
+      that.setData({
+        pinglun: false
+      }); 
+    } else if (e.target.dataset.current == 0) {
+      that.setData({
+        pinglun: true
+      });
+    }
   },
   onLoad: function (options) {
     let _this = this;
@@ -45,27 +67,22 @@ Page({
         _this.setData({
           token: res.data
         });
-        _this.getFindData(0, res.data, result => {
+        (async () => {
+          let result = await _this.getFindData(0, res.data)
           _this.setData({
             load: false,
             value: result
           })
-        })
+        })()
       }
     })
-  },
-  // 跳转到详情页
-  goMore:function(){
-wx.navigateTo({
-  url: '../findDetail/findDetal',
-})
   },
   /**
    * 获取发现信息
    * @param {*} page 第几页
    * @param {*} token token
    */
-  getFindData: function (page, token, back) {
+  getFindData: async function (page, token) {
     let _this = this;
     let Item = {
       url: `http://${app.ip}:5001/mini/finds?page=${page}`,
@@ -76,35 +93,43 @@ wx.navigateTo({
       }
     };
     try {
-      request.requestUtils(Item, result => {
-        let tempPlace = {};
-        let temp = ''
-        result.map((value, index) => {
-          result[index].time = value.time.split("T")[0]
-          result[index].picture = JSON.parse(value.picture)
-          tempPlace = JSON.parse(value.place)
-          // 阻塞
-          locations.sleep(300);
-          // 获取位置
-          locations.LLToAddress(tempPlace.latitude, tempPlace.longitude, res => {
+      let result = await request.requestUtils(Item)
+      let tempPlace = {};
+      let temp = ''
+      result.map((value, index) => {
+        result[index].time = value.time.split("T")[0]
+        result[index].picture = JSON.parse(value.picture)
+        tempPlace = JSON.parse(value.place)
+        // 阻塞
+        locations.sleep(300);
+        // 获取位置
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: tempPlace.latitude,
+            longitude: tempPlace.longitude
+          },
+          sig: '9DSDjJe92pgZIKGmupKUwiqYAZpjPnyQ',
+          success: function (res) {
             temp = 'value[' + (index + page * 10) + '].str';
             _this.setData({
               [temp]: res.result.address
             })
-          })
-        })
-        back(result)
+          },
+          fail: function (error) {
+            console.error(error);
+          }
+        });
       })
-
+      return result
     } catch (err) {
       console.log(err)
     }
   },
+
   // 放大浏览
   showImage: function (e) {
     wx.previewImage({
-      urls: e.currentTarget.dataset.image,
-      current: e.currentTarget.dataset.url
+      urls: [e.currentTarget.dataset.url]
     })
   },
   // 评论
@@ -218,12 +243,14 @@ wx.navigateTo({
     let _this = this;
     // 到底了就不添加了
     if (!_this.data.endLoad) {
-      // 加载
-      _this.setData({
-        endShow: true
-      });
-      // 获取数据
-      _this.getFindData(_this.data.page + 1, _this.data.token, result => {
+      (async () => {
+        // 加载
+        _this.setData({
+          endShow: true
+        });
+        // 获取数据
+        let result = await _this.getFindData(_this.data.page + 1, _this.data.token)
+
         let valueTemp = _this.data.value;
         if (result.length < 10) {
           _this.setData({
@@ -245,7 +272,7 @@ wx.navigateTo({
             endShow: false
           })
         }
-      })
+      })()
     }
   },
   closeCanvas: function () {
@@ -274,7 +301,7 @@ wx.navigateTo({
               });
             },
             fail(err) {
-              wx.hideLoading();
+              wx.hideLoading()
               if (err.errMsg == 'saveImageToPhotosAlbum:fail auth deny') {
                 $Message({
                   content: '必须获取权限才可图片保存'
@@ -302,21 +329,34 @@ wx.navigateTo({
                           }
                         },
                         fail(err) {
-                          console.log(err);
+                          console.log(err)
                           $Message({
                             content: '未知错误',
                             type: 'error'
                           });
                         }
-                      });
+                      })
                     } else {
                       $Message({
                         content: '用户取消选择'
                       });
-                    };
+                    }
                   }
-                });
-              };
+                })
+              }
+              // if (res.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
+              //   console.log("打开设置窗口");
+              //   wx.openSetting({
+              //     success(settingdata) {
+              //       console.log(settingdata)
+              //       if (settingdata.authSetting["scope.writePhotosAlbum"]) {
+              //         console.log("获取权限成功，再次点击图片保存到相册")
+              //       } else {
+              //         console.log("获取权限失败")
+              //       }
+              //     }
+              //   })
+              // }
             }
           });
         }

@@ -1,3 +1,7 @@
 <view>
     <video id="myVideo" src="{{videoUrl}}" enable-danmu danmu-btn controls></video>
 </view>
+<view class="input">
+<view><button class="btn">发送</button></view>
+<view><textarea class="textarea" maxlength='100' placeholder="发一波弹幕吧" bindinput="inputs"></textarea></view>
+</view>

@@ -1,7 +1,7 @@
 <!-- <i-load-more loading="{{ load }}" /> -->
 <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height}}px;">
   <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
-  <block wx:for="{{value}}">
+  <block wx:for="{{value}}" bindtap="goMore">
     <view class="content">
       <view class="avatar">
         <image src="{{item.avatarUrl}}"></image>
