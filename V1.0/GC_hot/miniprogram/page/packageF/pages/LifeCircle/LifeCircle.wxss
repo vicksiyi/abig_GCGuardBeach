@@ -106,6 +106,7 @@ swiper {
     color: #495060;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin-top: 10rpx;
+    word-break: break-all;
 }
 
 .content-title-map {

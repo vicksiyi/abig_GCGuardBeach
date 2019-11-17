@@ -10,16 +10,16 @@
     </view>
 </view>
 <!-- 轮播 -->
-<view style="height:{{height -70}}px;">
+<view style="height:{{height-70}}px;">
     <swiper current="{{current}}" bindchange="currentChange" circular="{{true}}" indicator-dots="{{false}}" autoplay="{{false}}">
         <swiper-item>
-            <template is="life" data="{{value,picture}}"></template>
+            <template is="life" data="{{value}}"></template>
         </swiper-item>
         <swiper-item>
-            <template is="life" data="{{valueFocus,picture}}"></template>
+            <template is="life" data="{{valueFocus}}"></template>
         </swiper-item>
         <swiper-item>
-            <template is="life" data="{{valueSelect,picture}}"></template>
+            <template is="life" data="{{valueSelect}}"></template>
         </swiper-item>
     </swiper>
 </view>

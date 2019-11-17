@@ -47,30 +47,50 @@ router.get('/mode', passport.authenticate('jwt', { session: false }), (req, res)
 // @desc 发送生活圈
 // @access private
 router.post('/send', passport.authenticate('jwt', { session: false }), (req, res) => {
-    LifeType.findOne({ twoType: req.body.type }).then(lifetype => {
-        if (lifetype) {
-            new Life({
-                nickName: req.user[0].nickName,
-                avatarUrl: req.user[0].avatarUrl,
-                picture: JSON.parse(req.body.picture),
-                content: req.body.content,
-                openId: req.user[0].openId,
-                type: req.body.type //需检查
-            }).save().then(life => {
-                res.json({
-                    msg: "Success"
+    if (req.body.picture != '' || req.body.content != '') {
+        LifeType.findOne({ twoType: req.body.type }).then(lifetype => {
+            if (lifetype) {
+                new Life({
+                    nickName: req.user[0].nickName,
+                    avatarUrl: req.user[0].avatarUrl,
+                    picture: JSON.parse(req.body.picture),
+                    content: req.body.content,
+                    openId: req.user[0].openId,
+                    type: req.body.type //需检查
+                }).save().then(life => {
+                    res.json({
+                        msg: "Success"
+                    })
+                }).catch(err => {
+                    Err.ErrorFuc(err, req.originalUrl)
+                    res.json({
+                        msg: 'Error'
+                    })
                 })
-            }).catch(err => {
-                Err.ErrorFuc(err, req.originalUrl)
-                res.json({
-                    msg: 'Error'
-                })
+                return
+            }
+            res.json({
+                msg: '字段错误!'
             })
-            return
-        }
+        })
+    } else {
         res.json({
             msg: '字段错误!'
         })
+    }
+})
+
+// $routes /mini/chats/show
+// @desc 查看生活圈
+// @access private
+router.get('/show', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Life.find().sort({ time: -1 }).skip(req.query.page * 10).limit(10).then(New => {
+        res.json(New)
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json({
+            msg: "Error"
+        });
     })
 })
 

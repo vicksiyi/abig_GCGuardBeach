@@ -22,7 +22,8 @@ Page({
     showPhoto: false,
     showStatus: false,
     tag: 'GC海滩卫士',
-    token: ''
+    token: '',
+    nickName: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -54,6 +55,14 @@ Page({
       success(res) {
         _this.setData({
           token: res.data
+        })
+      }
+    })
+    wx.getStorage({
+      key: 'name',
+      success(res) {
+        _this.setData({
+          nickName: res.data
         })
       }
     })
@@ -169,32 +178,57 @@ Page({
   },
   submit: function () {
     let _this = this
-    let Item = {
-      url: `http://${app.ip}:5001/mini/chats/send`,
-      method: "POST",
-      data: {
-        picture: JSON.stringify(_this.data.picture),
-        content: _this.data.msg,
-        type: _this.data.tag
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': _this.data.token
-      }
-    };
-    request.requestUtils(Item, res => {
-      if (res.msg == "Success") {
-        $Message({
-          content: '发布成功！',
-          type: 'success'
-        });
-        setTimeout(() => {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000);
-      }
-    })
+    if (_this.data.picture.length != 0 || _this.data.msg != '') {
+      wx.showLoading({
+        title: '上传中...',
+        mask: true
+      })
+      // 上传多张图片
+      Promise.all(_this.data.picture.map(item => {
+        return wx.cloud.uploadFile({
+          cloudPath: 'life/' + _this.data.nickName + Date.now() + item.match(/\.[^.]+?$/)[0],
+          filePath: item // 文件路径
+        })
+      })).then(resCloud => {
+        wx.hideLoading()
+        let all = resCloud.map(value => {
+          return value.fileID
+        })
+        let Item = {
+          url: `http://${app.ip}:5001/mini/chats/send`,
+          method: "POST",
+          data: {
+            picture: JSON.stringify(all),
+            content: _this.data.msg,
+            type: _this.data.tag
+          },
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': _this.data.token
+          }
+        };
+        request.requestUtils(Item, res => {
+          if (res.msg == "Success") {
+            $Message({
+              content: '发布成功！',
+              type: 'success'
+            });
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000);
+          }
+        })
+      }).catch((err) => {
+        console.log(err)
+      })
+    } else {
+      $Message({
+        content: '正文或图片不能为空',
+        type: 'warning'
+      });
+    }
   },
   onShow: function () {
     let _this = this

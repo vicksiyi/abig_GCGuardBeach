@@ -11,30 +11,7 @@ Page({
     height: 0,
     value: [],
     valueFocus: [],
-    valueSelect: [],
-    picture: [
-      "https://f10.baidu.com/it/u=752933719,2910359121&fm=72",
-      "https://f10.baidu.com/it/u=3350054069,3401952888&fm=72",
-      "http://img3.imgtn.bdimg.com/it/u=3846934696,94519349&fm=26&gp=0.jpg",
-      "http://img0.imgtn.bdimg.com/it/u=3487785566,2694268244&fm=26&gp=0.jpg",
-      "http://img4.imgtn.bdimg.com/it/u=3379661414,1149353874&fm=26&gp=0.jpg",
-      "http://img5.imgtn.bdimg.com/it/u=2394242552,2024191525&fm=26&gp=0.jpg",
-      "http://img1.imgtn.bdimg.com/it/u=2503161458,3326084877&fm=26&gp=0.jpg",
-      "http://img1.imgtn.bdimg.com/it/u=3847857250,4054804645&fm=26&gp=0.jpg",
-      "http://img0.imgtn.bdimg.com/it/u=3400507779,684511797&fm=26&gp=0.jpg"
-    ],
-    picture1: [
-      "http://img1.imgtn.bdimg.com/it/u=3847857250,4054804645&fm=26&gp=0.jpg",
-      "http://img0.imgtn.bdimg.com/it/u=3400507779,684511797&fm=26&gp=0.jpg"
-    ],
-    picture2: [
-      "https://f10.baidu.com/it/u=752933719,2910359121&fm=72",
-      "https://f10.baidu.com/it/u=3350054069,3401952888&fm=72",
-      "http://img1.imgtn.bdimg.com/it/u=2503161458,3326084877&fm=26&gp=0.jpg",
-      "http://img1.imgtn.bdimg.com/it/u=3847857250,4054804645&fm=26&gp=0.jpg",
-      "http://img0.imgtn.bdimg.com/it/u=3400507779,684511797&fm=26&gp=0.jpg"
-    ]
-
+    valueSelect: []
   },
 
   /**
@@ -46,6 +23,19 @@ Page({
       success(res) {
         _this.setData({
           height: res.windowHeight
+        })
+      }
+    })
+    wx.getStorage({
+      key: 'Token',
+      success(res) {
+        _this.setData({
+          token: res.data
+        });
+        _this.getLife(res.data, 0, result => {
+          _this.setData({
+            value: result
+          })
         })
       }
     })
@@ -77,5 +67,29 @@ Page({
     wx.navigateTo({
       url: '../../../packageD/pages/write/write'
     })
+  },
+  getLife: function (token, page, back) {
+    let _this = this
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
+    let Item = {
+      url: `http://${app.ip}:5001/mini/chats/show?page=${page}`,
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
+      }
+    };
+    try {
+      request.requestUtils(Item, result => {
+        wx.hideLoading()
+        back(result)
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 })

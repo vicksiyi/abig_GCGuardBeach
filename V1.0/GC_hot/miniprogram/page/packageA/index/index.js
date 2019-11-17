@@ -182,9 +182,9 @@ Page({
     oauth.loginUser()
 
     // 测试所用
-    wx.navigateTo({
-      url: "../../packageF/pages/LifeCircle/LifeCircle"
-    })
+    // wx.navigateTo({
+    //   url: "../../packageD/pages/write/write"
+    // })
     wx.getLocation({
       type: 'wgs84',
       success(res) {

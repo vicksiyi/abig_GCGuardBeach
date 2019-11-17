@@ -13,11 +13,11 @@ const LifeSchema = new Schema({
     },
     picture: {              // 发送的图片
         type: Array,
-        required: true
+        required: false
     },
     content: {              // 正文
         type: String,
-        required: true
+        required: false
     },
     openId: {               // 用户唯一值
         type: String,
