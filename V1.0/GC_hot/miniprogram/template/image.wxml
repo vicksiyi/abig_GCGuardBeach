@@ -1,0 +1,8 @@
+<!-- 图片显示列表 -->
+<template name="image">
+    <view class="content-title-img">
+        <block wx:for="{{picture}}" wx:for-item="image">
+            <image bindtap="showImage" data-Image="{{picture}}" data-Url="{{image}}" src="{{image}}"></image>
+        </block>
+    </view>
+</template>

@@ -123,6 +123,20 @@ router.get('/showType', (req, res) => {
     })
 })
 
+// $routes /mini/chats/showTypeOne
+// @desc 查看单一类型
+// @access public
+router.get('/showTypeOne', (req, res) => {
+    LifeType.find({ twoType: req.query.type }).then(type => {
+        res.json(type)
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json({
+            msg: 'Error'
+        })
+    })
+})
+
 // $routes /mini/chats/showGood
 // @desc 点赞人
 // @access private
@@ -286,7 +300,7 @@ router.get('/focusMsg', passport.authenticate('jwt', { session: false }), (req, 
 // @desc 获取精选的信息
 // @access private
 router.get('/good', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Life.find({ openId: 'otdIv5RxNOOGGRn0ebk2xakTeahg'}).sort({ time: -1 }).limit(10).then(lifefocus => {
+    Life.find({ openId: 'otdIv5RxNOOGGRn0ebk2xakTeahg' }).sort({ time: -1 }).limit(10).then(lifefocus => {
         res.json(lifefocus)
     })
 })
@@ -299,6 +313,30 @@ router.get('/goodPage', passport.authenticate('jwt', { session: false }), (req, 
         res.json(lifefocus)
     })
 })
+
+// $routes /mini/chats/showFocus
+// @desc 查看关注的内容
+// @access private
+router.get('/showFocus', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Life.find({ type: req.query.type }).sort({ time: -1 }).limit(10).then(lifefocus => {
+        res.json(lifefocus)
+    })
+})
+
+
+// $routes /mini/chats/showPageFocus
+// @desc 分页查看关注的内容(加标签->避免脏读)
+// @access private
+router.get('/showPageFocus', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Life.find({ type: req.body.type, time: { "$lt": req.query.time } }).sort({ time: -1 }).limit(10).then(lifefocus => {
+        res.json(lifefocus)
+    })
+})
+
+
+// $routes /mini/chats/showType
+// @desc 分页查看关注的内容(加标签->避免脏读)
+// @access private
 
 
 module.exports = router;

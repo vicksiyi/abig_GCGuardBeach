@@ -16,21 +16,21 @@
 <view style="height:{{height-70}}px;">
     <swiper current="{{current}}" bindchange="currentChange" circular="{{true}}" indicator-dots="{{false}}" easing-function="easeInOutCubic" autoplay="{{false}}">
         <swiper-item>
-            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
+            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scrollTop}}" style="height: {{height-70}}px;">
                 <template is="life" data="{{value}}"></template>
                 <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
                 <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
             </scroll-view>
         </swiper-item>
         <swiper-item>
-            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
+            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scrollTop}}" style="height: {{height-70}}px;">
                 <template is="life" data="{{value}}"></template>
                 <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
                 <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
             </scroll-view>
         </swiper-item>
         <swiper-item>
-            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
+            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scrollTop}}" style="height: {{height-70}}px;">
                 <template is="life" data="{{value}}"></template>
                 <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
                 <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />

@@ -14,7 +14,7 @@ Page({
     selectList: '全部',
     height: 0,
     value: [],
-    scollTop: 0,
+    scrollTop: 0,
     current: 0,
     endShow: false,
     endLoad: false
@@ -59,7 +59,7 @@ Page({
       selectList: _this.data.list[e.currentTarget.dataset.id],
       current: id,
       endLoad: false,
-      scollTop: 0,
+      scrollTop: 0,
       endShow: true,
       value: []
     })
@@ -73,7 +73,7 @@ Page({
     _this.setData({
       selectList: _this.data.list[e.detail.current],
       endLoad: false,
-      scollTop: 0,
+      scrollTop: 0,
       endShow: true,
       value: []
     })
@@ -275,7 +275,7 @@ Page({
     setTimeout(() => {
       _this.setData({
         fei: false,
-        scollTop: 0
+        scrollTop: 0
       })
     }, 1000);
   },

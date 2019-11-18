@@ -1,15 +1,16 @@
+<import src="../../../../template/image.wxml" />
 <!-- 背景 -->
 <image class="bg" src="http://img4.imgtn.bdimg.com/it/u=3932604083,3686752977&fm=15&gp=0.jpg"></image>
 <!-- 头部 -->
 <view id="wrapper" class="title">
-    <image class="title-image" src="../../resources/images/backwhite.png"></image>
-    <view class="content">
+    <image class="title-image" bindtap="back" src="../../resources/images/backwhite.png"></image>
+    <view class="content" style="height:{{topHeight + 40}}rpx;">
         <view>
-            <image src="http://img4.imgtn.bdimg.com/it/u=3932604083,3686752977&fm=15&gp=0.jpg"></image>
+            <image style="width:{{topWidth}}rpx;height:{{topHeight}}rpx" src="{{image}}"></image>
         </view>
         <view class="content-title">
-            <text>GC海滩卫士</text>
-            <view class="focus-title">
+            <text>{{type}}</text>
+            <view class="focus-title" wx:if="{{fontShowMsg}}">
                 <text>点击下面可关注噢！</text>
             </view>
         </view>
@@ -29,4 +30,28 @@
     </view>
 </view>
 <!-- 正文 -->
-<view class="focus-content" style="height:{{height-10}}px;"></view>
+<view class="focus-content" style="height:{{height-10}}px;">
+    <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scrollTop}}" style="height: {{height-10}}px;">
+        <view class="block">
+            <block wx:for="{{value}}" wx:key="this">
+                <view class="content-template">
+                    <view class="avatar-template">
+                        <image src="{{item.avatarUrl}}"></image>
+                    </view>
+                    <view class="content-title-template">
+                        <view class="content-content-template">
+                            <view class="content-title-name-template">
+                                <text>{{item.nickName}}</text>
+                                <text style="color:#bbbec4;">{{item.time}}</text>
+                            </view>
+                            <view class="content-msg-template">{{item.content}}</view>
+                            <template is="image" data="{{picture:item.picture}}"></template>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
+        <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
+    </scroll-view>
+</view>

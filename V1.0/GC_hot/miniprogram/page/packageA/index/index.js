@@ -182,9 +182,9 @@ Page({
     oauth.loginUser()
 
     // 测试所用
-    wx.navigateTo({
-      url: "../../packageD/pages/focus/focus?type=GC海滩卫士"
-    })
+    // wx.navigateTo({
+    //   url: "../../packageD/pages/focus/focus?type=GC海滩卫士"
+    // })
     wx.getLocation({
       type: 'wgs84',
       success(res) {

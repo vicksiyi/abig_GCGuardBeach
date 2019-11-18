@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: row;
     width: 90%;
-    margin: auto;
+    margin: 10rpx auto;
 }
 
 .content-event text {
@@ -101,4 +101,45 @@
     background: #fff;
     border-radius: 10rpx 10rpx 0 0;
     margin-top: 10px;
+}
+
+.content-template {
+    display: flex;
+    flex-direction: row;
+    margin: 30rpx auto;
+    width: 96%;
+}
+
+.avatar-template {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 20rpx;
+}
+
+.avatar-template image {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx;
+    border-radius: 50%;
+}
+
+.content-title-template {
+    width: 90%;
+    margin: auto;
+}
+
+.content-title-name-template text {
+    font-size: 0.8rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #5cadff;
+}
+
+
+.content-msg-template {
+    width: 90%;
+    font-size: 0.8rem;
+    color: #495060;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 10rpx;
+    word-break: break-all;
 }

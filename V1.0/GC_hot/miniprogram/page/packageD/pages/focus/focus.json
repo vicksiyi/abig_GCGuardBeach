@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-load-more": "../../../dist/load-more/index"
+  },
   "navigationStyle": "custom",
   "navigationBarTextStyle": "black"
 }
