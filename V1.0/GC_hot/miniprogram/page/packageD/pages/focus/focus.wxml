@@ -1,0 +1,32 @@
+<!-- 背景 -->
+<image class="bg" src="http://img4.imgtn.bdimg.com/it/u=3932604083,3686752977&fm=15&gp=0.jpg"></image>
+<!-- 头部 -->
+<view id="wrapper" class="title">
+    <image class="title-image" src="../../resources/images/backwhite.png"></image>
+    <view class="content">
+        <view>
+            <image src="http://img4.imgtn.bdimg.com/it/u=3932604083,3686752977&fm=15&gp=0.jpg"></image>
+        </view>
+        <view class="content-title">
+            <text>GC海滩卫士</text>
+            <view class="focus-title">
+                <text>点击下面可关注噢！</text>
+            </view>
+        </view>
+    </view>
+    <view class="content-event">
+        <view class="focus">
+            <text>1.1K关注</text>
+        </view>
+        <view class="content-focus">
+            <view>
+                <image src="../../resources/images/focus.png"></image>
+            </view>
+            <view>
+                <text>关注</text>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 正文 -->
+<view class="focus-content" style="height:{{height-10}}px;"></view>
