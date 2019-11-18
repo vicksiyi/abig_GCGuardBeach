@@ -2,6 +2,9 @@
 <!-- 标签 -->
 <view class="border">
     <view class="tap">
+        <view class="font" bindtap="back" style="width:100rpx;">
+            <image style="width:40rpx;height:40rpx;margin:30rpx;" src="../../resources/images/back.png">  </image>
+        </view>
         <block wx:for="{{list}}">
             <view class="font {{item == selectList?'select':''}}" bindtap="listChange" data-Id="{{index}}">
                 <text>{{item}}</text>
@@ -13,27 +16,21 @@
 <view style="height:{{height-70}}px;">
     <swiper current="{{current}}" bindchange="currentChange" circular="{{true}}" indicator-dots="{{false}}" easing-function="easeInOutCubic" autoplay="{{false}}">
         <swiper-item>
-            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" 
-            
-            scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
+            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
                 <template is="life" data="{{value}}"></template>
                 <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
                 <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
             </scroll-view>
         </swiper-item>
         <swiper-item>
-            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" 
-            
-            scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
+            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
                 <template is="life" data="{{value}}"></template>
                 <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
                 <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
             </scroll-view>
         </swiper-item>
         <swiper-item>
-            <scroll-view scroll-y="true" bindscrolltolower="bottomChange"      bindscroll="scrollChange"
-            
-            scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
+            <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height-70}}px;">
                 <template is="life" data="{{value}}"></template>
                 <i-load-more class="bottom-end" wx:if="{{endShow}}" loading="{{ true }}" />
                 <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
@@ -46,9 +43,8 @@
 <view class="write" bindtap="write">
     <image src="../../resources/images/write.png"></image>
 </view>
-
 <!-- 火箭 -->
 <view wx:if="{{upShowTemp}}" class="up {{upShow?'up-mask':'up-close'}} {{fei?'fei-up-mask':''}}">
-  <image class="{{fei?'fei-up-Image':''}}" bindtap="feiUp" src="../../../../images/up.{{fei?'gif':'png'}}"></image>
-  <!-- <image src="../../../images/up.gif"></image> -->
+    <image class="{{fei?'fei-up-Image':''}}" bindtap="feiUp" src="../../../../images/up.{{fei?'gif':'png'}}"></image>
+    <!-- <image src="../../../images/up.gif"></image> -->
 </view>

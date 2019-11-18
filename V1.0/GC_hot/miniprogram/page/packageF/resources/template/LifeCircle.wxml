@@ -29,7 +29,7 @@
                         </view>
                     </view>
                     <!-- 标签 -->
-                    <view class="tag">
+                    <view class="tag" bindtap="focusChange" data-Type="{{item.type}}">
                         <image src="../../resources/images/tag.png"></image>
                         <text>{{item.type}}</text>
                     </view>

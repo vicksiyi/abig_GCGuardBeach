@@ -111,7 +111,8 @@
       "root": "page/packageD/",
       "pages": [
         "pages/write/write",
-        "pages/selectTag/selectTag"
+        "pages/selectTag/selectTag",
+        "pages/focus/focus"
       ]
     }
   ],
