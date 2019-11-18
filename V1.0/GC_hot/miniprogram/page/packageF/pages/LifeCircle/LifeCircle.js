@@ -301,5 +301,16 @@ Page({
       })
     }
     tempSc = e.detail.scrollTop
+  },
+  // 关注
+  focusChange: function (e) {
+    wx.navigateTo({
+      url: `../../../packageD/pages/focus/focus?type=${e.currentTarget.dataset.type}`
+    })
+  },
+  back: function () {
+    wx.navigateBack({
+      delta: 1
+    })
   }
 })
