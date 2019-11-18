@@ -1,6 +1,6 @@
 <template name="life">
     <view class="block">
-        <block wx:for="{{value}}">
+        <block wx:for="{{value}}" wx:key="this">
             <view class="content">
                 <view class="avatar">
                     <image src="{{item.avatarUrl}}"></image>

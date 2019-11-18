@@ -68,7 +68,7 @@
   margin: 10rpx;
 }
 
-.content-title-img {
+/* .content-title-img {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -80,7 +80,7 @@
   width: 160rpx;
   height: 160rpx;
   border-radius: 10rpx;
-}
+} */
 
 .mode {
   display: flex;

@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "i-tag": "../../../dist/tag/index"
+    "i-tag": "../../../dist/tag/index",
+    "i-load-more": "../../../dist/load-more/index",
+    "i-message": "../../../dist/message/index"
   },
   "navigationStyle": "custom",
   "navigationBarTextStyle": "black",

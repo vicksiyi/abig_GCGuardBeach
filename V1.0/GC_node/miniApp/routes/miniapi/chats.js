@@ -84,7 +84,22 @@ router.post('/send', passport.authenticate('jwt', { session: false }), (req, res
 // @desc 查看生活圈
 // @access private
 router.get('/show', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Life.find().sort({ time: -1 }).skip(req.query.page * 10).limit(10).then(New => {
+    Life.find().sort({ time: -1 }).limit(10).then(New => {
+        res.json(New)
+    }).catch(err => {
+        Err.ErrorFuc(err, req.originalUrl)
+        res.json({
+            msg: "Error"
+        });
+    })
+})
+
+// $routes /mini/chats/show
+// @desc 分页查看生活圈(加标签->防止脏读)
+// @access private
+router.get('/showPage', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log(req.query)
+    Life.find({ time: { "$lt": req.query.time } }).sort({ time: -1 }).limit(10).then(New => {
         res.json(New)
     }).catch(err => {
         Err.ErrorFuc(err, req.originalUrl)
@@ -199,14 +214,35 @@ router.get('/addMsg/:id', passport.authenticate('jwt', { session: false }), (req
 // $routes /mini/chats/focus
 // @desc 关注
 // @access private
-router.get('/focus/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    new LifeFocus({
-        openId: req.user[0].openId,
-        focusId: req.params.id
-    }).save().then(life => {
-        res.json({
-            msg: 'Success'
-        })
+router.get('/focus', passport.authenticate('jwt', { session: false }), (req, res) => {
+    LifeType.findOne({ twoType: req.body.type }).then(lifetype => {
+        if (lifetype) {
+            LifeFocus.findOne({ openId: req.user[0].openId, focusId: lifetype.twoType }).then(data => {
+                if (!data) {
+                    new LifeFocus({
+                        openId: req.user[0].openId,
+                        focusId: lifetype.twoType
+                    }).save().then(life => {
+                        res.json({
+                            msg: 'Success'
+                        })
+                    }).catch(err => {
+                        Err.ErrorFuc(err, req.originalUrl)
+                        res.json({
+                            msg: 'Error'
+                        })
+                    })
+                } else {
+                    res.json({
+                        msg: "Null"
+                    })
+                }
+            })
+        } else {
+            res.json({
+                msg: 'Null'
+            })
+        }
     }).catch(err => {
         Err.ErrorFuc(err, req.originalUrl)
         res.json({
@@ -214,5 +250,55 @@ router.get('/focus/:id', passport.authenticate('jwt', { session: false }), (req,
         })
     })
 })
+
+
+// $routes /mini/chats/focusFirst
+// @desc 首次获取信息
+// @access private
+router.get('/focusFirst', passport.authenticate('jwt', { session: false }), (req, res) => {
+    LifeFocus.find({ openId: req.user[0].openId }).then(lifefocus => {
+        let result = lifefocus.map(value => {
+            return value.focusId
+        })
+        Life.find({ type: { "$in": result } }).sort({ time: -1 }).limit(10).then(data => {
+            res.json(data)
+        })
+    })
+})
+
+
+// $routes /mini/chats/focusMsg
+// @desc 分页查看关注生活圈(加标签->防止脏读)
+// @access private
+router.get('/focusMsg', passport.authenticate('jwt', { session: false }), (req, res) => {
+    LifeFocus.find({ openId: req.user[0].openId }).then(lifefocus => {
+        let result = lifefocus.map(value => {
+            return value.focusId
+        })
+        Life.find({ type: { "$in": result }, time: { "$lt": req.query.time } }).sort({ time: -1 }).limit(10).then(data => {
+            res.json(data)
+        })
+    })
+})
+
+
+// $routes /mini/chats/focus
+// @desc 获取精选的信息
+// @access private
+router.get('/good', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Life.find({ openId: 'otdIv5RxNOOGGRn0ebk2xakTeahg'}).sort({ time: -1 }).limit(10).then(lifefocus => {
+        res.json(lifefocus)
+    })
+})
+
+// $routes /mini/chats/goodPage
+// @desc 分页查看精选圈(加标签->防止脏读)
+// @access private
+router.get('/goodPage', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Life.find({ openId: 'otdIv5RxNOOGGRn0ebk2xakTeahg', time: { "$lt": req.query.time } }).sort({ time: -1 }).limit(10).then(lifefocus => {
+        res.json(lifefocus)
+    })
+})
+
 
 module.exports = router;

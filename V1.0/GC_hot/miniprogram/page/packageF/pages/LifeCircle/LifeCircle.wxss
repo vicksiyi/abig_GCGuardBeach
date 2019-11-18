@@ -174,14 +174,14 @@ swiper {
     line-height: 30rpx;
 }
 
-.write{
+.write {
     position: fixed;
     right: 30rpx;
     bottom: 100rpx;
     border-radius: 50%;
 }
 
-.write image{
+.write image {
     width: 80rpx;
     height: 80rpx;
     box-shadow: 0 0 5px #ff9900;
@@ -192,6 +192,98 @@ swiper {
     overflow: scroll;
 } */
 
-swiper-item{
+swiper-item {
     overflow: scroll;
+}
+
+/* .bottom-end {
+    margin-top: -70px;
+} */
+
+
+/* 飞机 */
+.up {
+    position: fixed;
+    bottom: 0rpx;
+    right: 20rpx;
+}
+
+.up image {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.up-mask {
+    animation: maskFish 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+@keyframes maskFish {
+    0% {
+        bottom: 0rpx;
+        opacity: 0;
+    }
+
+    100% {
+        bottom: 20rpx;
+        opacity: 1;
+    }
+}
+
+.up-close {
+    animation: closeFish 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+@keyframes closeFish {
+    0% {
+        bottom: 20rpx;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 0rpx;
+        opacity: 0;
+    }
+}
+
+.fei-up-mask {
+    animation: feiFish 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+.fei-up-Image {
+    animation: feiImage 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+@keyframes feiFish {
+    0% {
+        bottom: 20rpx;
+        opacity: 1;
+        right: 20rpx;
+    }
+
+    10% {
+        right: 0;
+    }
+
+    100% {
+        bottom: 600rpx;
+        opacity: 0;
+    }
+}
+
+@keyframes feiImage {
+    0% {
+        height: 110rpx;
+    }
+
+    100% {
+        height: 162rpx;
+    }
 }
