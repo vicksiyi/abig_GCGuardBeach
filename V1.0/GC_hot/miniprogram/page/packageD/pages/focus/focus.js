@@ -1,5 +1,6 @@
 const app = getApp();
 const request = require('../../../../utils/requests');
+const { $Message } = require('../../../../dist/base/index');
 var status = 0;
 Page({
 
@@ -14,7 +15,9 @@ Page({
     topWidth: 160,
     topHeight: 160,
     fontShowMsg: true,
-    image: ''
+    image: '',
+    num: 0,
+    statusFocus: false
   },
 
   /**
@@ -45,7 +48,9 @@ Page({
         })
         _this.getImage(res.data, options.type, result => {
           _this.setData({
-            image: result[0].image
+            image: result.image,
+            num: result.num,
+            statusFocus: result.status
           })
         })
       }
@@ -63,6 +68,13 @@ Page({
           })
         });
       }
+    })
+  },
+  // 放大浏览
+  showImage: function (e) {
+    wx.previewImage({
+      urls: e.currentTarget.dataset.image,
+      current: e.currentTarget.dataset.url
     })
   },
   // 首页数据获取
@@ -170,7 +182,7 @@ Page({
       delta: 1
     })
   },
-  // 类别获取图片
+  // 类别获取图片&关注数&状态
   getImage: function (token, type, back) {
     let _this = this
     // 获取数据
@@ -187,6 +199,41 @@ Page({
     };
     request.requestUtils(Item, result => {
       back(result)
+    })
+  },
+  // 关注
+  focusChange: function () {
+    let _this = this
+    // 获取数据
+    let Item = {
+      url: `http://${app.ip}:5001/mini/chats/focus`,
+      method: "GET",
+      data: {
+        type: _this.data.type
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': _this.data.token
+      }
+    };
+    request.requestUtils(Item, result => {
+      if (result.msg == "Success") {
+        $Message({
+          content: '关注成功',
+          type: 'success'
+        });
+        _this.setData({
+          statusFocus: true
+        })
+      } else {
+        $Message({
+          content: '取消关注成功',
+          type: 'success'
+        });
+        _this.setData({
+          statusFocus: false
+        })
+      }
     })
   }
 })

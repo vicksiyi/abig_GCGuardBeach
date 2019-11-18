@@ -17,14 +17,14 @@
     </view>
     <view class="content-event">
         <view class="focus">
-            <text>1.1K关注</text>
+            <text>{{num}}关注</text>
         </view>
-        <view class="content-focus">
-            <view>
+        <view class="content-focus" bindtap="focusChange" style="{{statusFocus?'display: block;text-align:center;':''}}">
+            <view wx:if="{{!statusFocus}}">
                 <image src="../../resources/images/focus.png"></image>
             </view>
             <view>
-                <text>关注</text>
+                <text>{{statusFocus?'取消关注':'关注'}}</text>
             </view>
         </view>
     </view>
@@ -55,3 +55,4 @@
         <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
     </scroll-view>
 </view>
+<i-message id="message" />

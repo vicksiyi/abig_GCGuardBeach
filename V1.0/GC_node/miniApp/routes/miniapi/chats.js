@@ -126,9 +126,30 @@ router.get('/showType', (req, res) => {
 // $routes /mini/chats/showTypeOne
 // @desc 查看单一类型
 // @access public
-router.get('/showTypeOne', (req, res) => {
-    LifeType.find({ twoType: req.query.type }).then(type => {
-        res.json(type)
+router.get('/showTypeOne', passport.authenticate('jwt', { session: false }), (req, res) => {
+    LifeType.findOne({ twoType: req.query.type }).then(type => {
+        let image = type.image
+        // 获取关注数
+        LifeFocus.find({ focusId: req.query.type }).then(typeLen => {
+            let num = typeLen.length
+            status = false
+            typeLen.map(value => {
+                if (value.openId == req.user[0].openId) {
+                    status = true
+                    return
+                }
+            })
+            res.json({
+                image: image,
+                num: num,
+                status: status
+            })
+        }).catch(err => {
+            Err.ErrorFuc(err, req.originalUrl)
+            res.json({
+                msg: 'Error'
+            })
+        })
     }).catch(err => {
         Err.ErrorFuc(err, req.originalUrl)
         res.json({
@@ -226,10 +247,10 @@ router.get('/addMsg/:id', passport.authenticate('jwt', { session: false }), (req
 })
 
 // $routes /mini/chats/focus
-// @desc 关注
+// @desc 关注/取消
 // @access private
 router.get('/focus', passport.authenticate('jwt', { session: false }), (req, res) => {
-    LifeType.findOne({ twoType: req.body.type }).then(lifetype => {
+    LifeType.findOne({ twoType: req.query.type }).then(lifetype => {
         if (lifetype) {
             LifeFocus.findOne({ openId: req.user[0].openId, focusId: lifetype.twoType }).then(data => {
                 if (!data) {
@@ -247,8 +268,14 @@ router.get('/focus', passport.authenticate('jwt', { session: false }), (req, res
                         })
                     })
                 } else {
-                    res.json({
-                        msg: "Null"
+                    LifeFocus.findOneAndRemove({ openId: req.user[0].openId, focusId: lifetype.twoType }).then(lifefocus => {
+                        lifefocus.save().then(close => {
+                            res.json({
+                                msg: 'Close'
+                            });
+                        })
+                    }).catch(err => {
+                        res.json(err);
                     })
                 }
             })
@@ -332,11 +359,6 @@ router.get('/showPageFocus', passport.authenticate('jwt', { session: false }), (
         res.json(lifefocus)
     })
 })
-
-
-// $routes /mini/chats/showType
-// @desc 分页查看关注的内容(加标签->避免脏读)
-// @access private
 
 
 module.exports = router;
