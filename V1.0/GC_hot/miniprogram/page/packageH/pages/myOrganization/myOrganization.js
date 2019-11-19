@@ -328,7 +328,41 @@ Page({
   },
   // 图片
   showPhoto: function () {
-    console.log("图片")
+    let _this = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        wx.cloud.uploadFile({
+          cloudPath: 'chat/' + _this.data.name + Date.now() + res.tempFilePaths[0].match(/\.[^.]+?$/)[0],
+          filePath: res.tempFilePaths[0], // 文件路径
+          success(res) {
+            let data = JSON.stringify({
+              type: 3,
+              str: res.fileID,
+              room: _this.data.roomId,
+              name: _this.data.name,
+              avatar: _this.data.avatar
+            })
+            _this.sendSocketMessage({
+              msg: data,
+              data: data,
+              success: () => {
+                console.log("客户端发送成功")
+              },
+              fail: function (err) {
+                console.log('发送失败');
+                $Message({
+                  content: '发送失败',
+                  type: 'error'
+                });
+              }
+            })
+          }
+        })
+      }
+    })
   },
   // 发送表情包
   sendIcon: function (e) {

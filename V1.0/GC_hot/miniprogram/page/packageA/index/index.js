@@ -183,7 +183,7 @@ Page({
 
     // 测试所用
     // wx.navigateTo({
-    //   url: "../../packageD/pages/focus/focus?type=GC海滩卫士"
+    //   url: "../../packageH/pages/myVolunteer/myVolunteer"
     // })
     wx.getLocation({
       type: 'wgs84',
