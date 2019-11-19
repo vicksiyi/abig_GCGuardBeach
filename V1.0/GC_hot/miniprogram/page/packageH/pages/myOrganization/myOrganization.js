@@ -2,6 +2,7 @@ const app = getApp()
 const Utils = require('../../../../utils/util');
 const utils = new Utils();
 const { $Message } = require('../../../../dist/base/index');
+const request = require('../../../../utils/requests');
 var wxst = function () { }
 const myUrl = `ws://${app.ip}:5002` // websocket链接
 
@@ -29,7 +30,8 @@ Page({
     scrollTop: 0,
     showIcon: false,
     indicatorDots: true,
-    showFirst: false
+    showFirst: false,
+    token: ''
   },
   onLoad: function (options) {
     let _this = this
@@ -41,8 +43,21 @@ Page({
     _this.setData({
       roomId: options.id
     })
-    // 历史信息
-    _this.history(1)
+    wx.getStorage({
+      key: 'Token',
+      success(res) {
+        _this.setData({
+          token: res.data
+        })
+        // 历史信息
+        _this.history(options.id, res.data, result => {
+          _this.setData({
+            msgData: result.reverse(),
+            scrollTop: result.length * 1000
+          })
+        })
+      }
+    })
 
     // 获取姓名
     wx.getStorage({
@@ -84,10 +99,20 @@ Page({
         })
       }
     })
-
   },
-  history: function (page) {
-    console.log(`历史信息${page}`)
+  history: function (id, token, back) {
+    let Item = {
+      url: `http://${app.ip}:5001/mini/chats/showChats`,
+      data: {
+        room: id
+      },
+      header: {
+        'Authorization': token
+      }
+    };
+    request.requestUtils(Item, result => {
+      back(result)
+    })
   },
   // 通过websocket发送数据
   formSubmit: function (e) {
@@ -395,6 +420,46 @@ Page({
           type: 'error'
         });
       }
+    })
+  },
+  // 分页查看历史记录
+  showPage: function () {
+    let _this = this
+    let valueTemp = _this.data.msgData;
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
+    let Item = {
+      url: `http://${app.ip}:5001/mini/chats/showPageChats`,
+      data: {
+        room: _this.data.roomId,
+        time: _this.data.msgData[0].time
+      },
+      header: {
+        'Authorization': _this.data.token
+      }
+    };
+    request.requestUtils(Item, result => {
+      wx.hideLoading()
+      if (result.length == 0) {
+        $Message({
+          content: '以上没有消息了',
+          type: 'warning'
+        });
+        return
+      }
+      if (result.length < 30) {
+        $Message({
+          content: '最后一页了',
+          type: 'warning'
+        });
+      }
+      valueTemp.unshift(...result);
+      _this.setData({
+        msgData: valueTemp,
+        scrollTop: result.length * 1000
+      })
     })
   }
 })

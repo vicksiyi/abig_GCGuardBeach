@@ -4,6 +4,7 @@ const passport = require('passport');
 const request = require('request');
 const getToken = require('../../utils/accessToken');
 const Life = require('../../models/Life');
+const Chats = require('../../models/Chats');
 const LifeType = require('../../models/LifeType');
 const Err = require('../../utils/error');
 const LifeFocus = require('../../models/LifeFocus');
@@ -360,5 +361,27 @@ router.get('/showPageFocus', passport.authenticate('jwt', { session: false }), (
     })
 })
 
+
+
+
+// $routes /mini/chats/showChats
+// @desc 聊天查历史记录
+// @access private
+router.get('/showChats', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log(req.query)
+    Chats.find({ room: req.query.room }).sort({ time: -1 }).limit(30).then(chats => {
+        res.json(chats)
+    })
+})
+
+
+// $routes /mini/chats/showPageChats
+// @desc 聊天分页查历史记录(加标签->避免脏读)
+// @access private
+router.get('/showPageChats', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Chats.find({ room: req.query.room, time: { "$lt": req.query.time } }).limit(30).then(chats => {
+        res.json(chats)
+    })
+})
 
 module.exports = router;

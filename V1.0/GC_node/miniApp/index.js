@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const passport = require('passport');
+const Chats = require('./models/Chats');
 
 // 引入ws
 const ws = require("nodejs-websocket");
@@ -58,6 +59,18 @@ var server = ws.createServer(function (conn) {
         let data = JSON.parse(dataTemp)
         data.time = time.formatTime(new Date());
         console.log(`${data.name}:${data.str}`)
+        if (data.type == 2 || data.type == 3) {
+            new Chats({
+                type: data.type,
+                name: data.name,
+                avatar: data.avatar,
+                room: data.room,
+                str: data.str,
+                time: data.time
+            }).save().then(str => {
+                console.log(str)
+            })
+        }
         switch (data.type) {
             case 0:
                 conn.name = data.name;

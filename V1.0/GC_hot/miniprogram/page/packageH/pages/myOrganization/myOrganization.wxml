@@ -29,7 +29,7 @@
 </view>
 <!-- 消息体 -->
 <view class="content" style="height:{{height - 50}}px">
-    <scroll-view scroll-y='true' enable-back-to-top='true' style="height:{{height - 50}}px" scroll-top='{{scrollTop}}' scroll-with-animation="true">
+    <scroll-view bindscrolltoupper="showPage" scroll-y='true' enable-back-to-top='true' style="height:{{height - 50}}px" scroll-top='{{scrollTop}}' scroll-with-animation="true">
         <!-- 消息 -->
         <block wx:for="{{msgData}}">
             <view wx:if="{{name != item.name}}" class="content-all">
