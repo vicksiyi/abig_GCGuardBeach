@@ -7,19 +7,19 @@ Page({
     currentData: 0,
     winHeight: "", //窗口高度
     currentTab: 0, //预设当前项的值
-    scrollLeft: 0 ,//tab标题的滚动条位置
-     inputList: [ {
+    scrollLeft: 0,//tab标题的滚动条位置
+    inputList: [{
       id: 1,
       title: "邮箱",
       type: "string",
       value: ""
     },
     {
-         id: 2,
-         title: "密码",
-         type: "string",
-         value: ""
-       }
+      id: 2,
+      title: "密码",
+      type: "string",
+      value: ""
+    }
     ],
     registerList: [{
       id: 1,
@@ -32,13 +32,13 @@ Page({
       title: "邮箱",
       type: "string",
       value: ""
-      },
-      {
-        id: 3,
-        title: "密码",
-        type: "string",
-        value: ""
-      }
+    },
+    {
+      id: 3,
+      title: "密码",
+      type: "string",
+      value: ""
+    }
     ]
 
   },
@@ -72,9 +72,9 @@ Page({
       })
     }
   },
-   /**
-   * 授权登录
-   */
+  /**
+  * 授权登录
+  */
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
@@ -98,7 +98,7 @@ Page({
         isHide: false
       });
       wx.showTabBar({});
-     
+
     } else {
       //用户按了拒绝按钮
       wx.showModal({
