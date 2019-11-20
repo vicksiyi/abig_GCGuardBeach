@@ -1,4 +1,4 @@
-<import src="../../resources/template/LifeCircle.wxml" />
+<import src="../../../../template/image.wxml" />
 <scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height}}px;">
   <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
   <block wx:for="{{value}}" wx:key="this">
