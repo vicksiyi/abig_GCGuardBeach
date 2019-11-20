@@ -1,18 +1,18 @@
-<!-- 未授权-->
-<view wx:if="{{isHide}}" >
+<!-- 未授权 -->
+<view wx:if="{{isHide}}">
   <view wx:if="{{canIUse}}">
     <!-- <section> -->
-      <!-- <view class="profile-content"> -->
-        <view class="padding-image">
-          <image  class="padding-image" src="https://images.pexels.com/photos/3025667/pexels-photo-3025667.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></image>
-        </view>
-        <button bindtap="login" class="btn_login">登录</button>
-      <!-- </view> -->
+    <!-- <view class="profile-content"> -->
+    <view class="padding-image">
+      <image class="padding-image" src="https://images.pexels.com/photos/3025667/pexels-photo-3025667.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></image>
+    </view>
+    <button bindtap="login" class="btn_login">登录</button>
+    <!-- </view> -->
     <!-- </section> -->
   </view>
   <view wx:else>请升级微信版本</view>
   <i-message id="message" />
-</view> 
+</view>
 <!-- 已授权 -->
 <view style="height:1100rpx;" wx:else>
   <!-- 选择框 -->
@@ -26,9 +26,14 @@
   </view>
   <!-- 地图 -->
   <view class="index-map">
-    <map id="map" longitude="{{longitude}}" latitude=" {{latitude}}" markers="{{markers}}" scale="13" show-location style="width: 100%; height: 170px;"></map>
+    <map id="map" longitude="{{longitude}}" latitude=" {{latitude}}" markers="{{markers}}" subkey="{{subkey}}" scale="8" show-location style="width: 100%; height: 170px;" bindmarkertap="markersChange">
+      <i-spin size="large" fix wx:if="{{ loadMap }}"></i-spin>
+    </map>
   </view>
-<!-- 弹出菜单 -->
+  <view class="fish">
+  <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/fish.gif" style="width:120rpx;height:120rpx" mode="aspectFill" bindtap="view"></image>
+  </view>
+  <!-- 弹出菜单 -->
   <view class="pop_up">
     <image src="../../../images/icon/indexfind.png" class="img-style" animation="{{animCollect}}" bindtap="find"></image>
     <image src="../../../images/icon/indexvolunteer.png" class="img-style" animation="{{animTranspond}}" bindtap="volut"></image>
@@ -54,9 +59,10 @@
           </view>
         </view>
         <view class="imagesline"></view>
+        <!-- 测试model时候可能暂时去掉 -->
+        <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
       </view>
       <view class="texttips">更新时间:{{weatherResult.update_time}}</view>
-      <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
     </view>
     <view class="index-othertips">
       <i-tag style="opacity: 0.8;" class="i-tags" color="{{weatherColor}}">
@@ -68,4 +74,67 @@
     </view>
   </view>
   <i-message id="message" />
+</view>
+<!-- 底部弹框 -->
+<view class="model" wx:if="{{showModel}}">
+  <!-- 电话列表 -->
+  <i-modal title="选择您要联系的号码" visible="{{ visible4 }}" actions="{{ actions4 }}" action-mode="{{ vertical }}" bind:click="telPhoneList"></i-modal>
+  <view class="model-content {{showModel?'pop-up':''}}">
+    <!-- 关闭 -->
+    <view class="close" bindtap="closeModel">
+      <image src="../../../images/close.png"></image>
+    </view>
+    <view class="model-01">
+      <!-- 名称、地点 -->
+      <view class="model-name">
+        <!-- 名称、地点 -->
+        <view class="model-name-title">
+          <!-- 名称 -->
+          <view class="model-show-name">
+            <view class="name">
+              <text>{{dataValue.title}}</text>
+            </view>
+            <view class="model-tag-01">
+              <i-tag>{{dataValue.category}}</i-tag>
+            </view>
+          </view>
+          <view class="model-text">
+            <text>{{dataValue.address}}</text>
+          </view>
+        </view>
+        <!-- 导航 -->
+        <view class="model-dao">
+          <image src="../../../images/line.png" bindtap="navMap"></image>
+        </view>
+      </view>
+      <!-- 操作 -->
+      <view class="model-mode">
+        <!-- 时间 -->
+        <view class="model-time">
+          <view>
+            <image src="../../../images/time.png"></image>
+          </view>
+          <view class="model-tag-time">
+            <i-tag>09:00~23:30</i-tag>
+          </view>
+        </view>
+        <!-- 电话 -->
+        <view class="model-tel" bindtap="tel" data-Tel="{{dataValue.tel}}">
+          <view>
+            <text>电话联系:</text>
+          </view>
+          <view>
+            <image src="../../../images/tel.png"></image>
+          </view>
+        </view>
+        <!-- 距离 -->
+        <view class="model-line">
+          <view>
+            <i-spin size="large" fix wx:if="{{ loadDistance }}"></i-spin>
+            <text>{{distance}}公里</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

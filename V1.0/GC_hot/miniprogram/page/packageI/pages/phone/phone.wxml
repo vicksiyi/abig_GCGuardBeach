@@ -1,0 +1,22 @@
+<view class="phone">
+    <view class="phone-title">
+        <text>手机号验证</text>
+    </view>
+    <view>
+        <view class="input-num">
+            <i-input value="{{ phone }}" bind:change="changePhone" type="number" placeholder="请输入手机号" />
+        </view>
+        <view class="num-row">
+            <view class="input">
+                <i-input value="{{ value2 }}" type="number" bind:change="changeValue2"  placeholder="请输入验证码" />
+            </view>
+            <view class="btn">
+                <i-button bind:click="valPhone" type="primary"  disabled="{{btnDisable}}" size="small">{{msg}}</i-button>
+            </view>
+        </view>
+    </view>
+    <view class="sub">
+        <i-button bind:click="submit" disabled="{{subDisabled}}" type="primary">确定修改</i-button>
+    </view>
+</view>
+<i-message id="message" />

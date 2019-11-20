@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-spin": "../../../dist/spin/index"
+  },
+  "disableScroll": true,
+  "navigationBarTitleText": "全览"
+}

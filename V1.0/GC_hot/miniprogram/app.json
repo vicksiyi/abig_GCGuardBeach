@@ -1,12 +1,11 @@
 {
   "pages": [
     "page/packageA/index/index",
-    "page/packageA/test/test",
     "page/packageA/mine/mine",
+    "page/packageA/news/news",
     "page/packageA/login/login",
     "page/packageA/commodity/commodity",
-    "page/packageA/interactive/interactive",
-    "page/packageA/news/news"
+    "page/packageA/interactive/interactive"
   ],
   "permission": {
     "scope.userLocation": {
@@ -57,10 +56,19 @@
   },
   "subpackages": [
     {
+      "root": "page/packageC/",
+      "pages": [
+        "pages/NewsDetail/NewsDetail",
+        "pages/VideosDetail/VideosDetail"
+      ]
+    },
+    {
       "root": "page/packageB/",
       "pages": [
         "pages/volunteer/volunteer",
-        "pages/knowledge/knowledge"
+        "pages/volunteerJoin/volunteerJoin",
+        "pages/knowledge/knowledge",
+        "pages/FullView/FullView"
       ]
     },
     {
@@ -68,14 +76,17 @@
       "pages": [
         "pages/find/find",
         "pages/FindCircle/FindCircle",
-        "pages/record/record"
+        "pages/record/record",
+        "pages/findDetail/findDetail",
+        "pages/LifeCircle/LifeCircle"
       ]
     },
     {
       "root": "page/packageG/",
       "pages": [
         "pages/order/order",
-        "pages/commoditycar/commoditycar"
+        "pages/commoditycar/commoditycar",
+        "pages/ShowDetail/ShowDetail"
       ]
     },
     {
@@ -84,12 +95,35 @@
         "pages/myinfo/myinfo",
         "pages/about/about",
         "pages/feedback/feedback",
-        "pages/rank/rank"
+        "pages/rank/rank",
+        "pages/myOrganization/myOrganization",
+        "pages/myVolunteer/myVolunteer"
+      ]
+    },
+    {
+      "root": "page/packageI/",
+      "pages": [
+        "pages/email/email",
+        "pages/phone/phone"
+      ]
+    },
+    {
+      "root": "page/packageD/",
+      "pages": [
+        "pages/write/write",
+        "pages/selectTag/selectTag",
+        "pages/focus/focus"
       ]
     }
   ],
   "usingComponents": {
     "i-icon": "../../dist/icon/index"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.3",
+      "provider": "wx50b5593e81dd937a"
+    }
+  }
 }

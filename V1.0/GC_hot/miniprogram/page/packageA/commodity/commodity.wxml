@@ -2,29 +2,24 @@
   <view class='productNav'>
     <!-- 左侧 -->
     <view class='left'>
-      <view wx:for="{{category}}" wx:for-item="categoryName">
+      <view wx:for="{{store}}" wx:for-item="categoryName">
         <view class="{{active==index?'selected':'normal'}}" id="{{index}}" bindtap='switchNav'>
-          {{categoryName.name}}
+          {{categoryName.title}}
         </view>
       </view>
       <view style="width:150rpx;height:150rpx;margin-top:200rpx;"></view>
     </view>
     <!-- 右侧 -->
     <view class='right' style="height:{{windowHeight}}px;">
-      <!-- <swiper current='{{currentTab}}' vertical='{{true}}' class='type' bindchange="swiperChange">
-        <swiper-item wx:for="{{category}}" id="{{index}}">
-          
-        </swiper-item>
-      </swiper> -->
-      <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" class="scoll-h" scroll-with-animation="true">
-        <view class="goodcontainer" wx:for="{{category}}" wx:for-item="categoryName" wx:key="id">
+      <scroll-view scroll-y="true" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" class="scoll-h" scroll-with-animation="true">
+        <view class="goodcontainer" wx:for="{{store}}" wx:for-item="categoryName" wx:key="id">
           <view style="width:300rpx;margin-left:120rpx;">
-            <i-divider content="{{categoryName.name}}" color="#bbbec4" lineColor="#bbbec4" size="20px" style="font-weight:bold;"></i-divider>
+            <i-divider content="{{categoryName.title}}" color="#bbbec4" lineColor="#bbbec4" size="20px" style="font-weight:bold;"></i-divider>
           </view>
           <view class="goodpack">
-            <view style="float:left;" wx:for="{{categoryName.science}}" wx:for-item="itemName" wx:key="id">
+            <view style="float:left;" wx:for="{{categoryName.select}}" wx:for-item="itemName" wx:key="id">
               <view class="goodpicture">
-                <image src="{{itemName.picture}}" mode="aspectFill" style="width:140rpx;height:140rpx" bindtap="tap" data-Id="{{index}}" />
+                <image src="{{baseUrl+itemName.imageBg}}" mode="aspectFill" style="width:140rpx;height:140rpx" data-Id="{{itemName._id}}" bindtap="detail" />
               </view>
               <view class="goodtext">{{itemName.name}}</view>
             </view>

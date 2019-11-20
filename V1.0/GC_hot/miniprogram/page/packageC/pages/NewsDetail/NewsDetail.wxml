@@ -1,0 +1,20 @@
+<import src="../../../../wxParse/wxParse.wxml" />
+<view class="title-container">
+  <text class="title-text">{{dataNews.new_title}}</text>
+</view>
+<view class="tip-container">
+  <view class="from">
+    <text class="tip-text">来源:{{dataNews.new_from}}</text>
+  </view>
+  <view>
+    <text class="tip-text">{{dataNews.new_time}}</text>
+  </view>
+</view>
+<view class="wxParse">
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<!-- <button class="btnshare" open-type='share'>
+  <i-icon type="share_fill" />
+  分享
+</button> -->

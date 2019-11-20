@@ -1,0 +1,264 @@
+.scoll-h {
+  height: 100%;
+}
+
+.scoll-h::-webkit-scrollbar {
+  display: none;
+}
+
+page {
+  background: #f8f8f9;
+}
+
+.tagcontainer {
+  padding-top: 15rpx;
+  width: 100%;
+  height: 50rpx;
+  border-bottom: 2rpx solid #e9eaec;
+}
+
+.tagtextcontainer {
+  float: left;
+  margin-left: 20rpx;
+  width: 70rpx;
+  height: 40rpx;
+  background-color: #e9eaec;
+  border-radius: 35px;
+  text-align: center;
+  font-size: 11px;
+  color: #1c2438;
+}
+
+._tagtextcontainer {
+  float: left;
+  margin-left: 20rpx;
+  width: 70rpx;
+  height: 40rpx;
+  background-color: #2b85e4;
+  border-radius: 35px;
+  text-align: center;
+  font-size: 11px;
+  color: #fff;
+}
+
+.video_whole {
+  width: 100%;
+  height: 400rpx;
+}
+
+.video {
+  width: 100%;
+  height: 300rpx;
+}
+
+.video_title {
+  width: 100%;
+  font-size: 1rem;
+  height: 60rpx;
+  color: #1c2438;
+}
+
+.video_time {
+  color: #495060;
+  font-size: 0.7rem;
+  width: 40%;
+  height: 40rpx;
+  margin-top: -39rpx;
+  margin-left: 519rpx;
+}
+
+.video_source {
+  color: #495060;
+  font-size: 0.7rem;
+  width: 50%;
+  height: 40rpx;
+}
+
+.news_whole {
+  width: 96%;
+  height: 200rpx;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  margin: 20rpx auto;
+  border-radius: 10rpx;
+}
+
+.news_image image {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.content {
+  width: 100%;
+  padding: 10rpx;
+}
+
+.news_title {
+  width: 94%;
+  margin: auto;
+}
+
+.news_title text {
+  font-size: 0.9rem;
+  color: #495060;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.time-from {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 50rpx;
+}
+
+.news_source {
+  margin-left: 10rpx;
+  font-size: 0.7rem;
+  color: #bbbec4;
+  width: 50%;
+}
+
+.news_time {
+  font-size: 0.7rem;
+  color: #bbbec4;
+  width: 50%;
+}
+
+.bg-img {
+  width: 96%;
+  height: 400rpx;
+  margin: 30rpx auto;
+  background: #fff;
+  border-radius: 10rpx;
+}
+
+.bg-img image {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 10rpx;
+}
+
+.bg-content {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  height: 100rpx;
+  margin: -170rpx auto;
+  padding: 30rpx;
+  color: #fff;
+}
+
+.bg-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.bg-content text {
+  font-weight: bolder;
+  font-size: 1.2rem;
+  margin-top: -20rpx;
+}
+
+.video-time {
+  width: 50%;
+  font-size: 0.7rem;
+}
+
+.video-author {
+  width: 40%;
+  font-size: 0.9rem;
+}
+
+.up {
+  position: fixed;
+  bottom: 0rpx;
+  right: 20rpx;
+}
+
+.up image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.up-mask {
+  animation: maskFish 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+}
+
+@keyframes maskFish {
+  0% {
+    bottom: 0rpx;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 60rpx;
+    opacity: 1;
+  }
+}
+
+.up-close {
+  animation: closeFish 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes closeFish {
+  0% {
+    bottom: 60rpx;
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 0rpx;
+    opacity: 0;
+  }
+}
+
+.fei-up-mask {
+  animation: feiFish 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+.fei-up-Image {
+  animation: feiImage 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+@keyframes feiFish {
+  0% {
+    bottom: 60rpx;
+    opacity: 1;
+    right: 20rpx;
+  }
+
+  10% {
+    right: 0;
+  }
+
+  100% {
+    bottom: 600rpx;
+    opacity: 0;
+  }
+}
+
+@keyframes feiImage {
+  0% {
+    height: 110rpx;
+  }
+
+  100% {
+    height: 162rpx;
+  }
+}

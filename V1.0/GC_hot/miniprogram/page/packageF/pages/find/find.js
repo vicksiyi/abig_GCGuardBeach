@@ -1,18 +1,20 @@
-const { $Message } = require('../../../../dist/base/index');
-const utils = require('../../../../utils/util');
+const {
+  $Message
+} = require('../../../../dist/base/index');
+const Utils = require('../../../../utils/util');
 const requests = require('../../../../utils/requests');
+const utils = new Utils()
+const app = getApp();
 Page({
   data: {
     currentData: 0,
     max: 100,
     value: "",
     files: [],
-    actions2: [
-      {
-        name: '删除',
-        color: '#ed3f14'
-      }
-    ],
+    actions2: [{
+      name: '删除',
+      color: '#ed3f14'
+    }],
     fileID: [],
     spinShow: false,
     percent: '',
@@ -136,6 +138,14 @@ Page({
     let filePath = ''
     let fileIDTemp = []
     let tempNum = 1
+    console.log(_this.data.content == '', _this.data.files.length == 0)
+    if (_this.data.content == '' || _this.data.files.length == 0) {
+      $Message({
+        content: `文件和描述不可为空`,
+        type: 'error'
+      });
+      return
+    }
     this.setData({
       spinShow: true,
       submit: true
@@ -196,75 +206,115 @@ Page({
   submitForm: function () {
     console.log('开始提交表单')
     let _this = this
+    let Token = ''
+    let item = {}
+    item.url = `http://${app.ip}:5001/mini/finds/add`;
+    item.data = {
+      picture: JSON.stringify(_this.data.fileID),
+      content: _this.data.content
+    }
+    item.method = 'POST'
     wx.getStorage({
-      key: 'name',
+      key: 'Token',
       success(res) {
-        wx.getStorage({
-          key: 'avatar',
-          success(e) {
-            // 获取OPENID
-            wx.cloud.callFunction({
-              name: 'login',
-              success(re) {
-                // 位置
-                wx.getLocation({
-                  type: 'wgs84',
-                  success(location) {
-                    let item = {
-                      url: 'http://localhost:5000/api/finds/add',
-                      data: {
-                        name: res.data,
-                        avatar: e.data,
-                        picture: JSON.stringify(_this.data.fileID),
-                        content: _this.data.content,
-                        openid: re.result.openid,
-                        place: JSON.stringify(location)
-                      },
-                      method: 'POST',
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded' // 默认值
-                      }
-                    }
-                    let event = async () => {
-                      // 阻塞等待数据上传
-                      let result = await requests.requestUtils(item)
-                      console.log(result)
-                      if (result.errors == undefined) {
-                        $Message({
-                          content: `已上传后台审核`,
-                          type: 'success'
-                        });
-                        setTimeout(() => {
-                          _this.setData({
-                            spinShow: false
-                          })
-                          wx.switchTab({
-                            url: '../../../../page/packageA/index/index'
-                          })
-                        }, 1000);
-                      } else {
-                        $Message({
-                          content: `上传后台审核失败`,
-                          type: 'error'
-                        });
-                        setTimeout(() => {
-                          wx.switchTab({
-                            url: '../../../../page/packageA/index/index'
-                          })
-                        }, 1000);
-                      }
-                    }
-                    event()
-                  }
-                })
-
+        Token = res.data
+      },
+      complete() {
+        item.header = {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          'Authorization': Token
+        }
+        wx.getLocation({
+          success(res) {
+            item.data.place = JSON.stringify({
+              latitude: res.latitude,
+              longitude: res.longitude
+            });
+            // 阻塞等待数据上传
+            requests.requestUtils(item, result => {
+              console.log(result);
+              if (result.msg == 'Success') {
+                $Message({
+                  content: `已上传后台审核`,
+                  type: 'success'
+                });
+                setTimeout(() => {
+                  _this.setData({
+                    spinShow: false
+                  })
+                  wx.switchTab({
+                    url: '../../../../page/packageA/index/index'
+                  })
+                }, 1000);
+              } else {
+                $Message({
+                  content: `上传后台审核失败`,
+                  type: 'error'
+                });
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '../../../../page/packageA/index/index'
+                  })
+                }, 1000);
               }
-            })
+            });
+          },
+          fail() {
+            _this.modelLocation()
           }
         })
-      },
-      fail(err) {
-        console.log(err)
+      }
+    })
+  },
+  modelLocation: function () {
+    let _this = this
+    wx.showModal({
+      title: '位置获取失败',
+      content: '是否进入开启权限页面重新授权',
+      confirmText: '确定',
+      confirmColor: '#19be6b',
+      success(res2) {
+        if (res2.confirm) {
+          wx.openSetting({
+            success(data) {
+              if (data.authSetting["scope.userLocation"]) {
+                $Message({
+                  content: '获取位置成功',
+                  type: 'success'
+                });
+                // 重新提交
+                _this.submitForm()
+              } else {
+                $Message({
+                  content: '获取权限失败,发布失败',
+                  type: 'error'
+                });
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '../../../packageA/index/index'
+                  })
+                }, 1000)
+              }
+            },
+            fail(err) {
+              console.log(err)
+              $Message({
+                content: '未知错误',
+                type: 'error'
+              });
+            }
+          })
+        } else {
+          $Message({
+            content: '用户取消授权,发布失败',
+            type: 'error'
+          });
+          setTimeout(() => {
+            wx.switchTab({
+              url: '../../../packageA/index/index'
+            })
+          }, 1000)
+        }
       }
     })
   }

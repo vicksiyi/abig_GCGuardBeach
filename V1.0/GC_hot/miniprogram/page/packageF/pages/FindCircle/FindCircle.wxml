@@ -1,21 +1,73 @@
-<view>
-  <image class="top_image" src="../../../../images/findsth.png"></image>
-</view>
-<view  wx:for="{{array}}" wx:for-item="item" wx:key="id">
-  <i-divider class="divi"></i-divider>
-  <view class="container">
-    <i-avatar class="avatar_img" src="{{item.headportrait}}" size="large" shape="square"></i-avatar>
-    <text class="nickname">{{item. headname}}</text>
-    <text class="time">{{item.headtime}}</text>
-    <i-icon class="zan" type="praise" />
-    <textarea  class="contant">{{item.contenttext}}</textarea>
-    <!-- 社区图片 -->
-    <view class="picturecontainer">
-      <view class="contentpicture">
-        <view class="pcitem" wx:for="{{item.contentpicture}}" wx:for-item="pictureName" wx:key="id">
-          <image style="width:180rpx; height:180rpx;" mode="aspectFill" src="{{pictureName.photo}}"></image>
+<import src="../../../../template/image.wxml" />
+<scroll-view scroll-y="true" bindscrolltolower="bottomChange" bindscroll="scrollChange" scroll-with-animation="{{true}}" scroll-top="{{scollTop}}" style="height: {{height}}px;">
+  <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ load }}" />
+  <block wx:for="{{value}}" wx:key="this">
+    <view class="content">
+      <view class="avatar">
+        <image src="{{item.avatarUrl}}"></image>
+      </view>
+      <view class="content-title">
+        <view class="content-content">
+          <view class="content-title-name">
+            <text>{{item.nickName}}</text>
+            <text style="color:#bbbec4;">{{item.time}}</text>
+          </view>
+          <view class="content-msg">{{item.content}}</view>
+          <!-- <view class="content-title-img">
+            <block wx:for="{{item.picture}}" wx:for-item="image">
+              <view bindtap="showImage" data-Image="{{item.picture}}" data-Url="{{image}}">
+                <image src="{{image}}"></image>
+              </view>
+            </block>
+          </view> -->
+          <template is="image" data="{{picture:item.picture}}"></template>
+
+          <view class="content-title-map" bindtap="map" data-Index="{{index}}" data-Str="{{item.str}}">
+            <view>
+              <image src="../../resources/images/map.png"></image>
+            </view>
+            <view class="msg">
+              <text>{{item.str}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="mode">
+          <view bindtap="goMore">
+            <image src="../../resources/images/msg.png"></image>
+            <text>评论</text>
+          </view>
+          <view bindtap="goMore">
+            <image src="../../resources/images/zhao.png"></image>
+            <text>号召</text>
+          </view>
+          <view bindtap="enjoyMode" data-Index="{{index}}">
+            <image src="../../resources/images/enjoy.png"></image>
+            <text>分享</text>
+          </view>
         </view>
       </view>
     </view>
+  </block>
+  <!-- 生成图 -->
+  <view class="canvas-bg" wx:if="{{canvasShow}}">
+    <view class="canvas-close" bindtap="closeCanvas">
+      <image src="../../resources/images/close.png"></image>
+    </view>
+    <view class="content-canvas {{canvasShow?'show-canvas':''}}">
+      <view class="canvas-content">
+        <canvas canvas-id="canvas-map" style="width: 600rpx; height: 750rpx;" class="share-canvas"></canvas>
+      </view>
+      <view>
+        <i-button bind:click="saveImage" type="primary">保存到相册</i-button>
+      </view>
+    </view>
   </view>
+  <i-message id="message" />
+  <i-load-more wx:if="{{endShow}}" loading="{{ true }}" />
+  <i-load-more wx:if="{{endLoad}}" tip="我们也是有底线的" loading="{{ false }}" />
+</scroll-view>
+<!-- 火箭 -->
+<view wx:if="{{upShowTemp}}" class="up {{upShow?'up-mask':'up-close'}} {{fei?'fei-up-mask':''}}">
+  <image class="{{fei?'fei-up-Image':''}}" bindtap="feiUp" src="../../../../images/up.{{fei?'gif':'png'}}"></image>
+  <!-- <image src="../../../images/up.gif"></image> -->
 </view>

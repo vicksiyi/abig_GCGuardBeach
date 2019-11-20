@@ -1,0 +1,51 @@
+<!-- 列表 -->
+<view>
+    <block wx:for="{{value}}">
+        <view class="volunteer-container" bindtap="{{item.msg_status == undefined ? 'joinIn':'show'}}" data-Id="{{index}}">
+            <view class="volunteer-title">{{item.msg_title}}</view>
+            <view class="volunteer-content">
+                <view class="volunteer-img">
+                    <image src="{{item.msg_image}}"></image>
+                </view>
+                <view class="volunteer-content-all">
+                    <view class="volunteer-time">
+                        <view>
+                            <image src="../../resources/images/time.png"></image>
+                        </view>
+                        <view>
+                            <text>{{item.msg_day}}</text>
+                        </view>
+                    </view>
+                    <view class="volunteer-time">
+                        <view>
+                            <image src="../../resources/images/address.png"></image>
+                        </view>
+                        <view>
+                            <text>{{item.msg_address}}</text>
+                        </view>
+                    </view>
+                    <view class="volunteer-time">
+                        <view class="volunteer-img-row">
+                            <image src="../../resources/images/num.png"></image>
+                        </view>
+                        <view class="volunteer-num">
+                            <view class="font-num" style="{{item.msg_status == undefined ? '':'color：red'}}">
+                                {{item.msg_status == undefined ?  '进入聊天':'查看详细'}}
+                                <text>/{{item.msg_person}}</text>
+                            </view>
+                        </view>
+                        <view class="volunteer-pinc">
+                            <i-tag wx:if="{{item.msg_status == undefined}}" class="i-tags" name="标签一" color="green" type="border">
+                                进行中
+                            </i-tag>
+                            <i-tag wx:else class="i-tags" name="标签一" color="red" type="border">
+                                已完成
+                            </i-tag>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ spinLoad }}" />
+</view>

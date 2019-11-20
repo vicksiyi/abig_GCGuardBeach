@@ -1,0 +1,145 @@
+.title {
+    width: 100%;
+}
+
+.title-image {
+    width: 40rpx;
+    height: 40rpx;
+    margin: 80rpx 0 0 40rpx;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 200rpx;
+    margin: auto;
+    z-index: 1;
+}
+
+.content image {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 10rpx;
+    margin: 20rpx;
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    -webkit-filter: blur(15px);
+}
+
+.content-title {
+    width: 96%;
+    margin-top: 10rpx;
+}
+
+.content-title text {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.focus-title text {
+    font-size: 0.8rem;
+    font-weight: normal;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #e9eaec;
+}
+
+.content-event {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 10rpx auto;
+}
+
+.content-event text {
+    color: #e9eaec;
+}
+
+.focus {
+    width: 200rpx;
+    text-align: center;
+}
+
+.content-focus {
+    width: 160rpx;
+    height: 50rpx;
+    background: #ff9900;
+    border-radius: 20rpx;
+    margin-left: auto;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+}
+
+.content-focus text {
+    line-height: 50rpx;
+    padding-left: 10rpx;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.content-focus image {
+    width: 30rpx;
+    height: 30rpx;
+    margin: 10rpx 0 0 30rpx;
+}
+
+.focus-content {
+    background: #fff;
+    border-radius: 10rpx 10rpx 0 0;
+    margin-top: 10px;
+}
+
+.content-template {
+    display: flex;
+    flex-direction: row;
+    margin: 30rpx auto;
+    width: 96%;
+}
+
+.avatar-template {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 20rpx;
+}
+
+.avatar-template image {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 10rpx;
+    border-radius: 50%;
+}
+
+.content-title-template {
+    width: 90%;
+    margin: auto;
+}
+
+.content-title-name-template text {
+    font-size: 0.8rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #5cadff;
+}
+
+
+.content-msg-template {
+    width: 90%;
+    font-size: 0.8rem;
+    color: #495060;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 10rpx;
+    word-break: break-all;
+}

@@ -2,6 +2,8 @@
     "usingComponents": {
       "i-tabs": "../../../dist/tabs/index",
       "i-tab": "../../../dist/tab/index",
-      "i-tag": "../../../dist/tag/index"
-    }
+      "i-tag": "../../../dist/tag/index",
+      "i-load-more": "../../../dist/load-more/index"
+    },
+    "navigationBarTitleText": "新闻"
   }

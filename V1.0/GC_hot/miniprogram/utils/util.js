@@ -1,9 +1,15 @@
+function Utils() { }
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
 /**
   * 格式化时间
   * @param {date} 当前时间戳
   * @return 返回的是已格式化的时间
   */
-const formatTime = date => {
+Utils.prototype.formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -14,17 +20,12 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
-
 
 /**
   * 生成十个不重复的随机数
   * @return 返回的是十个随机数字符串
   */
-const randomNum = () => {
+Utils.prototype.randomNum = () => {
   var arr1 = new Array();
   var arr2 = new Array();
   for (var i = 0; i < 20; i++) {
@@ -51,18 +52,10 @@ const randomNum = () => {
  * @param {*} minNum 最小值
  * @param {*} maxNum 最大值
  */
-function randomNumOneToOne(minNum, maxNum) {
-  switch (arguments.length) {
-    case 1:
-      return parseInt(Math.random() * minNum + 1, 10);
-      break;
-    case 2:
-      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-      break;
-    default:
-      return 0;
-      break;
-  }
+Utils.prototype.randomNumOneToOne = (minNum, maxNum) => {
+  let Range = maxNum - minNum;
+  let Rand = Math.random();
+  return (minNum + Math.round(Rand * Range));
 }
 
 /**
@@ -70,7 +63,7 @@ function randomNumOneToOne(minNum, maxNum) {
   * @return 周数
   * @example 当天：2019-10-05  return ["2019-09-30", "2019-10-01", "2019-10-02", "2019-10-03", "2019-10-04", "2019-10-05", "2019-10-06"]
   */
-const thisWeek = () => {
+Utils.prototype.thisWeek = () => {
   const dateOfToday = Date.now()
   const dayOfToday = (new Date().getDay() + 7 - 1) % 7
   const daysOfThisWeek = Array.from(new Array(7))
@@ -85,9 +78,36 @@ const thisWeek = () => {
   return daysOfThisWeek
 }
 
-module.exports = {
-  formatTime: formatTime,
-  randomNum: randomNum,
-  thisWeek: thisWeek,
-  randomNumOneToOne: randomNumOneToOne
+/**
+ * 距离转换
+ * @param {distance} 米
+ * @return 公里
+ */
+Utils.prototype.distanceFormat = (distance) => {
+  return Math.round((distance / 100) / 10).toFixed(1)
 }
+
+/**
+ * 聚类
+ * @param {*} array 需要聚类的数组
+ */
+Utils.prototype.aggregationFunc = (array) => {
+  let valueTemp = [{}]
+  let oneType = []
+  let i = 0;
+  array.map((value, index) => {
+    if (oneType.indexOf(value.oneType) == -1) {
+      i = oneType.push(value.oneType)
+      valueTemp[i - 1] = {}
+      valueTemp[i - 1].select = new Array();
+      valueTemp[i - 1].title = value.oneType
+    }
+    valueTemp[oneType.indexOf(value.oneType)].select.push({
+      image: value.image,
+      type: value.twoType
+    })
+  })
+  return valueTemp
+}
+
+module.exports = Utils

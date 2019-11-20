@@ -1,69 +1,384 @@
-/*订单列表*/
-
-.orderDetails {
-  background: #fff;
-  border-bottom: 20rpx solid #f5f5f5;
+.mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 9000;
+  opacity: 0.7;
 }
 
-.orderListTitle {
-  height: 100rpx;
-  line-height: 100rpx;
-  border-bottom: 1rpx solid #bebebe;
-}
-
-.orderListTitle .userName {
-  padding-right: 50rpx;
-  margin-left: 10px;
-}
-
-.orderListTitle .orderStatus {
-  float: right;
-  margin-right: 20rpx;
-  color: #2f7b27;
-  font-size: 34rpx;
-}
-
-.orderListDetails {
+.modalDlg {
+  width: 619rpx;
+  height: 1063rpx;
+  position: fixed;
+  top: 36%;
+  left: 0;
+  z-index: 9999;
+  margin: -370rpx 70rpx;
+  background-color: #fff;
+  border-radius: 36rpx;
   display: flex;
-  height: 200rpx;
-  border-bottom: 1rpx solid #f3f3f3;
+  flex-direction: column;
+  align-items: center;
 }
 
-.orderListDetails .productImg {
-  flex: 1;
-  height: 180rpx;
-  width: 120px;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
+.header {
+  background: #2b85e4;
+  height: 219rpx;
+  width: 100%;
 }
 
-.orderListDetails .productImg image {
-  width: 100px;
-  height: 90%;
+.status {
+  position: relative;
+  height: 50rpx;
+  text-align: center;
+  font-size: 1.4rem;
+  color: #fff;
 }
 
-.orderListDetails .productInfo {
-  flex: 4;
-  margin: 40rpx 10px 20px 30rpx;
-  font-size: 15px;
+.image {
+  height: 144rpx;
+  width: 144rpx;
+  margin: 17rpx 25rpx;
 }
 
-.orderListDetails .productInfo .productTitle {
-  font-size: 15px;
-  overflow: hidden;
+.title {
+  font-size: 0.8rem;
+  color: #fff;
+  margin: -155rpx 190rpx;
+}
+
+.type {
+  font-size: 0.6rem;
+  color: #f8f8f8;
+  margin: 158rpx 190rpx;
+}
+
+.number {
+  font-size: 0.6rem;
+  color: #f8f8f8;
+  margin: -199rpx 300rpx;
+}
+
+.arrive {
+  font-size: 1rem;
+  color: #f8f8f8;
+  margin: 200rpx 190rpx;
+}
+
+/* 追踪 */
+
+.logisit {
+  position: relative;
+  width: 100%;
+  height: 170rpx;
+  text-align: center; /* background-color: red; */
+}
+
+/*  */
+
+.list {
+  position: relative;
+  display: inline-block;
+  width: 85%;
+  height: 170rpx; /* border-left: 1rpx solid #ddd; *//* background-color: yellow; */
+}
+
+.list_name_page {
+  position: relative;
+  width: 100%;
+  top: 25%; /* background-color: red; */
+  left: 40rpx;
+}
+
+.list_dates_page {
+  position: relative;
+  width: 70%;
+  top: 30%;
+  color: #aaa;
+  text-align: left;
+  font-size: 30rpx; /* background-color: yellow; */
+  left: 40rpx;
+}
+
+.list_img_tab1 {
+  display: inline-flex;
+  position: absolute;
+  left: -34rpx;
+  top: 40rpx;
+  width: 55rpx;
+  height: 195rpx;
+}
+
+.list_img {
+  position: absolute;
+  left: -28rpx;
+  top: 50rpx;
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.list_imgs {
+  display: inline-flex;
+  position: absolute;
+  left: -28rpx;
+  top: 40rpx;
+  width: 40rpx;
+  height: 195rpx;
+}
+
+.list_name {
+  position: relative;
+  text-align: left;
+  font-size: 30rpx;
+  width:516rpx;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  margin-bottom: 10px;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
-.productCount {
-  height: 80rpx;
-  line-height: 80rpx;
-  border-bottom: 1rpx solid #f3f3f3;
+.list_dates {
+  position: absolute;
+  text-align: left;
+  top: 68%;
+  font-size: 30rpx;
 }
 
-.productCount>view {
-  float: right;
-  margin-right: 30rpx;
+/* .write{  position: absolute;  height: 78%;  top:38%;  border-left: 1rpx solid #ddd; left: 45rpx;} */
+
+.writes {
+  position: absolute;
+  width: 80%;
+  bottom: -20rpx;
+  border-bottom: 1rpx solid #ddd;
+  left: 100rpx;
+}
+/* 顶部菜单切换 */
+.navbar {
+    display: flex;
+    background: #f8f8f9;
+}
+
+.none_tab {
+    position: relative;
+    top: 20rpx;
+    color: #999;
+    font-size: 32rpx;
+}
+
+/* 默认选中菜单 */
+.navbar .item {
+    position: relative;
+    flex: auto;
+    font-size: 27rpx;
+    width: 100rpx;
+    text-align: center;
+    line-height: 80rpx;
+    color: #333;
+    border-bottom: 6rpx solid #ddd;
+}
+
+/* 选中菜单样式 */
+.navbar .item.active {
+    color: #333333;
+    border-bottom: 6rpx solid #2b85e4;
+
+}
+
+/* 字体 */
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4rpx;
+}
+
+
+/* 全部 */
+.cont_count {
+    margin-top: 20rpx;
+    margin-left: 25rpx;
+    margin-right: 25rpx;
+    position: relative;
+    width: 700rpx;
+    text-align: center;
+    margin-bottom: 30rpx;
+    background-color: #fff;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 2px 2px 3px #DDDEE1;
+    -webkit-box-shadow: 2px 2px 3px #DDDEE1;
+    box-shadow: 2px 2px 3px #DDDEE1;
+}
+
+/* 编号 */
+.seria {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    height: 70rpx;
+    line-height: 70rpx;
+    /* background-color: yellow; */
+    border-bottom: 1rpx solid #D4D4D4;
+}
+
+/* 订单lab */
+.seriac_name {
+    position: absolute;
+    font-size: 28rpx;
+    color: #333;
+    left: 0rpx;
+}
+
+.seriac_name text {
+    margin-left: 15rpx;
+}
+
+/* 订单状态 */
+.seriac_start {
+    position: absolute;
+    right: 0rpx;
+    color: #ff9900;
+    font-size: 28rpx;
+}
+
+/* 列表 */
+.GoodList {
+    position: relative;
+    width: 90%;
+    display: inline-block;
+    padding-bottom: 10rpx;
+    height: 200rpx;
+}
+
+/* 列表图片 */
+.GoodList_img {
+    position: absolute;
+    width: 144rpx;
+    height: 144rpx;
+    left: 0rpx;
+    top: 30rpx;
+}
+
+/* 列表标题 */
+.GoodList_name {
+    position: absolute;
+    text-align: left;
+    top: 30rpx;
+    left: 180rpx;
+    color: #333333;
+    width: 350rpx;
+    font-size: 30rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+
+}
+
+/* 列表价格 */
+.GoodList_money {
+    position: absolute;
+    font-size: 32rpx;
+    right: 0rpx;
+    bottom: 30rpx;
+}
+
+
+/* 总和 */
+.count_eg {
+    position: relative;
+    width: 100%;
+    height: 75rpx;
+    line-height: 90rpx;
+}
+
+/* 总和居中 */
+.count_cent {
+    position: relative;
+    width: 90%;
+    display: inline-block;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+
+/* 商品数量 */
+.cont_cent_name {
+    position: relative;
+    font-size: 28rpx;
+    float: right;
+}
+
+.cont_ce_mon {
+    font-size: 28rpx;
+}
+
+/* 总计金额 */
+.cont_cen_money {
+    position: relative;
+    font-size: 28rpx;
+    margin-right: 15rpx;
+    float: right;
+}
+
+/* 标签功能 */
+.coent_GoodList {
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    line-height: 150rpx;
+    background-color: #fff;
+}
+
+/* 查看 */
+.coent_del {
+    position: absolute;
+    top: 30%;
+    right: 430rpx;
+    display: inline-block;
+    width: 180rpx;
+    text-align: center;
+    height: 56rpx;
+    border: 1rpx solid #d3d3d3;
+    font-size: 30rpx;
+    line-height: 56rpx;
+    border-radius: 25px;
+}
+
+/* 删除 */
+.coent_check {
+    position: absolute;
+    top: 30%;
+    right: 240rpx;
+    display: inline-block;
+    width: 180rpx;
+    text-align: center;
+    height: 56rpx;
+    border: 1rpx solid #d3d3d3;
+    font-size: 30rpx;
+    line-height: 56rpx;
+    border-radius: 25px;
+}
+
+
+/* 取消 */
+.coent_log_base {
+    position: absolute;
+    top: 30%;
+    color: #ff9900;
+    right: 30rpx;
+    display: inline-block;
+    width: 180rpx;
+    height: 56rpx;
+    text-align: center;
+    border: 1rpx solid #ff9900;
+    font-size: 30rpx;
+    line-height: 56rpx;
+    border-radius: 25px;
+
 }

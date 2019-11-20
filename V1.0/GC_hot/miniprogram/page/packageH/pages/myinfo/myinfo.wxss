@@ -4,3 +4,12 @@
   background-color: #2d8cf0;
   width: 80%;
 }
+.btn-suc{
+  width: 68%;
+  margin: auto;
+}
+.btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

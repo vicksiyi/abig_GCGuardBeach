@@ -16,41 +16,54 @@
     </label>
   </view>
   <!-- 动态出现的“取消”键 -->
-  <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">
-    取消
-  </view>
+  <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
 </view>
-<view class="volunteercontainer">
-  <view class="volunteerpicture">
-    <image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2275557018,866498616&fm=26&gp=0.jpg" mode="aspectFill" style="width:700rpx;" />
-  </view>
-  <view style="background-color:#fff;">
-    <view class="volunteertext">浪漫海岸捡垃圾</view>
-    <view>
-      <view style="float:left">
-        <i-tag class="i-tags" name="标签一" type="border" color="green" style="margin-left:30rpx;margin-top:5rpx;">
-          茂名
-        </i-tag>
+<block wx:for="{{value}}">
+  <view class="volunteer-container" bindtap="joinIn" data-Id="{{item._id}}">
+    <view class="volunteer-title">{{item.msg_title}}</view>
+    <view class="volunteer-content">
+      <view class="volunteer-img">
+        <image src="{{item.msg_image}}"></image>
       </view>
-      <view>
-        <i-tag class="i-tags" name="标签一" type="border" color="green" style="margin-left:30rpx;margin-top:5rpx;">
-          30人封团
-        </i-tag>
+      <view class="volunteer-content-all">
+        <view class="volunteer-time">
+          <view>
+            <image src="../../resources/images/time.png"></image>
+          </view>
+          <view>
+            <text>{{item.msg_day}}</text>
+          </view>
+        </view>
+        <view class="volunteer-time">
+          <view>
+            <image src="../../resources/images/address.png"></image>
+          </view>
+          <view>
+            <text>{{item.msg_address}}</text>
+            <text>距离:{{item.msg_distance}}公里</text>
+          </view>
+        </view>
+        <view class="volunteer-time">
+          <view class="volunteer-img-row">
+            <image src="../../resources/images/num.png"></image>
+          </view>
+          <view class="volunteer-num">
+            <view class="font-num" style="{{item.msg_status == undefined ? '':'color:red'}}">
+              {{item.msg_status == undefined?'点击可看':'查看详细'}}
+              <text>/{{item.msg_person}}</text>
+            </view>
+          </view>
+          <view class="volunteer-pinc">
+            <i-tag wx:if="{{item.msg_status == undefined}}" class="i-tags" name="标签一" color="green" type="border">
+              可加入
+            </i-tag>
+            <i-tag wx:else class="i-tags" name="标签一" color="red" type="border">已完成</i-tag>
+          </view>
+        </view>
       </view>
     </view>
-    <view class="volunteerintroduce">浪漫海岸海滩捡垃圾环保活动+GC海滩卫士环保活动宣讲+公益实践活动</view>
-    <view class="volunteertips">
-      <view style="float:left;margin-left:30rpx;">
-        <i-icon type="coordinates_fill" size="20" color="#80848f" />
-        <text style="font-size:14px;color:#495060">广东·茂名</text>
-      </view>
-      <view style="float:right;margin-right:40rpx;">
-        <i-icon type="activity" size="20" color="#80848f" />
-        <text style="font-size:14px;color:#495060">3天2晚</text>
-      </view>
-    </view>
   </view>
-</view>
+</block>
 <view>
-  <i-load-more tip="暂无数据" loading="{{ false }}" />
+  <i-load-more wx:if="{{!value.length}}" tip="暂无数据" loading="{{ spinLoad }}" />
 </view>

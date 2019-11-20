@@ -82,6 +82,10 @@
   padding-top: 35rpx;
 }
 
+.goodpicture image{
+  border-radius: 10rpx;
+}
+
 .goodtext {
   margin-left: 24rpx;
   padding-top: 10rpx;
@@ -92,4 +96,7 @@
   justify-content: center;
   align-items: center;
   color: #495060;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

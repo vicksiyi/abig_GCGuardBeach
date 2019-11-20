@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-load-more": "../../../dist/load-more/index",
+    "i-message": "../../../dist/message/index"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black"
+}

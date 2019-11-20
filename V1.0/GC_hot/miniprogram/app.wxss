@@ -1,1 +1,13 @@
 @import "./style/weui.wxss";
+.content-title-img {
+    display: block;
+    width: 90%;
+    margin-top: 20rpx;
+}
+
+.content-title-img image {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 10rpx;
+    margin: 10rpx;
+}

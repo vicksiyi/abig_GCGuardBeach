@@ -1,0 +1,29 @@
+<view class="all" style="height:{{windowHeight}}px">
+    <!-- 左侧 -->
+    <view class="left">
+        <block wx:for="{{value}}">
+            <view bindtap="select" data-Title="{{item.title}}" data-Id="{{index}}" class="left-container {{selected == item.title?'select':''}}">
+                <text>{{item.title}}</text>
+            </view>
+        </block>
+    </view>
+    <!-- 右侧 -->
+    <view class="right">
+        <!-- 列表 -->
+        <block wx:for="{{valueItem}}">
+            <view class="right-list">
+                <view>
+                    <image src="{{item.image}}"></image>
+                </view>
+                <view class="font-right">
+                    <text>{{item.type}}</text>
+                </view>
+                <view class="btn-right">
+                    <button bindtap="selectType" data-Type="{{item.type}}" type="primary" plain="{{true}}" class="btn">
+                        选择
+                    </button>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

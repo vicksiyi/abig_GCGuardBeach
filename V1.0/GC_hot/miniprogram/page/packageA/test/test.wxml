@@ -1,34 +1,23 @@
-<image class="title_image" src="../../../images/rank.gif"></image>
-<text class="head">GC排行榜</text>
-<text class="top">TOP10</text>
-<view class="otherrank">
-    <view class="otherrankitem">
-        <view class="otherranknum">124,856</view>
-        <view class="otherranktext">您在全国总排名</view>
+<view class="container">
+    <view class="fishcontainer">
+        <image src="../../../images/fish1.gif" mode="aspectFill" style="width:100rpx;height:100rpx;" />
     </view>
-    <view class="otherrankitem">
-        <view class="otherranknum">19</view>
-        <view class="otherranktext">您在附近排名</view>
+    <view class="takephoto">
+        <image src="../../../images/takephoto.png" mode="aspectFill" style="width:160rpx;height:160rpx;" />
     </view>
-    <view class="otherrankitem">
-        <view class="otherranknum">6</view>
-        <view class="otherranktext">近七日附近排名</view>
+    <view class="rubbishfish">
+        <image src="../../../images/rubbish.png" mode="aspectFill" style="width:120rpx;height:120rpx;" />
     </view>
-</view>
-
-<view class="item-box">
-    <!-- 所有项 -->
-    <view class="items">
-        <!-- 每一项 -->
-        <view wx:for="{{list}}" wx:key="{{index}}" class="item">
-            <view style="float:left;margin-left:20rpx;">
-                <view style="width:80rpx;height:80rpx;margin-top:20rpx;">
-                    <image src="{{item.ranking}}" mode="aspectFill" style="width:80rpx;height:80rpx;" />
-                </view>
-            </view>
-            <view class="itemformat">{{item.userName}}</view>
-            <view class="itemformat">{{item.title}}</view>
-            <view class="itemformat">爱心数量</view>
-        </view>
+    <view class="interactivecontainer">
+        <image src="../../../images/interactive.png" mode="aspectFill" style="width:180rpx;height:180rpx;" />
+    </view>
+    <view class="lovecontainer">
+        <image src="../../../images/lovestore.png" mode="aspectFill" style="width:150rpx;height:150rpx;" />
+    </view>
+    <view class="newswomen">
+        <image src="../../../images/newswomen.png" mode="aspectFill" style="width:120rpx;height:150rpx;" />
+    </view>
+    <view class="newsman">
+        <image src="../../../images/newsman.png" mode="aspectFill" style="width:120rpx;height:150rpx;" />
     </view>
 </view>

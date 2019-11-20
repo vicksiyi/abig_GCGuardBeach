@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "i-spin": "../../../../dist/spin/index",
+    "i-load-more": "../../../../dist/load-more/index",
+    "i-button": "../../../../dist/button/index",
+    "i-message": "../../../../dist/message/index",
+    "i-divider": "../../../../dist/divider/index"
+  }
+}

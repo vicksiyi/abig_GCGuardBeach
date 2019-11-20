@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="fishcontainer">
+        <image src="../../resources/images/fish.gif" mode="aspectFill"   style="width:100rpx;height:100rpx;" />
+    </view>
+    <view class="takephoto">
+        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/takephoto.png"   mode="aspectFill" style="width:160rpx;height:160rpx;" />
+    </view>
+    <view class="rubbishfish">
+        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/rubbish.png"   mode="aspectFill" style="width:120rpx;height:120rpx;" />
+    </view>
+    <view class="interactivecontainer">
+        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/interactive.png" bindload="imageLoad"  mode="aspectFill" style="width:180rpx;height:180rpx;" />
+    </view>
+    <view class="lovecontainer">
+        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/lovestore.png"    mode="aspectFill" style="width:150rpx;height:150rpx;" />
+    </view>
+    <view class="newswomen">
+        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/newswomen.png"    mode="aspectFill" style="width:120rpx;height:150rpx;" />
+    </view>
+    <view class="newsman">
+        <image src="cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/resources/newsman.png"    mode="aspectFill" style="width:120rpx;height:150rpx;" />
+    </view>
+</view>
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
