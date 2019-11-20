@@ -1,3 +1,5 @@
+const request = require('../../../utils/requests');
+const app = getApp();
 Page({
   data: {
     store: [],
@@ -6,7 +8,9 @@ Page({
     category: [],
     spinShow: false,
     windowHeight: '',
-    scrollTop: 0
+    scrollTop: 0,
+    token: '',
+    baseUrl: 'cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/store/'
   },
   /**
    *  左侧栏选择
@@ -47,9 +51,9 @@ Page({
       url: '../../packageC/pages/commoditycar/commoditycar',
     })
   },
-  detail: function () {
+  detail: function (e) {
     wx.navigateTo({
-      url: '../../packageG/pages/ShowDetail/ShowDetail',
+      url: `../../packageG/pages/ShowDetail/ShowDetail?_id=${e.currentTarget.dataset.id}`,
     })
   },
   /**
@@ -100,17 +104,39 @@ Page({
     _this.setData({
       spinShow: true
     })
-    const db = wx.cloud.database()
-    db.collection('abig_store').get({
-      success: function (res) {
+    wx.getStorage({
+      key: 'Token',
+      success(res) {
         _this.setData({
-          category: res.data
+          token: res.data
         })
-      },
-      complete: function () {
-        _this.setData({
-          spinShow: false
-        })
+        _this.getList(res.data, result => {
+          let valueTemp = [{}]
+          let oneType = []
+          let i = 0;
+          result.map((value, index) => {
+            if (oneType.indexOf(value.type) == -1) {
+              i = oneType.push(value.type)
+              valueTemp[i - 1] = {}
+              valueTemp[i - 1].select = new Array();
+              valueTemp[i - 1].title = value.type
+            }
+            valueTemp[oneType.indexOf(value.type)].select.push({
+              imageBg: value.imageBg,
+              images: value.images,
+              inventory: value.inventory,
+              money: value.money,
+              msg: value.msg,
+              name: value.name,
+              price: value.price,
+              _id: value._id
+            })
+          })
+          _this.setData({
+            store: valueTemp,
+            spinShow: false
+          })
+        });
       }
     })
     wx.getSystemInfo({
@@ -133,6 +159,18 @@ Page({
     }
     _this.setData({
       active: id
+    })
+  },
+  // 获取购物车列表
+  getList: function (token, back) {
+    let Item = {
+      url: `http://${app.ip}:5001/mini/stores/list`,
+      header: {
+        'Authorization': token
+      }
+    };
+    request.requestUtils(Item, result => {
+      back(result)
     })
   }
 })

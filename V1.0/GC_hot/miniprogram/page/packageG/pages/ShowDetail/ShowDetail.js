@@ -1,47 +1,101 @@
+const request = require('../../../../utils/requests');
+const app = getApp();
 Page({
   data: {
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    value: {
-      "picture": "https://img10.360buyimg.com/n7/jfs/t1/15698/19/11981/101342/5c94e772E57381273/4b3766ce92477b3f.jpg",
-      "name": "茉莉套装",
-      "content": "桌上摆饰洗手间卧室家用厨房香薰摆件儿童茶几墙面小饰品欧式浴D 鹅蛋 紫 茉莉套装",
-      "price": "1260",
-      "kucun": 123,
-      "xiaoliang": 1231131,
-      "yunfei": 0,
-      "images": [{
-        'img': 'https://img11.360buyimg.com/n5/jfs/t1/23952/23/12222/99954/5c94e772E9065c135/76a763a6f702ce40.jpg'
-      }, {
-        'img': 'https://img11.360buyimg.com/n5/jfs/t1/23952/23/12222/99954/5c94e772E9065c135/76a763a6f702ce40.jpg'
-      }, {
-        'img': 'https://img11.360buyimg.com/n5/jfs/t1/23952/23/12222/99954/5c94e772E9065c135/76a763a6f702ce40.jpg'
-      }, {
-        'img': 'https://img11.360buyimg.com/n5/jfs/t1/23952/23/12222/99954/5c94e772E9065c135/76a763a6f702ce40.jpg'
-      },]
-    }
+    value: {},
+    baseUrl: 'cloud://kkworkspace-4sdw7.6b6b-kkworkspace-4sdw7-1300292448/store/',
+    msgTitle: '邀请您一起过来领奖品',
+    token: '',
+    _id: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.type, options.name)
     let _this = this
-    const db = wx.cloud.database()
-    db.collection("abig_store").where({
-      name: options.type
-    }).get({
+    _this.setData({
+      _id: options._id
+    })
+    wx.getStorage({
+      key: 'Token',
       success(res) {
-        res.data[0].science.map((value, index) => {
-          if (value.name == options.name) {
-            _this.setData({
-              value: value
-            })
-          }
+        _this.setData({
+          token: res.data
+        })
+        _this.getMsg(res.data, options._id, result => {
+          wx.setNavigationBarTitle({ title: result.name })
+          _this.setData({
+            value: result
+          })
+        })
+      },
+      fail() {
+        // wx.setStorage({
+        //   key: "back",
+        //   data: options._id
+        // })
+        wx.switchTab({
+          url: '../../../packageA/index/index'
         })
       }
     })
+  },
+  // 获取数据
+  getMsg: function (token, id, back) {
+    let Item = {
+      url: `http://${app.ip}:5001/mini/stores/listOne`,
+      data: {
+        _id: id
+      },
+      header: {
+        'Authorization': token
+      }
+    };
+    request.requestUtils(Item, result => {
+      back(result)
+    })
+  },
+  /**
+   * 用户分享自定义
+   */
+  onShareAppMessage: function (res) {
+    return {
+      title: '邀请您一起过来领奖品'
+    }
+  },
+  onShow: function () {
+    let _this = this;
+    // wx.getStorage({
+    //   key: 'Token',
+    //   success(res) {
+    //     _this.setData({
+    //       token: res.data
+    //     })
+    //     wx.getStorage({
+    //       key: 'back',
+    //       success(e) {
+    //         _this.getMsg(res.data, e.data, result => {
+    //           wx.setNavigationBarTitle({ title: result.name })
+    //           _this.setData({
+    //             value: result
+    //           })
+    //         })
+    //       }
+    //     })
+    //   },
+    //   fail() {
+    //     wx.setStorage({
+    //       key: "back",
+    //       data: options._id
+    //     })
+    //     wx.switchTab({
+    //       url: '../../../packageA/index/index'
+    //     })
+    //   }
+    // })
   }
 })
