@@ -1,12 +1,49 @@
-# 云开发 quickstart
-
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
-
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
-
-## 参考文档
-
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
+- image : 主包资源文件
+- page：主包&子包
+  - packageA(主包)
+		 - index : 首页
+		 - commodity : 兑换
+		 - interactive : 发现
+		 - login : 登录
+		 - logs : 日志
+		 - mine : 我的
+		 - news : 新闻
+		 - test : 测试
+  - packageB
+    - FullView : 全览
+    - knowledge : 海洋知识
+    - volunteer : 志愿者活动列表
+    - volunteerJoin : 加入志愿活动
+  - packageC
+    - NewsDetail : 新闻详情
+    - VideoDetail : 视频详情
+  - packageF
+     - find : 发现表单提交
+     - FindCircle : 发现圈
+     - record : 我的发现圈
+   - packageG
+      - commoditycar : 兑换车
+      - order : 物流
+      - ShowDetail : 我的兑换
+    - packageH
+      - about : 关于我们
+      - feedback : 意见反馈
+      - myinfo : 我的信息
+      - myOrganization : 聊天页面
+      - myVolunteer : 我加入的志愿活动
+      - rank : 排名
+    - packageI
+			 - email : 邮箱验证
+			 - phone : 电话号码验证
+- utils：工具包
+    - base64src.js : Buffer解码
+    - locations.js : 地图接口封装
+    - oauth.js : 获取access_token
+    - qqmap-wx-jssdk.js : 腾讯地图SDK
+    - requests.js : 获取后台数据接口
+    - util.js : 时间格式化&函数节流
+    - weatherLogo.js : 天气logo
+- style：样式包
+    - base
+    - widget
+    - weui.css
