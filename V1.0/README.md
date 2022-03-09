@@ -1,7 +1,7 @@
-- DataTest:冷知识JSON数据
-- GC_hot&bug：项目小程序	
-- Prote_UI ：原型
-- dataPy  : 天气logo爬取
-- html ： Email HTML格式
-- GC_node：后端接口
-- client:管理页面Vue 
+- DataTest: 冷知识JSON数据
+- GC_hot: 项目小程序	
+- Prote_UI: 原型
+- dataPy: 天气logo爬取
+- html: Email HTML格式
+- GC_node: 后端接口
+- client: 管理页面Vue 
