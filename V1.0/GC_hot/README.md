@@ -1,14 +1,14 @@
 - image : 主包资源文件
 - page：主包&子包
   - packageA(主包)
-		 - index : 首页
-		 - commodity : 兑换
-		 - interactive : 发现
-		 - login : 登录
-		 - logs : 日志
-		 - mine : 我的
-		 - news : 新闻
-		 - test : 测试
+	- index : 首页
+	- commodity : 兑换
+	- interactive : 发现
+	- login : 登录
+	- logs : 日志
+	- mine : 我的
+	- news : 新闻
+	- test : 测试
   - packageB
     - FullView : 全览
     - knowledge : 海洋知识
